@@ -1,6 +1,8 @@
 branch-defaults:
   default:
     environment: flask-env
+  master:
+    environment: flask-env
 global:
   application_name: flask-tutorial
   branch: null
