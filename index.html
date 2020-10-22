@@ -29,6 +29,7 @@
 		  method: "GET",
 		  url: "/search?word="+word,
 		  success: (data) =>{
+		$("#tweets2").html("");
                 for (let i = 0; i < data.length; i++) {
                     $("#tweets2").append('<pre>' + data[i].text + '</pre>');
                 }
