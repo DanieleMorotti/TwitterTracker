@@ -29,7 +29,9 @@
 		  method: "GET",
 		  url: "/search?word="+word,
 		  success: (data) =>{
-				$('#tweets2').append(data);
+                for (let i = 0; i < data.length; i++) {
+                    $("#tweets2").append('<pre>' + data[i].text + '</pre>');
+                }
 		  },
 		  error: (e) => {
 				console.log("errore",e);
@@ -42,7 +44,9 @@
 		<label for="search">Filtra per parola: </label>
 		<input type="text" name="search" id="search" />
 		<button onclick="filter()">FILTRA</button>
-		<pre id="tweets2"></pre>
+		<ul id="tweets2">
+        </ul>
+        
 		<br>
 		
 		<button onclick="getD()">CLICK HERE</button>

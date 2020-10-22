@@ -26,6 +26,15 @@ def get_tweets(api, username):
     return string
 
 
+def get_tweet_text(tweet):
+    try:
+       text = tweet.retweeted_status.full_text
+    except AttributeError:  # Not a Retweet
+       text = tweet.full_text
+    
+    return text
+
+                
 @application.route('/search')
 def search():
     word = request.args.get("word");
@@ -34,9 +43,9 @@ def search():
     
     list = [];
     for tweet in api.search(q=word, tweet_mode="extended"):
-        list.append({'text': tweet.full_text, 'user':tweet.user.name,'data':tweet.created_at.strftime('%m/%d/%Y')})
+        list.append({'text': get_tweet_text(tweet), 'user':tweet.user.name,'data':tweet.created_at.strftime('%m/%d/%Y')})
     
-    return json.dumps(list, ensure_ascii=False, indent=2);
+    return Response(json.dumps(list, ensure_ascii=False, indent=2), status=200, mimetype="application/json");
     
     
 # Route for the index page
