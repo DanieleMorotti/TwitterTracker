@@ -1,44 +1,40 @@
 from flask import Flask
 from flask import send_file, redirect
-import logging as log
-import os
+import tweepy
+import datetime, time
+import json
 
-log_path = '/opt/python/log/application.log'
+API_KEY = 'j6DEP35tCTAxgmoaCYMQAThHw'
+API_SECRET_KEY = 'IStBpbpGzInMyzxAtlg6ZRLpJWZu5hS0SUAm6RB8YdmlNLz9OD'
+ACCESS_TOKEN = '1315934369433956354-4rOOoUjQUh6ePCUw5ZwtzeUF4t9Kks'
+ACCESS_SECRET_TOKEN = 'apq38hqrJwSpZMGSBfU0qppMud9l8Dz0yE1F1PlPNhkdb'
 
-# EB looks for an 'application' callable by default <- name MUST be 'application'
+auth = tweepy.OAuthHandler(API_KEY, API_SECRET_KEY)
+auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET_TOKEN)
+api = tweepy.API(auth)
+
 application = Flask(__name__)
 
-# Initialize logger to output to log_path
-log.basicConfig(filename=log_path, level=log.DEBUG)
+def get_tweets(api, username):
+    deadend = False
+    lista = {'tweets':[]}
+    tweets = api.user_timeline(username)
+    for tweet in tweets:
+        lista['tweets'].append({'testo':tweet.text,'user':tweet.user.name,'data':tweet.created_at.strftime('%m/%d/%Y')})
+        
+    return json.dumps(lista,indent=2, sort_keys=True)
+
 
 # Route for the index page
+@application.route('/getTweets')
+def sendData():
+    return get_tweets(api,'SpaceX')
+    
 @application.route('/')
-def hello_world():
-    log.debug('Got index request')
+def getPage():
     return send_file("index.html")
-    
-
-# Route for retrieving log
-@application.route('/log')
-def get_log():
-    return send_file(log_path, "text/plain")
-    with open(log_path) as f:
-        return f.read();
-        
-    return "Unable to open log file";
-    
-    
-# Route for clearing the log
-@application.route('/log/clear')
-def clear_log():
-    os.truncate(log_path, 0);
-    return redirect('/log');
 
     
-# Run the application
 if __name__ == "__main__":
-    # Setting debug to True enables debug output. This line should be
-    # removed before deploying a production app.
-    application.debug = True
     application.run()
-    
+

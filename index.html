@@ -1,8 +1,32 @@
 <!DOCTYPE html>
-<html>
-	<body>
-		<h1>Che bel titolo!</h1>
-		<p>Un paragrafo interessante</p>
+<html lang="it">
+	<head>
+		<title>Titolo</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js" ></script>
 	
+	</head>
+	
+	<script>
+	 function getD(){
+		$.ajax({
+		  method: "GET",
+		  url: "/getTweets",
+		  success: (data) =>{
+				var a = data;
+				$('#tweets').append(a);
+		  },
+		  error: (e) => {
+				console.log("errore",e);
+		  }
+		});
+	 }
+		
+	</script>
+	<body>
+	
+		<button onclick="getD()">CLICK HERE</button>
+		<pre id="tweets"></pre>
 	</body>
-</html>
+</html
