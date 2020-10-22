@@ -4,8 +4,8 @@
 		<title>Titolo</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script src="https://code.jquery.com/jquery-3.5.1.min.js" ></script>
-		
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 		<script>
 			var streamingInterval = null;
 			function getD() {
@@ -25,19 +25,19 @@
 				let keyword = $('#keyword-field').val();
 				if (keyword) {
 					let route = "/searchTweets/" + keyword;
-                    $.ajax({
-                        method: "GET",
-                        url: route,
-                        success: (data) => {
+					$.ajax({
+						method: "GET",
+						url: route,
+						success: (data) => {
 							$('#tweets').empty();
 							$('#tweets').append(data);
 							streamingInterval = setInterval(() => { streamUpdate(keyword) }, 5000);
-                        },
-                        error: (e) => {
-                            console.log("errore", e);
-                        }
-                    });
-                }
+						},
+						error: (e) => {
+							console.log("errore", e);
+						}
+					});
+				}
 			}
 			function streamUpdate(keyword) {
 				console.log('stream update');
@@ -51,17 +51,39 @@
 					error: (e) => {
 						console.log('errore', e);
 					}
-				 });
-            }
+				});
+			}
+			function filter() {
+				let word = $('#search').val();
+				$.ajax({
+					method: "GET",
+					url: "/search?word=" + word,
+					success: (data) => {
+						$("#tweets2").html("");
+						for (let i = 0; i < data.length; i++) {
+							$("#tweets2").append('<pre>' + data[i].text + '</pre>');
+						}
+					},
+					error: (e) => {
+						console.log("errore", e);
+					}
+				});
+			}
+
 		</script>
 	</head>
-	
-	
 	<body>
+		<label for="search">Filtra per parola: </label>
+		<input type="text" name="search" id="search" />
+		<button onclick="filter()">FILTRA</button>
+		<ul id="tweets2">
+		</ul>
+		<br>
 		<div>
 			<input id="keyword-field"/>
 			<button onclick="getTweetsByKeyWord()">Cerca</button>
 		</div>
+		<br/>
 		<button onclick="getD()">CLICK HERE</button>
 		<pre id="tweets"></pre>
 	</body>

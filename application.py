@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import send_file, redirect
+from flask import send_file, redirect, request, Response
 import tweepy
 import datetime, time
 import json
@@ -22,9 +22,9 @@ def get_tweets(api, username):
     for tweet in tweets:
         lista['tweets'].append({'testo':tweet.text,'user':tweet.user.name,'data':tweet.created_at.strftime('%m/%d/%Y')})
         
-    return json.dumps(lista,indent=2, sort_keys=True)
-# Get tweets by keyword
-#override tweepy.StreamListener to add logic to on_status
+
+    string = json.dumps(lista, ensure_ascii=False, indent=2, sort_keys=True);
+    return string
 
 streaming_data = []
 
@@ -59,6 +59,28 @@ def get_keyword_stream(keyword):
 
     return 'Streaming started'
 
+def get_tweet_text(tweet):
+    try:
+       text = tweet.retweeted_status.full_text
+    except AttributeError:  # Not a Retweet
+       text = tweet.full_text
+    
+    return text
+
+                
+@application.route('/search')
+def search():
+    word = request.args.get("word");
+    if not word:
+        return ""
+    
+    list = [];
+    for tweet in api.search(q=word, tweet_mode="extended"):
+        list.append({'text': get_tweet_text(tweet), 'user':tweet.user.name,'data':tweet.created_at.strftime('%m/%d/%Y')})
+    
+    return Response(json.dumps(list, ensure_ascii=False, indent=2), status=200, mimetype="application/json");
+    
+    
 # Route for the index page
 @application.route('/getTweets')
 def sendData():

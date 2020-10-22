@@ -1,3 +1,5 @@
+#VS files
+.vs
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
