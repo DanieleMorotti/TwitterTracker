@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import send_file, redirect
+from flask import send_file, redirect, request, Response
 import tweepy
 import datetime, time
 import json
@@ -22,9 +22,23 @@ def get_tweets(api, username):
     for tweet in tweets:
         lista['tweets'].append({'testo':tweet.text,'user':tweet.user.name,'data':tweet.created_at.strftime('%m/%d/%Y')})
         
-    return json.dumps(lista,indent=2, sort_keys=True)
+    string = json.dumps(lista, ensure_ascii=False, indent=2, sort_keys=True);
+    return string
 
 
+@application.route('/search')
+def search():
+    word = request.args.get("word");
+    if not word:
+        return ""
+    
+    list = [];
+    for tweet in api.search(q=word, tweet_mode="extended"):
+        list.append({'text': tweet.full_text, 'user':tweet.user.name,'data':tweet.created_at.strftime('%m/%d/%Y')})
+    
+    return json.dumps(list, ensure_ascii=False, indent=2);
+    
+    
 # Route for the index page
 @application.route('/getTweets')
 def sendData():
