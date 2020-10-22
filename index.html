@@ -22,10 +22,29 @@
 		  }
 		});
 	 }
+	 
+	 function filter() {
+		let word = $('#search').val();
+		$.ajax({
+		  method: "GET",
+		  url: "/search?word="+word,
+		  success: (data) =>{
+				$('#tweets2').append(data);
+		  },
+		  error: (e) => {
+				console.log("errore",e);
+		  }
+		});
+	 }
 		
 	</script>
 	<body>
-	
+		<label for="search">Filtra per parola: </label>
+		<input type="text" name="search" id="search" />
+		<button onclick="filter()">FILTRA</button>
+		<pre id="tweets2"></pre>
+		<br>
+		
 		<button onclick="getD()">CLICK HERE</button>
 		<pre id="tweets"></pre>
 	</body>
