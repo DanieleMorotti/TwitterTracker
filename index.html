@@ -1,32 +1,68 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="it">
 	<head>
 		<title>Titolo</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js" ></script>
-	
+		
+		<script>
+			var streamingInterval = null;
+			function getD() {
+				$.ajax({
+					method: "GET",
+					url: "/getTweets",
+					success: (data) => {
+						var a = data;
+						$('#tweets').append(a);
+					},
+					error: (e) => {
+						console.log("errore", e);
+					}
+				});
+			}
+			function getTweetsByKeyWord() {
+				let keyword = $('#keyword-field').val();
+				if (keyword) {
+					let route = "/searchTweets/" + keyword;
+                    $.ajax({
+                        method: "GET",
+                        url: route,
+                        success: (data) => {
+							$('#tweets').empty();
+							$('#tweets').append(data);
+							streamingInterval = setInterval(() => { streamUpdate(keyword) }, 5000);
+                        },
+                        error: (e) => {
+                            console.log("errore", e);
+                        }
+                    });
+                }
+			}
+			function streamUpdate(keyword) {
+				console.log('stream update');
+				$.ajax({
+					url: '/streamUpdate',
+					method: 'GET',
+					success: (data) => {
+						console.log(keyword + '\n--\n' + data);
+						//data.forEach((tweet) => { $('#tweets').append(tweet) });
+					},
+					error: (e) => {
+						console.log('errore', e);
+					}
+				 });
+            }
+		</script>
 	</head>
 	
-	<script>
-	 function getD(){
-		$.ajax({
-		  method: "GET",
-		  url: "/getTweets",
-		  success: (data) =>{
-				var a = data;
-				$('#tweets').append(a);
-		  },
-		  error: (e) => {
-				console.log("errore",e);
-		  }
-		});
-	 }
-		
-	</script>
-	<body>
 	
+	<body>
+		<div>
+			<input id="keyword-field"/>
+			<button onclick="getTweetsByKeyWord()">Cerca</button>
+		</div>
 		<button onclick="getD()">CLICK HERE</button>
 		<pre id="tweets"></pre>
 	</body>
-</html
+</html>
