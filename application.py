@@ -26,7 +26,7 @@ application = Flask(__name__)
 #         lista['tweets'].append({'testo':tweet.text,'user':tweet.user.name,'data':tweet.created_at.strftime('%m/%d/%Y')})
 #         
 # 
-#     string = json.dumps(lista, ensure_ascii=False, indent=2, sort_keys=True);
+#     string = json.dumps(lista, ensure_ascii=False, indent=2, sort_keys=True)
 #     return string
 # 
 #    
@@ -34,14 +34,13 @@ application = Flask(__name__)
 # def sendData():
 #     return get_tweets(api,'SpaceX')
 
-
 #Stream tweets
 class MyStreamListener(tweepy.StreamListener):
     def on_connect(self):
         print("Connected to the server!")
     
     def on_status(self, status):
-        text = "";
+        text = ""
         if hasattr(status, "retweeted_status"): # Check if Retweet
             try:
                 text = status.retweeted_status.extended_tweet["full_text"]
@@ -100,7 +99,7 @@ def streamStop():
 # Route to get tweets from the stream
 @application.route('/streamUpdate')
 def streamUpdate():
-    return Response(json.dumps(streaming_data, ensure_ascii=False, indent=2), status=200, mimetype="application/json");
+    return Response(json.dumps(streaming_data, ensure_ascii=False, indent=2), status=200, mimetype="application/json")
     
 #Search tweets
 def get_tweet_text(tweet):
@@ -113,15 +112,15 @@ def get_tweet_text(tweet):
                 
 @application.route('/search')
 def search():
-    word = request.args.get("word");
+    word = request.args.get("word")
     if not word:
-        return Response(status = 400);
+        return Response(status = 400)
     
-    list = [];
+    list = []
     for tweet in api.search(q=word, tweet_mode="extended"):
         list.append({'id': tweet.id_str, 'text': get_tweet_text(tweet), 'user':tweet.user.name, 'username': tweet.user.screen_name,'data':tweet.created_at.strftime('%m/%d/%Y')})
     
-    return Response(json.dumps(list, ensure_ascii=False, indent=2), status=200, mimetype="application/json");
+    return Response(json.dumps(list, ensure_ascii=False, indent=2), status=200, mimetype="application/json")
     
 
 @application.route('/index.css')
@@ -137,4 +136,5 @@ def getPage():
     
 if __name__ == "__main__":
     application.run()
+    stopStreamListener()
 
