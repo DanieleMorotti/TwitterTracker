@@ -119,11 +119,16 @@ def search():
     
     list = [];
     for tweet in api.search(q=word, tweet_mode="extended"):
-        list.append({'text': get_tweet_text(tweet), 'user':tweet.user.name,'data':tweet.created_at.strftime('%m/%d/%Y')})
+        list.append({'id': tweet.id_str, 'text': get_tweet_text(tweet), 'user':tweet.user.name, 'username': tweet.user.screen_name,'data':tweet.created_at.strftime('%m/%d/%Y')})
     
     return Response(json.dumps(list, ensure_ascii=False, indent=2), status=200, mimetype="application/json");
     
-   
+
+@application.route('/index.css')
+def getCss():
+    return send_file("index.css")
+
+    
 # Route for the index page
 @application.route('/')
 def getPage():
