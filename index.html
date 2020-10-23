@@ -31,6 +31,7 @@
 						success: (data) => {
 							$('#tweets').empty();
 							$('#tweets').append(data);
+							if (streamingInterval) clearInterval(streamingInterval);
 							streamingInterval = setInterval(() => { streamUpdate(keyword) }, 5000);
 						},
 						error: (e) => {
@@ -46,12 +47,17 @@
 					method: 'GET',
 					success: (data) => {
 						console.log(keyword + '\n--\n' + data);
-						//data.forEach((tweet) => { $('#tweets').append(tweet) });
+						$('#tweets').empty();
+						if (data.length > 0) {
+							data.forEach((tweet) => {
+								$('#tweets').append(tweet);
+							});
+						}
 					},
 					error: (e) => {
 						console.log('errore', e);
 					}
-				});
+				});	
 			}
 			function filter() {
 				let word = $('#search').val();

@@ -28,6 +28,7 @@ def get_tweets(api, username):
 
 streaming_data = []
 
+
 class MyStreamListener(tweepy.StreamListener):
     def on_connect(self):
         print("Connected to the server!")
@@ -51,9 +52,15 @@ class MyStreamListener(tweepy.StreamListener):
         print('Streaming Error Status Code - ' + status)
 
 myStreamListener = MyStreamListener()
+myStream = None
 # Function to starm StreamListener
 def get_keyword_stream(keyword):
     global myStreamListener
+    global myStream
+    global streaming_data
+    if(myStream != None): 
+        myStream.disconnect()
+        streaming_data = []
     myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener, tweet_mode = 'extended')
     myStream.filter(track=[keyword], is_async=True)
 
@@ -94,7 +101,9 @@ def getStreamingListener(keyword):
 # Route to get tweets from the stream
 @application.route('/streamUpdate')
 def getStreamingTweets():
-    return json.dumps(streaming_data)        
+    return json.dumps(streaming_data) 
+    return Response(json.dumps(streaming_data, ensure_ascii=False, indent=2), status=200, mimetype="application/json");
+    
 
 @application.route('/')
 def getPage():
