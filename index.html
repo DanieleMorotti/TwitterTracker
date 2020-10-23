@@ -8,70 +8,85 @@
 
 		<script>
 			var streamingInterval = null;
-			function getD() {
-				$.ajax({
-					method: "GET",
-					url: "/getTweets",
-					success: (data) => {
-						var a = data;
-						$('#tweets').append(a);
-					},
-					error: (e) => {
-						console.log("errore", e);
-					}
-				});
-			}
-			function getTweetsByKeyWord() {
-				let keyword = $('#keyword-field').val();
+            
+			function streamStart() {
+				let keyword = $('#stream').val();
 				if (keyword) {
-					let route = "/searchTweets/" + keyword;
 					$.ajax({
 						method: "GET",
-						url: route,
+						url: 'streamStart',
+                        data: {
+                            word: keyword,
+                        },
+                        
 						success: (data) => {
 							$('#tweets').empty();
-							$('#tweets').append(data);
-							if (streamingInterval) clearInterval(streamingInterval);
-							streamingInterval = setInterval(() => { streamUpdate(keyword) }, 5000);
+                            
+                            if(streamingInterval)
+                                clearInterval(streamingInterval);
+                            
+							streamingInterval = setInterval(() => { streamUpdate(keyword) }, 500);
 						},
-						error: (e) => {
-							console.log("errore", e);
+                        
+						error: (xhr, ajaxOptions, thrownError) => {
+							console.log("streamStart: " + xhr.status + ' - ' + thrownError);
 						}
 					});
 				}
 			}
+            
+            function streamStop() {
+                if(streamingInterval)
+                    clearInterval(streamingInterval);
+                
+                $.ajax({
+						method: "GET",
+						url: 'streamStop',
+                        
+						success: (data) => {
+						},
+                        
+						error: (xhr, ajaxOptions, thrownError) => {
+                            console.log("streamStop: " + xhr.status + ' - ' + thrownError);
+						}
+                });
+            }
+            
 			function streamUpdate(keyword) {
 				console.log('stream update');
 				$.ajax({
 					url: '/streamUpdate',
 					method: 'GET',
 					success: (data) => {
-						console.log(keyword + '\n--\n' + data);
-						$('#tweets').empty();
-						if (data.length > 0) {
-							data.forEach((tweet) => {
-								$('#tweets').append(tweet);
-							});
+						$("#tweets-stream").html("");
+						for (let i = 0; i < data.length; i++) {
+							$("#tweets-stream").append('<p>' + data[i].text + '</p>');
 						}
 					},
-					error: (e) => {
-						console.log('errore', e);
-					}
-				});	
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log("streamUpdate: " + xhr.status + ' - ' + thrownError);
+                    }
+				});
 			}
-			function filter() {
-				let word = $('#search').val();
+            
+			function search() {
+				let keyword = $('#search').val();
 				$.ajax({
 					method: "GET",
-					url: "/search?word=" + word,
+					url: "/search",
+                    data: {
+                        word: keyword,
+                    },
+                    
 					success: (data) => {
-						$("#tweets2").html("");
+						$("#tweets-search").html("");
 						for (let i = 0; i < data.length; i++) {
-							$("#tweets2").append('<pre>' + data[i].text + '</pre>');
+							$("#tweets-search").append('<p>' + data[i].text + '</p>');
 						}
 					},
-					error: (e) => {
-						console.log("errore", e);
+                    
+					error: (xhr, ajaxOptions, thrownError) => {
+                        console.log("search: " + xhr.status + ' - ' + thrownError);
 					}
 				});
 			}
@@ -79,18 +94,20 @@
 		</script>
 	</head>
 	<body>
-		<label for="search">Filtra per parola: </label>
+		<label for="search">Search by word: </label>
 		<input type="text" name="search" id="search" />
-		<button onclick="filter()">FILTRA</button>
-		<ul id="tweets2">
-		</ul>
-		<br>
-		<div>
-			<input id="keyword-field"/>
-			<button onclick="getTweetsByKeyWord()">Cerca</button>
+		<button onclick="search()">Search</button>
+        <h4>Search Results</h4>
+		<div id="tweets-search">
 		</div>
-		<br/>
-		<button onclick="getD()">CLICK HERE</button>
-		<pre id="tweets"></pre>
+		<hr>
+        
+        <label for="stream">Start stream by word: </label>
+		<input type="text" name="stream" id="stream" />
+		<button onclick="streamStart()">Start</button>
+		<button onclick="streamStop()">Stop</button>
+        <h4>Stream Results</h4>
+		<div id="tweets-stream">
+		</div>
 	</body>
 </html>
