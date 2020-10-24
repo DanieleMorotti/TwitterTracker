@@ -121,8 +121,22 @@ def search():
         list.append({'id': tweet.id_str, 'text': get_tweet_text(tweet), 'user':tweet.user.name, 'username': tweet.user.screen_name,'data':tweet.created_at.strftime('%m/%d/%Y')})
     
     return Response(json.dumps(list, ensure_ascii=False, indent=2), status=200, mimetype="application/json")
+   
+   
+@application.route('/geo')
+def geo():
+    word = request.args.get("word")
+    location = request.args.get("location")
+    list = []
     
-
+    for tweet in tweepy.Cursor(api.search,q=word,count=200,geocode=location).items(200):
+        #verifico se la geo-localizzazione è abilitata e se esiste l'oggetto che contiene informazioni
+        if(tweet.user.geo_enabled is not False and tweet.place is not None):
+            list.append({'id': tweet.id_str, 'text': tweet.text, 'user':tweet.user.name, 'username': tweet.user.screen_name,'data':tweet.created_at.strftime('%m/%d/%Y'),'geo_enabled':tweet.user.geo_enabled,'city':tweet.place.full_name,'coordinates':tweet.place.bounding_box.coordinates})
+    
+    return Response(json.dumps(list, ensure_ascii=False, indent=2), status=200, mimetype="application/json")
+        
+        
 @application.route('/index.css')
 def getCss():
     return send_file("index.css")

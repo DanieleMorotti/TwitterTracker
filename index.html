@@ -69,15 +69,38 @@
                     }
 				});
 			}
+			
+			function geo_localized(){
+				let keyword = $('#search_geo').val();
+				let loc = $('#coordinates').val();
+				$.ajax({
+					method: 'GET',
+					url: '/geo',
+					data: {
+						word: keyword,
+						location: loc
+					},
+					success: (data) => {
+						$("#tweets-geo").html("");
+						for (let i = 0; i < data.length; i++) {
+							$("#tweets-geo").append('<p>Città: ' + data[i].city +' Coordinate: '+ data[i].coordinates + '</p>');
+						}
+						console.log("success");
+					},
+               error: function (xhr, ajaxOptions, thrownError) {
+                  console.log("streamUpdate: " + xhr.status + ' - ' + thrownError);
+               }
+				});				
+			}
             
 			function search() {
 				let keyword = $('#search').val();
 				$.ajax({
 					method: "GET",
 					url: "/search",
-                    data: {
-                        word: keyword,
-                    },
+					data: {
+						word: keyword,
+					},
                     
 					success: (data) => {
 						$("#tweets-search").html("");
@@ -112,14 +135,24 @@
 		</div>
 		<hr>
         
-        <label for="stream">Start stream by word: </label>
+       <label for="stream">Start stream by word: </label>
 		<input type="text" name="stream" id="stream" />
 		<button onclick="streamStart()">Start</button>
 		<button onclick="streamStop()">Stop</button>
         <h4>Stream Results</h4>
 		<div id="tweets-stream">
 		</div>
-
+		<hr>
+		
+		<label for="stream">Search this word: </label>
+		<input type="text" name="geo_search" id="search_geo" />
+		<label for="stream">In this coordinates(lat,long,radius)[Es.(45.4773,9.1815,1000km)]: </label>
+		<input type="text" name="geo_search_coord" id="coordinates" />
+		<button onclick="geo_localized()">Prova geo</button>
+       <h4>Geolocalized tweets Results</h4>
+		<div id="tweets-geo">
+		</div>
+		
 		<!-- modal for displaying tweets -->
 		<div class="modal fade" id="myModal" role="dialog">
 			<div class="modal-dialog">
