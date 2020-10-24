@@ -118,7 +118,6 @@
 			}
 
 			function show(index){
-				console.log('premuto')
 				let url = localStorage.getItem(index);
 				$('#tweetContent').empty();
 				$('#tweetContent').append(`<blockquote class="twitter-tweet"><a href=${url}>Tweet</a></blockquote>  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"><\/script>`);
