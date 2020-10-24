@@ -106,8 +106,7 @@
 						$("#tweets-search").html("");
 						for (let i = 0; i < data.length; i++) {
 							var url = "https://twitter.com/"+ data[i].username + "/status/"+ data[i].id;
-							localStorage.setItem(i, url);
-							$("#tweets-search").append(`<div class="messages"><h3>${data[i].user}</h3><p>${data[i].data}</p><p>${data[i].text}</p><button onclick=show(${i}) id="btn" data-toggle="modal" data-target="#myModal" >Show</button>`);
+							$("#tweets-search").append(`<div class="messages"><h3>${data[i].user}</h3><p>${data[i].data}</p><p>${data[i].text}</p><button onclick=show("${url}") id="btn" data-toggle="modal" data-target="#myModal" >Show</button>`);
 						}
 					},
                     
@@ -117,10 +116,9 @@
 				});
 			}
 
-			function show(index){
-				let url = localStorage.getItem(index);
+			function show(url){
 				$('#tweetContent').empty();
-				$('#tweetContent').append(`<blockquote class="twitter-tweet"><a href=${url}>Tweet</a></blockquote>  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"><\/script>`);
+				$('#tweetContent').append(`<blockquote class="twitter-tweet"><a href="${url}">Tweet</a></blockquote>  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"><\/script>`);
 			}
 		</script>
 		<link rel="stylesheet" href="index.css">
