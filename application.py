@@ -129,7 +129,7 @@ def geo():
     location = request.args.get("location")
     list = []
     
-    for tweet in tweepy.Cursor(api.search,q=word,count=200,geocode=location).items(200):
+    for tweet in tweepy.Cursor(api.search,q=word,count=1000,geocode=location).items(1000):
         #verifico se la geo-localizzazione è abilitata e se esiste l'oggetto che contiene informazioni
         if(tweet.user.geo_enabled is not False and tweet.place is not None):
             list.append({'id': tweet.id_str, 'text': tweet.text, 'user':tweet.user.name, 'username': tweet.user.screen_name,'data':tweet.created_at.strftime('%m/%d/%Y'),'geo_enabled':tweet.user.geo_enabled,'city':tweet.place.full_name,'coordinates':tweet.place.bounding_box.coordinates})
