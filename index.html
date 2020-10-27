@@ -60,7 +60,7 @@
 					success: (data) => {
 						$("#tweets-search").empty();
 						$("#tweets-search").append('<h4>Streaming Tweets Results</h4>');
-                        window.scrollTo(0, 0);
+						window.scrollTo(0, 0);
                         for (let i = 0; i < data.length; i++) {
                             var url = "https://twitter.com/" + data[i].username + "/status/" + data[i].id;
 							$(`<div class="messages"><h3>${data[i].user}</h3><p>${data[i].data}</p><p>${data[i].text}</p><button onclick=show("${url}") id="btn" data-toggle="modal" data-target="#myModal" >Show</button>`).
@@ -84,16 +84,18 @@
 						location: loc
 					},
 					success: (data) => {
+						//Regex da usare per sostituire
+						let reg = new RegExp(keyword, 'gi');
+
 						$("#tweets-search").empty();
 						$("#tweets-search").append('<h4>Geolocalized Tweets Results</h4>');
 						window.scrollTo(0, 0);
 						for (let i = 0; i < data.length; i++) {
-							$("#tweets-search").append('<p>Città: ' + data[i].city +' Coordinate: '+ data[i].coordinates + '</p>');
+							$("#tweets-search").append('<p>Città: ' + data[i].city + ' Coordinate: ' + data[i].coordinates + '</p>');
 						}
 						if (data.length < 1) {
                             $("#tweets-search").append('<h5>No results for the specified query</h5>');
                         }
-						console.log("success");
 					},
                error: function (xhr, ajaxOptions, thrownError) {
                   console.log("streamUpdate: " + xhr.status + ' - ' + thrownError);
@@ -111,13 +113,14 @@
 					},
                     
 					success: (data) => {
+                        let reg = new RegExp(keyword, 'gi');
 						$("#tweets-search").empty();
                         $("#tweets-search").append('<h4>Search Tweets Results</h4>');
                         window.scrollTo(0, 0);
 
 						for (let i = 0; i < data.length; i++) {
 							var url = "https://twitter.com/" + data[i].username + "/status/" + data[i].id;
-							$("#tweets-search").append(`<div class="messages"><h3>${data[i].user}</h3><p>${data[i].data}</p><p>${data[i].text}</p><button onclick=show("${url}") id="btn" data-toggle="modal" data-target="#myModal" >Show</button>`);
+                            $("#tweets-search").append(`<div class="messages"><h3>${data[i].user}</h3><p>${data[i].data}</p><p>${data[i].text.replace(reg, '<mark>$&</mark>')}</p><button onclick=show("${url}") id="btn" data-toggle="modal" data-target="#myModal" >Show</button>`);
 						}
 					},
                     

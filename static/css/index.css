@@ -43,3 +43,6 @@ body label, input, button, h4 {
     padding: 1vh;
     border-bottom: 1px solid white;
 }
+mark {
+    background-color: #FFFF00;
+}
