@@ -1,5 +1,6 @@
 body {
     background-color: rgb(10, 68, 94);
+    
 }
 
 body p, label, h4 {
@@ -11,8 +12,8 @@ body h3 {
 }
 
 body label, input, button, h4 {
-    margin-left: 30px;
-    margin-top: 30px;
+    margin-left: 1vw;
+    margin-top: 1vh;
 }
 
 
@@ -20,4 +21,25 @@ body label, input, button, h4 {
     background-color: rgb(43, 96, 121);
     padding: 20px;
     margin: 50px;
+}
+
+#tweets-search > h5 {
+    text-align: center;
+    font-size: 2vh;
+    color:  white;
+}
+#stream-div {
+    display: inline-block;
+}
+#search-div {
+    display:inline-block;
+    float: right;
+    margin-right:1vw;
+}
+.filter-bar {
+    position:sticky; 
+    top:0; 
+    background:rgb(3, 29, 41); 
+    padding: 1vh;
+    border-bottom: 1px solid white;
 }

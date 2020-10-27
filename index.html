@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="it">
 	<head>
-		<title>Titolo</title>
+		<title>Fraydrum</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -39,7 +39,6 @@
             function streamStop() {
                 if(streamingInterval)
                     clearInterval(streamingInterval);
-                
                 $.ajax({
 						method: "GET",
 						url: 'streamStop',
@@ -59,10 +58,14 @@
 					url: '/streamUpdate',
 					method: 'GET',
 					success: (data) => {
-						$("#tweets-stream").html("");
-						for (let i = 0; i < data.length; i++) {
-							$("#tweets-stream").append('<p>' + data[i].text + '</p>');
-						}
+						$("#tweets-search").empty();
+						$("#tweets-search").append('<h4>Streaming Tweets Results</h4>');
+                        window.scrollTo(0, 0);
+                        for (let i = 0; i < data.length; i++) {
+                            var url = "https://twitter.com/" + data[i].username + "/status/" + data[i].id;
+							$(`<div class="messages"><h3>${data[i].user}</h3><p>${data[i].data}</p><p>${data[i].text}</p><button onclick=show("${url}") id="btn" data-toggle="modal" data-target="#myModal" >Show</button>`).
+								insertAfter('#tweets-search > h4');
+                        }
 					},
                     error: function (xhr, ajaxOptions, thrownError) {
                         console.log("streamUpdate: " + xhr.status + ' - ' + thrownError);
@@ -71,7 +74,7 @@
 			}
 			
 			function geo_localized(){
-				let keyword = $('#search_geo').val();
+				let keyword = $('#search').val();
 				let loc = $('#coordinates').val();
 				$.ajax({
 					method: 'GET',
@@ -81,10 +84,15 @@
 						location: loc
 					},
 					success: (data) => {
-						$("#tweets-geo").html("");
+						$("#tweets-search").empty();
+						$("#tweets-search").append('<h4>Geolocalized Tweets Results</h4>');
+						window.scrollTo(0, 0);
 						for (let i = 0; i < data.length; i++) {
-							$("#tweets-geo").append('<p>Città: ' + data[i].city +' Coordinate: '+ data[i].coordinates + '</p>');
+							$("#tweets-search").append('<p>Città: ' + data[i].city +' Coordinate: '+ data[i].coordinates + '</p>');
 						}
+						if (data.length < 1) {
+                            $("#tweets-search").append('<h5>No results for the specified query</h5>');
+                        }
 						console.log("success");
 					},
                error: function (xhr, ajaxOptions, thrownError) {
@@ -103,9 +111,12 @@
 					},
                     
 					success: (data) => {
-						$("#tweets-search").html("");
+						$("#tweets-search").empty();
+                        $("#tweets-search").append('<h4>Search Tweets Results</h4>');
+                        window.scrollTo(0, 0);
+
 						for (let i = 0; i < data.length; i++) {
-							var url = "https://twitter.com/"+ data[i].username + "/status/"+ data[i].id;
+							var url = "https://twitter.com/" + data[i].username + "/status/" + data[i].id;
 							$("#tweets-search").append(`<div class="messages"><h3>${data[i].user}</h3><p>${data[i].data}</p><p>${data[i].text}</p><button onclick=show("${url}") id="btn" data-toggle="modal" data-target="#myModal" >Show</button>`);
 						}
 					},
@@ -116,6 +127,15 @@
 				});
 			}
 
+			function dispatch_search() {
+				let loc = $('#coordinates').val();
+				if (loc) {
+					geo_localized();
+				} else {
+					search();
+                }
+            }
+
 			function show(url){
 				$('#tweetContent').empty();
 				$('#tweetContent').append(`<blockquote class="twitter-tweet"><a href="${url}">Tweet</a></blockquote>  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"><\/script>`);
@@ -124,50 +144,51 @@
 		<link rel="stylesheet" href="/static/css/index.css">
 	</head>
 	<body>
-		<label for="search">Search by word: </label>
-		<input type="text" name="search" id="search" onkeyup="function press(event) {if (event.keyCode === 13) search()}; press(event)"/>
-		<button onclick="search()">Search</button>
-        <h4>Search Results</h4>
-		<div id="tweets-search">	
+		<!--
+	<label for="search">Search by word: </label>
+	<input type="text" name="search" id="search" onkeyup="function press(event) {if (event.keyCode === 13) search()}; press(event)"/>
+	<button onclick="search()">Search</button>
+	<h4>Search Results</h4>
+	<div id="tweets-search">
+	</div>
+	<hr>
+	-->
+		<div class="filter-bar">
+			<div id="stream-div">
+				<label for="stream">Start stream by word: </label>
+				<input type="text" name="stream" id="stream" />
+				<button onclick="streamStart()">Start</button>
+				<button onclick="streamStop()">Stop</button>
+			</div>
+			<div id="search-div">
+				<label for="stream">Search this word: </label>
+				<input type="text" name="search" id="search" />
+				<label for="stream">In this coordinates(lat,long,radius)[Es.(45.4773,9.1815,1000km)]: </label>
+				<input type="text" name="geo_search_coord" id="coordinates" />
+				<button onclick="dispatch_search()">Search</button>
+			</div>
 		</div>
-		<hr>
-        
-       <label for="stream">Start stream by word: </label>
-		<input type="text" name="stream" id="stream" />
-		<button onclick="streamStart()">Start</button>
-		<button onclick="streamStop()">Stop</button>
-        <h4>Stream Results</h4>
-		<div id="tweets-stream">
+		<div id="tweets-search">
 		</div>
-		<hr>
-		
-		<label for="stream">Search this word: </label>
-		<input type="text" name="geo_search" id="search_geo" />
-		<label for="stream">In this coordinates(lat,long,radius)[Es.(45.4773,9.1815,1000km)]: </label>
-		<input type="text" name="geo_search_coord" id="coordinates" />
-		<button onclick="geo_localized()">Prova geo</button>
-       <h4>Geolocalized tweets Results</h4>
-		<div id="tweets-geo">
-		</div>
-		
+
 		<!-- modal for displaying tweets -->
 		<div class="modal fade" id="myModal" role="dialog">
 			<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div id="tweetContent"></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
 				</div>
-				<div class="modal-body">
-					<div id="tweetContent"></div>
-				</div>
-				<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-			
+
 			</div>
 		</div>
-			
-		  
+
+
 	</body>
 </html>
