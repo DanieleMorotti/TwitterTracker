@@ -142,6 +142,15 @@ def geo():
 def getPage():
     return send_file("index.html")
 
+# Headers to avoid browser caching
+@application.after_request
+def add_header(r):
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'public, max-age=0'
+    return r
+
     
 if __name__ == "__main__":
     application.run()
