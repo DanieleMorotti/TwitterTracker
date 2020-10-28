@@ -92,7 +92,7 @@
 							let div = $(`<div class="messages"><h3>${data[i].user}</h3>
 											<p>${data[i].data}</p><p>${data[i].text.replace(reg, '<mark>$&</mark>')}</p>
 												<button onclick=show("${url}") id="btn" data-toggle="modal" data-target="#myModal" >Show</button>`);
-                            
+                     
 							if(data[i].city || data[i].coordinates){
 								let cityAndCoord = `<p>Città: ${data[i].city} Coordinate: ${data[i].coordinates} </p>`;
 								$(cityAndCoord).insertBefore(div.find('button'));

@@ -103,9 +103,10 @@ def search():
         return Response(status = 400)        
 
     list = []
+    #per ora lasciato a 100, ma se abbiamo bisogno di più tweet aumentiamo(per la geolocalizzazione)
     for tweet in tweepy.Cursor(api.search,q=word,count=100,geocode=location,tweet_mode="extended").items(100):
-        #verifico se la geo-localizzazione è abilitata e se esiste l'oggetto che contiene informazioni
-        '''if(tweet.user.geo_enabled is not False and tweet.place is not None):'''
+        '''#verifico se la geo-localizzazione è abilitata e se esiste l'oggetto che contiene informazioni
+        if(tweet.user.geo_enabled is not False and tweet.place is not None):'''
         city=coordinates =""
         if tweet.place:
             city,coordinates = tweet.place.full_name,tweet.place.bounding_box.coordinates
