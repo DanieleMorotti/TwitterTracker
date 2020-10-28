@@ -36,7 +36,7 @@ class MyStreamListener(tweepy.StreamListener):
             except AttributeError:
                 text = status.text
         
-        streaming_data.append({'text': text, 'user':status.user.name,'data':status.created_at.strftime('%m/%d/%Y')})
+        streaming_data.append({'id': status.id_str, 'user':status.user.name, 'username': status.user.screen_name,'text': text, 'data':status.created_at.strftime('%m/%d/%Y')})
 
     def on_error(self, status):
         print('Streaming Error Status Code - ' + str(status))

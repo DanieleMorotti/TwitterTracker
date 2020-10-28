@@ -62,7 +62,9 @@
 						$("#tweets-search").append('<h4>' + data.length + ' Streaming Tweets Results</h4>');
                         for (let i = 0; i < data.length; i++) {
                             var url = "https://twitter.com/" + data[i].username + "/status/" + data[i].id;
-                            $(`<div class="messages"><h3>${data[i].user}</h3><p>${data[i].data}</p><p>${data[i].text.replace(reg, '<mark>$&</mark>')}</p><button onclick=show("${url}") id="btn" data-toggle="modal" data-target="#myModal" >Show</button>`).
+                            $(`<div class="messages"><h3>${data[i].user}</h3>
+								<p>${data[i].data}</p><p>${data[i].text.replace(reg, '<mark>$&</mark>')}</p>
+								<button onclick=show("${url}") id="btn" data-toggle="modal" data-target="#myModal" >Show</button>`).
 								insertAfter('#tweets-search > h4');
                         }
 					},
@@ -142,14 +144,14 @@
 		<div class="filter-bar">
 			<div id="stream-div">
 				<label for="stream">Start stream by word: </label>
-				<input type="text" name="stream" id="stream" />
+				<input type="text" name="stream" id="stream" onkeyup="function press(event) {if (event.keyCode === 13) streamStart()}; press(event)"/>
 				<button onclick="streamStart()">Start</button>
 				<button onclick="streamStop()">Stop</button>
 			</div>
 			<div id="search-div">
 				<label for="stream">Search this word: </label>
-				<input type="text" name="search" id="search" />
-				<label for="stream">In this coordinates (lat,long,radius): </label>
+				<input type="text" name="search" id="search" onkeyup="function press(event) {if (event.keyCode === 13) dispatch_search()}; press(event)" />
+				<label for="stream">In this coordinates (lat, long, radius): </label>
 				<input type="text" name="geo_search_coord" id="coordinates" placeholder="e.g. 45.4773,9.1815,1000km" size="22"/>
 				<button onclick="dispatch_search()">Search</button>
 			</div>
