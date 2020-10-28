@@ -8,7 +8,7 @@ body p, label, h4 {
 }
 
 body h3 {
-    color:  rgb(251, 190, 132);
+    color:  rgb(241, 170, 103);
 }
 
 body label, input, button, h4 {
@@ -28,21 +28,32 @@ body label, input, button, h4 {
     font-size: 2vh;
     color:  white;
 }
+
+#tweets-search > h4 {
+    margin: 50px;
+}
+
 #stream-div {
     display: inline-block;
+    padding-top: 5vh;
+    font-size: 1.7rem;
+    font-family: Yu Gothic UI;
+
 }
 #search-div {
     display:inline-block;
-    float: right;
-    margin-right:1vw;
+    padding-top: 5vh;
+    font-size: 1.7rem;
+    font-family: Yu Gothic UI;
 }
 .filter-bar {
     position:sticky; 
-    top:0; 
-    background:rgb(3, 29, 41); 
-    padding: 1vh;
+    top: 0;
+    padding: 5vh 5vw;
+    background-color: rgb(10, 68, 94);
     border-bottom: 1px solid white;
 }
 mark {
-    background-color: #FFFF00;
+    background-color: rgb(241, 170, 103);
+    color: rgb(10, 68, 94);
 }
