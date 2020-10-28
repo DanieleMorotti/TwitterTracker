@@ -53,17 +53,16 @@
             }
             
 			function streamUpdate(keyword) {
-				console.log('stream update');
+                let reg = new RegExp(keyword, 'gi');
 				$.ajax({
 					url: '/streamUpdate',
 					method: 'GET',
 					success: (data) => {
 						$("#tweets-search").empty();
-						$("#tweets-search").append('<h4>Streaming Tweets Results</h4>');
-						window.scrollTo(0, 0);
+						$("#tweets-search").append('<h4>' + data.length + ' Streaming Tweets Results</h4>');
                         for (let i = 0; i < data.length; i++) {
                             var url = "https://twitter.com/" + data[i].username + "/status/" + data[i].id;
-							$(`<div class="messages"><h3>${data[i].user}</h3><p>${data[i].data}</p><p>${data[i].text}</p><button onclick=show("${url}") id="btn" data-toggle="modal" data-target="#myModal" >Show</button>`).
+                            $(`<div class="messages"><h3>${data[i].user}</h3><p>${data[i].data}</p><p>${data[i].text.replace(reg, '<mark>$&</mark>')}</p><button onclick=show("${url}") id="btn" data-toggle="modal" data-target="#myModal" >Show</button>`).
 								insertAfter('#tweets-search > h4');
                         }
 					},
@@ -84,7 +83,7 @@
 					success: (data) => {
                         let reg = new RegExp(query.keyword, 'gi');
 						$("#tweets-search").empty();
-                        $("#tweets-search").append('<h4>Search Tweets Results</h4>');
+                        $("#tweets-search").append('<h4>' + data.length + ' Search Tweets Results</h4>');
                         window.scrollTo(0, 0);
 
 						for (let i = 0; i < data.length; i++) {
@@ -118,6 +117,7 @@
 				if (!word) {
 					alert("Non hai inserito la parola");
 				} else {
+					if (streamingInterval) { streamStop(); }
 					search(word,loc);
                 }
             }
@@ -149,8 +149,8 @@
 			<div id="search-div">
 				<label for="stream">Search this word: </label>
 				<input type="text" name="search" id="search" />
-				<label for="stream">In this coordinates(lat,long,radius)[Es.(45.4773,9.1815,1000km)]: </label>
-				<input type="text" name="geo_search_coord" id="coordinates" />
+				<label for="stream">In this coordinates (lat,long,radius): </label>
+				<input type="text" name="geo_search_coord" id="coordinates" placeholder="e.g. 45.4773,9.1815,1000km" size="22"/>
 				<button onclick="dispatch_search()">Search</button>
 			</div>
 		</div>

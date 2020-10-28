@@ -39,7 +39,7 @@ class MyStreamListener(tweepy.StreamListener):
         streaming_data.append({'text': text, 'user':status.user.name,'data':status.created_at.strftime('%m/%d/%Y')})
 
     def on_error(self, status):
-        print('Streaming Error Status Code - ' + status)
+        print('Streaming Error Status Code - ' + str(status))
 
 myStreamListener = MyStreamListener()
 myStream = None
