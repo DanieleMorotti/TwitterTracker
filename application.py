@@ -18,22 +18,6 @@ api = tweepy.API(auth)
 # Initialize flask
 application = Flask(__name__)
 
-# def get_tweets(api, username):
-#     deadend = False
-#     lista = {'tweets':[]}
-#     tweets = api.user_timeline(username)
-#     for tweet in tweets:
-#         lista['tweets'].append({'testo':tweet.text,'user':tweet.user.name,'data':tweet.created_at.strftime('%m/%d/%Y')})
-#         
-# 
-#     string = json.dumps(lista, ensure_ascii=False, indent=2, sort_keys=True)
-#     return string
-# 
-#    
-# @application.route('/getTweets')
-# def sendData():
-#     return get_tweets(api,'SpaceX')
-
 #Stream tweets
 class MyStreamListener(tweepy.StreamListener):
     def on_connect(self):
@@ -112,31 +96,26 @@ def get_tweet_text(tweet):
                 
 @application.route('/search')
 def search():
-    word = request.args.get("word")
-    if not word:
-        return Response(status = 400)
-    
-    list = []
-    for tweet in api.search(q=word, tweet_mode="extended"):
-        list.append({'id': tweet.id_str, 'text': get_tweet_text(tweet), 'user':tweet.user.name, 'username': tweet.user.screen_name,'data':tweet.created_at.strftime('%m/%d/%Y')})
-    
-    return Response(json.dumps(list, ensure_ascii=False, indent=2), status=200, mimetype="application/json")
-   
-   
-@application.route('/geo')
-def geo():
-    word = request.args.get("word")
+    word = request.args.get("keyword")
     location = request.args.get("location")
+
+    if not word:
+        return Response(status = 400)        
+
     list = []
-    
-    for tweet in tweepy.Cursor(api.search,q=word,count=1000,geocode=location).items(1000):
+    for tweet in tweepy.Cursor(api.search,q=word,count=100,geocode=location,tweet_mode="extended").items(100):
         #verifico se la geo-localizzazione è abilitata e se esiste l'oggetto che contiene informazioni
-        if(tweet.user.geo_enabled is not False and tweet.place is not None):
-            list.append({'id': tweet.id_str, 'text': tweet.text, 'user':tweet.user.name, 'username': tweet.user.screen_name,'data':tweet.created_at.strftime('%m/%d/%Y'),'geo_enabled':tweet.user.geo_enabled,'city':tweet.place.full_name,'coordinates':tweet.place.bounding_box.coordinates})
+        '''if(tweet.user.geo_enabled is not False and tweet.place is not None):'''
+        city=coordinates =""
+        if tweet.place:
+            city,coordinates = tweet.place.full_name,tweet.place.bounding_box.coordinates
+
+        list.append({'id': tweet.id_str, 'text': get_tweet_text(tweet), 'user':tweet.user.name, 'username': tweet.user.screen_name,
+            'data':tweet.created_at.strftime('%m/%d/%Y'),'geo_enabled':tweet.user.geo_enabled,'city':city,'coordinates':coordinates})
     
     return Response(json.dumps(list, ensure_ascii=False, indent=2), status=200, mimetype="application/json")
+   
     
-
 # Route for the index page
 @application.route('/')
 def getPage():

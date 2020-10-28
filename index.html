@@ -73,55 +73,36 @@
 				});
 			}
 			
-			function geo_localized(){
-				let keyword = $('#search').val();
-				let loc = $('#coordinates').val();
-				$.ajax({
-					method: 'GET',
-					url: '/geo',
-					data: {
-						word: keyword,
-						location: loc
-					},
-					success: (data) => {
-						//Regex da usare per sostituire
-						let reg = new RegExp(keyword, 'gi');
-
-						$("#tweets-search").empty();
-						$("#tweets-search").append('<h4>Geolocalized Tweets Results</h4>');
-						window.scrollTo(0, 0);
-						for (let i = 0; i < data.length; i++) {
-							$("#tweets-search").append('<p>Città: ' + data[i].city + ' Coordinate: ' + data[i].coordinates + '</p>');
-						}
-						if (data.length < 1) {
-                            $("#tweets-search").append('<h5>No results for the specified query</h5>');
-                        }
-					},
-               error: function (xhr, ajaxOptions, thrownError) {
-                  console.log("streamUpdate: " + xhr.status + ' - ' + thrownError);
-               }
-				});				
-			}
             
-			function search() {
-				let keyword = $('#search').val();
+			function search(word,loc) {
+				let query = {keyword: word};
+				if(loc) query['location'] = loc;
 				$.ajax({
 					method: "GET",
 					url: "/search",
-					data: {
-						word: keyword,
-					},
-                    
+					data: query,
 					success: (data) => {
-                        let reg = new RegExp(keyword, 'gi');
+                        let reg = new RegExp(query.keyword, 'gi');
 						$("#tweets-search").empty();
                         $("#tweets-search").append('<h4>Search Tweets Results</h4>');
                         window.scrollTo(0, 0);
 
 						for (let i = 0; i < data.length; i++) {
 							var url = "https://twitter.com/" + data[i].username + "/status/" + data[i].id;
-                            $("#tweets-search").append(`<div class="messages"><h3>${data[i].user}</h3><p>${data[i].data}</p><p>${data[i].text.replace(reg, '<mark>$&</mark>')}</p><button onclick=show("${url}") id="btn" data-toggle="modal" data-target="#myModal" >Show</button>`);
+							let div = $(`<div class="messages"><h3>${data[i].user}</h3>
+											<p>${data[i].data}</p><p>${data[i].text.replace(reg, '<mark>$&</mark>')}</p>
+												<button onclick=show("${url}") id="btn" data-toggle="modal" data-target="#myModal" >Show</button>`);
+                            
+							if(data[i].city || data[i].coordinates){
+								let cityAndCoord = `<p>Città: ${data[i].city} Coordinate: ${data[i].coordinates} </p>`;
+								$(cityAndCoord).insertBefore(div.find('button'));
+								console.log(i);
+							}
+							$("#tweets-search").append(div);
 						}
+						if (data.length < 1) {
+                            $("#tweets-search").append('<h5>No results for the specified query</h5>');
+                        }
 					},
                     
 					error: (xhr, ajaxOptions, thrownError) => {
@@ -131,11 +112,13 @@
 			}
 
 			function dispatch_search() {
+				let word = $('#search').val();
 				let loc = $('#coordinates').val();
-				if (loc) {
-					geo_localized();
+
+				if (!word) {
+					alert("Non hai inserito la parola");
 				} else {
-					search();
+					search(word,loc);
                 }
             }
 
