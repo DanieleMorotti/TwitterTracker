@@ -1,10 +1,10 @@
 body {
-    background-color: rgb(10, 68, 94);
+    background-color:  rgb(6, 40, 55);
     
 }
 
 body p, label, h4 {
-    color: rgb(195, 222, 240);
+    color:rgb(184, 217, 231);
 }
 
 /* Tweet */
@@ -45,17 +45,46 @@ body p, label, h4 {
 .filter-bar {
     position:sticky; 
     top: 0;
-    padding: 5vh 5vw;
-    background-color: rgb(10, 68, 94);
+    background-color:  rgb(6, 40, 55);
     border-bottom: 1px solid white;
 }
 
-.filter-tab {
-    border-bottom: 1px solid white;
-}
+
 
 .filter-tab a {
-    background-color: rgb(6, 40, 55);
+    background-color:   rgb(184, 217, 231);
     font-size: 2rem;
-    color: rgb(195, 222, 240);
+    color:  rgb(29, 67, 85);
+    padding: 8px  10px !important;
 }
+
+.active a {
+    background-color: rgb(29, 67, 85) !important;
+    font-size: 2rem;
+    color:  rgb(184, 217, 231) !important;
+}
+
+
+.nav-tabs {
+    border-style: none;
+}
+
+
+.nav-tabs>li {
+    margin-bottom: 0;
+    border-style: none !important;
+}
+
+
+.tab-content {
+    padding: 3rem;
+    background-color:  rgb(29, 67, 85);
+}
+
+.tab-content label {
+    color: rgb(184, 217, 231);
+    padding-bottom: 3rem;
+}
+
+
+
