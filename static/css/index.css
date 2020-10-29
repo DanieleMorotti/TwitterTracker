@@ -7,22 +7,23 @@ body p, label, h4 {
     color: rgb(195, 222, 240);
 }
 
-body h3 {
-    color:  rgb(241, 170, 103);
-}
-
-body label, input, button, h4 {
-    margin-left: 1vw;
-    margin-top: 1vh;
-}
-
-
-.messages {
+/* Tweet */
+.tweet {
     background-color: rgb(43, 96, 121);
     padding: 20px;
     margin: 50px;
 }
 
+.tweet h3 {
+    color:  rgb(241, 170, 103);
+}
+
+.tweet mark {
+    background-color: rgb(241, 170, 103);
+    color: rgb(10, 68, 94);
+}
+
+/* Tweet area */
 #tweets-search > h5 {
     text-align: center;
     font-size: 2vh;
@@ -33,19 +34,14 @@ body label, input, button, h4 {
     margin: 50px;
 }
 
-#stream-div {
+/* Filter area */
+#stream-div, #search-div {
     display: inline-block;
     padding-top: 5vh;
     font-size: 1.7rem;
     font-family: Yu Gothic UI;
+}
 
-}
-#search-div {
-    display:inline-block;
-    padding-top: 5vh;
-    font-size: 1.7rem;
-    font-family: Yu Gothic UI;
-}
 .filter-bar {
     position:sticky; 
     top: 0;
@@ -53,7 +49,13 @@ body label, input, button, h4 {
     background-color: rgb(10, 68, 94);
     border-bottom: 1px solid white;
 }
-mark {
-    background-color: rgb(241, 170, 103);
-    color: rgb(10, 68, 94);
+
+.filter-tab {
+    border-bottom: 1px solid white;
+}
+
+.filter-tab a {
+    background-color: rgb(6, 40, 55);
+    font-size: 2rem;
+    color: rgb(195, 222, 240);
 }

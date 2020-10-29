@@ -36,7 +36,13 @@ class MyStreamListener(tweepy.StreamListener):
             except AttributeError:
                 text = status.text
         
-        streaming_data.append({'id': status.id_str, 'user':status.user.name, 'username': status.user.screen_name,'text': text, 'data':status.created_at.strftime('%m/%d/%Y')})
+        streaming_data.append({
+            'id': status.id_str, 
+            'user':status.user.name, 
+            'username': status.user.screen_name, 
+            'text': text, 
+            'data':status.created_at.strftime('%m/%d/%Y')
+        })
 
     def on_error(self, status):
         print('Streaming Error Status Code - ' + str(status))
@@ -83,7 +89,7 @@ def streamStop():
 # Route to get tweets from the stream
 @application.route('/streamUpdate')
 def streamUpdate():
-    return Response(json.dumps(streaming_data, ensure_ascii=False, indent=2), status=200, mimetype="application/json")
+    return Response(json.dumps(list(reversed(streaming_data)), ensure_ascii=False, indent=2), status=200, mimetype="application/json")
     
 #Search tweets
 def get_tweet_text(tweet):
@@ -111,8 +117,16 @@ def search():
         if tweet.place:
             city,coordinates = tweet.place.full_name,tweet.place.bounding_box.coordinates
 
-        list.append({'id': tweet.id_str, 'text': get_tweet_text(tweet), 'user':tweet.user.name, 'username': tweet.user.screen_name,
-            'data':tweet.created_at.strftime('%m/%d/%Y'),'geo_enabled':tweet.user.geo_enabled,'city':city,'coordinates':coordinates})
+        list.append({
+            'id': tweet.id_str, 
+            'text': get_tweet_text(tweet), 
+            'user':tweet.user.name, 
+            'username': tweet.user.screen_name,
+            'data':tweet.created_at.strftime('%m/%d/%Y'),
+            'geo_enabled':tweet.user.geo_enabled, 
+            'city':city, 
+            'coordinates':coordinates
+        })
     
     return Response(json.dumps(list, ensure_ascii=False, indent=2), status=200, mimetype="application/json")
    
