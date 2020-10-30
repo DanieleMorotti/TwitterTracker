@@ -20,9 +20,12 @@ application = Flask(__name__)
 
 #Stream tweets
 class MyStreamListener(tweepy.StreamListener):
+
+    # Called when the stream starts
     def on_connect(self):
         print("Connected to the server!")
     
+    # Called when a new tweet is received
     def on_status(self, status):
         text = ""
         if hasattr(status, "retweeted_status"): # Check if Retweet
@@ -44,9 +47,11 @@ class MyStreamListener(tweepy.StreamListener):
             'data':status.created_at.strftime('%m/%d/%Y')
         })
 
+    # Called when an error occurs
     def on_error(self, status):
         print('Streaming Error Status Code - ' + str(status))
 
+# Global variables for the stream
 myStreamListener = MyStreamListener()
 myStream = None
 streaming_data = []
@@ -91,7 +96,7 @@ def streamStop():
 def streamUpdate():
     return Response(json.dumps(list(reversed(streaming_data)), ensure_ascii=False, indent=2), status=200, mimetype="application/json")
     
-#Search tweets
+# Search tweets
 def get_tweet_text(tweet):
     try:
        text = tweet.retweeted_status.full_text
@@ -105,14 +110,15 @@ def search():
     word = request.args.get("keyword")
     location = request.args.get("location")
 
+    # If no word is provided return an error code
     if not word:
         return Response(status = 400)        
 
     list = []
-    #per ora lasciato a 100, ma se abbiamo bisogno di più tweet aumentiamo(per la geolocalizzazione)
+    
+    # Ask for 100 tweets
     for tweet in tweepy.Cursor(api.search,q=word,count=100,geocode=location,tweet_mode="extended").items(100):
-        '''#verifico se la geo-localizzazione è abilitata e se esiste l'oggetto che contiene informazioni
-        if(tweet.user.geo_enabled is not False and tweet.place is not None):'''
+        # Store city coordinates only if they are available in the tweet
         city=coordinates =""
         if tweet.place:
             city,coordinates = tweet.place.full_name,tweet.place.bounding_box.coordinates
@@ -145,7 +151,7 @@ def add_header(r):
     r.headers['Cache-Control'] = 'public, max-age=0'
     return r
 
-    
+# Run the application
 if __name__ == "__main__":
     application.run()
     stopStreamListener()
