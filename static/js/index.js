@@ -135,3 +135,15 @@ function show(url){
     $('#tweetContent').empty();
     $('#tweetContent').append(`<blockquote class="twitter-tweet"><a href="${url}">Tweet</a></blockquote>  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"><\/script>`);
 }
+
+//Function provided by Google to initialize the map associated to the div w/ id="map"
+function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 41.885453, lng: 12.498221 },
+        zoom: 5,
+    });
+}
+
+$(document).on('ready', () => {
+    initMap();
+});

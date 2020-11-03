@@ -86,5 +86,18 @@ body p, label, h4 {
     padding-bottom: 3rem;
 }
 
+/* Map */
+#map {
+    height: 300px !important;
+    width: 400px !important;
+    display: inline-block;
+    margin: 1vh;
+    float: right;
+    border: 3px solid white;
+    border-radius: 2px;
+}
 
-
+#map a{
+    background-color: transparent !important;
+    color: initial !important;
+}
