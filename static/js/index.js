@@ -92,9 +92,25 @@ function streamUpdate(word) {
 
 // Search tweets containing a word and an optional location
 function search(word,loc) {
-    let query = {keyword: word};
-    if(loc) query['location'] = loc;
-    
+    let query = {keyword: word}, center,ray ;
+    if(loc){
+        query['location'] = loc;
+        //initialized the ray of the circle and the center
+        radius = 1000*parseInt(loc.split(',')[2].slice(0,-2));
+        center = {lat: parseInt(loc.split(',')[0]),lng: parseInt(loc.split(',')[1])};
+
+        // Add the circle for this city to the map.
+        const search_area = new google.maps.Circle({
+            strokeColor: "#FF0000",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "#FF0000",
+            fillOpacity: 0.35,
+            map,
+            center: center,
+            radius: radius,
+        });
+    }
     $.ajax({
         method: "GET",
         url: "/search",
@@ -109,6 +125,7 @@ function search(word,loc) {
                 //Display a message if no tweets are available
                 $("#tweets-search").append('<h5>No results for the specified query</h5>');
             }
+
         },
         
         error: (xhr, ajaxOptions, thrownError) => {
