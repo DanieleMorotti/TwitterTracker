@@ -2,7 +2,7 @@
 var streamingInterval = null;
 
 // Start the stream of tweets
-function streamStart() {
+function stream_start() {
     let keyword = $('#stream').val();
     if (keyword) {
         $.ajax({
@@ -19,7 +19,7 @@ function streamStart() {
                     clearInterval(streamingInterval);
                 
                 // Start an interval timer that updates the tweets every 500ms
-                streamingInterval = setInterval(() => { streamUpdate(keyword) }, 500);
+                streamingInterval = setInterval(() => { stream_update(keyword) }, 500);
             },
             
             error: (xhr, ajaxOptions, thrownError) => {
@@ -30,7 +30,7 @@ function streamStart() {
 }
 
 // Stop the stream of tweets
-function streamStop() {
+function stream_stop() {
     
     //Stop the interval update of the stream
     if(streamingInterval) {
@@ -73,8 +73,7 @@ function displayTweets(data, word) {
 }
 
 // Update the tweets from the stream
-function streamUpdate(word) {
-    let reg = new RegExp(word, 'gi');
+function stream_update(word) {
     $.ajax({
         url: '/streamUpdate',
         method: 'GET',
@@ -127,7 +126,7 @@ function dispatch_search() {
     if (!word) {
         alert("Non hai inserito la parola");
     } else {
-        if (streamingInterval) { streamStop(); }
+        if (streamingInterval) { stream_stop(); }
         search(word,loc);
     }
 }

@@ -20,8 +20,8 @@ function setUpClickListener() {
 // Draw Searched area on the map
 function drawSearchAreaOnMap(loc, color) {
     //initialized the ray of the circle and the center
-    radius = 1000 * parseInt(loc.split(',')[2].slice(0, -2));
-    center = { lat: parseFloat(loc.split(',')[0]), lng: parseFloat(loc.split(',')[1]) };
+    let radius = 1000 * parseInt(loc.split(',')[2].slice(0, -2));
+    let center = { lat: parseFloat(loc.split(',')[0]), lng: parseFloat(loc.split(',')[1]) };
 
     // Remove previous circle if exists
     if (search_area) {

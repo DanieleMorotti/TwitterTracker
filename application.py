@@ -56,47 +56,47 @@ class MyStreamListener(tweepy.StreamListener):
 
 # Global variables for the stream
 myStreamListener = MyStreamListener()
-myStream = None
+my_stream = None
 streaming_data = []
 
 # Disconnect current stream if there is one
-def stopStreamListener():
-    if(myStream != None): 
-        myStream.disconnect()
+def stop_stream_listener():
+    if(my_stream != None): 
+        my_stream.disconnect()
         streaming_data.clear()
     
 # Function to starm StreamListener
-def startStreamListener(keyword):
+def start_stream_listener(keyword):
     global myStreamListener
-    global myStream
+    global my_stream
     
     # Disconnect existing stream
-    stopStreamListener()
+    stop_stream_listener()
     
     # Create a new stream with the specified 
-    myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener, tweet_mode = 'extended')
-    myStream.filter(track=[keyword], is_async=True)
+    my_stream = tweepy.Stream(auth = api.auth, listener=myStreamListener, tweet_mode = 'extended')
+    my_stream.filter(track=[keyword], is_async=True)
 
 # Route to start stream
 @application.route('/streamStart')
-def streamStart():
+def stream_start():
     word = request.args.get("word")
     if not word:
         return Response(status = 400)
     
-    startStreamListener(word)
+    start_stream_listener(word)
     
     return Response(status = 200)
     
 # Route to stop stream
 @application.route('/streamStop')
-def streamStop():
-    stopStreamListener()
+def stream_stop():
+    stop_stream_listener()
     return Response(status = 200)
 
 # Route to get tweets from the stream
 @application.route('/streamUpdate')
-def streamUpdate():
+def stream_update():
     return Response(json.dumps(list(reversed(streaming_data)), ensure_ascii=False, indent=2), status=200, mimetype="application/json")
     
 # Search tweets
@@ -142,7 +142,7 @@ def search():
     
 # Route for the index page
 @application.route('/')
-def getPage():
+def get_page():
     return send_file("index.html")
 
 # Headers to avoid browser caching
@@ -157,5 +157,5 @@ def add_header(r):
 # Run the application
 if __name__ == "__main__":
     application.run()
-    stopStreamListener()
+    stop_stream_listener()
 
