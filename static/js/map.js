@@ -1,4 +1,5 @@
 var map = null;
+var search_area = null;
 //Function provided by Google to initialize the map associated to the div w/ id="map"
 function initMap() {
 

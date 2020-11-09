@@ -89,7 +89,6 @@ function streamUpdate(word) {
     });
 }
 
-var search_area = null;
 // Search tweets containing a word and an optional location
 function search(word,loc) {
     let query = {keyword: word}, center, ray ;
