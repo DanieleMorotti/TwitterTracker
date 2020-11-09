@@ -40,6 +40,7 @@ body p, label, h4 {
     padding-top: 5vh;
     font-size: 1.7rem;
     font-family: Yu Gothic UI;
+    width:100%;
 }
 
 .filter-bar {

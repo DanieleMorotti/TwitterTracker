@@ -89,27 +89,13 @@ function streamUpdate(word) {
     });
 }
 
-
+var search_area = null;
 // Search tweets containing a word and an optional location
 function search(word,loc) {
-    let query = {keyword: word}, center,ray ;
-    if(loc){
+    let query = {keyword: word}, center, ray ;
+    if (loc) {
         query['location'] = loc;
-        //initialized the ray of the circle and the center
-        radius = 1000*parseInt(loc.split(',')[2].slice(0,-2));
-        center = {lat: parseInt(loc.split(',')[0]),lng: parseInt(loc.split(',')[1])};
-
-        // Add the circle for this city to the map.
-        const search_area = new google.maps.Circle({
-            strokeColor: "#FF0000",
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: "#FF0000",
-            fillOpacity: 0.35,
-            map,
-            center: center,
-            radius: radius,
-        });
+        drawSearchAreaOnMap(loc, '#00FF00');
     }
     $.ajax({
         method: "GET",
@@ -152,15 +138,3 @@ function show(url){
     $('#tweetContent').empty();
     $('#tweetContent').append(`<blockquote class="twitter-tweet"><a href="${url}">Tweet</a></blockquote>  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"><\/script>`);
 }
-
-//Function provided by Google to initialize the map associated to the div w/ id="map"
-function initMap() {
-    map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 41.885453, lng: 12.498221 },
-        zoom: 5,
-    });
-}
-
-$(document).on('ready', () => {
-    initMap();
-});
