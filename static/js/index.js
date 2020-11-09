@@ -1,9 +1,41 @@
+// Save search filters
+var searchObj = {};
+function save() {
+    searchObj = [
+        {field: 'keyword', val: $('#keyWord').val()},
+        {field: 'user', val: $('#user').val()},
+        {field: 'center', val: $('#coordinates').val()},
+        {field: 'ray', val: $('#ray').val()}
+    ]
+
+    searchObj.forEach(element => {
+        let index = searchObj.indexOf(element);
+        if(element.val && element.field !== 'ray' && element.field !== 'center' ) {
+            $('#componentView').prepend(`<button id="${element.field}Btn" onclick="deleteFilter(${index})">${element.val} &#10006;</button>`)
+        }
+        else if(element.val && element.field == 'center' ) {
+            $('#componentView').prepend(`<button id="${element.field}Btn" onclick="deleteFilter(${index})">(${element.val}) &#10006;</button>`)
+        }
+    })
+    
+    $('#toTweets').click();
+    dispatch_search();
+}
+
+
+function deleteFilter(index) {
+    console.log(`#${searchObj[index].val}Btn`)
+    $(`#${searchObj[index].field}Btn`).remove();
+    searchObj[index].val = "";
+}
+
 // Interval for the update of the stream of tweets
 var streamingInterval = null;
 
 // Start the stream of tweets
 function streamStart() {
-    let keyword = $('#stream').val();
+ //   let keyword = $('#keyWord').val();
+    console.log(searchObj.keyword)
     if (keyword) {
         $.ajax({
             method: "GET",
@@ -57,8 +89,8 @@ function displayTweets(data, word) {
     for (let i = 0; i < data.length; i++) {
         var url = "https://twitter.com/" + data[i].username + "/status/" + data[i].id;
         let div = $(`<div class="tweet">
-                        <h3>${data[i].user}</h3>
-                        <p>${data[i].data}</p>
+                        <p class="date">${data[i].data}</p>
+                        <h5>${data[i].user}</h5>
                         <p>${data[i].text.replace(reg, '<mark>$&</mark>')}</p>
                         <button onclick=show("${url}") id="btn" data-toggle="modal" data-target="#myModal" >Show</button>
                     </div>`);
@@ -136,8 +168,10 @@ function search(word,loc) {
 
 // Start a search and stop the stream if it's active
 function dispatch_search() {
-    let word = $('#search').val();
-    let loc = $('#coordinates').val();
+ //   let word = $('#search').val();
+    let word = searchObj[0].val;
+    let coordinates = searchObj[2].val;
+  //  let loc = $('#coordinates').val();
 
     if (!word) {
         alert("Non hai inserito la parola");

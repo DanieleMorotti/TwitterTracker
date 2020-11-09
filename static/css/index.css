@@ -1,38 +1,48 @@
+html, body, #app {
+    height: 100%
+}
 body {
     background-color:  rgb(6, 40, 55);
-    
+
 }
 
 body p, label, h4 {
     color:rgb(184, 217, 231);
 }
 
-/* Tweet */
-.tweet {
-    background-color: rgb(43, 96, 121);
-    padding: 20px;
-    margin: 50px;
-}
-
-.tweet h3 {
-    color:  rgb(241, 170, 103);
-}
-
-.tweet mark {
-    background-color: rgb(241, 170, 103);
-    color: rgb(10, 68, 94);
-}
-
-/* Tweet area */
-#tweets-search > h5 {
+body ul {
+    height: 100%;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    float: left;
+    background-color:  rgb(43, 96, 121);
     text-align: center;
-    font-size: 2vh;
-    color:  white;
+    width: 60px;
 }
 
-#tweets-search > h4 {
-    margin: 50px;
+.icon {
+    color: white;
+    margin: 2px;
+    font-size: 2rem;
+    width: 20px;
+    align-content: center;
 }
+
+
+body ul button {
+    background-color: transparent;
+    border-style: none;
+    display: inline-block;
+    padding: 1rem;
+}
+
+body ul li:hover {
+    background-color: darkgoldenrod;
+}
+
+/**************************************/
+
 
 /* Filter area */
 #stream-div, #search-div {
@@ -43,6 +53,8 @@ body p, label, h4 {
 }
 
 .filter-bar {
+    width: 90%;
+    float: right;
     position:sticky; 
     top: 0;
     background-color:  rgb(6, 40, 55);

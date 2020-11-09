@@ -1,0 +1,30 @@
+/* Tweet */
+#tweets-search > h4, .tweet {
+    border-bottom: 1px solid white;
+    padding: 1rem;
+}
+
+.tweet h5 {
+    color:  rgb(241, 170, 103);
+}
+
+.tweet mark {
+    background-color: rgb(241, 170, 103);
+}
+
+.date {
+    float: right;
+}
+
+/* Tweet area */
+#tweets-search > h5 {
+    text-align: center;
+    font-size: 2vh;
+    color:  white;
+}
+
+#saveBtn {
+    position: fixed;
+    top: 0;
+    right: 0;
+}

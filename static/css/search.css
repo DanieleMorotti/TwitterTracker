@@ -1,0 +1,17 @@
+
+#inputFields > * {
+    margin: 1.5rem;
+}
+
+span {
+    color: white;
+}
+
+input[type="range"] {
+    width: 20rem;
+}
+
+#tweets-search {
+    max-height: 90vh;
+    overflow-y: scroll;
+}
