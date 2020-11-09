@@ -12,11 +12,11 @@
 
 	<!--Google Maps-->
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxlsjc_wL_GLgVJZipSdTGXHembWnSh3Y&callback=initMap&libraries=&v=weekly" defer></script>
-
-
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDD9bBnkYVGlT_4TOWjQkhVe9M3RchWAmU&callback=initMap&libraries=&v=weekly" defer></script>
+	
 	<!--Internal dependencies-->
 	<script src="/static/js/index.js"></script>
+	<script src="/static/js/map.js"></script>
 	<link rel="stylesheet" href="/static/css/index.css">
 	<link rel="stylesheet" id="stylesheetComp" href="/static/css/search.css">
 
@@ -50,7 +50,7 @@
 					</router-link>
 				</li>
 				<li class="nav-item">
-					<router-link id="toCharts" to="/charts" >
+					<router-link id="toCharts" tag="button" to="/charts" >
 						<i class="icon fas fa-chart-pie"></i>
 					</router-link>
 				</li>
@@ -74,9 +74,9 @@
                 <div class="tab-pane active" id="nav-stream">
                     <div id="stream-div">
                         <label for="stream">Start stream by word: </label>
-                        <input type="text" name="stream" id="stream" onkeyup="function press(event) {if (event.keyCode === 13) streamStart()}; press(event)"/>
-                        <button onclick="streamStart()">Start</button>
-                        <button onclick="streamStop()">Stop</button>
+                        <input type="text" name="stream" id="stream" onkeyup="function press(event) {if (event.keyCode === 13) stream_start()}; press(event)"/>
+                        <button onclick="stream_start()">Start</button>
+                        <button onclick="stream_stop()">Stop</button>
                     </div>
                 </div>
                 <div class="tab-pane" id="nav-search">
@@ -96,7 +96,7 @@
 		</div>
 	-->
 		<!-- modal for displaying tweets -->
-		<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal fade" id="tweetModal" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -113,6 +113,23 @@
 			</div>
 		</div>
 
+		<!-- modal for displaying map -->
+		<div class="modal fade" id="mapModal" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div id="map"></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
 
 	</body>
 </html>

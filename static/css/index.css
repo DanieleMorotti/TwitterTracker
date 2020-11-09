@@ -7,7 +7,16 @@ body {
 }
 
 body p, label, h4 {
-    color:rgb(184, 217, 231);
+    color: white;
+}
+
+
+.icon {
+    color: white;
+    margin: 2px;
+    font-size: 2rem;
+    width: 20px;
+    align-content: center;
 }
 
 body ul {
@@ -21,35 +30,35 @@ body ul {
     width: 60px;
 }
 
-.icon {
-    color: white;
-    margin: 2px;
-    font-size: 2rem;
-    width: 20px;
-    align-content: center;
-}
-
-
 body ul button {
     background-color: transparent;
     border-style: none;
     display: inline-block;
-    padding: 1rem;
+    padding: 1.5rem;
 }
 
 body ul li:hover {
     background-color: darkgoldenrod;
 }
 
+button:focus {outline:0;}
+
+
+.filter {
+    margin: 0.5rem;
+}
+
 /**************************************/
 
 
 /* Filter area */
+/*
 #stream-div, #search-div {
     display: inline-block;
     padding-top: 5vh;
     font-size: 1.7rem;
     font-family: Yu Gothic UI;
+    width:100%;
 }
 
 .filter-bar {
@@ -97,6 +106,7 @@ body ul li:hover {
     color: rgb(184, 217, 231);
     padding-bottom: 3rem;
 }
+*/
 
 /* Map */
 #map {
@@ -104,9 +114,8 @@ body ul li:hover {
     width: 400px !important;
     display: inline-block;
     margin: 1vh;
-    float: right;
-    border: 3px solid white;
-    border-radius: 2px;
+/*    border: 3px solid white;
+    border-radius: 2px;*/
 }
 
 #map a{

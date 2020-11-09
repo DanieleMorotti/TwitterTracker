@@ -1,4 +1,9 @@
 /* Tweet */
+
+#tweets-search {
+    padding-top: 2rem;
+}
+
 #tweets-search > h4, .tweet {
     border-bottom: 1px solid white;
     padding: 1rem;
@@ -27,4 +32,8 @@
     position: fixed;
     top: 0;
     right: 0;
+}
+
+button {
+    margin: 0.5rem;
 }

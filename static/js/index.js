@@ -7,24 +7,34 @@ function save() {
         {field: 'center', val: $('#coordinates').val()},
         {field: 'ray', val: $('#ray').val()}
     ]
-
     searchObj.forEach(element => {
         let index = searchObj.indexOf(element);
         if(element.val && element.field !== 'ray' && element.field !== 'center' ) {
-            $('#componentView').prepend(`<button id="${element.field}Btn" onclick="deleteFilter(${index})">${element.val} &#10006;</button>`)
+            $(`#${element.field}Btn`).remove();
+            $('#componentView').prepend(`<button class="filter" id="${element.field}Btn" onclick="deleteFilter(${index})">${element.val} &#10006;</button>`)
         }
         else if(element.val && element.field == 'center' ) {
-            $('#componentView').prepend(`<button id="${element.field}Btn" onclick="deleteFilter(${index})">(${element.val}) &#10006;</button>`)
+            $(`#${element.field}Btn`).remove();
+            $('#componentView').prepend(`<button class="filter" id="${element.field}Btn" onclick="deleteFilter(${index})">(${element.val}) &#10006;</button>`)
         }
     })
     
     $('#toTweets').click();
+
     dispatch_search();
+        
+}
+
+/* new search invoked from tweets component */
+function newSearch() {
+    $("#tweets-search").empty();
+
+    if((searchObj[0] && searchObj.val) || (searchObj[1] && searchObj[1].val)) 
+        dispatch_search();
 }
 
 
 function deleteFilter(index) {
-    console.log(`#${searchObj[index].val}Btn`)
     $(`#${searchObj[index].field}Btn`).remove();
     searchObj[index].val = "";
 }
@@ -34,8 +44,7 @@ var streamingInterval = null;
 
 // Start the stream of tweets
 function streamStart() {
- //   let keyword = $('#keyWord').val();
-    console.log(searchObj.keyword)
+    let keyword = $('#keyWord').val();
     if (keyword) {
         $.ajax({
             method: "GET",
@@ -51,7 +60,7 @@ function streamStart() {
                     clearInterval(streamingInterval);
                 
                 // Start an interval timer that updates the tweets every 500ms
-                streamingInterval = setInterval(() => { streamUpdate(keyword) }, 500);
+                streamingInterval = setInterval(() => { stream_update(keyword) }, 500);
             },
             
             error: (xhr, ajaxOptions, thrownError) => {
@@ -62,7 +71,7 @@ function streamStart() {
 }
 
 // Stop the stream of tweets
-function streamStop() {
+function stream_stop() {
     
     //Stop the interval update of the stream
     if(streamingInterval) {
@@ -92,7 +101,7 @@ function displayTweets(data, word) {
                         <p class="date">${data[i].data}</p>
                         <h5>${data[i].user}</h5>
                         <p>${data[i].text.replace(reg, '<mark>$&</mark>')}</p>
-                        <button onclick=show("${url}") id="btn" data-toggle="modal" data-target="#myModal" >Show</button>
+                        <button onclick=show("${url}") id="btn" data-toggle="modal" data-target="#tweetModal" >Show</button>
                     </div>`);
     
         // Add the city and coordinates only if they are available in the tweet
@@ -105,8 +114,7 @@ function displayTweets(data, word) {
 }
 
 // Update the tweets from the stream
-function streamUpdate(word) {
-    let reg = new RegExp(word, 'gi');
+function stream_update(word) {
     $.ajax({
         url: '/streamUpdate',
         method: 'GET',
@@ -121,28 +129,13 @@ function streamUpdate(word) {
     });
 }
 
-
 // Search tweets containing a word and an optional location
-function search(word,loc) {
-    let query = {keyword: word}, center,ray ;
-    if(loc){
-        query['location'] = loc;
-        //initialized the ray of the circle and the center
-        radius = 1000*parseInt(loc.split(',')[2].slice(0,-2));
-        center = {lat: parseInt(loc.split(',')[0]),lng: parseInt(loc.split(',')[1])};
-
-        // Add the circle for this city to the map.
-        const search_area = new google.maps.Circle({
-            strokeColor: "#FF0000",
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: "#FF0000",
-            fillOpacity: 0.35,
-            map,
-            center: center,
-            radius: radius,
-        });
-    }
+function search(word,center,ray) {
+    let query = {keyword: word};
+ /*   if (center && ray) {
+        query['location'] = center+","+ray+"km";
+        drawSearchAreaOnMap(center, '#00FF00');
+    } */
     $.ajax({
         method: "GET",
         url: "/search",
@@ -159,7 +152,6 @@ function search(word,loc) {
             }
 
         },
-        
         error: (xhr, ajaxOptions, thrownError) => {
             console.log("search: " + xhr.status + ' - ' + thrownError);
         }
@@ -168,16 +160,15 @@ function search(word,loc) {
 
 // Start a search and stop the stream if it's active
 function dispatch_search() {
- //   let word = $('#search').val();
     let word = searchObj[0].val;
-    let coordinates = searchObj[2].val;
-  //  let loc = $('#coordinates').val();
+    let center = searchObj[2].val;
+    let ray = searchObj[3].val;
 
     if (!word) {
         alert("Non hai inserito la parola");
     } else {
-        if (streamingInterval) { streamStop(); }
-        search(word,loc);
+        if (streamingInterval) { stream_stop(); }
+        search(word, center, ray);
     }
 }
 
@@ -186,15 +177,3 @@ function show(url){
     $('#tweetContent').empty();
     $('#tweetContent').append(`<blockquote class="twitter-tweet"><a href="${url}">Tweet</a></blockquote>  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"><\/script>`);
 }
-
-//Function provided by Google to initialize the map associated to the div w/ id="map"
-function initMap() {
-    map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 41.885453, lng: 12.498221 },
-        zoom: 5,
-    });
-}
-
-$(document).on('ready', () => {
-    initMap();
-});
