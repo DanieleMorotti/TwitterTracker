@@ -4,6 +4,8 @@ import tweepy
 import datetime, time
 import json
 
+from tweets import store_tweets, get_stored_tweets_info, get_stored_tweet
+
 # Twitter keys
 API_KEY = 'j6DEP35tCTAxgmoaCYMQAThHw'
 API_SECRET_KEY = 'IStBpbpGzInMyzxAtlg6ZRLpJWZu5hS0SUAm6RB8YdmlNLz9OD'
@@ -17,6 +19,7 @@ api = tweepy.API(auth)
 
 # Initialize flask
 application = Flask(__name__)
+
 
 #Stream tweets
 class MyStreamListener(tweepy.StreamListener):
