@@ -11,7 +11,13 @@
 log
 virt/
 
+# Python cache
+__pycache__/
+
 # SonarQube
 sonar-scanner-4.5.0.2216-windows
 .scannerwork
 sonar-project.properties
+
+# Others
+env.sh
