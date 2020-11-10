@@ -1,11 +1,12 @@
-// Save search filters
+// Save search filters  dove avviene la ricerca per luogo?
 var searchObj = {};
 function save() {
     searchObj = [
         {field: 'keyword', val: $('#keyWord').val()},
         {field: 'user', val: $('#user').val()},
         {field: 'center', val: $('#coordinates').val()},
-        {field: 'ray', val: $('#ray').val()}
+        {field: 'ray', val: $('#ray').val()},
+        {field: 'pdi', val: $('#pdi').val()},
     ]
     searchObj.forEach(element => {
         let index = searchObj.indexOf(element);
@@ -18,7 +19,7 @@ function save() {
             $('#componentView').prepend(`<button class="filter" id="${element.field}Btn" onclick="deleteFilter(${index})">(${element.val}) &#10006;</button>`)
         }
     })
-    
+
     $('#toTweets').click();
 
     dispatch_search();
@@ -132,10 +133,10 @@ function stream_update(word) {
 // Search tweets containing a word and an optional location
 function search(word,center,ray) {
     let query = {keyword: word};
- /*   if (center && ray) {
+    if (center && ray) {
         query['location'] = center+","+ray+"km";
-        drawSearchAreaOnMap(center, '#00FF00');
-    } */
+        drawSearchAreaOnMap(center, ray, '#00FF00');
+    }
     $.ajax({
         method: "GET",
         url: "/search",
@@ -163,8 +164,9 @@ function dispatch_search() {
     let word = searchObj[0].val;
     let center = searchObj[2].val;
     let ray = searchObj[3].val;
+    let pdi = searchObj[4].val;
 
-    if (!word) {
+    if (!word && !pdi) {
         alert("Non hai inserito la parola");
     } else {
         if (streamingInterval) { stream_stop(); }

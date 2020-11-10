@@ -15,8 +15,11 @@ export default {
             <label for="user">user: </label>
             <input type="text" name="user" id="user" />
             <br>
+
+            <label for="pdi">point of interest: </label>
+            <input type="text" name="pdi" id="pdi" placeholder="University of Bologna" size="22" /> <br>
             
-            <button id="mapBtn" data-toggle="modal" data-target="#mapModal"> Draw your area</button><br>
+            <button id="mapBtn" data-toggle="modal" data-target="#mapModal"> Draw your area</button>  <br>
 
             <label for="coordinates">coordinates (lat, long): </label>
             <input type="text" name="coordinates" id="coordinates" placeholder="e.g. 45.4773,9.1815" size="22" /> <br>
