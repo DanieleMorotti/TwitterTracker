@@ -112,7 +112,7 @@ def get_tweet_text(tweet):
 def search():
     word = request.args.get("keyword")
     location = request.args.get("location")
-
+    print(word)
     # If no word is provided return an error code
     if not word:
         return Response(status = 400)        
