@@ -1,4 +1,4 @@
-// Save search filters  dove avviene la ricerca per luogo?
+// Save search filters
 var searchObj = {};
 function save() {
     searchObj = [
@@ -8,7 +8,7 @@ function save() {
         {field: 'ray', val: $('#ray').val()},
         {field: 'pdi', val: $('#pdi').val()},
     ]
-    searchObj.forEach(element => {
+    searchObj.forEach(element => {  //le barrette coi filtri inseriti dopo che hai fatto una ricerca
         let index = searchObj.indexOf(element);
         if(element.val && element.field !== 'ray' && element.field !== 'center' ) {
             $(`#${element.field}Btn`).remove();
@@ -20,9 +20,27 @@ function save() {
         }
     })
 
+    if(searchObj[4].val) {
+    var request = {
+        query: searchObj[4].val,
+        fields: ["name", "geometry"],
+      };
+      service = new google.maps.places.PlacesService(map);
+      service.findPlaceFromQuery(request, (results, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          console.log(results[0]);
+          let lat = results[0].geometry.viewport.Sa.i;
+          let lon = results[0].geometry.viewport.Ya.i;
+          $('#toTweets').click();
+          //pdi_search(lat, lon); Si può fare ricerca senza parola chiave ma con data area geografica?
+        }
+      });
+    }
+    else {
     $('#toTweets').click();
 
     dispatch_search();
+    }
         
 }
 
@@ -164,7 +182,6 @@ function dispatch_search() {
     let word = searchObj[0].val;
     let center = searchObj[2].val;
     let ray = searchObj[3].val;
-    let pdi = searchObj[4].val;
 
     if (!word && !pdi) {
         alert("Non hai inserito la parola");
