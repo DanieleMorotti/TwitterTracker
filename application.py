@@ -3,8 +3,12 @@ from flask import send_file, redirect, request, Response
 import tweepy
 import datetime, time
 import json
+import mimetypes
 
 from tweets import store_tweets, get_stored_tweets_info, get_stored_tweet
+
+# Set default mimetype for .js files
+mimetypes.add_type('application/javascript', '.js')
 
 # Twitter keys
 API_KEY = 'j6DEP35tCTAxgmoaCYMQAThHw'
@@ -153,6 +157,7 @@ def add_header(r):
     r.headers["Expires"] = "0"
     r.headers['Cache-Control'] = 'public, max-age=0'
     return r
+
 
 # Run the application
 if __name__ == "__main__":
