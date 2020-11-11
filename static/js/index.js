@@ -8,9 +8,9 @@ function save() {
         {field: 'ray', val: $('#ray').val()},
         {field: 'pdi', val: $('#pdi').val()},
     ]
-    searchObj.forEach(element => {  //le barrette coi filtri inseriti dopo che hai fatto una ricerca
+    searchObj.forEach(element => { 
         let index = searchObj.indexOf(element);
-        if(element.val && element.field !== 'ray' && element.field !== 'center' ) {
+        if(element.val && element.field !== 'ray' && element.field !== 'center' && element.field !== 'pdi' ) {
             $(`#${element.field}Btn`).remove();
             $('#componentView').prepend(`<button class="filter" id="${element.field}Btn" onclick="deleteFilter(${index})">${element.val} &#10006;</button>`)
         }
@@ -20,7 +20,7 @@ function save() {
         }
     })
 
-    if(searchObj[4].val) {
+    if(searchObj[4].val != "") {
     var request = {
         query: searchObj[4].val,
         fields: ["name", "geometry"],
@@ -29,10 +29,16 @@ function save() {
       service.findPlaceFromQuery(request, (results, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           console.log(results[0]);
-          let lat = results[0].geometry.viewport.Sa.i;
-          let lon = results[0].geometry.viewport.Ya.i;
+          let lat = results[0].geometry.location.lat();
+          let lon = results[0].geometry.location.lng();
+          let center = lat + ',' + lon;
+
+          $(`#pdiBtn`).remove();
+          $('#componentView').prepend(`<button class="filter" id="pdiBtn" onclick="deleteFilter(4)">${results[0].name} &#10006;</button>`)
+          document.getElementById("pdi").value = results[0].name;
+          
           $('#toTweets').click();
-          //pdi_search(lat, lon); Si può fare ricerca senza parola chiave ma con data area geografica?
+          search(searchObj[0].val, center, 2); //Con un raggio così piccolo restituisce solo i tweet con al loro interno una città precisa di pubblicazione...
         }
       });
     }
@@ -113,7 +119,7 @@ function stream_stop() {
 // Display an array of tweets highlighting the specified word
 function displayTweets(data, word) {
     let reg = new RegExp(word, 'gi');
-
+    if (word != "") {
     for (let i = 0; i < data.length; i++) {
         var url = "https://twitter.com/" + data[i].username + "/status/" + data[i].id;
         let div = $(`<div class="tweet">
@@ -129,6 +135,24 @@ function displayTweets(data, word) {
             $(cityAndCoord).insertBefore(div.find('button'));
         }
         $("#tweets-search").append(div);
+    } }
+    else {
+        for (let i = 0; i < data.length; i++) {
+            var url = "https://twitter.com/" + data[i].username + "/status/" + data[i].id;
+            let div = $(`<div class="tweet">
+                            <p class="date">${data[i].data}</p>
+                            <h5>${data[i].user}</h5>
+                            <p>${data[i].text}</p>
+                            <button onclick=show("${url}") id="btn" data-toggle="modal" data-target="#tweetModal" >Show</button>
+                        </div>`);
+        
+            // Add the city and coordinates only if they are available in the tweet
+            if(data[i].city || data[i].coordinates){
+                let cityAndCoord = `<p>Città: ${data[i].city} Coordinate: ${data[i].coordinates} </p>`;
+                $(cityAndCoord).insertBefore(div.find('button'));
+            }
+            $("#tweets-search").append(div);
+        }
     }
 }
 
@@ -150,7 +174,10 @@ function stream_update(word) {
 
 // Search tweets containing a word and an optional location
 function search(word,center,ray) {
-    let query = {keyword: word};
+    let query = {};
+    if (word) {
+        query['keyword']= word;
+    }
     if (center && ray) {
         query['location'] = center+","+ray+"km";
         drawSearchAreaOnMap(center, ray, '#00FF00');
@@ -183,8 +210,8 @@ function dispatch_search() {
     let center = searchObj[2].val;
     let ray = searchObj[3].val;
 
-    if (!word && !pdi) {
-        alert("Non hai inserito la parola");
+    if (!word) {
+        alert("Inserisci una parola chiave o un PdI");
     } else {
         if (streamingInterval) { stream_stop(); }
         search(word, center, ray);

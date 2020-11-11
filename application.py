@@ -118,13 +118,13 @@ def search():
     location = request.args.get("location")
     print(word)
     # If no word is provided return an error code
-    if not word:
-        return Response(status = 400)        
+    #if not word:
+     #   return Response(status = 400)        
 
     list = []
     
     # Ask for 100 tweets
-    for tweet in tweepy.Cursor(api.search,q=word,count=100,geocode=location,tweet_mode="extended").items(100):
+    for tweet in tweepy.Cursor(api.search,q=word,geocode=location,count=100,tweet_mode="extended").items(100):
         # Store city coordinates only if they are available in the tweet
         city=coordinates =""
         if tweet.place:
