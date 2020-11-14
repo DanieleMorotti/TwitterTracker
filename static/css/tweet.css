@@ -31,9 +31,6 @@
 #saveBtn {
     position: fixed;
     top: 0;
-    right: 0;
-}
-
-button {
+    right: 3rem;
     margin: 0.5rem;
 }

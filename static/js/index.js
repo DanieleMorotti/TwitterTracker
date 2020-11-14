@@ -98,7 +98,7 @@ function save() {
 function newSearch() {
     $("#tweets-search").empty();
     lastTweetsList = null;
-    if(searchObj.keyword || searchObj.val)
+    if(searchObj && (searchObj.keyword || searchObj.val))
         dispatch_search();
 }
 
@@ -163,13 +163,20 @@ function stream_stop() {
 // Display an array of tweets highlighting the specified word
 function displayTweets(data, word) {
     let reg = new RegExp(word.trim().replace(' ', '|'), 'gi');
-    if (word != "") {
+
     for (let i = 0; i < data.length; i++) {
-        var url = "https://twitter.com/" + data[i].username + "/status/" + data[i].id;
+        let url = "https://twitter.com/" + data[i].username + "/status/" + data[i].id;
+
+        //If there is a keyword higlight it
+        let text = data[i].text;
+        if(word != "") {
+            text = text.replace(reg, '<mark>$&</mark>');
+        }
+
         let div = $(`<div class="tweet">
                         <p class="date">${data[i].data}</p>
                         <h5>${data[i].user}</h5>
-                        <p>${data[i].text.replace(reg, '<mark>$&</mark>')}</p>
+                        <p>${text}</p>
                         <button onclick=show("${url}") id="btn" data-toggle="modal" data-target="#tweetModal" >Show</button>
                     </div>`);
     
@@ -178,25 +185,8 @@ function displayTweets(data, word) {
             let cityAndCoord = `<p>Città: ${data[i].city} Coordinate: ${data[i].coordinates} </p>`;
             $(cityAndCoord).insertBefore(div.find('button'));
         }
+
         $("#tweets-search").append(div);
-    } }
-    else {
-        for (let i = 0; i < data.length; i++) {
-            var url = "https://twitter.com/" + data[i].username + "/status/" + data[i].id;
-            let div = $(`<div class="tweet">
-                            <p class="date">${data[i].data}</p>
-                            <h5>${data[i].user}</h5>
-                            <p>${data[i].text}</p>
-                            <button onclick=show("${url}") id="btn" data-toggle="modal" data-target="#tweetModal" >Show</button>
-                        </div>`);
-        
-            // Add the city and coordinates only if they are available in the tweet
-            if(data[i].city || data[i].coordinates){
-                let cityAndCoord = `<p>Città: ${data[i].city} Coordinate: ${data[i].coordinates} </p>`;
-                $(cityAndCoord).insertBefore(div.find('button'));
-            }
-            $("#tweets-search").append(div);
-        }
     }
 }
 
