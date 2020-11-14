@@ -102,45 +102,44 @@ def stream_stop():
 @application.route('/streamUpdate')
 def stream_update():
     return Response(json.dumps(list(reversed(streaming_data)), ensure_ascii=False, indent=2), status=200, mimetype="application/json")
-    
-# Search tweets
-def get_tweet_text(tweet):
-    try:
-       text = tweet.retweeted_status.full_text
-    except AttributeError:  # Not a Retweet
-       text = tweet.full_text
-    
-    return text
-                
+                 
 @application.route('/search')
 def search():
     word = request.args.get("keyword")
-    # Another way to search two words is to escape quotation marks as follow
-    #           [q="\"two words\""] 
-    #  but it will find the exact word sequence 
-    word = word.strip().replace(' ',' AND ')
     location = request.args.get("location")
-    print(word)
-    # If no word is provided return an error code
-    # if not word:
-    # return Response(status = 400)        
+    images_only = request.args.get("images_only")
+    
+    query = word
+    if images_only:
+        query += " filter:images"
+    print(query)
 
     list = []
-    
     # Ask for 100 tweets
-    for tweet in tweepy.Cursor(api.search, q=word, geocode=location, count=100, tweet_mode="extended", include_entities=True).items(100):
+    for tweet in tweepy.Cursor(api.search, q=query, geocode=location, count=100, tweet_mode="extended", include_entities=True).items(100):
+        #If it's a retweet the tweet is actually in retweeted_status
+        if hasattr(tweet, "retweeted_status"):
+            tweet = tweet.retweeted_status
+
         # Store city coordinates only if they are available in the tweet
         city = coordinates = ""
-        images = ""
         if tweet.place:
             city,coordinates = tweet.place.full_name,tweet.place.bounding_box.coordinates
         
-        if 'media' in tweet.entities:
-            images=tweet.entities['media']
+        media = []
+        if hasattr(tweet, "extended_entities") and 'media' in tweet.extended_entities:
+            media = tweet.extended_entities["media"]
+        elif hasattr(tweet, "entities") and 'media' in tweet.entities:
+            media = tweet.entities["media"]
+
+        images = []
+        for m in media:
+            if m["type"] == "photo" or m["type"] == "animated_gif":
+                images.append(m["media_url"])
         
         list.append({
             'id': tweet.id_str, 
-            'text':get_tweet_text(tweet), 
+            'text':tweet.full_text, 
             'user':tweet.user.name, 
             'username':tweet.user.screen_name,
             'data':tweet.created_at.strftime('%m/%d/%Y'),
@@ -148,7 +147,7 @@ def search():
             'location': tweet.user.location,
             'city':city, 
             'coordinates':coordinates,
-            'images':images
+            'images': images
         })
     
     return Response(json.dumps(list, ensure_ascii=False, indent=2), status=200, mimetype="application/json")

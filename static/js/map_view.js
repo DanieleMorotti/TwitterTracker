@@ -10,7 +10,8 @@ export default {
     methods: {
         drawDataOnMapView() {
             lastTweetsList.forEach(tweet => {
-                console.log('location: ' + tweet.location + '\ngeo: ' + tweet.geo_enabled + '\ncoords: '+ tweet.coordinates);
+                //console.log('location: ' + tweet.location + '\ngeo: ' + tweet.geo_enabled + '\ncoords: '+ tweet.coordinates);
+                console.log(tweet.images);
             });
         }
     },

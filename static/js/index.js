@@ -53,10 +53,14 @@ function save() {
         if (val && field !== 'ray' && field !== 'pdi') {
             $(`#${field}Btn`).remove();
 
-            //Add parenthesis around the center field
             let text = val;
             if(field == 'center') {
+                //Add parenthesis around the center field
                 text = '(' + text + ')';
+            } 
+            else if(field == 'images_only') {
+                //Text for only images filter
+                text = "Containing images";
             }
             
             //Add a button to delete the filter in the tweets view
@@ -207,7 +211,7 @@ function stream_update(word) {
 }
 
 // Search tweets containing a word and an optional location
-function search(word,center,ray) {
+function search(word, center, ray, images_only) {
     let query = {};
     if (word) {
         query['keyword']= word;
@@ -216,6 +220,10 @@ function search(word,center,ray) {
         query['location'] = center+","+ray+"km";
         drawSearchAreaOnMap(center, ray, '#00FF00');
     }
+    if (images_only) {
+        query['images_only'] = true;
+    }
+    
     $.ajax({
         method: "GET",
         url: "/search",
@@ -243,6 +251,7 @@ function dispatch_search() {
     let word = searchObj.keyword;
     let center = searchObj.center;
     let ray = searchObj.ray;
+    let images_only = searchObj.images_only
 
     if (!word) {
         alert("Inserisci una parola chiave o un PdI");
@@ -250,7 +259,7 @@ function dispatch_search() {
         alert('Le coordinate devono essere della forma xx.xxx, yy.yyy');
     } else {
         if (streamingInterval) { stream_stop(); }
-        search(word, center, ray);
+        search(word, center, ray, images_only);
     }
 }
 
