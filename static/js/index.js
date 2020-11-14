@@ -164,6 +164,7 @@ function stream_stop() {
     });
 }
 
+
 // Display an array of tweets highlighting the specified word
 function displayTweets(data, word) {
     let reg = new RegExp(word.trim().replace(' ', '|'), 'gi');
@@ -173,7 +174,7 @@ function displayTweets(data, word) {
 
         //If there is a keyword higlight it
         let text = data[i].text;
-        if(word != "") {
+        if(word) {
             text = text.replace(reg, '<mark>$&</mark>');
         }
 
@@ -194,15 +195,22 @@ function displayTweets(data, word) {
     }
 }
 
+// Set the title and the tweets of the tweets view
+function setTitleAndTweets(title, data, word) {
+    $("#tweets-search").empty();
+    $("#tweets-search").append('<h4>' + title + '</h4>');
+    
+    lastTweetsList = data;
+    displayTweets(data, word);
+}
+
 // Update the tweets from the stream
 function stream_update(word) {
     $.ajax({
         url: '/streamUpdate',
         method: 'GET',
         success: (data) => {
-            $("#tweets-search").empty();
-            $("#tweets-search").append('<h4>' + data.length + ' Streaming Tweets Results</h4>');
-            displayTweets(data, word);
+            setTitleAndTweets(data.length + ' Streaming Tweets Results', data, word);
         },
         error: function (xhr, ajaxOptions, thrownError) {
             console.log("streamUpdate: " + xhr.status + ' - ' + thrownError);
@@ -229,12 +237,10 @@ function search(word, center, ray, images_only) {
         url: "/search",
         data: query,
         success: (data) => {
-            lastTweetsList = data;
             $("#tweets-search").empty();
             if (data.length > 0) {
                 //Display the tweets
-                $("#tweets-search").append('<h4>' + data.length + ' Search Tweets Results</h4>');
-                displayTweets(data, word);
+                setTitleAndTweets(data.length + ' Search Tweets Results', data, word);
             } else {
                 //Display a message if no tweets are available
                 $("#tweets-search").append('<h5>No results for the specified query</h5>');
@@ -267,4 +273,108 @@ function dispatch_search() {
 function show(url){
     $('#tweetContent').empty();
     $('#tweetContent').append(`<blockquote class="twitter-tweet"><a href="${url}">Tweet</a></blockquote>  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"><\/script>`);
+}
+
+// Open a tweet collection
+function openCollection(id) {
+    $('#toTweets').click();
+    $.ajax({
+        method: "GET",
+        url: "/collections/" + id,
+        success: (info) => {
+            //TODO: add word highlighting if we store the filter data on the collection
+            setTitleAndTweets(info.count + " Tweets from collection: " + info.name, info.data, "");
+        },
+
+        error: (xhr, ajaxOptions, thrownError) => {
+            console.log("deleteCollections: " + xhr.status + ' - ' + thrownError);
+        }
+    })
+}
+
+// Delete a tweet collection
+function deleteCollection(id) {
+    $.ajax({
+        method: "DELETE",
+        url: "/collections/" + id,
+        success: () => {
+            loadCollections();
+        },
+
+        error: (xhr, ajaxOptions, thrownError) => {
+            console.log("deleteCollections: " + xhr.status + ' - ' + thrownError);
+        }
+    })
+}
+
+// Update a collection name
+function updateCollectionName(id, name) {
+    $.ajax({
+        method: "POST",
+        url: `/collections/${id}/name`,
+        contentType: 'application/json',
+        data: JSON.stringify({
+            name: name,
+        }),
+
+        success: (data) => {
+        },
+
+        error: (xhr, ajaxOptions, thrownError) => {
+            console.log("updateCollectionName: " + xhr.status + ' - ' + thrownError);
+        }
+    });
+}
+
+// Load tweet collections
+function loadCollections() {
+    $("#collections").empty();
+        
+    $.ajax({
+        method: "GET",
+        url: "/collections",
+
+        success: (data) => {
+            for(let i = 0; i < data.length; i++)
+            {
+                let c = data[i];
+                let div = $(`
+                <div class="collection">
+                    <input type="text" class="collection-name" value="${c.name}" onchange="updateCollectionName(${c.id}, $(this).val())">
+                    <p class="collection-count">Count: ${c.count}</p>
+                    <button class="collection-open" onclick="openCollection(${c.id})">Open</button>
+                    <button class="collection-open" onclick="deleteCollection(${c.id})">Delete</button>
+                </div>
+                `);
+
+                $("#collections").append(div);
+            }
+        },
+
+        error: (xhr, ajaxOptions, thrownError) => {
+            console.log("collections: " + xhr.status + ' - ' + thrownError);
+        }
+    });
+}
+
+// Save the currently loaded tweets as a new collection
+function saveCollection()
+{
+    $.ajax({
+        method: "POST",
+        url: "/collections",
+        contentType: 'application/json',
+        data: JSON.stringify({
+            name: "New collection",
+            data: lastTweetsList
+        }),
+
+        success: (data) => {
+            $("#toCollections").click();
+        },
+
+        error: (xhr, ajaxOptions, thrownError) => {
+            console.log("collections: " + xhr.status + ' - ' + thrownError);
+        }
+    });
 }

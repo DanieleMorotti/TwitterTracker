@@ -29,19 +29,26 @@ def get_tweets_path_from_id(id):
     return os.path.join(tweets_dir, filename)
 
 def store_tweets(name, data):
-    #ensure the tweets directory exists
-    if not os.path.isdir(tweets_dir):
-        os.mkdir(tweets_dir)
+    try:
+        #ensure the tweets directory exists
+        if not os.path.isdir(tweets_dir):
+            os.mkdir(tweets_dir)
 
-    id = get_next_id()
-    info = {
-        'id': id,
-        'name': name,
-        'data': data,
-    }
-    path = get_tweets_path_from_id(id)
-    with open(path, "w") as f:
-        json.dump(info, f, ensure_ascii=False, indent=2)
+        id = get_next_id()
+        info = {
+            'id': id,
+            'name': name,
+            'data': data,
+            'count': len(data),
+        }
+        path = get_tweets_path_from_id(id)
+
+        with open(path, "w") as f:
+            json.dump(info, f, ensure_ascii=False, indent=2)
+        return True
+    except Exception as e:
+        print(e)
+        return False
 
 def get_stored_tweets_info():
     if not os.path.isdir(tweets_dir):
@@ -55,6 +62,7 @@ def get_stored_tweets_info():
             result.append({
                 'id': info['id'],
                 'name': info['name'],
+                'count': info['count'],
             })
     
     return result
@@ -63,16 +71,40 @@ def get_stored_tweet(id):
     path = get_tweets_path_from_id(id)
     try:
         with open(path) as f:
-            return json.load(f)
-    except:
+            info = json.load(f)
+            return info
+    except Exception as e:
+        print(e)
         return None
 
-def test():
-    store_tweets("prova1", {'prova' : "Hello 1"})
-    store_tweets("prova2", {'prova' : "Hello 2"})
-    store_tweets("prova3", {'prova' : "Hello 3"})
+def delete_stored_tweet(id):
+    path = get_tweets_path_from_id(id)
+    try:
+        os.remove(path)
+        return True
+    except:
+        return False
 
+def update_tweets_name(id, name):
+    path = get_tweets_path_from_id(id)
+    try:
+        info = {}
+        with open(path, "r+") as f:
+            info = json.load(f)
+            info["name"] = name
+            f.seek(0)
+            f.truncate()
+            json.dump(info, f, ensure_ascii=False, indent=2)
+            return True
+    except:
+        return False
+
+
+def test():
+    store_tweets("prova1", [{'prova' : "Hello 1"}, {'other' : 'Hello other'}])
+    store_tweets("prova2", [{'prova' : "Hello 2"}])
+    store_tweets("prova3", [{'prova' : "Hello 3"}])
     print(get_stored_tweets_info())
     print(get_stored_tweet(2))
 
-# test()
+#test()

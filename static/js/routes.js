@@ -2,12 +2,14 @@
 import searchComp from '/static/js/search.js'
 import tweetComp from '/static/js/tweet.js'
 import mapView from '/static/js/map_view.js'
+import collectionsComp from '/static/js/collections.js'
 
 const router = new VueRouter({
     routes: [
       {path: '/search', component: searchComp},
       {path: '/tweets', component: tweetComp},
-      {path: '/map_view', component: mapView}
+      {path: '/map_view', component: mapView},
+      {path: '/collections', component: collectionsComp},
     ],
   })
 
@@ -22,6 +24,10 @@ router.beforeEach((to, from, next) => {
     else if (to.path === '/map_view') {
       $('#stylesheetComp').attr('href','/static/css/map_view.css');
     }
+    else if (to.path === '/collections') {
+      $('#stylesheetComp').attr('href','/static/css/collections.css');
+    }
+
     next();
 })
 

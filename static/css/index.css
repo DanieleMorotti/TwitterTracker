@@ -30,6 +30,16 @@ body ul {
     width: 60px;
 }
 
+/* 
+    IMPORTANTE: left di componentView deve essere uguale a width della navbar qui sopra ^
+
+    Non e' sicuramente il modo piu' intelligente di ottenere che l'area del componente sia affiancata alla navbar, ma funziona
+*/
+#componentView {
+    position: absolute;
+    left: 60px;
+}
+
 body ul button {
     background-color: transparent;
     border-style: none;

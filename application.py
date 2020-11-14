@@ -5,7 +5,7 @@ import datetime, time
 import json
 import mimetypes
 
-from tweets import store_tweets, get_stored_tweets_info, get_stored_tweet
+from tweets import store_tweets, get_stored_tweets_info, get_stored_tweet, delete_stored_tweet, update_tweets_name
 
 # Set default mimetype for .js files
 mimetypes.add_type('application/javascript', '.js')
@@ -152,7 +152,47 @@ def search():
     
     return Response(json.dumps(list, ensure_ascii=False, indent=2), status=200, mimetype="application/json")
    
+# Route for retrieving tweet collections info
+@application.route('/collections')
+def collections():
+    info = get_stored_tweets_info()
+    return Response(json.dumps(info, ensure_ascii=False, indent=2), status=200,  mimetype="application/json")
+
+@application.route('/collections', methods=["POST"])
+def save_collection():
+    body = request.get_json()
+    if not body:
+        return Response(status=400)
+
+    success = store_tweets(body["name"], body["data"])
+    status = 200 if success else 400
+    return Response(status=status)
     
+@application.route('/collections/<int:id>/name', methods=["POST"])
+def update_collection_name(id):
+    body = request.get_json()
+    if not body:
+        return Response(status=400)
+
+    success = update_tweets_name(id, body["name"])
+    status = 200 if success else 400
+    return Response(status=status)
+
+@application.route('/collections/<int:id>', methods=["GET"])
+def get_collection(id):
+    result = get_stored_tweet(id)
+    if result:
+        return Response(json.dumps(result, ensure_ascii=False, indent=2), status=200,  mimetype="application/json")
+    else:
+        return Response(status=400)
+
+@application.route('/collections/<int:id>', methods=["DELETE"])
+def delete_collection(id):
+    success = delete_stored_tweet(id)
+    status = 200 if success else 400
+    return Response(status=status)
+    
+
 # Route for the index page
 @application.route('/')
 def get_page():
