@@ -1,24 +1,26 @@
 // Save search filters
-var searchObj = {};
+var searchObj = null;
+var lastTweetsList = null;
 function save() {
     searchObj = [
-        {field: 'keyword', val: $('#keyWord').val()},
-        {field: 'user', val: $('#user').val()},
-        {field: 'center', val: $('#coordinates').val()},
-        {field: 'ray', val: $('#ray').val()},
-        {field: 'pdi', val: $('#pdi').val()},
+/* 0 */ {field: 'keyword', val: $('#keyWord').val()}, 
+/* 1 */ { field: 'user', val: $('#user').val() },
+/* 2 */ { field: 'center', val: $('#coordinates').val().replace(/\s+/g, '') },
+/* 3 */ {field: 'ray', val: $('#ray').val()},
+/* 4 */ {field: 'pdi', val: $('#pdi').val()},
+/* 5 */ {field: 'images-only', val: $('#images-only').prop('checked')}
     ]
-    searchObj.forEach(element => { 
+    searchObj.forEach(element => {
         let index = searchObj.indexOf(element);
-        if(element.val && element.field !== 'ray' && element.field !== 'center' && element.field !== 'pdi' ) {
+        if (element.val && element.field !== 'ray' && element.field !== 'center' && element.field !== 'pdi') {
             $(`#${element.field}Btn`).remove();
             $('#componentView').prepend(`<button class="filter" id="${element.field}Btn" onclick="deleteFilter(${index})">${element.val} &#10006;</button>`)
         }
-        else if(element.val && element.field == 'center' ) {
+        else if (element.val && element.field == 'center') {
             $(`#${element.field}Btn`).remove();
             $('#componentView').prepend(`<button class="filter" id="${element.field}Btn" onclick="deleteFilter(${index})">(${element.val}) &#10006;</button>`)
         }
-    })
+    });
 
     if(searchObj[4].val != "") {
     var request = {
@@ -43,9 +45,8 @@ function save() {
       });
     }
     else {
-    $('#toTweets').click();
-
-    dispatch_search();
+        $('#toTweets').click();
+        dispatch_search();
     }
         
 }
@@ -53,8 +54,8 @@ function save() {
 /* new search invoked from tweets component */
 function newSearch() {
     $("#tweets-search").empty();
-
-    if((searchObj[0] && searchObj.val) || (searchObj[1] && searchObj[1].val)) 
+    lastTweetsList = null;
+    if((searchObj[0] && searchObj[0].val) || (searchObj[1] && searchObj[1].val)) 
         dispatch_search();
 }
 
@@ -118,7 +119,7 @@ function stream_stop() {
 
 // Display an array of tweets highlighting the specified word
 function displayTweets(data, word) {
-    let reg = new RegExp(word, 'gi');
+    let reg = new RegExp(word.trim().replace(' ', '|'), 'gi');
     if (word != "") {
     for (let i = 0; i < data.length; i++) {
         var url = "https://twitter.com/" + data[i].username + "/status/" + data[i].id;
@@ -187,6 +188,7 @@ function search(word,center,ray) {
         url: "/search",
         data: query,
         success: (data) => {
+            lastTweetsList = data;
             $("#tweets-search").empty();
             if (data.length > 0) {
                 //Display the tweets
@@ -196,7 +198,6 @@ function search(word,center,ray) {
                 //Display a message if no tweets are available
                 $("#tweets-search").append('<h5>No results for the specified query</h5>');
             }
-
         },
         error: (xhr, ajaxOptions, thrownError) => {
             console.log("search: " + xhr.status + ' - ' + thrownError);
@@ -212,6 +213,8 @@ function dispatch_search() {
 
     if (!word) {
         alert("Inserisci una parola chiave o un PdI");
+    } else if (!(/^\s?\-?\d+\.?\d*\,\s?\-?\d+\.?\d*\s?$/.test(center))) {
+        alert('Le coordinate devono essere della forma xx.xxx, yy.yyy');
     } else {
         if (streamingInterval) { stream_stop(); }
         search(word, center, ray);

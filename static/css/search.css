@@ -11,6 +11,9 @@ input[type="range"] {
     width: 20rem;
 }
 
+input[type="checkbox"] {
+    transform: scale(1.5);
+}
 #tweets-search {
     max-height: 90vh;
     overflow-y: scroll;

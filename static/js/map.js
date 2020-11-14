@@ -46,11 +46,14 @@ function drawSearchAreaOnMap(loc, ray, color) {
 
 function getCoordinatesOnCLick(mapsMouseEvent) {
     $('#coordinates').val(mapsMouseEvent.latLng.lat().toFixed(2) + ', ' + mapsMouseEvent.latLng.lng().toFixed(2));
-    drawSearchAreaOnMap($('#coordinates').val(), 100, '#FF0000');
+    drawSearchAreaOnMap($('#coordinates').val(), $('#ray').val(), '#FF0000');
 }
 // Event associated on change of coordinates to draw the area
 $(document).on('input', '#coordinates', function () {
-    drawSearchAreaOnMap($('#coordinates').val(), 100, '#FF0000');
+    let coordinates = $('#coordinates').val();
+    if (!isNaN(coordinates.split(',')[1])) {
+        drawSearchAreaOnMap($('#coordinates').val(), $('#ray').val(), '#FF0000');
+    }
 });
 
 function test(valore) {

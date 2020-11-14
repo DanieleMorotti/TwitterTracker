@@ -115,30 +115,40 @@ def get_tweet_text(tweet):
 @application.route('/search')
 def search():
     word = request.args.get("keyword")
+    # Another way to search two words is to escape quotation marks as follow
+    #           [q="\"two words\""] 
+    #  but it will find the exact word sequence 
+    word = word.strip().replace(' ',' AND ')
     location = request.args.get("location")
     print(word)
     # If no word is provided return an error code
-    #if not word:
-     #   return Response(status = 400)        
+    # if not word:
+    # return Response(status = 400)        
 
     list = []
     
     # Ask for 100 tweets
-    for tweet in tweepy.Cursor(api.search,q=word,geocode=location,count=100,tweet_mode="extended").items(100):
+    for tweet in tweepy.Cursor(api.search, q=word, geocode=location, count=100, tweet_mode="extended", include_entities=True).items(100):
         # Store city coordinates only if they are available in the tweet
-        city=coordinates =""
+        city = coordinates = ""
+        images = ""
         if tweet.place:
             city,coordinates = tweet.place.full_name,tweet.place.bounding_box.coordinates
-
+        
+        if 'media' in tweet.entities:
+            images=tweet.entities['media']
+        
         list.append({
             'id': tweet.id_str, 
-            'text': get_tweet_text(tweet), 
+            'text':get_tweet_text(tweet), 
             'user':tweet.user.name, 
-            'username': tweet.user.screen_name,
+            'username':tweet.user.screen_name,
             'data':tweet.created_at.strftime('%m/%d/%Y'),
             'geo_enabled':tweet.user.geo_enabled, 
+            'location': tweet.user.location,
             'city':city, 
-            'coordinates':coordinates
+            'coordinates':coordinates,
+            'images':images
         })
     
     return Response(json.dumps(list, ensure_ascii=False, indent=2), status=200, mimetype="application/json")
