@@ -39,47 +39,53 @@ function initAutocomplete() {
   });
 
 function save() {
-    searchObj = [
-/* 0 */ {field: 'keyword', val: $('#keyWord').val()}, 
-/* 1 */ { field: 'user', val: $('#user').val() },
-/* 2 */ { field: 'center', val: $('#coordinates').val().replace(/\s+/g, '') },
-/* 3 */ {field: 'ray', val: $('#ray').val()},
-/* 4 */ {field: 'pdi', val: $('#pdi').val()},
-/* 5 */ {field: 'images-only', val: $('#images-only').prop('checked')}
-    ]
-    searchObj.forEach(element => {
-        let index = searchObj.indexOf(element);
-        if (element.val && element.field !== 'ray' && element.field !== 'center' && element.field !== 'pdi') {
-            $(`#${element.field}Btn`).remove();
-            $('#componentView').prepend(`<button class="filter" id="${element.field}Btn" onclick="deleteFilter(${index})">${element.val} &#10006;</button>`)
-        }
-        else if (element.val && element.field == 'center') {
-            $(`#${element.field}Btn`).remove();
-            $('#componentView').prepend(`<button class="filter" id="${element.field}Btn" onclick="deleteFilter(${index})">(${element.val}) &#10006;</button>`)
-        }
-    });
+    searchObj = {
+        keyword: $('#keyWord').val(),  
+        user: $('#user').val(),
+        center: $('#coordinates').val().replace(/\s+/g, ''),
+        ray: $('#ray').val(),
+        pdi: $('#pdi').val(),
+        images_only: $('#images-only').prop('checked')
+    };
 
-    if(searchObj[4].val != "") {
-    var request = {
-        query: searchObj[4].val,
-        fields: ["name", "geometry"],
-      };
-      service = new google.maps.places.PlacesService(map);
-      service.findPlaceFromQuery(request, (results, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          console.log(results[0]);
-          let lat = results[0].geometry.location.lat();
-          let lon = results[0].geometry.location.lng();
-          let center = lat + ',' + lon;
+    for(let field in searchObj) {
+        let val = searchObj[field];
+        if (val && field !== 'ray' && field !== 'pdi') {
+            $(`#${field}Btn`).remove();
 
-          $(`#pdiBtn`).remove();
-          $('#componentView').prepend(`<button class="filter" id="pdiBtn" onclick="deleteFilter(4)">${results[0].name} &#10006;</button>`)
-          document.getElementById("pdi").value = results[0].name;
-          
-          $('#toTweets').click();
-          search(searchObj[0].val, center, 2); //Con un raggio così piccolo restituisce solo i tweet con al loro interno una città precisa di pubblicazione...
+            //Add parenthesis around the center field
+            let text = val;
+            if(field == 'center') {
+                text = '(' + text + ')';
+            }
+            
+            //Add a button to delete the filter in the tweets view
+            $('#componentView').prepend(`<button class="filter" id="${field}Btn" onclick="deleteFilter('${field}')">${text} &#10006;</button>`);
         }
-      });
+    }
+
+    if(searchObj.pdi != "") {
+        var request = {
+            query: searchObj.pdi,
+            fields: ["name", "geometry"],
+        };
+
+        service = new google.maps.places.PlacesService(map);
+        service.findPlaceFromQuery(request, (results, status) => {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                console.log(results[0]);
+                let lat = results[0].geometry.location.lat();
+                let lon = results[0].geometry.location.lng();
+                let center = lat + ',' + lon;
+
+                $(`#pdiBtn`).remove();
+                $('#componentView').prepend(`<button class="filter" id="pdiBtn" onclick="deleteFilter('pdi')">${results[0].name} &#10006;</button>`)
+                document.getElementById("pdi").value = results[0].name;
+                
+                $('#toTweets').click();
+                search(searchObj.keyword, center, 2); //Con un raggio così piccolo restituisce solo i tweet con al loro interno una città precisa di pubblicazione...
+            }
+        });
     }
     else {
         $('#toTweets').click();
@@ -92,14 +98,14 @@ function save() {
 function newSearch() {
     $("#tweets-search").empty();
     lastTweetsList = null;
-    if((searchObj[0] && searchObj[0].val) || (searchObj[1] && searchObj[1].val)) 
+    if(searchObj.keyword || searchObj.val)
         dispatch_search();
 }
 
 
-function deleteFilter(index) {
-    $(`#${searchObj[index].field}Btn`).remove();
-    searchObj[index].val = "";
+function deleteFilter(field) {
+    $(`#${field}Btn`).remove();
+    searchObj[field] = "";
 }
 
 // Interval for the update of the stream of tweets
@@ -244,13 +250,13 @@ function search(word,center,ray) {
 
 // Start a search and stop the stream if it's active
 function dispatch_search() {
-    let word = searchObj[0].val;
-    let center = searchObj[2].val;
-    let ray = searchObj[3].val;
+    let word = searchObj.keyword;
+    let center = searchObj.center;
+    let ray = searchObj.ray;
 
     if (!word) {
         alert("Inserisci una parola chiave o un PdI");
-    } else if (!(/^\s?\-?\d+\.?\d*\,\s?\-?\d+\.?\d*\s?$/.test(center))) {
+    } else if (center && !(/^\s?\-?\d+\.?\d*\,\s?\-?\d+\.?\d*\s?$/.test(center))) {
         alert('Le coordinate devono essere della forma xx.xxx, yy.yyy');
     } else {
         if (streamingInterval) { stream_stop(); }

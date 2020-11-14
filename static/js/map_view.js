@@ -15,8 +15,8 @@ export default {
         }
     },
     activated() {
-        //TODO: Copy pasted code, abstraction needed 
-        var center = searchObj ? searchObj[2].val : '41.885453,12.498221';
+        //TODO: Copy pasted code, abstraction needed
+        var center = (searchObj && searchObj.center) ? searchObj.center : '41.885453,12.498221';
         var geocoder = new google.maps.Geocoder();
         var data_map = new google.maps.Map(document.getElementById("data-view-map"), {
             center: { lat: Number(center.split(',')[0]), lng: Number(center.split(',')[1]) },
