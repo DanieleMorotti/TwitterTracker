@@ -1,15 +1,17 @@
 html, body, #app {
     height: 100%
 }
+
 body {
     background-color:  rgb(6, 40, 55);
 
 }
 
+/*
 body p, label, h4 {
     color: white;
 }
-
+*/
 
 .icon {
     color: white;
@@ -19,7 +21,23 @@ body p, label, h4 {
     align-content: center;
 }
 
-body ul {
+#navbar button {
+    background-color: transparent;
+    border-style: none;
+    display: inline-block;
+    padding: 1.5rem;
+}
+
+#navbar button:focus {
+    outline:0;
+}
+
+#navbar li:hover {
+    background-color: darkgoldenrod;
+}
+
+
+#navbar {
     height: 100%;
     z-index: 3;
     top: 0;
@@ -40,83 +58,10 @@ body ul {
     left: 60px;
 }
 
-body ul button {
-    background-color: transparent;
-    border-style: none;
-    display: inline-block;
-    padding: 1.5rem;
-}
-
-body ul li:hover {
-    background-color: darkgoldenrod;
-}
-
-button:focus {outline:0;}
-
-
 .filter {
     margin: 0.5rem;
 }
 
-/**************************************/
-
-
-/* Filter area */
-/*
-#stream-div, #search-div {
-    display: inline-block;
-    padding-top: 5vh;
-    font-size: 1.7rem;
-    font-family: Yu Gothic UI;
-    width:100%;
-}
-
-.filter-bar {
-    width: 90%;
-    float: right;
-    position:sticky; 
-    top: 0;
-    background-color:  rgb(6, 40, 55);
-    border-bottom: 1px solid white;
-}
-
-
-
-.filter-tab a {
-    background-color:   rgb(184, 217, 231);
-    font-size: 2rem;
-    color:  rgb(29, 67, 85);
-    padding: 8px  10px !important;
-}
-
-.active a {
-    background-color: rgb(29, 67, 85) !important;
-    font-size: 2rem;
-    color:  rgb(184, 217, 231) !important;
-}
-
-
-.nav-tabs {
-    border-style: none;
-}
-
-
-.nav-tabs>li {
-    margin-bottom: 0;
-    border-style: none !important;
-}
-
-
-.tab-content {
-    padding: 3rem;
-    background-color:  rgb(29, 67, 85);
-}
-
-.tab-content label {
-    color: rgb(184, 217, 231);
-    padding-bottom: 3rem;
-}
-*/
 
 /* Map */
 #map {

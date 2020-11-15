@@ -3,7 +3,11 @@
     margin: 1.5rem;
 }
 
-span {
+#rayValue {
+    color: white;
+}
+
+#inputFields label{
     color: white;
 }
 

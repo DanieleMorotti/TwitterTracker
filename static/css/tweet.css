@@ -13,6 +13,10 @@
     color:  rgb(241, 170, 103);
 }
 
+.tweet p {
+    color: white;
+}
+
 .tweet mark {
     background-color: rgb(241, 170, 103);
 }
@@ -37,4 +41,8 @@
 
 #save-collection {
     margin: 0.5rem;
+}
+
+#search-title {
+    color: white;
 }

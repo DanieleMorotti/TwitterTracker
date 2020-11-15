@@ -198,7 +198,7 @@ function displayTweets(data, word) {
 // Set the title and the tweets of the tweets view
 function setTitleAndTweets(title, data, word) {
     $("#tweets-search").empty();
-    $("#tweets-search").append('<h4>' + title + '</h4>');
+    $("#tweets-search").append('<h4 id="search-title">' + title + '</h4>');
     
     lastTweetsList = data;
     displayTweets(data, word);
