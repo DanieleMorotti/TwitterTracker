@@ -1,0 +1,1480 @@
+{
+  "id": 3,
+  "name": "Ciao - Bologna",
+  "filters": {
+    "keyword": "ciao",
+    "user": "",
+    "center": "44.494887,11.3426163",
+    "ray": "10",
+    "pdi": "Bologna, Metropolitan City of Bologna, Italy",
+    "images_only": false
+  },
+  "count": 100,
+  "data": [
+    {
+      "id": "1327908434298236931",
+      "text": "@sarapedrotti Ciao Sara rossa 😂",
+      "user": "Stefano",
+      "username": "OrraStefano",
+      "data": "11/15/2020",
+      "geo_enabled": true,
+      "location": "Bologna ",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327903956819988480",
+      "text": "@RafBigCat @solebastardo @BarbagiM @danylovescats @Alex_Ssl1900 @misspassinella1 @deb8479eaeef410 @AnnaToniolo @patriziaandreoz ciao uggiosi https://t.co/4cokGJ86El",
+      "user": "Giovanni Ruiu",
+      "username": "givanno",
+      "data": "11/15/2020",
+      "geo_enabled": true,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327902390952071169",
+      "text": "@Lukas95976035 Ciao Lukas, sono d'accordo. Anche se twittasse foto della sua vita privata...... ma ci fossero risultati concreti dall'opposizione, non mi fregherebbe più di tanto. Così invece, mi scoccia un pochetto",
+      "user": "Nadia",
+      "username": "PersempreNadia",
+      "data": "11/15/2020",
+      "geo_enabled": false,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327763467177254912",
+      "text": "@MorganilRamingo @GagliardoneS ciao morgan, parli di ore contate. quante? \nci diamo un termine, per vedere se queste vostre affermazioni siano vere o false? \nci stai?",
+      "user": "davide negrini (Jay)",
+      "username": "_fiandri",
+      "data": "11/15/2020",
+      "geo_enabled": true,
+      "location": "Bologna, Italia",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327740233358643200",
+      "text": "@LorisDeluxe Ciao Loris come stai? Bella foto",
+      "user": "Roberto C",
+      "username": "Roberto81718393",
+      "data": "11/14/2020",
+      "geo_enabled": false,
+      "location": "Bologna Italia",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327735817897472000",
+      "text": "@giovanni_arata @AUSLBologna Ciao Giovanni, possono esserti utili queste informazioni https://t.co/6yG91s85If e qui https://t.co/VG3v8LdNYn",
+      "user": "Marilena Pasquini",
+      "username": "Marilenapas",
+      "data": "11/14/2020",
+      "geo_enabled": false,
+      "location": "",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327731901822627841",
+      "text": "@michelecmassari Ciao 👋😘",
+      "user": "Biancacaraffa",
+      "username": "biancacaraffa",
+      "data": "11/14/2020",
+      "geo_enabled": true,
+      "location": "",
+      "city": "Bologna, Emilia Romagna",
+      "coordinates": [
+        [
+          [
+            11.2296117,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.5563177
+          ],
+          [
+            11.2296117,
+            44.5563177
+          ]
+        ]
+      ],
+      "images": []
+    },
+    {
+      "id": "1327726593268133894",
+      "text": "@Shaula1981 Ciao Rossella io vivo in Emilia Romagna ma sono romano, qui la situazione non è così grave come sento dire in TV.....ma diciamo che credo a quello che ci dicono, in giro non c'è nessuno da settimane oramai. Non riconosco più questa terra, speriamo che cambi. Buona serata 🌹",
+      "user": "luca",
+      "username": "luca47603049",
+      "data": "11/14/2020",
+      "geo_enabled": false,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327716648535683072",
+      "text": "Consiglio caldamente l’acquisto di una sfera stroboscopia 7€ dai cinesi ciao",
+      "user": "Marco",
+      "username": "mrccrmt",
+      "data": "11/14/2020",
+      "geo_enabled": true,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327712640047730688",
+      "text": "@jonrappoport The \"science\" first of all... Ciao, Jon. https://t.co/5rguPYm3ud",
+      "user": "andreaventura",
+      "username": "andreaventura01",
+      "data": "11/14/2020",
+      "geo_enabled": false,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": [
+        "http://pbs.twimg.com/media/Emz7dkcW4AE9rWW.png"
+      ]
+    },
+    {
+      "id": "1327698401220321281",
+      "text": "@Ritagliati_RCdC ciao Riccardo ... Magari un mazzo",
+      "user": "Comandante Lupo",
+      "username": "ComandanteLupo",
+      "data": "11/14/2020",
+      "geo_enabled": false,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327624995401584640",
+      "text": "@PescaraAndrea1 @Federica989111 Ciao Andrea, anche a te",
+      "user": "Nadia",
+      "username": "PersempreNadia",
+      "data": "11/14/2020",
+      "geo_enabled": false,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327613755476340736",
+      "text": "@giovanni_arata @AUSLBologna Ciao Giovanni, possono esserti utili queste informazioni https://t.co/6yG91s85If e qui https://t.co/VG3v8LdNYn",
+      "user": "Comune di Bologna",
+      "username": "comunebologna",
+      "data": "11/14/2020",
+      "geo_enabled": true,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327607546186764291",
+      "text": "Qui per ribadire un attimo quanto sia bono Umberto \nCiao\n\n#Amici20",
+      "user": "Giorgia🌚",
+      "username": "dignitosaG",
+      "data": "11/14/2020",
+      "geo_enabled": false,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327597162507759618",
+      "text": "@RitaB66743159 Eh, allora poi. ciao Rita, ciao Lucilla",
+      "user": "Nadia",
+      "username": "PersempreNadia",
+      "data": "11/14/2020",
+      "geo_enabled": false,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327596638634975232",
+      "text": "@Antonio76278652 @Federica989111 Ciao Antonio.",
+      "user": "Nadia",
+      "username": "PersempreNadia",
+      "data": "11/14/2020",
+      "geo_enabled": false,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327575592053714945",
+      "text": "@FabrizioProiet7 @lorisfrat Ma nuuuu....😂😂😂\n\nCiao Fabrizio 😘",
+      "user": "Sonia",
+      "username": "grafo_lo_gia",
+      "data": "11/14/2020",
+      "geo_enabled": false,
+      "location": "Bologna ",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327520958819741696",
+      "text": "@Annaelegalita Ciao Anna, si è così",
+      "user": "Nadia",
+      "username": "PersempreNadia",
+      "data": "11/14/2020",
+      "geo_enabled": false,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327520259058900992",
+      "text": "@DarioRossetto2 Ciao Dario e buona giornata.",
+      "user": "Sonia",
+      "username": "grafo_lo_gia",
+      "data": "11/14/2020",
+      "geo_enabled": false,
+      "location": "Bologna ",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327512518319886336",
+      "text": "@VivianaP1511 Ciao Vivi..... Buona gentilezza anche a te... 😊",
+      "user": "Nadia",
+      "username": "PersempreNadia",
+      "data": "11/14/2020",
+      "geo_enabled": false,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327511475397808130",
+      "text": "@eziamor Ciao.... Grazie🙂",
+      "user": "Nadia",
+      "username": "PersempreNadia",
+      "data": "11/14/2020",
+      "geo_enabled": false,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327500354867654658",
+      "text": "@67_stefi Ciao cucciolo ❤️",
+      "user": "rebecca manzoni",
+      "username": "rebeccamanzoni1",
+      "data": "11/14/2020",
+      "geo_enabled": false,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327425759036669952",
+      "text": "Ciao @DiMarzio, se compro il tuo libro mi assumi a Sky? Sono laureato in statistica, grazie",
+      "user": "Wishnu Bayu Adji",
+      "username": "adji_wishnu",
+      "data": "11/14/2020",
+      "geo_enabled": false,
+      "location": "",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327389267157454848",
+      "text": "@gucciclouds e allora perché continui a rispondere? ciao",
+      "user": "sara is golden | tics🥥",
+      "username": "bbianconeraa",
+      "data": "11/13/2020",
+      "geo_enabled": true,
+      "location": "bologna, italy",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327389032842670081",
+      "text": "Se a me viene una crisi di claustrofobia a -170 metri, ciao che la supero, ora che torno su #cirestoseccasicuro #Freedom #freedomoltreilconfine",
+      "user": "Cris Conti ♒️ Neshama",
+      "username": "freesoul251",
+      "data": "11/13/2020",
+      "geo_enabled": true,
+      "location": "Bologna, Italy",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327388890924249088",
+      "text": "@gucciclouds tipica risposta di chi sa che l’altra persona ha ragione, va bene ho capito che sto sprecando tempo.\nciao tesoro ciao",
+      "user": "sara is golden | tics🥥",
+      "username": "bbianconeraa",
+      "data": "11/13/2020",
+      "geo_enabled": true,
+      "location": "bologna, italy",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327387688434085888",
+      "text": "@gucciclouds AHAHAHAHAHAHAHAHAHAHAH.\noddio non ci credo aiuto.\nva bene i gusti sono gusti, ciao.",
+      "user": "sara is golden | tics🥥",
+      "username": "bbianconeraa",
+      "data": "11/13/2020",
+      "geo_enabled": true,
+      "location": "bologna, italy",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327386857500516353",
+      "text": "@gucciclouds si ok dai ciao",
+      "user": "sara is golden | tics🥥",
+      "username": "bbianconeraa",
+      "data": "11/13/2020",
+      "geo_enabled": true,
+      "location": "bologna, italy",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327383734237229067",
+      "text": "@GarauPina @Anna50732053 @paola124291 Ciao prezzemolina😂 https://t.co/BJ656IaHzR",
+      "user": "Nadia",
+      "username": "PersempreNadia",
+      "data": "11/13/2020",
+      "geo_enabled": false,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": [
+        "http://pbs.twimg.com/tweet_video_thumb/EmvQdk2W8AMuW0i.jpg"
+      ]
+    },
+    {
+      "id": "1327380140695969794",
+      "text": "@Anna50732053 @paola124291 Ciao Anna, ti follow. 🙂",
+      "user": "Nadia",
+      "username": "PersempreNadia",
+      "data": "11/13/2020",
+      "geo_enabled": false,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327374536782835712",
+      "text": "“Ciao a tutti” E IN PASSERELLA NON C’È NESSUNO  #GFVIP https://t.co/7yh32EfrOd",
+      "user": "(super) Martina 🐍",
+      "username": "_marti18",
+      "data": "11/13/2020",
+      "geo_enabled": false,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": [
+        "http://pbs.twimg.com/tweet_video_thumb/EmvIGibWEAAr-5x.jpg"
+      ]
+    },
+    {
+      "id": "1327373192424546305",
+      "text": "Lo so, oh mia pasionaria!! \nOh, comunque le donne hanno palle da vendere. Ho dm di donne che se imbracciano un Winchester, ciao proprio 🤨 https://t.co/Q947FM7rEA",
+      "user": "Mario",
+      "username": "Mario44623861",
+      "data": "11/13/2020",
+      "geo_enabled": false,
+      "location": "",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327371955998248967",
+      "text": "@emiliablu1 @LuraghiGiuseppe @lucazaiareal @M_Fedriga @sbonaccini Ciao Emilia https://t.co/4v5LPZEuKI",
+      "user": "Nadia",
+      "username": "PersempreNadia",
+      "data": "11/13/2020",
+      "geo_enabled": false,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": [
+        "http://pbs.twimg.com/tweet_video_thumb/EmvFwSWXcAAKcQl.jpg"
+      ]
+    },
+    {
+      "id": "1327368440454270976",
+      "text": "Lo so, oh mia pasionaria!! \nOh, comunque le donne hanno palle da vendere. Ho dm di donne che se imbracciano un Winchester, ciao proprio 🤨 https://t.co/Q947FM7rEA",
+      "user": "ℂ𝕙𝕚𝕒𝕞𝕒𝕞𝕚 𝔸𝕟𝕟𝕒",
+      "username": "4everAnnina",
+      "data": "11/13/2020",
+      "geo_enabled": true,
+      "location": "Bologna ",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327358411705643013",
+      "text": "@frbddntm @VJimmyV VABBÈ BUONANOTTE CIAO RAGAZZE IO MI ACCASCIO",
+      "user": "Marco",
+      "username": "mrccrmt",
+      "data": "11/13/2020",
+      "geo_enabled": true,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327341643448676352",
+      "text": "@BayYanlisRewind @canyamanitalian Ti auguro una dolce notte ♥️💋🌛⭐ ciao Nicoletta",
+      "user": "Nicoletta",
+      "username": "Nicolet97960931",
+      "data": "11/13/2020",
+      "geo_enabled": true,
+      "location": "Bologna, Emilia Romagna",
+      "city": "Bologna, Emilia Romagna",
+      "coordinates": [
+        [
+          [
+            11.2296117,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.5563177
+          ],
+          [
+            11.2296117,
+            44.5563177
+          ]
+        ]
+      ],
+      "images": []
+    },
+    {
+      "id": "1327341399382044674",
+      "text": "@BayYanlisRewind @canyamanitalian Ti auguro una dolce notte ♥️💋⭐🌛 ciao Nicoletta da Bologna",
+      "user": "Nicoletta",
+      "username": "Nicolet97960931",
+      "data": "11/13/2020",
+      "geo_enabled": true,
+      "location": "Bologna, Emilia Romagna",
+      "city": "Casalecchio di Reno, Emilia Romagna",
+      "coordinates": [
+        [
+          [
+            11.2325517,
+            44.4489077
+          ],
+          [
+            11.2968222,
+            44.4489077
+          ],
+          [
+            11.2968222,
+            44.494205
+          ],
+          [
+            11.2325517,
+            44.494205
+          ]
+        ]
+      ],
+      "images": []
+    },
+    {
+      "id": "1327340837643153410",
+      "text": "@canyamanunivers Ti auguro una dolce notte ♥️💋🌛 ciao Nicoletta da Bologna",
+      "user": "Nicoletta",
+      "username": "Nicolet97960931",
+      "data": "11/13/2020",
+      "geo_enabled": true,
+      "location": "Bologna, Emilia Romagna",
+      "city": "Bologna, Emilia Romagna",
+      "coordinates": [
+        [
+          [
+            11.2296117,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.5563177
+          ],
+          [
+            11.2296117,
+            44.5563177
+          ]
+        ]
+      ],
+      "images": []
+    },
+    {
+      "id": "1327334001221230592",
+      "text": "@Barbarahammer1 @GiusAmbr Te ne farai una rancione. (Ok, ciao, vado)",
+      "user": "annabì",
+      "username": "anna_ex_belva",
+      "data": "11/13/2020",
+      "geo_enabled": true,
+      "location": "",
+      "city": "Bologna, Emilia Romagna",
+      "coordinates": [
+        [
+          [
+            11.2296117,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.5563177
+          ],
+          [
+            11.2296117,
+            44.5563177
+          ]
+        ]
+      ],
+      "images": []
+    },
+    {
+      "id": "1327327784298029061",
+      "text": "Una ex collega mi ha invitato ad iscrivermi ad una pagina di un politico della L3g4. \nBloccata la pagina e pure lei.\nSono molto tollerante ma zero con gli intolleranti. \nCiao bella ciao bella ciao ciao ciao. https://t.co/FcggRqkP5O",
+      "user": "Luca 🏳️‍🌈🇪🇺",
+      "username": "celhoceruleo",
+      "data": "11/13/2020",
+      "geo_enabled": true,
+      "location": "Bologna, Emilia Romagna - Roma",
+      "city": "Bologna, Emilia Romagna",
+      "coordinates": [
+        [
+          [
+            11.2296117,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.5563177
+          ],
+          [
+            11.2296117,
+            44.5563177
+          ]
+        ]
+      ],
+      "images": [
+        "http://pbs.twimg.com/tweet_video_thumb/EmudlIPW4AMN6YD.jpg"
+      ]
+    },
+    {
+      "id": "1327281837895528450",
+      "text": "Ciao @DiMarzio, se compro il tuo libro mi assumi a Sky? Sono laureato in statistica, grazie",
+      "user": "Luca(ku)",
+      "username": "MorroLuca1",
+      "data": "11/13/2020",
+      "geo_enabled": true,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327275068980916224",
+      "text": "A me piacciono tutti e due ciao https://t.co/i6v8fAa9sw",
+      "user": "PORCIPOI 🐷🍔🌙",
+      "username": "unbelrumore",
+      "data": "11/13/2020",
+      "geo_enabled": true,
+      "location": "Biella / Bologna",
+      "city": "Bologna, Emilia Romagna",
+      "coordinates": [
+        [
+          [
+            11.2296117,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.5563177
+          ],
+          [
+            11.2296117,
+            44.5563177
+          ]
+        ]
+      ],
+      "images": []
+    },
+    {
+      "id": "1327217961376083968",
+      "text": "@mariadicuonzo1 @FaziEditore @LuciaLibri @letteratume @lucy_esposito @MollyBloom82 @LPieceofart @adelestancati @lagatta4739 @danisetta @annaritadenardo Grazie sempre Maria. Lessi \"In fuga dal muro\" di Simonelli; apprezzai, quindi leggerò anche questo. Ciao, buona giornata!",
+      "user": "bob tridattilo",
+      "username": "bonfigliolimas2",
+      "data": "11/13/2020",
+      "geo_enabled": true,
+      "location": "contemporaneamente ovunque",
+      "city": "Bologna, Emilia Romagna",
+      "coordinates": [
+        [
+          [
+            11.2296117,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.5563177
+          ],
+          [
+            11.2296117,
+            44.5563177
+          ]
+        ]
+      ],
+      "images": []
+    },
+    {
+      "id": "1327212880656297985",
+      "text": "@mani72012 @prophezia @Manueloz12 @Annamar35486740 Ciao Manu😁❤",
+      "user": "Nadia",
+      "username": "PersempreNadia",
+      "data": "11/13/2020",
+      "geo_enabled": false,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327208279353810945",
+      "text": "@prophezia @Manueloz12 @Annamar35486740 @mani72012 Ma ciao, come stai?",
+      "user": "Nadia",
+      "username": "PersempreNadia",
+      "data": "11/13/2020",
+      "geo_enabled": false,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327197696969596928",
+      "text": "@Alex_Ssl1900 @solebastardo @RafBigCat @BarbagiM @danylovescats @misspassinella1 @deb8479eaeef410 @AnnaToniolo @patriziaandreoz ciao ricordi in bassa fedeltà https://t.co/iD7B87TWbA",
+      "user": "Massimo   ❤💙",
+      "username": "solebastardo",
+      "data": "11/13/2020",
+      "geo_enabled": true,
+      "location": "Cagliari",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327189883073466368",
+      "text": "@MAUMAU_1976 ciao, patatino.",
+      "user": "CapGiangi il Ribelle🏳️‍🌈🇪🇺",
+      "username": "UranoRebel",
+      "data": "11/13/2020",
+      "geo_enabled": true,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327189450779144193",
+      "text": "@Alex_Ssl1900 @solebastardo @RafBigCat @BarbagiM @danylovescats @misspassinella1 @deb8479eaeef410 @AnnaToniolo @patriziaandreoz ciao ricordi in bassa fedeltà https://t.co/iD7B87TWbA",
+      "user": "Giovanni Ruiu",
+      "username": "givanno",
+      "data": "11/13/2020",
+      "geo_enabled": true,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327170898839941121",
+      "text": "A volte non trovo le parole.\nCiao piccolo Yoseph❤️ https://t.co/nNgeUbQB0C",
+      "user": "Eleana",
+      "username": "EleanaElefante",
+      "data": "11/13/2020",
+      "geo_enabled": true,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": [
+        "http://pbs.twimg.com/media/EmsO5cCXMAACuaG.jpg"
+      ]
+    },
+    {
+      "id": "1327170152035737600",
+      "text": "@SignorTrofimov Ma é un’iguana, un vero corpo speciale, ti aiuta, mangia gli insetti eh ....\nVabbè ti mando loro e ciao 😂 https://t.co/LZXMFkua8v",
+      "user": "Sonia",
+      "username": "grafo_lo_gia",
+      "data": "11/13/2020",
+      "geo_enabled": false,
+      "location": "Bologna ",
+      "city": "",
+      "coordinates": "",
+      "images": [
+        "http://pbs.twimg.com/tweet_video_thumb/EmsONeRXIAEnhR1.jpg"
+      ]
+    },
+    {
+      "id": "1327151444248698880",
+      "text": "@romatorino @anboni Ciao Bot! 😂😂😂",
+      "user": "ℂ𝕙𝕚𝕒𝕞𝕒𝕞𝕚 𝔸𝕟𝕟𝕒",
+      "username": "4everAnnina",
+      "data": "11/13/2020",
+      "geo_enabled": true,
+      "location": "Bologna ",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327008249980350464",
+      "text": "Mydrama entra spacca esce ciao #XFactor2020",
+      "user": "Gloria",
+      "username": "Strange_Ellegi",
+      "data": "11/12/2020",
+      "geo_enabled": true,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1327000667630800898",
+      "text": "Cmqmartina può fistarmi ciao buonanotte",
+      "user": "Marco",
+      "username": "mrccrmt",
+      "data": "11/12/2020",
+      "geo_enabled": true,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326989793549373440",
+      "text": "@MauroZambelli Ciao Mauro ... se mi segui posso scirverti in privato .... grazie",
+      "user": "Luca Alberti",
+      "username": "AlboGibba007",
+      "data": "11/12/2020",
+      "geo_enabled": true,
+      "location": "Bologna, Emilia Romagna",
+      "city": "Bologna, Emilia Romagna",
+      "coordinates": [
+        [
+          [
+            11.2296117,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.5563177
+          ],
+          [
+            11.2296117,
+            44.5563177
+          ]
+        ]
+      ],
+      "images": []
+    },
+    {
+      "id": "1326988641068064768",
+      "text": "@giuli_valle @kirkjtkirk Ciao  .... onestamente è un bel po  che non lo sento ....",
+      "user": "Luca Alberti",
+      "username": "AlboGibba007",
+      "data": "11/12/2020",
+      "geo_enabled": true,
+      "location": "Bologna, Emilia Romagna",
+      "city": "Bologna, Emilia Romagna",
+      "coordinates": [
+        [
+          [
+            11.2296117,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.5563177
+          ],
+          [
+            11.2296117,
+            44.5563177
+          ]
+        ]
+      ],
+      "images": []
+    },
+    {
+      "id": "1326986503105490961",
+      "text": "@alecattelan Ciao Alessandro  .... come stai???",
+      "user": "Luca Alberti",
+      "username": "AlboGibba007",
+      "data": "11/12/2020",
+      "geo_enabled": true,
+      "location": "Bologna, Emilia Romagna",
+      "city": "Bologna, Emilia Romagna",
+      "coordinates": [
+        [
+          [
+            11.2296117,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.5563177
+          ],
+          [
+            11.2296117,
+            44.5563177
+          ]
+        ]
+      ],
+      "images": []
+    },
+    {
+      "id": "1326981760220090369",
+      "text": "@dajedeclick @lucaferrara4 Prima ho scritto ragazzina non bimba ho parlato di film gialli non ho offeso nessuno e probabilmente ha fatto lo stesso lei ciao",
+      "user": "Bruna. Emilia Romagna Bologna",
+      "username": "Bruna64439387",
+      "data": "11/12/2020",
+      "geo_enabled": true,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326954106750111744",
+      "text": "@lucacarboni Aspetto il Tuo Nuovo Album! Ciao Mitico Un Abbraccio!",
+      "user": "Michele Dona'",
+      "username": "MicheleDon8",
+      "data": "11/12/2020",
+      "geo_enabled": false,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326953760216723459",
+      "text": "Ciao Carbo! https://t.co/VnXXVGDMLv",
+      "user": "Michele Dona'",
+      "username": "MicheleDon8",
+      "data": "11/12/2020",
+      "geo_enabled": false,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326913362979135491",
+      "text": "@LuxairAirlines Ciao amici! 😘",
+      "user": "Aeroporto di Bologna",
+      "username": "BLQairport",
+      "data": "11/12/2020",
+      "geo_enabled": true,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326839720207380480",
+      "text": "@dybaladiez ciao mi video",
+      "user": "sara is golden | tics🥥",
+      "username": "bbianconeraa",
+      "data": "11/12/2020",
+      "geo_enabled": true,
+      "location": "bologna, italy",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326819468840931328",
+      "text": "@capuanogio Ciao Giovanni, lasciamo da parte per un attimo i metodi del peggior #acchiappaclick 😭🤮\n\nCitiamo anche opinione di Barra Caracciolo (difese la Juventus nella vicenda Calciopoli) via @CorSport ⁉️\nDaje 😝\n\n#JuveNapoli #SerieA #TAR https://t.co/NsrB418nVQ",
+      "user": "azierno",
+      "username": "azierno",
+      "data": "11/12/2020",
+      "geo_enabled": true,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": [
+        "http://pbs.twimg.com/media/EmnO0E1XUAApFs0.png",
+        "http://pbs.twimg.com/media/EmnO0F0W8AEAlg_.png",
+        "http://pbs.twimg.com/media/EmnO0G3WEAYaBbH.png"
+      ]
+    },
+    {
+      "id": "1326781010609119234",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "Maria Cristina Malvicini",
+      "username": "MalviciniMaria",
+      "data": "11/12/2020",
+      "geo_enabled": false,
+      "location": "",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326648066695450625",
+      "text": "@PanariellinaIda Ciao e pure maramao!!!",
+      "user": "Alberto Maione",
+      "username": "AlbertoMaione",
+      "data": "11/11/2020",
+      "geo_enabled": true,
+      "location": "Bologna, Italy",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326627663495229440",
+      "text": "@RSD_studiodelta Ciao  .... posso chiedervi un info",
+      "user": "Luca Alberti",
+      "username": "AlboGibba007",
+      "data": "11/11/2020",
+      "geo_enabled": true,
+      "location": "Bologna, Emilia Romagna",
+      "city": "Bologna, Emilia Romagna",
+      "coordinates": [
+        [
+          [
+            11.2296117,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.5563177
+          ],
+          [
+            11.2296117,
+            44.5563177
+          ]
+        ]
+      ],
+      "images": []
+    },
+    {
+      "id": "1326626897216876546",
+      "text": "@BarchiesiCinzia Bellissimo ..... ciao mitica Cinzia",
+      "user": "Luca Alberti",
+      "username": "AlboGibba007",
+      "data": "11/11/2020",
+      "geo_enabled": true,
+      "location": "Bologna, Emilia Romagna",
+      "city": "Bologna, Emilia Romagna",
+      "coordinates": [
+        [
+          [
+            11.2296117,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.4211518
+          ],
+          [
+            11.4336997,
+            44.5563177
+          ],
+          [
+            11.2296117,
+            44.5563177
+          ]
+        ]
+      ],
+      "images": []
+    },
+    {
+      "id": "1326622546754727937",
+      "text": "@Sandro19714 Ciao, Sandroh!!!!!",
+      "user": "grace",
+      "username": "GraceMontaguti",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326621516172324865",
+      "text": "@IlCastiga Ciao Castigaaaa",
+      "user": "Nadia",
+      "username": "PersempreNadia",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326620840637722624",
+      "text": "@GingerPresident Ciao amo 😂",
+      "user": "Matteo Tascà 🏳️‍🌈",
+      "username": "matteo_tasca",
+      "data": "11/11/2020",
+      "geo_enabled": true,
+      "location": "Bologna / Italy",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326620121977270274",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "Andrea Augurio",
+      "username": "AndreaAugurio",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326619823183450112",
+      "text": "Ciao, disagiati....stasera preparate Google traduttore, parlano di Agata",
+      "user": "grace",
+      "username": "GraceMontaguti",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326619476536815616",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "Tony Dan",
+      "username": "SoIitaryCat",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "Italia イタリア Италия 意大利",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326613271298928642",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "Efisio Scalas🇮🇹",
+      "username": "Efisio31251859",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326607296236032000",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "Giovanna Campi",
+      "username": "GiovannaCampi6",
+      "data": "11/11/2020",
+      "geo_enabled": true,
+      "location": "",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326601349295910917",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "INDIVIDUALS LIBERTIES FIRST!",
+      "username": "GraalTruth",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326600691096428554",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "M A R C O M E R C A N Z I N",
+      "username": "braveheartmmt",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "Veneto - Padova ",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326597924487372800",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "SEB5113910",
+      "username": "seb5113910",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "Golfo del Tigullio",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326596420061761543",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "Francesco",
+      "username": "francesco201423",
+      "data": "11/11/2020",
+      "geo_enabled": true,
+      "location": "Verona",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326595926006362112",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "Marco Gubetti",
+      "username": "magub5",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "Giornalista",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326595099657121792",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "Fabius Dieciscudi ♱ 🇮🇹 🇫🇷",
+      "username": "fabius10scudi",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "Regno di Lotario I",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326594820530429952",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "Davide Falchieri",
+      "username": "DavideFalchieri",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "Bologna",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326594664661741569",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "Andrea Capozucca ❤️🇮🇹",
+      "username": "capand69",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326586890494087168",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "Coffee Break",
+      "username": "haveabreaknow",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "Rho",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326573328597999616",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "Carlo Asnaghi",
+      "username": "CarloAsnaghi",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326569408622436352",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "Ziafranci",
+      "username": "Ziafranci1",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326568367319289856",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "MariMario",
+      "username": "MariMario1",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326563382330322951",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "Willy Coyote",
+      "username": "WillyCoyote6",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326548846827118596",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "Peonia40🇮🇹🇮🇹🇮🇹",
+      "username": "Peonia249",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326534295108808704",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "Il_Greenback_🇮🇹🇬🇧🇺🇸",
+      "username": "99Abe_Lincoln99",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "Teramo",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326527486939815938",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "RobinHood🇭🇰",
+      "username": "Ale79Friul",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "il cuore a Sherwood ",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326522634906050562",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "barbara 🇮🇹",
+      "username": "babyspettri",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326522002803396608",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "Marco Leone #NoEuro",
+      "username": "marcocf69",
+      "data": "11/11/2020",
+      "geo_enabled": true,
+      "location": "Genève - Switzerland 🇨🇭",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326520847578882058",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "pulcedacqua (blocco chi segue troll)",
+      "username": "thewaterflea",
+      "data": "11/11/2020",
+      "geo_enabled": true,
+      "location": "",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326514331702484992",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "stefania campanini",
+      "username": "stefaniacampani",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "Emilia",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326510777344417792",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "Giuseppe Dell’Aquila",
+      "username": "GiuseppeDellA15",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "Mira, Veneto",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326510313785745416",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "Monica Vivarelli",
+      "username": "StufaMarcia1",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "Alassio, Liguria",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326508692125200389",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "Miniver84",
+      "username": "Miniver841",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326507094045052928",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "altrimondi#noMES",
+      "username": "chiarapellegri9",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "cerco risposte #noeuro",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326504688896905217",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "Reverendo Adriano - Prima gli italiani - #NoMes",
+      "username": "ReverendoAdria1",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "Verona, Veneto",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    },
+    {
+      "id": "1326504539181158406",
+      "text": "Vette altissime di logica piddina.\n\nTrump avvelena i pozzi dicendo che ci sono brogli mai provati.\n\nBene, allora ricontiamo le schede.\n\nSì bravo, così Trump ha modo di fare brogli.\n\nMa scusa, come fai a saperlo?\n\nLo dicono tutti, 4 anni fa vinse grazie agli hacker russi\n\nOk ciao",
+      "user": "LU BO H 🇮🇹 #PAFI 🇮🇹",
+      "username": "LUBOHAIXIA",
+      "data": "11/11/2020",
+      "geo_enabled": false,
+      "location": "",
+      "city": "",
+      "coordinates": "",
+      "images": []
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 // Save search filters
 var searchObj = null;
 var lastTweetsList = null;
+var lastTweetsSearchObj = null;
 var autocompleteInitialized = false;
 
 function initAutocomplete() {
@@ -41,7 +42,6 @@ function initAutocomplete() {
 }
 
 function setFilters() {
-    // TODO: Handle the point of interest here too
     for(let field in searchObj) {
         let val = searchObj[field];
         if (val && field != 'ray' && field != 'pdi') {
@@ -112,7 +112,7 @@ function save() {
 
 /* new search invoked from tweets component */
 function newSearch() {
-    if(searchObj && (searchObj.keyword || searchObj.val)) {
+    if(searchObj && (searchObj.keyword || searchObj.center)) {
         $("#tweets-search").empty();
         lastTweetsList = null;
         dispatch_search();
@@ -214,6 +214,8 @@ function setTitleAndTweets(title, data, word) {
     $("#tweets-search").append('<h4 id="search-title">' + title + '</h4>');
     
     lastTweetsList = data;
+    //Make a copy of the search object at the time of search, so that we can use it when we save the collection
+    lastTweetsSearchObj = JSON.parse(JSON.stringify(searchObj));
     displayTweets(data, word);
 }
 
@@ -297,8 +299,9 @@ function openCollection(id) {
         method: "GET",
         url: "/collections/" + id,
         success: (info) => {
-            //TODO: add word highlighting if we store the filter data on the collection
-            setTitleAndTweets(info.count + " Tweets from collection: " + info.name, info.data, "");
+            searchObj = info.filters;
+            setFilters();
+            setTitleAndTweets(info.count + " Tweets from collection: " + info.name, info.data, searchObj.keyword || "");
         },
 
         error: (xhr, ajaxOptions, thrownError) => {
@@ -375,21 +378,25 @@ function loadCollections() {
 // Save the currently loaded tweets as a new collection
 function saveCollection()
 {
-    $.ajax({
-        method: "POST",
-        url: "/collections",
-        contentType: 'application/json',
-        data: JSON.stringify({
-            name: "New collection",
-            data: lastTweetsList
-        }),
+    if(lastTweetsList && lastTweetsSearchObj)
+    {
+        $.ajax({
+            method: "POST",
+            url: "/collections",
+            contentType: 'application/json',
+            data: JSON.stringify({
+                name: "New collection",
+                filters: lastTweetsSearchObj,
+                data: lastTweetsList
+            }),
 
-        success: (data) => {
-            $("#toCollections").click();
-        },
+            success: (data) => {
+                $("#toCollections").click();
+            },
 
-        error: (xhr, ajaxOptions, thrownError) => {
-            console.log("collections: " + xhr.status + ' - ' + thrownError);
-        }
-    });
+            error: (xhr, ajaxOptions, thrownError) => {
+                console.log("collections: " + xhr.status + ' - ' + thrownError);
+            }
+        });
+    }
 }

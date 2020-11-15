@@ -28,7 +28,7 @@ def get_tweets_path_from_id(id):
     filename = str(id) + ".json"
     return os.path.join(tweets_dir, filename)
 
-def store_tweets(name, data):
+def store_tweets(name, data, filters):
     try:
         #ensure the tweets directory exists
         if not os.path.isdir(tweets_dir):
@@ -38,8 +38,9 @@ def store_tweets(name, data):
         info = {
             'id': id,
             'name': name,
-            'data': data,
+            'filters': filters,
             'count': len(data),
+            'data': data,
         }
         path = get_tweets_path_from_id(id)
 

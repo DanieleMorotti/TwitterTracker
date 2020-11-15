@@ -17,8 +17,7 @@ export default {
             <br>
 
             <label for="pdi">point of interest: </label>
-            <input type="text" name="pdi" id="pdi" placeholder="e.g. Università di Bologna" size="22" /> 
-            <label >(non è necessario includere anche una parola chiave) </label> <br>
+            <input type="text" name="pdi" id="pdi" placeholder="e.g. Università di Bologna" size="22" /> <br>
             
             <button id="mapBtn" data-toggle="modal" data-target="#mapModal"> Draw your area</button>  <br>
 
