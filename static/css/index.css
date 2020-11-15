@@ -26,16 +26,20 @@ body p, label, h4 {
     border-style: none;
     display: inline-block;
     padding: 1.5rem;
+    width: 100%;
 }
 
 #navbar button:focus {
     outline:0;
 }
 
-#navbar li:hover {
+#navbar li:hover{
     background-color: darkgoldenrod;
 }
 
+#navbar .router-link-active {
+    background-color: darkgoldenrod;
+}
 
 #navbar {
     height: 100%;
