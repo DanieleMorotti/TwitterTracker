@@ -38,6 +38,10 @@ export default {
     </div>
     `,
     activated() {
+        if(!autocompleteInitialized) {
+            initAutocomplete();
+            autocompleteInitialized = true;
+        }
         $(document).on('click','#mapBtn', () =>{
                 let center = $('#coordinates').val();
                 let ray = $('#ray').val();
