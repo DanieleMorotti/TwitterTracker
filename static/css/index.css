@@ -7,11 +7,23 @@ body {
 
 }
 
-/*
-body p, label, h4 {
-    color: white;
+ul {
+    padding-top: 5rem;
 }
-*/
+
+h1 {
+    margin:0 ;
+    float: left;
+    padding-top: 1rem;
+    margin-left: 4rem;
+    color: white;
+    font-family: 'Ink Free','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+img {
+    margin-top: 2rem;
+    margin-left: 0.5rem;
+}
 
 .icon {
     color: white;
@@ -42,7 +54,7 @@ body p, label, h4 {
 }
 
 #navbar {
-    height: 100%;
+    height: 110vh;
     z-index: 3;
     top: 0;
     left: 0;
@@ -60,10 +72,6 @@ body p, label, h4 {
 #componentView {
     position: absolute;
     left: 60px;
-}
-
-.filter {
-    margin: 0.5rem;
 }
 
 

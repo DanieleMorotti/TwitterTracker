@@ -63,7 +63,8 @@ function setFilters() {
             }
             
             //Add a button to delete the filter in the tweets view
-            $('#componentView').prepend(`<button class="filter" id="${field}Btn" onclick="deleteFilter('${field}')">${text} &#10006;</button>`);
+
+            $('#filters').prepend(`<button class="filter" id="${field}Btn" onclick="deleteFilter('${field}')">${text} &#10006;</button><br>`);
         }
     }
 }
@@ -78,7 +79,6 @@ function save() {
         images_only: $('#images-only').prop('checked')
     };
 
-    setFilters();
 
     /*
     if(searchObj.pdi != "") {
@@ -107,7 +107,7 @@ function save() {
     */
         
     $('#toTweets').click();
-    dispatch_search();
+    dispatch_search();    
 }
 
 /* new search invoked from tweets component */
@@ -210,13 +210,14 @@ function displayTweets(data, word) {
 
 // Set the title and the tweets of the tweets view
 function setTitleAndTweets(title, data, word) {
-    $("#tweets-search").empty();
-    $("#tweets-search").append('<h4 id="search-title">' + title + '</h4>');
+    $("#results").empty();
+    $("#results").html('<h4 id="search-title">' + title + '</h4>');
     
     lastTweetsList = data;
     //Make a copy of the search object at the time of search, so that we can use it when we save the collection
     lastTweetsSearchObj = JSON.parse(JSON.stringify(searchObj));
     displayTweets(data, word);
+    setFilters();
 }
 
 // Update the tweets from the stream
@@ -253,12 +254,13 @@ function search(word, center, ray, images_only) {
         data: query,
         success: (data) => {
             $("#tweets-search").empty();
+            $('#results').empty();
             if (data.length > 0) {
                 //Display the tweets
                 setTitleAndTweets(data.length + ' Search Tweets Results', data, word);
             } else {
                 //Display a message if no tweets are available
-                $("#tweets-search").append('<h5>No results for the specified query</h5>');
+                $("#results").append('<h5>No results for the specified query</h5>');
             }
         },
         error: (xhr, ajaxOptions, thrownError) => {

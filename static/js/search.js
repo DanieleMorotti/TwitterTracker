@@ -45,7 +45,7 @@ export default {
                 let center = $('#coordinates').val();
                 let ray = $('#ray').val();
                 if (center && ray)
-                    drawSearchAreaOnMap(center,ray, '#00FF00');
+                    drawSearchAreaOnMap(center,ray, '#00FF00'); 
         });
     }
 }
