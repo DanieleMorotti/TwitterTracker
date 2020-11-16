@@ -19,7 +19,7 @@ export default {
             <label for="pdi">point of interest: </label>
             <input type="text" name="pdi" id="pdi" placeholder="e.g. Università di Bologna" size="22" /> <br>
             
-            <div id="map"></div>
+            <div id="map"></div><br>
             <label for="coordinates">coordinates (lat, long): </label>
             <input type="text" name="coordinates" id="coordinates" placeholder="e.g. 45.4773,9.1815" size="22" @keyup.enter="changeArea"/> <br>
             <label for="radius">radius: </label>
