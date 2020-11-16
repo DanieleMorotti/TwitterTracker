@@ -7,11 +7,7 @@ body {
 
 }
 
-ul {
-    padding-top: 5rem;
-}
-
-h1 {
+#fraydrum-header {
     margin:0 ;
     float: left;
     padding-top: 1rem;
@@ -20,7 +16,7 @@ h1 {
     font-family: 'Ink Free','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-img {
+#fraydrum-logo {
     margin-top: 2rem;
     margin-left: 0.5rem;
 }
@@ -54,6 +50,7 @@ img {
 }
 
 #navbar {
+    padding-top: 5rem;
     height: 110vh;
     z-index: 3;
     top: 0;
@@ -88,4 +85,12 @@ img {
 #map a{
     background-color: transparent !important;
     color: initial !important;
+}
+
+#map img {
+    vertical-align: baseline;
+}
+
+#map label {
+    margin-bottom: 0px;
 }

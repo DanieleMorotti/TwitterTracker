@@ -184,6 +184,7 @@ function stream_stop() {
 
 // Display an array of tweets highlighting the specified word
 function displayTweets(data, word) {
+    $("#tweets-search").empty();
     let reg = new RegExp(word.trim().replace(' ', '|'), 'gi');
 
     for (let i = 0; i < data.length; i++) {
@@ -259,7 +260,7 @@ function search(word, center, radius, images_only) {
         data: query,
         success: (data) => {
             $("#tweets-search").empty();
-            $('#results').empty();
+            $("#results").empty();
             if (data.length > 0) {
                 //Display the tweets
                 setTitleAndTweets(data.length + ' Search Tweets Results', data, word);
