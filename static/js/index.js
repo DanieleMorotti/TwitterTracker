@@ -241,7 +241,7 @@ function stream_update(word) {
 }
 
 // Search tweets containing a word and an optional location
-function search(word, center, radius, images_only) {
+function search(word, user, center, radius, images_only) {
     let query = {};
     if (word) {
         query['keyword']= word;
@@ -252,6 +252,9 @@ function search(word, center, radius, images_only) {
     }
     if (images_only) {
         query['images_only'] = true;
+    }
+    if (user) {
+        query['user'] = user;
     }
     
     $.ajax({
@@ -278,19 +281,20 @@ function search(word, center, radius, images_only) {
 // Start a search and stop the stream if it's active
 function dispatch_search() {
     let word = searchObj.keyword;
+    let user = searchObj.user;
     let center = searchObj.center;
     let radius = searchObj.radius;
-    let images_only = searchObj.images_only
+    let images_only = searchObj.images_only;
 
     if (center && !(/^\s?\-?\d+\.?\d*\,\s?\-?\d+\.?\d*\s?$/.test(center))) {
         alert('Le coordinate devono essere della forma xx.xxx, yy.yyy');
-    }  else if (!word && !center) {
-        alert("Inserisci una parola chiave o una posizione");
+    }  else if (!word && !center && !user) {
+        alert("Inserisci una parola chiave, un utente o una posizione");
     } else {
         if (streamingInterval) { 
             stream_stop(); 
         }
-        search(word, center, radius, images_only);
+        search(word, user, center, radius, images_only);
     }
 }
 
