@@ -19,13 +19,12 @@ export default {
             <label for="pdi">point of interest: </label>
             <input type="text" name="pdi" id="pdi" placeholder="e.g. Università di Bologna" size="22" /> <br>
             
-            <button id="mapBtn" data-toggle="modal" data-target="#mapModal"> Draw your area</button>  <br>
-
+            <div id="map"></div>
             <label for="coordinates">coordinates (lat, long): </label>
-            <input type="text" name="coordinates" id="coordinates" placeholder="e.g. 45.4773,9.1815" size="22" /> <br>
-            <label for="ray">ray: </label>
-            <input style="display:inline" id="ray" type="range" min="10" max="1000" step="10"  v-model="value" name="ray"/>
-            <label style="display:inline"><span v-text="value" id="rayValue"></span> km</label>
+            <input type="text" name="coordinates" id="coordinates" placeholder="e.g. 45.4773,9.1815" size="22" @keyup.enter="changeArea"/> <br>
+            <label for="radius">radius: </label>
+            <input style="display:inline" id="radius" type="range" min="10" max="1000" step="10"  v-model="value" name="radius" @click="changeArea"/>
+            <label style="display:inline"><span v-text="value" id="radiusValue"></span> km</label>
             <br>
             
             <input type="checkbox" id="images-only">            
@@ -36,16 +35,19 @@ export default {
         </div>
     </div>
     `,
+    methods: {
+        changeArea() {
+            let center = $('#coordinates').val();
+            let radius = this.value;
+            if (center && radius)
+                drawSearchAreaOnMap(center, radius, '#00FF00'); 
+        }
+    },
     activated() {
+        initMap();
         if(!autocompleteInitialized) {
             initAutocomplete();
             autocompleteInitialized = true;
         }
-        $(document).on('click','#mapBtn', () =>{
-                let center = $('#coordinates').val();
-                let ray = $('#ray').val();
-                if (center && ray)
-                    drawSearchAreaOnMap(center,ray, '#00FF00'); 
-        });
     }
 }

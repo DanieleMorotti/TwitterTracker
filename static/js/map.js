@@ -19,9 +19,9 @@ function setUpClickListener() {
 }
 // Draw Searched area on the map
 
-function drawSearchAreaOnMap(loc, ray, color) {
-    //initialized the ray of the circle and the center
-    let radius = 1000 * ray;// parseInt(loc.split(',')[2].slice(0, -2));
+function drawSearchAreaOnMap(loc, r, color) {
+    //initialized the radius of the circle and the center
+    let radius = 1000 * r;// parseInt(loc.split(',')[2].slice(0, -2));
     let center = { lat: parseFloat(loc.split(',')[0]), lng: parseFloat(loc.split(',')[1]) };
 
     // Remove previous circle if exists
@@ -46,13 +46,13 @@ function drawSearchAreaOnMap(loc, ray, color) {
 
 function getCoordinatesOnCLick(mapsMouseEvent) {
     $('#coordinates').val(mapsMouseEvent.latLng.lat().toFixed(2) + ', ' + mapsMouseEvent.latLng.lng().toFixed(2));
-    drawSearchAreaOnMap($('#coordinates').val(), $('#ray').val(), '#FF0000');
+    drawSearchAreaOnMap($('#coordinates').val(), $('#radius').val(), '#FF0000');
 }
 // Event associated on change of coordinates to draw the area
 $(document).on('input', '#coordinates', function () {
     let coordinates = $('#coordinates').val();
     if (!isNaN(coordinates.split(',')[1])) {
-        drawSearchAreaOnMap($('#coordinates').val(), $('#ray').val(), '#FF0000');
+        drawSearchAreaOnMap($('#coordinates').val(), $('#radius').val(), '#FF0000');
     }
 });
 

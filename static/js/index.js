@@ -8,7 +8,7 @@ function initAutocomplete() {
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pdi');
     var autocomplete = new google.maps.places.Autocomplete(input);
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+  /*  map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);*/
   
     // Bias the SearchBox results towards current map's viewport.
     autocomplete.bindTo('bounds', map);
@@ -36,15 +36,17 @@ function initAutocomplete() {
         let loc = place.geometry.location;
         let default_radius = 2;
         $('#coordinates').val(loc.lat() + ', ' + loc.lng());
-        $('#ray').val(default_radius);
-        $('#rayValue').text(default_radius);
+        $('#radius').val(default_radius);
+        $('#radiusValue').text(default_radius);
+
+        drawSearchAreaOnMap(loc.lat() + ', ' + loc.lng(), default_radius, '#00FF00'); 
     });
 }
 
 function setFilters() {
     for(let field in searchObj) {
         let val = searchObj[field];
-        if (val && field != 'ray' && field != 'pdi') {
+        if (val && field != 'radius' && field != 'pdi') {
             $(`#${field}Btn`).remove();
 
             let text = val;
@@ -74,7 +76,7 @@ function save() {
         keyword: $('#keyWord').val(),  
         user: $('#user').val(),
         center: $('#coordinates').val().replace(/\s+/g, ''),
-        ray: $('#ray').val(),
+        radius: $('#radius').val(),
         pdi: $('#pdi').val(),
         images_only: $('#images-only').prop('checked')
     };
@@ -238,14 +240,14 @@ function stream_update(word) {
 }
 
 // Search tweets containing a word and an optional location
-function search(word, center, ray, images_only) {
+function search(word, center, radius, images_only) {
     let query = {};
     if (word) {
         query['keyword']= word;
     }
-    if (center && ray) {
-        query['location'] = center+","+ray+"km";
-        drawSearchAreaOnMap(center, ray, '#00FF00');
+    if (center && radius) {
+        query['location'] = center+","+radius+"km";
+        drawSearchAreaOnMap(center, radius, '#00FF00');
     }
     if (images_only) {
         query['images_only'] = true;
@@ -276,7 +278,7 @@ function search(word, center, ray, images_only) {
 function dispatch_search() {
     let word = searchObj.keyword;
     let center = searchObj.center;
-    let ray = searchObj.ray;
+    let radius = searchObj.radius;
     let images_only = searchObj.images_only
 
     if (center && !(/^\s?\-?\d+\.?\d*\,\s?\-?\d+\.?\d*\s?$/.test(center))) {
@@ -287,7 +289,7 @@ function dispatch_search() {
         if (streamingInterval) { 
             stream_stop(); 
         }
-        search(word, center, ray, images_only);
+        search(word, center, radius, images_only);
     }
 }
 
