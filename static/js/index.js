@@ -114,6 +114,8 @@ function save() {
 function newSearch() {
     if(searchObj && (searchObj.keyword || searchObj.center)) {
         $("#tweets-search").empty();
+        $("#tweets-search").removeClass('bd-white');
+
         lastTweetsList = null;
         dispatch_search();
     }
@@ -205,6 +207,7 @@ function displayTweets(data, word) {
         }
 
         $("#tweets-search").append(div);
+        $("#tweets-search").addClass('bd-white');
     }
 }
 
@@ -260,7 +263,7 @@ function search(word, center, ray, images_only) {
                 setTitleAndTweets(data.length + ' Search Tweets Results', data, word);
             } else {
                 //Display a message if no tweets are available
-                $("#results").append('<h5>No results for the specified query</h5>');
+                $("#results").append('<p>No results for the specified query</p>');
             }
         },
         error: (xhr, ajaxOptions, thrownError) => {

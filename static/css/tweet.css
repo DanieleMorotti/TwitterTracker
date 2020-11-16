@@ -1,10 +1,14 @@
 /* Tweet */
 
 #tweets-search {
-    border: 0.3px solid white;
     border-radius: 8px;
     margin: 3rem;
-    height: 80vh;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.bd-white {
+    border: 0.3px solid white;
 }
 
 #tweets-search > h4, .tweet {
@@ -14,6 +18,10 @@
 
 #results {
     margin: 3rem;
+}
+
+#results p {
+    color: white;
 }
 
 #filters{
