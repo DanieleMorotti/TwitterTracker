@@ -56,19 +56,7 @@ function initMap() {
         }
 
         /*The shape can be moved or resized, added eventlisteners to manage this actions*/
-
-        shape.addListener('radius_changed', function(e) {
-            let newRadius = shape.getRadius();
-            $('#radius').val(parseInt(newRadius/1000));
-            $("#radius").trigger( "custom", parseInt(newRadius/1000) );
-    
-            //if the radius > 1000km i set to 1000km
-            if(newRadius > 1000000) shape.setRadius(1000000);
-        });
-        shape.addListener('center_changed', function(e){
-            let newCenter = shape.getCenter().toString().replace(/[\(\)]/g,'');
-            $('#coordinates').val(newCenter);
-        });
+        setEventListeners(shape,'radius_changed','center_changed');
     });
 }
 
@@ -97,20 +85,28 @@ function drawSearchAreaOnMap(loc, r, color) {
         radius: radius,
         editable:true
     });
-
+    
     /*The shape can be moved or resized, added eventlisteners to manage this actions*/
-    search_area.addListener('radius_changed', function(e) {
-        let newRadius = search_area.getRadius();
+    setEventListeners(search_area,'radius_changed','center_changed');
+}
+
+//set event listeners for event1,event2 on element el
+function setEventListeners(el,event1,event2){
+    el.addListener(event1, function(e) {
+        let newRadius = el.getRadius();
         $('#radius').val(parseInt(newRadius/1000));
 
         //if the radius > 1000km i set to 1000km
-        if(newRadius > 1000000) search_area.setRadius(1000000);
+        if(newRadius > 1000000) el.setRadius(1000000);
     });
-    search_area.addListener('center_changed', function(e){
-        let newCenter = search_area.getCenter().toString().replace(/[\(\)]/g,'');
+
+    el.addListener(event2, function(e){
+        let newCenter = el.getCenter().toString().replace(/[\(\)]/g,'');
         $('#coordinates').val(newCenter);
     });
+
 }
+
 
 // Event associated on change of coordinates to draw the area
 $(document).on('input', '#coordinates', function () {
