@@ -45,10 +45,10 @@ function initAutocomplete() {
 
 function setFilters() {
     for(let field in searchObj) {
+        $(`#${field}Btn`).remove();
         let val = searchObj[field];
-        if (val && field != 'radius' && field != 'pdi') {
-            $(`#${field}Btn`).remove();
 
+        if (val && field != 'radius' && field != 'pdi') {
             let text = val;
             if (field == 'center') {
                 //Add parenthesis around the center field
@@ -85,33 +85,6 @@ function save() {
         coordinates_only: $('#coordinates-only').prop('checked')
     };
 
-
-    /*
-    if(searchObj.pdi != "") {
-        var request = {
-            query: searchObj.pdi,
-            fields: ["name", "geometry"],
-        };
-
-        service = new google.maps.places.PlacesService(map);
-        service.findPlaceFromQuery(request, (results, status) => {
-            if (status === google.maps.places.PlacesServiceStatus.OK) {
-                console.log(results[0]);
-                let lat = results[0].geometry.location.lat();
-                let lon = results[0].geometry.location.lng();
-                let center = lat + ',' + lon;
-
-                $(`#pdiBtn`).remove();
-                $('#componentView').prepend(`<button class="filter" id="pdiBtn" onclick="deleteFilter('pdi')">${results[0].name} &#10006;</button>`)
-                document.getElementById("pdi").value = results[0].name;
-                
-                $('#toTweets').click();
-                search(searchObj.keyword, center, 2); //Con un raggio così piccolo restituisce solo i tweet con al loro interno una città precisa di pubblicazione...
-            }
-        });
-    }
-    */
-        
     $('#toTweets').click();
     dispatch_search();    
 }
@@ -246,6 +219,16 @@ function stream_update(word) {
 
 // Search tweets containing a word and an optional location
 function search(word, user, center, radius, images_only, coordinates_only) {
+    //TODO: queste chiamate empty non funzionano se il pulsante e' premuto dal componente search
+    // perche' il componente tweets non e' ancora stato caricato, bisogna trovare un modo farle 
+    // eliminare appena il componente e' caricato ad esempio con router.push('search', onComplete)
+    // tuttavia non ho trovato un modo per accede al router da questo file, forse tutti i file js
+    // dovrebbero diventare moduli cosi' possiamo importare le robe?
+    $("#tweets-search").empty();
+    $("#results").empty();
+
+    $('body').append('<div id="loading"></div>');
+
     let query = {};
     if (word) {
         query['keyword']= word;
@@ -264,16 +247,12 @@ function search(word, user, center, radius, images_only, coordinates_only) {
         query['user'] = user;
     }
 
-    $('body').append('<div id="loading"></div>');
-
     $.ajax({
         method: "GET",
         url: "/search",
         data: query,
         success: (data) => {
             $('#loading').remove();
-            $("#tweets-search").empty();
-            $("#results").empty();
             if (data.length > 0) {
                 //Display the tweets
                 setTitleAndTweets(data.length + ' Search Tweets Results', data, word);
