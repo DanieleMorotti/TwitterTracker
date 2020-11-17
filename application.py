@@ -114,10 +114,12 @@ def get_tweet_text(tweet):
 
 @application.route('/search')
 def search():
+    NEEDED = TO_REQUIRE = 100
     word = request.args.get("keyword")
     user = request.args.get("user")
     location = request.args.get("location")
     images_only = request.args.get("images_only")
+    coordinates_only = request.args.get("coordinates_only")
     
     query = ""
     if word:
@@ -126,48 +128,56 @@ def search():
         query += "from:" + user + " "
     if images_only:
         query += "filter:images "
-
+    if coordinates_only:
+        TO_REQUIRE = 5000 
     print(query)
 
     list = []
-    # Ask for 100 tweets
-    for tweet in tweepy.Cursor(api.search, q=query, geocode=location, count=100, tweet_mode="extended", include_entities=True).items(100):
-        # Store city coordinates only if they are available in the tweet
-        city = coordinates = ""
-        if tweet.place:
-            city,coordinates = tweet.place.full_name,tweet.place.bounding_box.coordinates
-        
-        media = []
-        media_tweet = tweet
-        #If it's a retweet the media is actually in retweeted_status
-        if hasattr(tweet, "retweeted_status"):
-            media_tweet = tweet.retweeted_status
-
-        if hasattr(media_tweet, "extended_entities") and 'media' in media_tweet.extended_entities:
-            media = media_tweet.extended_entities["media"]
-        elif hasattr(media_tweet, "entities") and 'media' in media_tweet.entities:
-            media = media_tweet.entities["media"]
-
-        images = []
-        for m in media:
-            if m["type"] == "photo" or m["type"] == "animated_gif":
-                images.append(m["media_url"])
-        
-        list.append({
-            'id': tweet.id_str,
-            'text': get_tweet_text(tweet), 
-            'user':tweet.user.name, 
-            'username':tweet.user.screen_name,
-            'data':tweet.created_at.strftime('%m/%d/%Y'),
-            'geo_enabled':tweet.user.geo_enabled, 
-            'location': tweet.user.location,
-            'city':city, 
-            'coordinates':coordinates,
-            'images': images
-        })
+    get_tweets(NEEDED, TO_REQUIRE, location, coordinates_only, query, list)
     
     return Response(json.dumps(list, ensure_ascii=False, indent=2), status=200, mimetype="application/json")
    
+# Method to fullfill the list of tweets
+def get_tweets(NEEDED, TO_REQUIRE, location, coordinates_only, query, list):
+    # Ask for TO_REQUIRE tweets
+    for tweet in tweepy.Cursor(api.search, q=query, geocode=location, count=TO_REQUIRE, tweet_mode="extended", include_entities=True).items(TO_REQUIRE):
+        # Store city coordinates only if they are available in the tweet
+        city = coordinates = ""
+        if tweet.place:
+            coordinates = tweet.place.bounding_box.coordinates
+            city =  tweet.place.full_name
+        if((coordinates_only and coordinates) or not coordinates_only):
+            media = []
+            media_tweet = tweet
+            #If it's a retweet the media is actually in retweeted_status
+            if hasattr(tweet, "retweeted_status"):
+                media_tweet = tweet.retweeted_status
+
+            if hasattr(media_tweet, "extended_entities") and 'media' in media_tweet.extended_entities:
+                media = media_tweet.extended_entities["media"]
+            elif hasattr(media_tweet, "entities") and 'media' in media_tweet.entities:
+                media = media_tweet.entities["media"]
+
+            images = []
+            for m in media:
+                if m["type"] == "photo" or m["type"] == "animated_gif":
+                    images.append(m["media_url"])
+                
+            list.append({
+                'id': tweet.id_str,
+                'text': get_tweet_text(tweet), 
+                'user':tweet.user.name, 
+                'username':tweet.user.screen_name,
+                'data':tweet.created_at.strftime('%m/%d/%Y'),
+                'location': tweet.user.location,
+                'city':city, 
+                'coordinates':coordinates,
+                'images': images
+            })
+            print(len(list),'element grouped')
+            if len(list) >= NEEDED:
+                break
+        
 # Route for retrieving tweet collections info
 @application.route('/collections')
 def collections():

@@ -29,6 +29,17 @@ body {
     align-content: center;
 }
 
+#loading {
+    background: url('/static/img/loading.gif') no-repeat center;
+    background-size: contain;
+    position: relative;
+    margin: 0 auto;
+    height: 30vh;
+    width: 30vw;
+    z-index: 9999999;
+    transform: translateY(-200%);
+}
+
 #navbar button {
     background-color: transparent;
     border-style: none;
@@ -93,7 +104,10 @@ body {
 /*    border: 3px solid white;
     border-radius: 2px;*/
 }
-
+#map > div > div > div:nth-child(4) .gmnoprint{
+    left: 250px !important;
+    margin: 10px !important;
+}
 #map a{
     background-color: transparent !important;
     color: initial !important;

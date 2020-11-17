@@ -30,6 +30,10 @@ export default {
             <input type="checkbox" id="images-only">            
             <label for="images-only">Show only tweets containing images</label>
             <br>
+
+            <input type="checkbox" id="coordinates-only">            
+            <label for="coordinates-only">Show only geo-localized tweets </label>
+            <br>
             
             <button @click="save()">SEARCH</button>
         </div>

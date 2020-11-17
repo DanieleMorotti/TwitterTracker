@@ -5,7 +5,6 @@ let shape = null;
 //Function provided by Google to initialize the map associated to the div w/ id="map"
 function initMap() {
 
-    //TODO:serve questa variabile? var geocoder = new google.maps.Geocoder();
     map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: 41.885453, lng: 12.498221 },
         zoom: 5,

@@ -50,18 +50,21 @@ function setFilters() {
             $(`#${field}Btn`).remove();
 
             let text = val;
-            if(field == 'center') {
+            if (field == 'center') {
                 //Add parenthesis around the center field
                 text = '(' + text + ')';
 
                 //If we have a pdi we write that too
-                if(searchObj.pdi) {
+                if (searchObj.pdi) {
                     text += " " + searchObj.pdi;
                 }
-            } 
-            else if(field == 'images_only') {
+            }
+            else if (field == 'images_only') {
                 //Text for only images filter
                 text = "Containing images";
+            }
+            else if (field == 'coordinates_only') {
+                text = "Containing coordinates";
             }
             
             //Add a button to delete the filter in the tweets view
@@ -78,7 +81,8 @@ function save() {
         center: $('#coordinates').val().replace(/\s+/g, ''),
         radius: $('#radius').val(),
         pdi: $('#pdi').val(),
-        images_only: $('#images-only').prop('checked')
+        images_only: $('#images-only').prop('checked'),
+        coordinates_only: $('#coordinates-only').prop('checked')
     };
 
 
@@ -205,7 +209,7 @@ function displayTweets(data, word) {
     
         // Add the city and coordinates only if they are available in the tweet
         if(data[i].city || data[i].coordinates){
-            let cityAndCoord = `<p>Città: ${data[i].city} Coordinate: ${data[i].coordinates} </p>`;
+            let cityAndCoord = `<p>City: ${data[i].city}<br>Coordinates: ${data[i].coordinates} </p>`;
             $(cityAndCoord).insertBefore(div.find('button'));
         }
 
@@ -241,7 +245,7 @@ function stream_update(word) {
 }
 
 // Search tweets containing a word and an optional location
-function search(word, user, center, radius, images_only) {
+function search(word, user, center, radius, images_only, coordinates_only) {
     let query = {};
     if (word) {
         query['keyword']= word;
@@ -253,15 +257,21 @@ function search(word, user, center, radius, images_only) {
     if (images_only) {
         query['images_only'] = true;
     }
+    if (coordinates_only) {
+        query['coordinates_only'] = true;
+    }
     if (user) {
         query['user'] = user;
     }
-    
+
+    $('body').append('<div id="loading"></div>');
+
     $.ajax({
         method: "GET",
         url: "/search",
         data: query,
         success: (data) => {
+            $('#loading').remove();
             $("#tweets-search").empty();
             $("#results").empty();
             if (data.length > 0) {
@@ -272,7 +282,8 @@ function search(word, user, center, radius, images_only) {
                 $("#results").append('<p>No results for the specified query</p>');
             }
         },
-        error: (xhr, ajaxOptions, thrownError) => {
+        error: (xhr, ajaxOptions, thrownError) => { 
+            $('#loading').remove();
             console.log("search: " + xhr.status + ' - ' + thrownError);
         }
     });
@@ -285,6 +296,7 @@ function dispatch_search() {
     let center = searchObj.center;
     let radius = searchObj.radius;
     let images_only = searchObj.images_only;
+    let coordinates_only = searchObj.coordinates_only;
 
     if (center && !(/^\s?\-?\d+\.?\d*\,\s?\-?\d+\.?\d*\s?$/.test(center))) {
         alert('Le coordinate devono essere della forma xx.xxx, yy.yyy');
@@ -294,7 +306,7 @@ function dispatch_search() {
         if (streamingInterval) { 
             stream_stop(); 
         }
-        search(word, user, center, radius, images_only);
+        search(word, user, center, radius, images_only, coordinates_only);
     }
 }
 
