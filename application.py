@@ -115,12 +115,18 @@ def get_tweet_text(tweet):
 @application.route('/search')
 def search():
     word = request.args.get("keyword")
+    user = request.args.get("user")
     location = request.args.get("location")
     images_only = request.args.get("images_only")
     
-    query = word
+    query = ""
+    if word:
+        query += word + " "
+    if user:
+        query += "from:" + user + " "
     if images_only:
-        query += " filter:images"
+        query += "filter:images "
+
     print(query)
 
     list = []

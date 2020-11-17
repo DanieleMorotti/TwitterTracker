@@ -44,7 +44,7 @@ def store_tweets(name, data, filters):
         }
         path = get_tweets_path_from_id(id)
 
-        with open(path, "w") as f:
+        with open(path, "w", encoding='utf-8') as f:
             json.dump(info, f, ensure_ascii=False, indent=2)
         return True
     except Exception as e:
@@ -58,7 +58,7 @@ def get_stored_tweets_info():
     result = []
     for filename in os.listdir(tweets_dir):
         path = os.path.join(tweets_dir, filename)
-        with open(path) as f:
+        with open(path, encoding='utf-8') as f:
             info = json.load(f)
             result.append({
                 'id': info['id'],
@@ -71,7 +71,7 @@ def get_stored_tweets_info():
 def get_stored_tweet(id):
     path = get_tweets_path_from_id(id)
     try:
-        with open(path) as f:
+        with open(path, encoding='utf-8') as f:
             info = json.load(f)
             return info
     except Exception as e:
@@ -90,7 +90,7 @@ def update_tweets_name(id, name):
     path = get_tweets_path_from_id(id)
     try:
         info = {}
-        with open(path, "r+") as f:
+        with open(path, "r+", encoding='utf-8') as f:
             info = json.load(f)
             info["name"] = name
             f.seek(0)
