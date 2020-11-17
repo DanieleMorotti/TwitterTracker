@@ -54,7 +54,7 @@ img {
 }
 
 #navbar {
-    height: 110vh;
+    height: 100%;
     z-index: 3;
     top: 0;
     left: 0;
@@ -70,10 +70,22 @@ img {
     Non e' sicuramente il modo piu' intelligente di ottenere che l'area del componente sia affiancata alla navbar, ma funziona
 */
 #componentView {
-    position: absolute;
-    left: 60px;
+    margin-left: 5rem;
+    overflow-y: scroll;
+    height: 100vh;
 }
 
+#componentView::-webkit-scrollbar-track {
+    background: #212529; 
+}
+   
+#componentView::-webkit-scrollbar-thumb {
+    background: rgb(24 63 92); 
+    border-radius: 8px;
+}
+#componentView::-webkit-scrollbar {
+    width: 10px;
+}
 
 /* Map */
 #map {
