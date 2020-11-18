@@ -63,7 +63,7 @@ function initMap() {
 
             $('#coordinates').val(center);
             $('#radius').val(radius);
- 
+            $('#radiusValue').text(radius)
         }
 
         /*The shape can be moved or resized, added eventlisteners to manage this actions*/

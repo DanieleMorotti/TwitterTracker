@@ -38,7 +38,7 @@ export default {
     methods: {
         changeArea() {
             let center = $('#coordinates').val();
-            let radius = this.value;
+            let radius = $('#radiusValue').text();
             if (center && radius)
                 drawSearchAreaOnMap(center, radius, '#00FF00'); 
         }

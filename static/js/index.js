@@ -45,6 +45,7 @@ function initAutocomplete() {
 
 function setFilters() {
     for(let field in searchObj) {
+       
         let val = searchObj[field];
         if (val && field != 'radius' && field != 'pdi') {
             $(`#${field}Btn`).remove();
@@ -52,11 +53,11 @@ function setFilters() {
             let text = val;
             if(field == 'center') {
                 //Add parenthesis around the center field
-                text = '(' + text + ')';
+                text = '(' + parseFloat(text.split(',')[0]).toFixed(2) + ', ' + parseFloat(text.split(',')[1]).toFixed(2) + ')';
 
                 //If we have a pdi we write that too
                 if(searchObj.pdi) {
-                    text += " " + searchObj.pdi;
+                    text = searchObj.pdi.split(',')[0];
                 }
             } 
             else if(field == 'images_only') {
@@ -142,7 +143,6 @@ function streamStart() {
             data: {
                 word: keyword,
             },
-            
             success: (data) => {
                 $('#tweets').empty();
                 
