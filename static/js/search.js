@@ -47,7 +47,7 @@ export default {
                 drawSearchAreaOnMap(center, radius, '#00FF00'); 
         }
     },
-    activated() {
+    mounted() {
         initMap();
         if(!autocompleteInitialized) {
             initAutocomplete();
