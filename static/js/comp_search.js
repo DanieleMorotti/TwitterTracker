@@ -25,24 +25,26 @@ export default {
     template: `
     <div id="filterComp">
         <div id="inputFields">
-            <label for="keyWord">key-word: </label>
+            <label for="keyWord" class="text">Key-word </label>
             <input type="text" name="keyWord" id="keyWord" />
             <br> 
-            <label for="user">user: </label>
+            <label for="user" class="text">User </label>
             <input type="text" name="user" id="user" />
             <br>
 
-            <label for="pdi">point of interest: </label>
+            <label for="pdi" class="text">Point of interest </label>
             <input type="text" name="pdi" id="pdi" placeholder="e.g. Università di Bologna" size="22" /> <br>
             
-            <div id="map"></div><br>
-            <label for="coordinates">coordinates (lat, long): </label>
+            <label for="coordinates" class="text">Coordinates (lat, long) </label>
             <input type="text" name="coordinates" id="coordinates" placeholder="e.g. 45.4773,9.1815" size="22" @change="updateCircleOnMap()" @keyup.enter="updateCircleOnMap()"/> <br>
-            <label for="radius">radius: </label>
+            
+            <div id="map"></div><br>
+
+            <label for="radius" class= "text">Radius </label>
             <input style="display:inline" id="radius" type="range" min="10" max="1000" step="10"  v-model="value" name="radius" @change="updateCircleOnMap()"/>
             <label style="display:inline"><span v-text="value" id="radiusValue"></span> km</label>
             <br>
-            
+
             <input type="checkbox" id="images-only">            
             <label for="images-only">Show only tweets containing images</label>
             <br>
@@ -50,8 +52,7 @@ export default {
             <input type="checkbox" id="coordinates-only">            
             <label for="coordinates-only">Show only geo-localized tweets </label>
             <br>
-            
-            <button @click="onClickSearch()">SEARCH</button>
+            <button id="searchBtn" @click="onClickSearch()">SEARCH</button>
         </div>
     </div>
     `,

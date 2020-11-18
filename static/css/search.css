@@ -1,14 +1,45 @@
 
+#inputFields {
+    float: left;
+    margin-top: 3rem;
+}
+
+
 #inputFields > * {
-    margin: 1.5rem;
+    margin-left: 3rem;
+}
+
+#inputFields input[type="text"]{
+    border-radius: 5px;
+    background-color: #062837;
+    border-style: none;
+    border: 2px solid #2b6079;
+    margin-bottom: 1rem;
+    width: 30vw;
+    color: white
+}
+
+#inputFields input[type="text"]::placeholder {
+    color: #6090a8;
 }
 
 #rayValue {
     color: white;
 }
 
-#inputFields > label{
-    color: white;
+
+#inputFields > label {
+    color: #98a0a3;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+}
+
+#inputFields > label.text{
+    display: block;
+}
+
+#inputFields label[for='coordinates-only'], #inputFields label[for='images-only'] {
+    margin-left: 1rem;
 }
 
 #inputFields > input[type="range"] {
@@ -19,7 +50,6 @@
     transform: scale(1.5);
 }
 
-#tweets-search {
-    max-height: 90vh;
-    overflow-y: scroll;
+#searchBtn {
+    margin: 3rem;
 }
