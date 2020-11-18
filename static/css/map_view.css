@@ -11,3 +11,15 @@ h3{
     height: 70vh;
     width: 90vw;
 }
+#data-view-map > div:first-child {
+    margin: 0 auto !important;
+    /*transform: translateY(-150%) !important;*/
+}
+#map_view_container {
+    position: absolute;
+    margin: 0 auto;
+    left: 5rem;
+    right: 0;
+    top: 20rem;
+    width: 550px;
+}

@@ -114,6 +114,9 @@ def get_tweet_text(tweet):
 
 @application.route('/search')
 def search():
+    # NEEDED represents the number of tweet to return inside the response
+    # TO_REQUIRE represents the number of tweets to analyze, due to small amount of tweets with coordinates,
+    # if such filter is set, 10000 tweets are required from the API
     NEEDED = TO_REQUIRE = 100
     word = request.args.get("keyword")
     user = request.args.get("user")
@@ -129,7 +132,7 @@ def search():
     if images_only:
         query += "filter:images "
     if coordinates_only:
-        TO_REQUIRE = 5000 
+        TO_REQUIRE = 10000 
     print(query)
 
     list = []
