@@ -49,39 +49,41 @@ export default {
             lastTweetsList.forEach(tweet => {
                 //For each tweet we pick the middle point of
                 //the bounding box and make a marker to display on the map
-                let yCenter = (Number(tweet.coordinates[0][1][0]) + Number(tweet.coordinates[0][3][0])) / 2;
-                let xCenter = (Number(tweet.coordinates[0][1][1]) + Number(tweet.coordinates[0][3][1])) / 2;
-                let LatLng = { lat: xCenter, lng: yCenter };
+                if (tweet.coordinates) {
+                    let yCenter = (Number(tweet.coordinates[0][1][0]) + Number(tweet.coordinates[0][3][0])) / 2;
+                    let xCenter = (Number(tweet.coordinates[0][1][1]) + Number(tweet.coordinates[0][3][1])) / 2;
+                    let LatLng = { lat: xCenter, lng: yCenter };
 
-                //Validation of the defined point
-                this.validatePoint(LatLng, already_used_coordinates);
+                    //Validation of the defined point
+                    this.validatePoint(LatLng, already_used_coordinates);
 
-                let marker = new google.maps.Marker({
-                    position: LatLng,
-                    map
-                });
-                //Event to invoke expandTweet when a click occur on the marker
-                marker.addListener("click", () => { this.expandTweet(tweet.id); });
+                    let marker = new google.maps.Marker({
+                        position: LatLng,
+                        map
+                    });
+                    //Event to invoke expandTweet when a click occur on the marker
+                    marker.addListener("click", () => { this.expandTweet(tweet.id); });
 
-                //If there is at least one image we use that one as the marker 
-                if (tweet.images.length > 0) {
-                    let url = tweet.images[0];
-                    let img = new Image();
-                    img.src = url;
-                    //We create an Image object and wait for it to load
-                    //after that the width to be used is calculated on a height of 50px
-                    img.onload = function () {
-                        let height = img.height;
-                        let width = img.width;
-                        let new_width = (50 * width) / height;
+                    //If there is at least one image we use that one as the marker 
+                    if (tweet.images.length > 0) {
+                        let url = tweet.images[0];
+                        let img = new Image();
+                        img.src = url;
+                        //We create an Image object and wait for it to load
+                        //after that the width to be used is calculated on a height of 50px
+                        img.onload = function () {
+                            let height = img.height;
+                            let width = img.width;
+                            let new_width = (50 * width) / height;
 
-                        let image = {
-                            url: url,
-                            origin: new google.maps.Point(0, 0),
-                            anchor: new google.maps.Point(new_width/2, 20),
-                            scaledSize: new google.maps.Size(new_width, 50)
-                        };
-                        marker.setIcon(image);
+                            let image = {
+                                url: url,
+                                origin: new google.maps.Point(0, 0),
+                                anchor: new google.maps.Point(new_width / 2, 20),
+                                scaledSize: new google.maps.Size(new_width, 50)
+                            };
+                            marker.setIcon(image);
+                        }
                     }
                 }
             });

@@ -172,7 +172,6 @@ function displayTweets(data, word) {
         if(word) {
             text = text.replace(reg, '<mark>$&</mark>');
         }
-
         let div = $(`<div class="tweet">
                         <p class="date">${data[i].data}</p>
                         <h5>${data[i].user}</h5>
@@ -182,7 +181,10 @@ function displayTweets(data, word) {
     
         // Add the city and coordinates only if they are available in the tweet
         if(data[i].city || data[i].coordinates){
-            let cityAndCoord = `<p>City: ${data[i].city}<br>Coordinates: ${data[i].coordinates} </p>`;
+            let yCenter = (Number(data[i].coordinates[0][1][0]) + Number(data[i].coordinates[0][3][0])) / 2;
+            let xCenter = (Number(data[i].coordinates[0][1][1]) + Number(data[i].coordinates[0][3][1])) / 2;
+
+            let cityAndCoord = `<p>City: ${data[i].city}<br>Coordinates: lat ${xCenter}, lng ${yCenter} </p>`;
             $(cityAndCoord).insertBefore(div.find('button'));
         }
 

@@ -25,10 +25,10 @@ function initMap() {
             ],
         },
         circleOptions: {
-            strokeColor: "green",
+            strokeColor: "red",
             strokeOpacity: 0.8,
             strokeWeight: 2,
-            fillColor: "green",
+            fillColor: "red",
             fillOpacity: 0.35,
             editable:true,
             clickable: false,
@@ -62,7 +62,7 @@ function initMap() {
 
             $('#coordinates').val(center);
             $('#radius').val(radius);
- 
+            $('#radiusValue').text(radius,'km');
         }
 
         /*The shape can be moved or resized, added eventlisteners to manage this actions*/
@@ -91,8 +91,7 @@ function drawSearchAreaOnMap(loc, r, color) {
         map,
         center: center,
         radius: radius,
-        editable:true,
-        clickable: false
+        editable:true
     });
     
     /*The shape can be moved or resized, added eventlisteners to manage this actions*/
@@ -102,7 +101,7 @@ function drawSearchAreaOnMap(loc, r, color) {
 //set event listeners for event1,event2 on element el
 function setEventListeners(el,event1,event2){
 
-    el.addListener(event1, (e)=> {
+    el.addListener(event1, function(e) {
         let newRadius = el.getRadius();
         //if the radius > max ray in m i set to the max in m
         if(newRadius > maxRadius*1000){
@@ -116,7 +115,7 @@ function setEventListeners(el,event1,event2){
         $('#radius').val(newRadius);
     });
 
-    el.addListener(event2, (e)=>{
+    el.addListener(event2, function(e){
         let newCenter = el.getCenter().toString().replace(/[\(\)]/g,'');
         $('#coordinates').val(newCenter);
     });
