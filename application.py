@@ -114,10 +114,12 @@ def get_tweet_text(tweet):
 
 @application.route('/search')
 def search():
+    count = 100
     word = request.args.get("keyword")
     user = request.args.get("user")
     location = request.args.get("location")
     images_only = request.args.get("images_only")
+    coordinates_only = request.args.get("coordinates_only")
     
     query = ""
     if word:
@@ -126,17 +128,31 @@ def search():
         query += "from:" + user + " "
     if images_only:
         query += "filter:images "
-
     print(query)
 
-    list = []
-    # Ask for 100 tweets
-    for tweet in tweepy.Cursor(api.search, q=query, geocode=location, count=100, tweet_mode="extended", include_entities=True).items(100):
+    tweets = get_tweets(query, location, coordinates_only, count)
+    
+    return Response(json.dumps(tweets, ensure_ascii=False, indent=2), status=200, mimetype="application/json")
+   
+# Method to fullfill the list of tweets
+def get_tweets(query, location, coordinates_only, count):
+    result = []
+    max_count = count 
+    if coordinates_only:
+        max_count = 1000
+
+    # Ask for max_count tweets
+    for tweet in tweepy.Cursor(api.search, q=query, geocode=location, count=max_count, tweet_mode="extended", include_entities=True).items(max_count):
         # Store city coordinates only if they are available in the tweet
         city = coordinates = ""
         if tweet.place:
-            city,coordinates = tweet.place.full_name,tweet.place.bounding_box.coordinates
+            coordinates = tweet.place.bounding_box.coordinates
+            city =  tweet.place.full_name
         
+        # skip the tweet if we need coordinates and they are not available
+        if coordinates_only and not coordinates:
+            continue
+
         media = []
         media_tweet = tweet
         #If it's a retweet the media is actually in retweeted_status
@@ -152,22 +168,24 @@ def search():
         for m in media:
             if m["type"] == "photo" or m["type"] == "animated_gif":
                 images.append(m["media_url"])
-        
-        list.append({
+            
+        result.append({
             'id': tweet.id_str,
             'text': get_tweet_text(tweet), 
             'user':tweet.user.name, 
             'username':tweet.user.screen_name,
             'data':tweet.created_at.strftime('%m/%d/%Y'),
-            'geo_enabled':tweet.user.geo_enabled, 
             'location': tweet.user.location,
             'city':city, 
             'coordinates':coordinates,
             'images': images
         })
-    
-    return Response(json.dumps(list, ensure_ascii=False, indent=2), status=200, mimetype="application/json")
-   
+        #stop as soon as we reach the count we needed
+        if len(result) >= count:
+            break
+
+    return result
+        
 # Route for retrieving tweet collections info
 @application.route('/collections')
 def collections():

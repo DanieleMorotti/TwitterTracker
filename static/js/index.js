@@ -45,13 +45,12 @@ function initAutocomplete() {
 
 function setFilters() {
     for(let field in searchObj) {
-       
+        $(`#${field}Btn`).remove();
         let val = searchObj[field];
-        if (val && field != 'radius' && field != 'pdi') {
-            $(`#${field}Btn`).remove();
 
+        if (val && field != 'radius' && field != 'pdi') {
             let text = val;
-            if(field == 'center') {
+            if (field == 'center') {
                 //Add parenthesis around the center field
                 text = '(' + parseFloat(text.split(',')[0]).toFixed(2) + ', ' + parseFloat(text.split(',')[1]).toFixed(2) + ')';
 
@@ -59,10 +58,13 @@ function setFilters() {
                 if(searchObj.pdi) {
                     text = searchObj.pdi.split(',')[0];
                 }
-            } 
-            else if(field == 'images_only') {
+            }
+            else if (field == 'images_only') {
                 //Text for only images filter
                 text = "Containing images";
+            }
+            else if (field == 'coordinates_only') {
+                text = "Containing coordinates";
             }
             
             //Add a button to delete the filter in the tweets view
@@ -79,36 +81,10 @@ function save() {
         center: $('#coordinates').val().replace(/\s+/g, ''),
         radius: $('#radius').val(),
         pdi: $('#pdi').val(),
-        images_only: $('#images-only').prop('checked')
+        images_only: $('#images-only').prop('checked'),
+        coordinates_only: $('#coordinates-only').prop('checked')
     };
 
-
-    /*
-    if(searchObj.pdi != "") {
-        var request = {
-            query: searchObj.pdi,
-            fields: ["name", "geometry"],
-        };
-
-        service = new google.maps.places.PlacesService(map);
-        service.findPlaceFromQuery(request, (results, status) => {
-            if (status === google.maps.places.PlacesServiceStatus.OK) {
-                console.log(results[0]);
-                let lat = results[0].geometry.location.lat();
-                let lon = results[0].geometry.location.lng();
-                let center = lat + ',' + lon;
-
-                $(`#pdiBtn`).remove();
-                $('#componentView').prepend(`<button class="filter" id="pdiBtn" onclick="deleteFilter('pdi')">${results[0].name} &#10006;</button>`)
-                document.getElementById("pdi").value = results[0].name;
-                
-                $('#toTweets').click();
-                search(searchObj.keyword, center, 2); //Con un raggio così piccolo restituisce solo i tweet con al loro interno una città precisa di pubblicazione...
-            }
-        });
-    }
-    */
-        
     $('#toTweets').click();
     dispatch_search();    
 }
@@ -205,7 +181,7 @@ function displayTweets(data, word) {
     
         // Add the city and coordinates only if they are available in the tweet
         if(data[i].city || data[i].coordinates){
-            let cityAndCoord = `<p>Città: ${data[i].city} Coordinate: ${data[i].coordinates} </p>`;
+            let cityAndCoord = `<p>City: ${data[i].city}<br>Coordinates: ${data[i].coordinates} </p>`;
             $(cityAndCoord).insertBefore(div.find('button'));
         }
 
@@ -241,7 +217,17 @@ function stream_update(word) {
 }
 
 // Search tweets containing a word and an optional location
-function search(word, user, center, radius, images_only) {
+function search(word, user, center, radius, images_only, coordinates_only) {
+    //TODO: queste chiamate empty non funzionano se il pulsante e' premuto dal componente search
+    // perche' il componente tweets non e' ancora stato caricato, bisogna trovare un modo farle 
+    // eliminare appena il componente e' caricato ad esempio con router.push('search', onComplete)
+    // tuttavia non ho trovato un modo per accede al router da questo file, forse tutti i file js
+    // dovrebbero diventare moduli cosi' possiamo importare le robe?
+    $("#tweets-search").empty();
+    $("#results").empty();
+
+    $('body').append('<div id="loading"></div>');
+
     let query = {};
     if (word) {
         query['keyword']= word;
@@ -253,17 +239,19 @@ function search(word, user, center, radius, images_only) {
     if (images_only) {
         query['images_only'] = true;
     }
+    if (coordinates_only) {
+        query['coordinates_only'] = true;
+    }
     if (user) {
         query['user'] = user;
     }
-    
+
     $.ajax({
         method: "GET",
         url: "/search",
         data: query,
         success: (data) => {
-            $("#tweets-search").empty();
-            $("#results").empty();
+            $('#loading').remove();
             if (data.length > 0) {
                 //Display the tweets
                 setTitleAndTweets(data.length + ' Search Tweets Results', data, word);
@@ -272,7 +260,8 @@ function search(word, user, center, radius, images_only) {
                 $("#results").append('<p>No results for the specified query</p>');
             }
         },
-        error: (xhr, ajaxOptions, thrownError) => {
+        error: (xhr, ajaxOptions, thrownError) => { 
+            $('#loading').remove();
             console.log("search: " + xhr.status + ' - ' + thrownError);
         }
     });
@@ -285,6 +274,7 @@ function dispatch_search() {
     let center = searchObj.center;
     let radius = searchObj.radius;
     let images_only = searchObj.images_only;
+    let coordinates_only = searchObj.coordinates_only;
 
     if (center && !(/^\s?\-?\d+\.?\d*\,\s?\-?\d+\.?\d*\s?$/.test(center))) {
         alert('Le coordinate devono essere della forma xx.xxx, yy.yyy');
@@ -294,7 +284,7 @@ function dispatch_search() {
         if (streamingInterval) { 
             stream_stop(); 
         }
-        search(word, user, center, radius, images_only);
+        search(word, user, center, radius, images_only, coordinates_only);
     }
 }
 

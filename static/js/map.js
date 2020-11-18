@@ -8,7 +8,6 @@ let maxRadius = null;
 function initMap() {
     maxRadius = $('#radius').prop('max');
 
-    //TODO:serve questa variabile? var geocoder = new google.maps.Geocoder();
     map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: 41.885453, lng: 12.498221 },
         zoom: 5,
@@ -26,10 +25,10 @@ function initMap() {
             ],
         },
         circleOptions: {
-            strokeColor: "red",
+            strokeColor: "green",
             strokeOpacity: 0.8,
             strokeWeight: 2,
-            fillColor: "red",
+            fillColor: "green",
             fillOpacity: 0.35,
             editable:true,
             clickable: false,
@@ -92,7 +91,8 @@ function drawSearchAreaOnMap(loc, r, color) {
         map,
         center: center,
         radius: radius,
-        editable:true
+        editable:true,
+        clickable: false
     });
     
     /*The shape can be moved or resized, added eventlisteners to manage this actions*/
@@ -102,7 +102,7 @@ function drawSearchAreaOnMap(loc, r, color) {
 //set event listeners for event1,event2 on element el
 function setEventListeners(el,event1,event2){
 
-    el.addListener(event1, function(e) {
+    el.addListener(event1, (e)=> {
         let newRadius = el.getRadius();
         //if the radius > max ray in m i set to the max in m
         if(newRadius > maxRadius*1000){
@@ -116,7 +116,7 @@ function setEventListeners(el,event1,event2){
         $('#radius').val(newRadius);
     });
 
-    el.addListener(event2, function(e){
+    el.addListener(event2, (e)=>{
         let newCenter = el.getCenter().toString().replace(/[\(\)]/g,'');
         $('#coordinates').val(newCenter);
     });
