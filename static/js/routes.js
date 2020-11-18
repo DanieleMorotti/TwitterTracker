@@ -1,15 +1,15 @@
 
-import searchComp from '/static/js/search.js'
-import tweetComp from '/static/js/tweet.js'
-import mapView from '/static/js/map_view.js'
-import collectionsComp from '/static/js/collections.js'
+import searchComp from '/static/js/comp_search.js'
+import tweetComp from '/static/js/comp_tweets.js'
+import mapComp from '/static/js/comp_map.js'
+import collectionsComp from '/static/js/comp_collections.js'
 
-const router = new VueRouter({
+export const router = new VueRouter({
     routes: [
-      {path: '/search', component: searchComp},
-      {path: '/tweets', component: tweetComp},
-      {path: '/map_view', component: mapView},
-      {path: '/collections', component: collectionsComp},
+      {path: '/search',       component: searchComp     },
+      {path: '/tweets',       component: tweetComp      },
+      {path: '/map',          component: mapComp        },
+      {path: '/collections',  component: collectionsComp},
     ],
   })
 
@@ -19,10 +19,10 @@ router.beforeEach((to, from, next) => {
       $('#stylesheetComp').attr('href','/static/css/search.css');
     }
     else if(to.path === '/tweets') {
-      $('#stylesheetComp').attr('href','/static/css/tweet.css');
+      $('#stylesheetComp').attr('href','/static/css/tweets.css');
     }
-    else if (to.path === '/map_view') {
-      $('#stylesheetComp').attr('href','/static/css/map_view.css');
+    else if (to.path === '/map') {
+      $('#stylesheetComp').attr('href','/static/css/map.css');
     }
     else if (to.path === '/collections') {
       $('#stylesheetComp').attr('href','/static/css/collections.css');

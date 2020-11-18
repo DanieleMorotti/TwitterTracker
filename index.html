@@ -26,11 +26,10 @@
 	<!-- Vue -->
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
 	<script src="https://npmcdn.com/vue-router/dist/vue-router.js"></script>
-	<script type="module" src="/static/js/routes.js"></script> 
 
 	<!--Internal dependencies-->
-	<script src="/static/js/index.js"></script>
-	<script src="/static/js/map.js"></script>
+	<script type="module" src="/static/js/routes.js"></script>
+	
 	<link rel="stylesheet" href="/static/css/index.css">
 	<link rel="stylesheet" id="stylesheetComp" href="/static/css/search.css">
 
@@ -50,7 +49,7 @@
 					</router-link>
 				</li>
 				<li class="nav-item">
-					<router-link id="toMap" tag="button" to="/map_view" >
+					<router-link id="toMap" tag="button" to="/map" >
 						<i class="icon fas fa-map-marker-alt"></i>
 					</router-link>			
 				</li>
@@ -80,37 +79,7 @@
 			</div>
 			
 		</div>
-<!--
-		<div class="filter-bar">
-            <ul class="nav nav-tabs">
-                <li class="filter-tab active"> <a data-toggle="tab" href="#nav-stream">Stream</a> </li>
-                <li class="filter-tab"> <a data-toggle="tab" href="#nav-search">Search</a> </li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane active" id="nav-stream">
-                    <div id="stream-div">
-                        <label for="stream">Start stream by word: </label>
-                        <input type="text" name="stream" id="stream" onkeyup="function press(event) {if (event.keyCode === 13) stream_start()}; press(event)"/>
-                        <button onclick="stream_start()">Start</button>
-                        <button onclick="stream_stop()">Stop</button>
-                    </div>
-                </div>
-                <div class="tab-pane" id="nav-search">
-					<div id="search-div">
-						<label for="stream">Search this word: </label>
-						<input type="text" name="search" id="search" onkeyup="function press(event) {if (event.keyCode === 13) dispatch_search()}; press(event)" />
-						<label for="stream">In this coordinates (lat, long, radius): </label>
-						<input type="text" name="geo_search_coord" id="coordinates" placeholder="e.g. 45.4773,9.1815,1000km" size="22" />
-						<button onclick="dispatch_search()">Search</button>
-						<div id="map"></div>
-					</div>
-                </div>
-            </div>
-		</div>
-        
-		<div id="tweets-search">
-		</div>
-	-->
+
 		<!-- modal for displaying tweets -->
 		<div class="modal fade" id="tweetModal" role="dialog">
 			<div class="modal-dialog">

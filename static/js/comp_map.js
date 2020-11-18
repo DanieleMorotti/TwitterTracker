@@ -1,4 +1,7 @@
 
+import {searchObj} from './search.js'
+import tweetComp, {lastTweetsList} from './comp_tweets.js'
+
 export default {
     name: 'map_view',
     template: `
@@ -13,9 +16,12 @@ export default {
         expandTweet(id) {
             lastTweetsList.forEach(tweet => {
                 if (tweet.id == id) {
-                    //Work-around to get modal window benefits by clicking a temporary button
                     let url = "https://twitter.com/" + tweet.username + "/status/" + id;
-                    $('#map_view_container').append(`<button onclick=show("${url}") id="modal-show-btn" data-toggle="modal" data-target="#tweetModal" style="display:none;"></button>`);
+                    
+                    //Work-around to get modal window benefits by clicking a temporary button
+                    let button = $(`<button id="modal-show-btn" data-toggle="modal" data-target="#tweetModal" style="display:none;"></button>`);
+                    button.on("click", () => tweetComp.methods.showTweetInModal(url));
+                    $('#map_view_container').append(button);
                     $('#modal-show-btn').click();
                     $('#modal-show-btn').remove();
                 }
