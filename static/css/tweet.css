@@ -3,8 +3,7 @@
 #tweets-search {
     border-radius: 8px;
     margin: 3rem;
-    max-height: 90vh;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 .bd-white {
