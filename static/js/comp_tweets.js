@@ -132,7 +132,6 @@ export default {
             //Make a copy of the search object at the time of search, so that we can use it when we save the collection
             lastTweetsSearchObj = JSON.parse(JSON.stringify(searchObj));
             this.displayTweets(data, word);
-            this.setFilters();
         }
 
     }

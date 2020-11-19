@@ -72,7 +72,10 @@ export default {
             let success = dispatch_search();
             if(success) {
                 this.$router.push('tweets', () => {
-                    setTimeout(() => tweetsComp.methods.clearTitleAndTweets(), 0);
+                    setTimeout(() => {
+                        tweetsComp.methods.setFilters();
+                        tweetsComp.methods.clearTitleAndTweets()
+                    }, 0);
                 });
             }
         },

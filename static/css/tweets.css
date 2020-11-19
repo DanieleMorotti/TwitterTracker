@@ -1,9 +1,12 @@
 /* Tweet */
-
 #tweets-search {
     border-radius: 8px;
     margin: 3rem;
+
     overflow-y: scroll;
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
 .bd-white {
@@ -58,12 +61,6 @@
 /* Hide scrollbar for Chrome, Safari and Opera */
 #tweets-search::-webkit-scrollbar {
   display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-#tweets-search {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
 }
 
 #saveBtn {
