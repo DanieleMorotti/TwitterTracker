@@ -26,17 +26,17 @@ export default {
     <div id="filterComp">
         <div id="inputFields">
             <label for="keyWord" class="text">Key-word </label>
-            <input type="text" name="keyWord" id="keyWord" />
+            <input autocomplete="off" type="text" name="keyWord" id="keyWord" />
             <br> 
             <label for="user" class="text">User </label>
-            <input type="text" name="user" id="user" />
+            <input autocomplete="off" type="text" name="user" id="user" />
             <br>
 
             <label for="pdi" class="text">Point of interest </label>
-            <input type="text" name="pdi" id="pdi" placeholder="e.g. Università di Bologna" size="22" /> <br>
+            <input autocomplete="off" type="text" name="pdi" id="pdi" placeholder="e.g. Università di Bologna" size="22" /> <br>
             
             <label for="coordinates" class="text">Coordinates (lat, long) </label>
-            <input type="text" name="coordinates" id="coordinates" placeholder="e.g. 45.4773,9.1815" size="22" @change="updateCircleOnMap()" @keyup.enter="updateCircleOnMap()"/> <br>
+            <input autocomplete="off" type="text" name="coordinates" id="coordinates" placeholder="e.g. 45.4773,9.1815" size="22" @change="updateCircleOnMap()" @keyup.enter="updateCircleOnMap()"/> <br>
             
             <div id="map"></div><br>
 
