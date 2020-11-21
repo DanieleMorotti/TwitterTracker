@@ -2,7 +2,7 @@ import { setSearchObj, dispatch_search } from "./search.js";
 import tweetsComp from './comp_tweets.js';
 
 // map used to draw the search area
-var map = null;
+export var map = null;
 // current search area on the map
 var search_area = null;
 // saving the last shape i drew, so when I draw a new shape I remove the previous one
@@ -79,7 +79,9 @@ export default {
                 });
             }
         },
-
+        clearPDI() {
+            $('#pdi').val('');
+        },
         // Initalize the map used to draw the search area
         initMap() {
             map = new google.maps.Map(document.getElementById("map"), {
@@ -222,6 +224,8 @@ export default {
 
             if (radius && !isNaN(lat) && !isNaN(lng))
                 this.drawCircleOnMap(lat, lng, radius);
+            //Still have to test if this statement makes problem, for now, if coordinates changes the PDI is cleared
+            this.clearPDI();
         },
 
         updateCenter(lat, lng) {
@@ -243,7 +247,7 @@ export default {
             el.addListener(event1, function(e) {
                 let newRadius = el.getRadius();
                 let maxRadius = $('#radius').prop('max');
-                //if the radius > max ray in m i set to the max in m
+                //if the radius > max radius in m i set to the max in m
                 if(newRadius > maxRadius*1000){
                     el.setRadius(maxRadius*1000);
                     newRadius = maxRadius;

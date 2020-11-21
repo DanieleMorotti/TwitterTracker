@@ -27,7 +27,6 @@
     color: white;
 }
 
-
 #inputFields > label {
     color: #98a0a3;
     margin-bottom: 0.5rem;
@@ -52,4 +51,8 @@
 
 #searchBtn {
     margin: 3rem;
+}
+
+.error_msg {
+    color: #efff00;
 }

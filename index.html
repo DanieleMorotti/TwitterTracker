@@ -33,6 +33,12 @@
 	<link rel="stylesheet" href="/static/css/index.css">
 	<link rel="stylesheet" id="stylesheetComp" href="/static/css/search.css">
 
+	<!--Tooltips enabling-->
+	<script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+	</script>
 </head>
 	<body>
 		
@@ -53,13 +59,14 @@
 						<i class="icon fas fa-map-marker-alt"></i>
 					</router-link>			
 				</li>
-				<li class="nav-item">
-					<router-link id="toCloud" tag="button" to="/cloud" >
+				<!--TO_REMOVE: data-toggle, data-placement, title, disabled, style and the <script> tag in <head>-->
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Work in Progress">
+					<router-link disabled style="pointer-events:none;" id="toCloud" tag="button" to="/cloud">
 						<i class="icon fas fa-cloud"></i>
 					</router-link>
 				</li>
-				<li class="nav-item">
-					<router-link id="toCharts" tag="button" to="/charts" >
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Work in Progress">
+					<router-link disabled style="pointer-events:none;" id="toCharts" tag="button" to="/charts" >
 						<i class="icon fas fa-chart-pie"></i>
 					</router-link>
 				</li>
