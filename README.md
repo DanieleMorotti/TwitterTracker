@@ -44,3 +44,21 @@ implementarla:
 Twitter API - tweepy: https://www.tweepy.org/
 
 Server-Side Routing - flask: https://flask.palletsprojects.com/en/1.1.x/
+
+## Test
+
+I test per le funzionalità server side sono in `tests/python`.
+Per eseguire i test e generare le informazioni di code coverage occorre installare pytest e coverage:
+
+```
+pip install pytest coverage
+```
+
+Per eseguire i test e generare il report di code coverage per SonarQube eseguire i comandi:
+
+```
+coverage run -m pytest tests/python
+coverage xml -i
+```
+
+Il report è generato nel file ```coverage.xml```

@@ -19,5 +19,10 @@ sonar-scanner-4.5.0.2216-windows
 .scannerwork
 sonar-project.properties
 
+# Test files
+.coverage
+.pytest_cache/
+coverage.xml
+
 # Others
 env.sh
