@@ -60,8 +60,9 @@ export function dispatch_search() {
 
 // Search tweets containing a word and an optional location
 function search(word, user, center, radius, images_only, coordinates_only) {
-    $('body').append('<div id="loading"></div>');
-
+    if (!$('#loading').length) {
+        $('body').append('<div id="loading"></div>');
+    }
     let query = {};
     if (word) {
         query['keyword']= word;
