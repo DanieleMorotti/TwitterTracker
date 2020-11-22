@@ -15,7 +15,8 @@ else:
         match = regex.search(f)
         if match.groups:
             val = int(match.group(0))
-            max_id = max(max_id, val)
+            if val < 1000:
+                max_id = max(max_id, val)
     next_tweets_id = max_id + 1
 
 def get_next_id():
