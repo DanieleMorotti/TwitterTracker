@@ -91,3 +91,7 @@ export function saveCollection(tweets, filters)
         }
     });
 }
+
+export function example() {
+    return true;
+}

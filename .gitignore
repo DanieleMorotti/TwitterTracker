@@ -22,7 +22,11 @@ sonar-project.properties
 # Test files
 .coverage
 .pytest_cache/
-coverage.xml
+coverage/
+
+# Node
+node_modules/
 
 # Others
 env.sh
+run_tests.sh

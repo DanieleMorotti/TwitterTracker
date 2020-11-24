@@ -47,6 +47,8 @@ Server-Side Routing - flask: https://flask.palletsprojects.com/en/1.1.x/
 
 ## Test
 
+#### Python
+
 I test per le funzionalità server side sono in `tests/python`.
 Per eseguire i test e generare le informazioni di code coverage occorre installare pytest e coverage:
 
@@ -58,7 +60,22 @@ Per eseguire i test e generare il report di code coverage per SonarQube eseguire
 
 ```
 coverage run -m pytest tests/python
-coverage xml -i
+coverage xml -i -o coverage/python/coverage.xml
 ```
 
-Il report è generato nel file ```coverage.xml```
+Il report è generato nel file ```coverage/python/coverage.xml```
+
+#### Javascript
+
+I test per le funzionalità client side sono in `tests/js`.
+Per eseguire i test e generare le informazioni di code coverage occorre installare i pacchetti necessari con npm:
+```
+npm install
+```
+
+Per eseguire i test e generare il report di code coverage per SonarQube eseguire il comando:
+```
+npm run test
+```
+
+Il report è generato nel file ```coverage/js/lconv.info```

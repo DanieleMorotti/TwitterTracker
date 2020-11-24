@@ -1,0 +1,30 @@
+{
+  "name": "fraydrum",
+  "version": "1.0.0",
+  "description": "Fraydrum è un Twitter tracker utile alla collezione di tweet già esistenti e alla visualizzazione in tempo reale dei tweet secondo determinati parametri.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests/js"
+  },
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://dmylos@aminsep.disi.unibo.it/gitlab/dmylos/fraydrum.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^26.6.3"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageDirectory": "coverage/js"
+  },
+  "dependencies": {
+    "@babel/preset-env": "^7.12.7",
+    "babel-jest": "^26.6.3"
+  }
+}
