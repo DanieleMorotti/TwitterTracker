@@ -42,7 +42,14 @@
 .tweet p {
     color: white;
 }
-
+.tweet-content {
+    background-color: #10445c;
+    padding: 1em;
+    border-radius: 1em;
+    border: 3px #b5b5b5;
+    border-style: ridge;
+}
+}
 .tweet mark {
     background-color: rgb(241, 170, 103);
 }
