@@ -1,2 +1,8 @@
 virt
-
+tests
+coverage
+node_modules
+package-lock.json
+package.json
+download.py
+babel.config.js
