@@ -1,24 +1,34 @@
+@font-face {
+    font-family: 'Ink';
+    src: url('/static/fonts/inkfree.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
 html, body, #app {
     height: 100%
 }
 
 body {
-    background-color:  rgb(6, 40, 55);
-
+    background-color:  rgb(1 18 25);
 }
 
 #fraydrum-header {
-    margin:0 ;
-    float: left;
-    padding-top: 1rem;
-    margin-left: 4rem;
+    float: right;
+    font-size: 3rem;
+    margin: 0;
+    margin-left: 1rem;
+    margin-top: 1rem;
     color: white;
-    font-family: 'Ink Free','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Ink','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #fraydrum-logo {
-    margin-top: 2rem;
+    float: left;
     margin-left: 0.5rem;
+    margin-top: 0.5rem;
 }
 
 .icon {
@@ -29,6 +39,7 @@ body {
     align-content: center;
 }
 
+/* ?????? */
 #loading {
     background: url('/static/img/loading.gif') no-repeat center;
     background-size: contain;
@@ -48,28 +59,52 @@ body {
     width: 100%;
 }
 
+#hr-navbar {
+    background-color: #3A525F;
+    width: 100%;
+    height: 5rem;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+  
+#hr-navbar  li {
+    float: left;
+}
+  
+#hr-navbar button {
+    display: block;
+    background-color: #2f424c;
+    border-style: none;
+    display: inline-block;
+    width: 6rem;
+    height: 5rem;
+    outline:0;
+}
+
 #navbar button:focus {
     outline:0;
 }
 
 #navbar li:hover{
-    background-color: darkgoldenrod;
+    background-color: #627481;
 }
 
 #navbar .router-link-active {
-    background-color: darkgoldenrod;
+    background-color: #627481;
 }
 
 #navbar {
-    padding-top: 5rem;
+    padding-top: 2rem;
     height: 100%;
     z-index: 3;
     top: 0;
     left: 0;
     float: left;
-    background-color:  rgb(43, 96, 121);
+    background-color:  #627481;
     text-align: center;
-    width: 60px;
+    width: 6rem;
 }
 
 /* 
