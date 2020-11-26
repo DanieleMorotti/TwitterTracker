@@ -1,4 +1,4 @@
-
+import mainComp from '/static/js/comp_main.js'
 import searchComp from '/static/js/comp_search.js'
 import tweetComp from '/static/js/comp_tweets.js'
 import mapComp from '/static/js/comp_map.js'
@@ -8,6 +8,7 @@ import graphsComp from '/static/js/comp_graphs.js'
 
 export const router = new VueRouter({
     routes: [
+      {path: '/',             component: mainComp     },
       {path: '/search',       component: searchComp     },
       {path: '/tweets',       component: tweetComp      },
       {path: '/map',          component: mapComp        },
