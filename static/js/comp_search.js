@@ -1,4 +1,6 @@
 import { setSearchObj, dispatch_search } from "./search.js";
+import { setStreamObj, streamStart } from "./stream.js";
+
 import tweetsComp from './comp_tweets.js';
 
 // map used to draw the search area
@@ -18,13 +20,19 @@ export default {
 
     data() {
         return{
-            value: 100
+            value: 100,
+            stream: false
         }
     },
 
     template: `
     <div id="filterComp">
         <div id="inputFields">
+            <label for="streamOff"> Stream </label>
+            <label id="streamSwitch" class="switch">
+                <input type="checkbox" id="streamOff" name="streamOff" value="false">
+                <span class="slider round" @click="changeSearch"></span>
+            </label>
             <label for="keyWord" class="text">Key-word </label>
             <input autocomplete="off" type="text" name="keyWord" id="keyWord" />
             <br> 
@@ -57,6 +65,19 @@ export default {
     </div>
     `,
     methods: {
+        changeSearch() {
+          if(!$("#streamOff").is(":checked")) {
+              $("#coordinates").val("");
+              $("#coordinates").attr("placeholder", "e.g. 41.83,12.48,45.519.14");
+              $("#pdi").val("");
+              $("#pdi").prop("disabled", true);
+          }
+          else {
+              $("#coordinates").val("");
+              $("#coordinates").attr("placeholder", "e.g. 45.4773,9.1815");
+              $("#pdi").prop("disabled", false);
+          }
+        },
         onClickSearch() {
             let newSearchObj = {
                 keyword: $('#keyWord').val(),  
@@ -68,8 +89,18 @@ export default {
                 coordinates_only: $('#coordinates-only').prop('checked')
             };
 
-            setSearchObj(newSearchObj);
-            let success = dispatch_search();
+            let success;
+
+            if(!$("#streamOff").is(":checked")) {
+                setSearchObj(newSearchObj);
+                success = dispatch_search();
+            }
+            /* if streaming is active */
+            else {
+                setStreamObj(newSearchObj);
+                success = streamStart();
+            }
+
             if(success) {
                 this.$router.push('tweets', () => {
                     setTimeout(() => {

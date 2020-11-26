@@ -1,5 +1,7 @@
 import { saveCollection } from './collections.js';
 import { searchObj, dispatch_search } from './search.js'
+import { stream_stop } from "./stream.js";
+
 
 export var lastTweetsList = null;
 export var lastTweetsSearchObj = null;
@@ -7,7 +9,8 @@ export var lastTweetsSearchObj = null;
 export default {
     name: 'search',
     template: `
-        <div>
+        <div id="tweetsDiv">
+            <button id="stopBtn" @click="streamStop()">Stop</button>
             <button id="saveBtn" @click="onClickSearch()">Search</button>
             <button id="save-collection" @click="onClickSave()">Save</button>
             <div id="results"></div>
@@ -18,6 +21,9 @@ export default {
     `,
 
     methods: {
+        streamStop() {
+            stream_stop();
+        }, 
         onClickSave() {
             saveCollection(lastTweetsList, lastTweetsSearchObj);
             this.$router.push("collections");
