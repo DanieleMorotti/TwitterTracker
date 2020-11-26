@@ -5,6 +5,7 @@ import json
 import mimetypes
 import os
 
+from words_frequency import get_words_frequency 
 from twitter import start_stream_listener, stop_stream_listener, streaming_data, get_tweets, post_tweet_with_image
 from tweets import store_tweets, get_stored_tweets_info, get_stored_tweet, delete_stored_tweet, update_tweets_name
 import scheduler
@@ -57,6 +58,7 @@ def search():
     print(query)
 
     tweets = get_tweets(query, location, coordinates_only, count)
+    get_words_frequency(tweets, 100)
     
     return Response(json.dumps(tweets, ensure_ascii=False, indent=2), status=200, mimetype="application/json")
         
