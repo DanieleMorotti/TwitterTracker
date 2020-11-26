@@ -3,8 +3,8 @@ import tweepy
 # Twitter keys
 API_KEY = 'j6DEP35tCTAxgmoaCYMQAThHw'
 API_SECRET_KEY = 'IStBpbpGzInMyzxAtlg6ZRLpJWZu5hS0SUAm6RB8YdmlNLz9OD'
-ACCESS_TOKEN = '1315934369433956354-KSJwtOBr3B9deMyqlF2pkNBU3sTmnk'
-ACCESS_SECRET_TOKEN = 'qLaGNPiYvJX0RgWeqvdx9iDe5lwDQRRAe5OruhGLtHkq1'
+ACCESS_TOKEN = '1315934369433956354-rLqEw3cEm7rCcM4gIkOwf769Bau9KO'
+ACCESS_SECRET_TOKEN = '6PpugJgagpUUdkvI9ZZCK7qB6Z6TjATmbTilZkmQNOU3U'
 
 # Initialize tweepy
 auth = tweepy.OAuthHandler(API_KEY, API_SECRET_KEY)
@@ -133,6 +133,10 @@ def get_tweets(query, location, coordinates_only, count):
         if len(result) >= count:
             break
     return result
+
+#Tweet on fraydrum
+def post_tweet_with_image(text, img_path):
+    api.update_with_media(img_path, text)
 
 #Trends
 def get_trends_at_woeid(woeid):

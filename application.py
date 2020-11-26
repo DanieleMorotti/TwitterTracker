@@ -3,9 +3,11 @@ from flask import send_file, redirect, request, Response
 import datetime, time
 import json
 import mimetypes
+import os
 
-from twitter import start_stream_listener, stop_stream_listener, streaming_data, get_tweets
+from twitter import start_stream_listener, stop_stream_listener, streaming_data, get_tweets, post_tweet_with_image
 from tweets import store_tweets, get_stored_tweets_info, get_stored_tweet, delete_stored_tweet, update_tweets_name
+import scheduler
 
 # Set default mimetype for .js files
 mimetypes.add_type('application/javascript', '.js')
@@ -113,6 +115,13 @@ def add_header(r):
     r.headers['Cache-Control'] = 'public, max-age=0'
     return r
 
+
+# Only run this once even if the reloader is running:
+if not (application.debug or os.environ.get("FLASK_ENV") == "development") or os.environ.get("WERKZEUG_RUN_MAIN") == "true":
+    # The app is not in debug mode or we are in the reloaded process
+    #scheduler.test()
+    #post_tweet_with_image("Tweet automatico di prova!", "static/img/logo.png")
+    pass
 
 # Run the application
 if __name__ == "__main__":
