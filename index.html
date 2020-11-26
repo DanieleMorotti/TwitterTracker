@@ -48,6 +48,15 @@
 	<body>
 		
 		<div id="app">
+			<ul id="hr-navbar" class="nav">
+				<li class="nav-item">
+					<router-link id="toHome" tag="button" to="/">
+						<img id="fraydrum-logo" src="/static/img/logo2.png" alt="logo" width="40">
+					</router-link>
+					<h1 id="fraydrum-header"> Fraydrum</h1>
+
+				</li>
+			</ul>
 			<ul id="navbar" class="nav">
 				<li class="nav-item">
 					<router-link id="toSearch" tag="button" to="/search">
@@ -83,8 +92,6 @@
 			</ul>
 		
 			<div id="componentView">
-				<h1 id="fraydrum-header"> Fraydrum</h1>
-				<img id="fraydrum-logo" src="/static/img/logo2.png" alt="logo" width="40">
 				<keep-alive>
 					<router-view></router-view>
 				</keep-alive>
