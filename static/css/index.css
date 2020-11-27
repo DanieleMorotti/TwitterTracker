@@ -8,7 +8,8 @@
 
 
 html, body, #app {
-    height: 100%
+    height: 100%;
+    overflow-y: hidden;
 }
 
 body {
@@ -115,7 +116,7 @@ body {
 #componentView {
     margin-left: 5rem;
     overflow-y: scroll;
-    height: 100vh;
+    height: calc(100vh - 5rem);
 }
 
 #componentView::-webkit-scrollbar-track {

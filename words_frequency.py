@@ -1,14 +1,29 @@
 from wordcloud import WordCloud
 from stop_words import get_stop_words
-import matplotlib.pyplot as plt
+from PIL import Image
 import string
+import numpy
 
 #Create a list with word and frequency
 def get_words_frequency(tweets, word_count):
     words = []
-    
     stopwords = get_stop_words('italian')
     stopwords += get_stop_words('english')
+    stopwords += get_stop_words('spanish')
+    stopwords += get_stop_words('french')
+    stopwords += get_stop_words('german')
+    stopwords += get_stop_words('hungarian')
+    stopwords += get_stop_words('polish')
+    stopwords += get_stop_words('portuguese')
+    stopwords += get_stop_words('dutch')
+    stopwords += get_stop_words('czech')
+    stopwords += get_stop_words('bulgarian')
+    stopwords += get_stop_words('finnish')
+    stopwords += get_stop_words('norwegian')
+    stopwords += get_stop_words('swedish')
+    stopwords += get_stop_words('romanian')
+    stopwords += get_stop_words('russian')
+
     stopwords.append('')
     stopwords=set(stopwords)
     tr = str.maketrans('', '', string.punctuation.replace('@','').replace('#',''))
@@ -19,6 +34,7 @@ def get_words_frequency(tweets, word_count):
         for t in tokens:
             if t.startswith('http'):
                 continue
+            #remove numbers?
             t = t.lower().translate(tr)
             if t not in stopwords:
                 words.append(t)
@@ -41,13 +57,21 @@ def get_words_frequency(tweets, word_count):
 
     for (w, c) in items:
         result[w] = c/total_count
-    make_wordcloud(result)
     return result
 
 #Wordloud
 def make_wordcloud(words):
-    wordcloud = WordCloud(width = 800, height = 800, 
-                background_color ='white',  
+    mask = numpy.array(Image.open("static/img/mask.jpg"))
+    wc = WordCloud(
+                width = 900,
+                height = 500,
+                mode='RGBA',
+                background_color = None,  
+                mask=mask,
                 font_path = 'static/fonts/seguiemj.ttf',
+            #    contour_color='black',
+            #    contour_width=3,
                 min_font_size = 10).fit_words(words).to_image()
-    wordcloud.save('wc.png')
+    wc.save('static/pil/wordcloud.png')
+
+    return wc   
