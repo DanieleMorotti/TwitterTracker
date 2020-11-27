@@ -7,14 +7,23 @@ h2{
 #firstGraph {
     width: 40%;
     margin-left: 5%;
-    margin-top: 5%;
     color: white;
     font-size: 15px;
+    float:left;
+    margin-top: 5%;
 }
-#container {
+#secondGraph {
+    width: 40%;
+    margin-right: 5%;
+    color: white;
+    font-size: 15px;
+    float: right;
+    margin-top: 5%;
+}
+#container1, #container2 {
     height: 500px;
 }
-#info {
+#info1, #info2 {
     margin-top: 3%;
     text-align: center;
 }
