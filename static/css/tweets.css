@@ -48,6 +48,7 @@
     border: 1px white;
     border-style: ridge;
 }
+
 .tweet mark {
     background-color: rgb(241, 170, 103);
 }

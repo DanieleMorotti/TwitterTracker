@@ -1,0 +1,13 @@
+#wordcloud{
+    display:flex;
+}
+#wordcloud img {
+    margin:auto;
+}
+
+h3 {
+    margin-top: 0;
+    text-align: center;
+    padding-top: 2vh;
+    color: white;
+}

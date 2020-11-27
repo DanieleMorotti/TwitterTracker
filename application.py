@@ -5,7 +5,7 @@ import json
 import mimetypes
 import os
 
-from words_frequency import get_words_frequency 
+from words_frequency import get_words_frequency, make_wordcloud
 from twitter import start_stream_listener, stop_stream_listener, streaming_data, get_tweets, post_tweet_with_image
 from tweets import store_tweets, get_stored_tweets_info, get_stored_tweet, delete_stored_tweet, update_tweets_name
 import scheduler
@@ -58,7 +58,6 @@ def search():
     print(query)
 
     tweets = get_tweets(query, location, coordinates_only, count)
-    get_words_frequency(tweets, 100)
     
     return Response(json.dumps(tweets, ensure_ascii=False, indent=2), status=200, mimetype="application/json")
         
@@ -101,7 +100,18 @@ def delete_collection(id):
     success = delete_stored_tweet(id)
     status = 200 if success else 400
     return Response(status=status)
-    
+
+#wordcloud request
+@application.route('/wordcloud/<int:req_count>', methods=["POST"])
+def get_wordcloud(req_count):
+    data = request.get_json()
+    wordcloud = make_wordcloud(get_words_frequency(data, int(req_count)))
+    return Response(status=200)
+
+#frequency words request
+@application.route('/frequency/<int:req_count>', methods=["GET"])
+def get_frequency(req_count):
+    return get_words_frequency(req_count)
 
 # Route for the index page
 @application.route('/')
