@@ -40,7 +40,6 @@ body {
     align-content: center;
 }
 
-/* ?????? */
 #loading {
     background: url('/static/img/loading.gif') no-repeat center;
     background-size: contain;
@@ -89,11 +88,11 @@ body {
 }
 
 #navbar li:hover{
-    background-color: #627481;
+    background-color: #e69f23;
 }
 
 #navbar .router-link-active {
-    background-color: #627481;
+    background-color: #e69f23;
 }
 
 #navbar {

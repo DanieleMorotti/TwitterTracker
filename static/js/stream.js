@@ -1,10 +1,18 @@
+import tweetsComp from './comp_tweets.js';
 
 // Interval for the update of the stream of tweets
 export var streamingInterval = null;
 
+// Save search filters
+export var streamObj = null;
+
+export function setStreamObj(newObj) {
+    streamObj = newObj;
+}
+
 // Start the stream of tweets
 export function streamStart() {
-    let keyword = $('#keyWord').val();
+    let keyword = streamObj.keyword;
     if (keyword) {
         $.ajax({
             method: "GET",
@@ -26,6 +34,7 @@ export function streamStart() {
                 console.log("streamStart: " + xhr.status + ' - ' + thrownError);
             }
         });
+        return true;
     }
 }
 
@@ -55,7 +64,7 @@ export function stream_update(word) {
         url: '/streamUpdate',
         method: 'GET',
         success: (data) => {
-            setTitleAndTweets(data.length + ' Streaming Tweets Results', data, word);
+            tweetsComp.methods.setTitleAndTweets(data.length + ' Streaming Tweets Results', data, word);
         },
         error: function (xhr, ajaxOptions, thrownError) {
             console.log("streamUpdate: " + xhr.status + ' - ' + thrownError);
