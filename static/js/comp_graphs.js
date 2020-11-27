@@ -1,7 +1,6 @@
-//import tweetsComp from './comp_tweets.js'
 import { lastTweetsList } from './comp_tweets.js'
 
-export default { //Il file css associato è ancora vuoto
+export default {
 	name: 'graphs',
 
 	data() {
@@ -10,13 +9,20 @@ export default { //Il file css associato è ancora vuoto
         }
 	},
 	
-	template: `
-	<div id="container" style="width: 500px; height: 400px;"></div>
+	template: ` 
+	<div id="total">
+		<h2> Graphs </h2>
+		<div id="firstGraph">
+			<div id="alert">No research was done </div>
+			<div id="container"> </div>
+			<div id="info">Temporal arrangement of the tweets found </div>
+		</div>
+	</div>
 	`,
 
 	methods: {
 		//Istogramma che rappresenta il numero di tweet postati per ogni giorno dell'ultima settimana
-		createGraph() { //se faccio nuova ricerca il grafico non cambia
+		createGraph() {
 
 		//create data
 		var dati = [];
@@ -50,7 +56,16 @@ export default { //Il file css associato è ancora vuoto
 		}
 	},
 
-	mounted() {
-        this.createGraph();
-    }
+	activated() {
+		if (lastTweetsList != null) {
+			$('#info').show();
+			$('#alert').hide();
+			$('#container').empty();
+			this.createGraph();
+		}
+		else {
+			$('#info').hide();
+			$('#alert').show();
+		}
+	}
 }
