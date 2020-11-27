@@ -122,7 +122,7 @@ export default {
 
             //set up the drawing tool
             const drawingManager = new google.maps.drawing.DrawingManager({
-                drawingMode: google.maps.drawing.OverlayType.MARKER,
+                //drawingMode: google.maps.drawing.OverlayType.MARKER,
                 drawingControl: true,
                 drawingControlOptions: {
                     //set the position of the tool and the shapes you can draw
