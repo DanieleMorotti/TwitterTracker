@@ -3,6 +3,7 @@ from stop_words import get_stop_words
 from PIL import Image
 import string
 import numpy
+import os
 
 #Create a list with word and frequency
 def get_words_frequency(tweets, word_count):
@@ -59,7 +60,7 @@ def get_words_frequency(tweets, word_count):
         result[w] = c/total_count
     return result
 
-#Wordloud
+#Wordcloud
 def make_wordcloud(words):
     mask = numpy.array(Image.open("static/img/mask.jpg"))
     wc = WordCloud(
@@ -72,6 +73,12 @@ def make_wordcloud(words):
             #    contour_color='black',
             #    contour_width=3,
                 min_font_size = 10).fit_words(words).to_image()
-    wc.save('static/pil/wordcloud.png')
+    
+    save_folder = 'static/pil'
+    if not os.path.exists(save_folder):
+        os.mkdir(save_folder)
+    
+    save_path = os.path.join(save_folder, 'wordcloud.png')
+    wc.save(save_path)
 
     return wc   
