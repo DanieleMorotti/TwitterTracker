@@ -11,6 +11,7 @@ export function setSearchObj(newObj) {
 
 // Start a search and stop the stream if it's active, returns false if the search fields are not valid
 export function dispatch_search() {
+    let count = searchObj.count;
     let word = searchObj.keyword;
     let user = searchObj.user;
     let center = searchObj.center;
@@ -54,12 +55,12 @@ export function dispatch_search() {
     if (streamingInterval) { 
         stream_stop(); 
     }
-    search(word, user, center, radius, images_only, coordinates_only);
+    search(count, word, user, center, radius, images_only, coordinates_only);
     return true;
 }
 
 // Search tweets containing a word and an optional location
-function search(word, user, center, radius, images_only, coordinates_only) {
+function search(count, word, user, center, radius, images_only, coordinates_only) {
     if (!$('#loading').length) {
         $('body').append('<div id="loading"></div>');
     }
@@ -79,7 +80,7 @@ function search(word, user, center, radius, images_only, coordinates_only) {
     if (user) {
         query['user'] = user;
     }
-
+    query['count'] = count;
     $.ajax({
         method: "GET",
         url: "/search",

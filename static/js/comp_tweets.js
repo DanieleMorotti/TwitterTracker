@@ -80,7 +80,11 @@ export default {
 
         deleteFilter(field) {
             $(`#${field}Btn`).remove();
-            searchObj[field] = "";
+            if (field == 'count') {
+                searchObj[field] = 250
+            } else {
+                searchObj[field] = "";
+            }
         },
 
         clearTitleAndTweets() {

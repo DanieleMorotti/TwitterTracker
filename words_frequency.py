@@ -1,10 +1,12 @@
-from wordcloud import WordCloud
+from wordcloud import WordCloud, ImageColorGenerator
 from stop_words import get_stop_words
+from scipy.ndimage import gaussian_gradient_magnitude
 from PIL import Image
 import string
 import numpy
 import os
-
+import time
+MAX = 100
 #Create a list with word and frequency
 def get_words_frequency(tweets, word_count):
     words = []
@@ -35,7 +37,6 @@ def get_words_frequency(tweets, word_count):
         for t in tokens:
             if t.startswith('http'):
                 continue
-            #remove numbers?
             t = t.lower().translate(tr)
             if t not in stopwords:
                 words.append(t)
@@ -48,8 +49,11 @@ def get_words_frequency(tweets, word_count):
             dict[w] += 1
 
     items = sorted(dict.items(), key = lambda item: item[1], reverse=True)
-    word_count = min(len(items), word_count)
+
+    #MAX è il numero di parole nella wordcloud
+    MAX = word_count = min(len(items), word_count)
     items = items[0 : word_count]
+    
     total_count = 0
 
     for (w, c) in items:
@@ -62,23 +66,31 @@ def get_words_frequency(tweets, word_count):
 
 #Wordcloud
 def make_wordcloud(words):
-    mask = numpy.array(Image.open("static/img/mask.jpg"))
+    mask_color = numpy.array(Image.open("static/img/mask.png"))
+     
+    mask = mask_color.copy()
+    mask[mask.sum(axis=2) == 0] = 255
+
+    edges = numpy.mean([gaussian_gradient_magnitude(mask_color[:,:,i]/255., 2) for i in range(3)], axis=0)
+    mask[edges > .08] = 255
     wc = WordCloud(
-                width = 900,
-                height = 500,
-                mode='RGBA',
-                background_color = None,  
-                mask=mask,
-                font_path = 'static/fonts/seguiemj.ttf',
-            #    contour_color='black',
-            #    contour_width=3,
-                min_font_size = 10).fit_words(words).to_image()
+            width = 900,
+            height = 600,
+            mode='RGBA',
+            background_color = (0,0,0,0),  
+            mask=mask,
+            font_path = 'static/fonts/seguiemj.ttf',
+            random_state=42,
+            max_words=MAX)
+    wc.fit_words(words)
+    
+    colors = ImageColorGenerator(mask_color)
+    wc.recolor(color_func=colors)
     
     save_folder = 'static/pil'
     if not os.path.exists(save_folder):
         os.mkdir(save_folder)
     
     save_path = os.path.join(save_folder, 'wordcloud.png')
-    wc.save(save_path)
-
-    return wc   
+    wc.to_file(save_path)
+    return time.time()   

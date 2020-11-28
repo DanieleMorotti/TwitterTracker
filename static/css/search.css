@@ -9,7 +9,7 @@
     margin-left: 3rem;
 }
 
-#inputFields input[type="text"]{
+#inputFields input[type="text"], #inputFields input[type="number"] {
     border-radius: 5px;
     background-color: transparent;
     border-style: none;
@@ -18,12 +18,18 @@
     width: 30vw;
     color: white
 }
-
+#inputFields input[type="number"] {
+    caret-color: transparent;
+    width:4em !important;
+}
+label[for="tweet-count"] {
+    margin-left: 3em !important;
+}
 #inputFields input[type="text"]::placeholder {
     color: #6090a8;
 }
 
-#inputFields input[type="text"]:disabled {
+#inputFields input[type="text"]:disabled, #inputFields input[type="number"]:disabled {
     border-color: #98a0a3;
 }
 
@@ -60,6 +66,7 @@
 
 #searchBtn {
     margin: 3rem;
+    font-weight: 700;
 }
 
 .error_msg {

@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, make_response
 from flask import send_file, redirect, request, Response
 import datetime, time
 import json
@@ -41,7 +41,7 @@ def stream_update():
 # Route to search tweets    
 @application.route('/search')
 def search():
-    count = 100
+    count = int(request.args.get("count"))
     word = request.args.get("keyword")
     user = request.args.get("user")
     location = request.args.get("location")
@@ -105,8 +105,10 @@ def delete_collection(id):
 @application.route('/wordcloud/<int:req_count>', methods=["POST"])
 def get_wordcloud(req_count):
     data = request.get_json()
-    wordcloud = make_wordcloud(get_words_frequency(data, int(req_count)))
-    return Response(status=200)
+    response_content = make_wordcloud(get_words_frequency(data, int(req_count)))
+    response = make_response(str(response_content), 200)
+    response.mimetype = 'text/plain'
+    return response
 
 #frequency words request
 @application.route('/frequency/<int:req_count>', methods=["GET"])

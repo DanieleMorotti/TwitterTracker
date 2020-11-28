@@ -1,8 +1,13 @@
 #wordcloud{
     display:flex;
 }
-#wordcloud img {
+#wc-img {
     margin:auto;
+    height:500px;
+}
+#cloud_loading {
+    margin:auto;
+    height:150px;
 }
 
 h3 {
@@ -10,4 +15,9 @@ h3 {
     text-align: center;
     padding-top: 2vh;
     color: white;
+}
+h4{
+    color:white;
+    text-align:center;
+    width:100%;
 }

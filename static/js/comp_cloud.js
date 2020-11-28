@@ -9,22 +9,25 @@ export default {
         </div>
     `,
     activated() {
-        let max_req = 100;
+        let max_req = 500;
         if (lastTweetsList) {
-            console.log(lastTweetsList)
+            $('#wordcloud').empty();
+            $('#wordcloud').append('<img id="cloud_loading" src="static/img/wc_loading.gif"></img>');
             $.ajax({
                 url: '/wordcloud/' + max_req,
                 type: 'POST',
-                contentType:'application/json',
+                contentType: 'application/json',
                 data: JSON.stringify(lastTweetsList),
                 success: (data) => {
-                    $('#wordcloud img').remove();
-                    $('#wordcloud').append('<img src="static/pil/wordcloud.png"></img>');
+                    $('#wordcloud').empty();
+                    $('#wordcloud').append('<img id="wc-img" src="static/pil/wordcloud.png?nocache=' + data + '"></img>');
                 },
                 error: (xhr, ajaxOptions, thrownError) => {
                     console.log("search: " + xhr.status + ' - ' + thrownError);
                 }
             });
+        } else {
+            $('#wordcloud').append('<h4>Search for tweets or just load a collection to see the relative wordcloud</h4>');
         }
     }
 
