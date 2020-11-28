@@ -29,25 +29,23 @@ def get_tweets_path_from_id(id):
     filename = str(id) + ".json"
     return os.path.join(tweets_dir, filename)
 
-def store_tweets(name, data, filters):
+def store_tweets(info):
     try:
         #ensure the tweets directory exists
         if not os.path.isdir(tweets_dir):
             os.mkdir(tweets_dir)
 
+        #Add id and count to the info
         id = get_next_id()
-        info = {
-            'id': id,
-            'name': name,
-            'filters': filters,
-            'count': len(data),
-            'data': data,
-        }
-        path = get_tweets_path_from_id(id)
+        info['id'] = id
+        info['count'] = len(info['data'])
 
+        #Save into file
+        path = get_tweets_path_from_id(id)
         with open(path, "w", encoding='utf-8') as f:
             json.dump(info, f, ensure_ascii=False, indent=2)
         return True
+
     except Exception as e:
         print(e)
         return False
@@ -65,6 +63,7 @@ def get_stored_tweets_info():
                 'id': info['id'],
                 'name': info['name'],
                 'count': info['count'],
+                'date': info.get('date', ''),
             })
     
     return result

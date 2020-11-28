@@ -23,7 +23,7 @@ info = requests.get(url + "/collections").json()
 
 # Request collections
 for i in info:
-    id = i['id'];
+    id = i['id']
     c = requests.get(url + "/collections/" + str(id)).json()
-    tweets.store_tweets(c['name'], c['data'], c['filters'])
+    tweets.store_tweets(c)
 

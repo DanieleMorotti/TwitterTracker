@@ -73,7 +73,7 @@ def save_collection():
     if not body:
         return Response(status=400)
 
-    success = store_tweets(body["name"], body["data"], body["filters"])
+    success = store_tweets(body)
     status = 200 if success else 400
     return Response(status=status)
     

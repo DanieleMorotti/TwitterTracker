@@ -25,8 +25,7 @@ export default {
             stream_stop();
         }, 
         onClickSave() {
-            saveCollection(lastTweetsList, lastTweetsSearchObj);
-            this.$router.push("collections");
+            saveCollection(lastTweetsList, lastTweetsSearchObj, () => this.$router.push("collections"));
         },
 
         onClickSearch() {
