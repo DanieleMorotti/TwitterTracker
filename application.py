@@ -4,6 +4,7 @@ import datetime, time
 import json
 import mimetypes
 import os
+from io import BytesIO
 
 from words_frequency import get_words_frequency, make_wordcloud
 from twitter import start_stream_listener, stop_stream_listener, streaming_data, get_tweets, post_tweet_with_image
@@ -106,10 +107,15 @@ def delete_collection(id):
 @application.route('/wordcloud/<int:req_count>', methods=["POST"])
 def get_wordcloud(req_count):
     data = request.get_json()
-    response_content = make_wordcloud(get_words_frequency(data, int(req_count)))
-    response = make_response(str(response_content), 200)
-    response.mimetype = 'text/plain'
-    return response
+
+    image = make_wordcloud(get_words_frequency(data, int(req_count)))
+    
+    image_io = BytesIO()
+    image.save(image_io, 'PNG')
+    image_io.seek(0)
+
+    #Return the image directly in the body    
+    return send_file(image_io, mimetype="image/png")
 
 #frequency words request
 @application.route('/frequency/<int:req_count>', methods=["POST"])

@@ -87,10 +87,13 @@ def make_wordcloud(words):
     colors = ImageColorGenerator(mask_color)
     wc.recolor(color_func=colors)
     
-    save_folder = 'static/pil'
-    if not os.path.exists(save_folder):
-        os.mkdir(save_folder)
+    #Return a PIL image of the wordcloud
+    return wc.to_image()
     
-    save_path = os.path.join(save_folder, 'wordcloud.png')
-    wc.to_file(save_path)
-    return time.time()   
+    # save_folder = 'static/pil'
+    # if not os.path.exists(save_folder):
+    #     os.mkdir(save_folder)
+    
+    # save_path = os.path.join(save_folder, 'wordcloud.png')
+    # wc.to_file(save_path)
+    # return time.time()   

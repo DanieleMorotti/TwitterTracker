@@ -13,19 +13,21 @@ export default {
         if (lastTweetsList) {
             $('#wordcloud').empty();
             $('#wordcloud').append('<img id="cloud_loading" src="static/img/wc_loading.gif"></img>');
-            $.ajax({
-                url: '/wordcloud/' + max_req,
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(lastTweetsList),
-                success: (data) => {
-                    $('#wordcloud').empty();
-                    $('#wordcloud').append('<img id="wc-img" src="static/pil/wordcloud.png?nocache=' + data + '"></img>');
-                },
-                error: (xhr, ajaxOptions, thrownError) => {
-                    console.log("search: " + xhr.status + ' - ' + thrownError);
-                }
-            });
+
+            let xhr = new XMLHttpRequest();
+            xhr.responseType = 'arraybuffer';
+            xhr.onload = () => {
+                $('#wordcloud').empty();
+                var blb = new Blob([xhr.response], {type: 'image/png'});
+                var url = (window.URL || window.webkitURL).createObjectURL(blb);
+                $('#wordcloud').append(`<img id="wc-img" src="${url}"></img>`);
+            }
+
+            xhr.onerror = () => console.log("Failed loading wordcloud");
+
+            xhr.open('POST', '/wordcloud/' + max_req);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.send(JSON.stringify(lastTweetsList));
         } else {
             $('#wordcloud').append('<h4>Search for tweets or just load a collection to see the relative wordcloud</h4>');
         }
