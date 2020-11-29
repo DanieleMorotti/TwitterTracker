@@ -111,9 +111,11 @@ def get_wordcloud(req_count):
     return response
 
 #frequency words request
-@application.route('/frequency/<int:req_count>', methods=["GET"])
+@application.route('/frequency/<int:req_count>', methods=["POST"])
 def get_frequency(req_count):
-    return get_words_frequency(req_count)
+    data = request.get_json()
+    freq_list = get_words_frequency(data, int(req_count))
+    return Response(json.dumps(freq_list, ensure_ascii=False, indent=2), status=200,  mimetype="application/json")
 
 # Route for the index page
 @application.route('/')

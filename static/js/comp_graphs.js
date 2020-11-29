@@ -65,10 +65,11 @@ export default {
 			//create data
 			var dati = [];
 			let max_req = 10;
-
 			$.ajax({
                 url: '/frequency/' + max_req,
-                type: 'GET',
+				type: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify(lastTweetsList),
                 success: (data) => {
                     console.log(data);
                 },
