@@ -122,7 +122,7 @@ def get_wordcloud(req_count):
 def get_frequency(req_count):
     data = request.get_json()
     freq_list = get_words_frequency(data, int(req_count))
-    return Response(json.dumps(freq_list, ensure_ascii=False, indent=2), status=200,  mimetype="application/json")
+    return Response(json.dumps(freq_list, ensure_ascii=False), status=200,  mimetype="application/json")
 
 # Route for the index page
 @application.route('/')
