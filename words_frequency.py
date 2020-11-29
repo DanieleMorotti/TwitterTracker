@@ -64,6 +64,7 @@ def get_words_frequency(tweets, word_count):
         result[w] = c/total_count
     return result
 
+
 #Wordcloud
 def make_wordcloud(words):
     mask_color = numpy.array(Image.open("static/img/mask.png"))
