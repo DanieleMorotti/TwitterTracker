@@ -12,7 +12,7 @@ export default {
         let max_req = 500;
         if (lastTweetsList) {
             $('#wordcloud').empty();
-            $('#wordcloud').append('<img id="cloud_loading" src="static/img/wc_loading.gif"></img>');
+            $('#wordcloud').append('<img id="cloud_loading" src="static/img/wc_loading.gif">');
 
             let xhr = new XMLHttpRequest();
             xhr.responseType = 'arraybuffer';
@@ -20,7 +20,7 @@ export default {
                 $('#wordcloud').empty();
                 var blb = new Blob([xhr.response], {type: 'image/png'});
                 var url = (window.URL || window.webkitURL).createObjectURL(blb);
-                $('#wordcloud').append(`<img id="wc-img" src="${url}"></img>`);
+                $('#wordcloud').append(`<img id="wc-img" src="${url}">`);
             }
 
             xhr.onerror = () => console.log("Failed loading wordcloud");
