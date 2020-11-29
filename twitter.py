@@ -77,7 +77,7 @@ def get_tweet_text(tweet):
     
     return text
 
-def get_tweet_images(tweet,search_type):
+def get_tweet_images(tweet):
     media = []
     media_tweet = tweet
     #If it's a retweet the media is actually in retweeted_status
@@ -89,21 +89,15 @@ def get_tweet_images(tweet,search_type):
     elif hasattr(media_tweet, "entities") and 'media' in media_tweet.entities:
         media = media_tweet.entities["media"]
     
-    if search_type == 'manual':
-        images = []
-        for m in media:
-            if m["type"] == "photo" or m["type"] == "animated_gif":
-                images.append(m["media_url"])
-        return images
-    else:
-        for m in media:
-            #i just need one photo per tweet
-            if m["type"] == "photo":
-                return m
-        return None
+    images = []
+    for m in media:
+        if m["type"] == "photo" or m["type"] == "animated_gif":
+            images.append(m["media_url"])
+    return images
+
    
 # Method to get a list of tweets
-def get_tweets(query, location, coordinates_only, count,search_type):
+def get_tweets(query, location, coordinates_only, count):
     result = []
     max_count = count 
     if coordinates_only:
@@ -117,17 +111,12 @@ def get_tweets(query, location, coordinates_only, count,search_type):
             coordinates = tweet.place.bounding_box.coordinates
             city =  tweet.place.full_name
         
-        if search_type == 'manual':
-            # skip the tweet if we need coordinates and they are not available
-            if coordinates_only and not coordinates:
-                continue
-        else:
-            # skip the tweet if coordinates are not available
-            if not coordinates:
-                continue
+        # skip the tweet if we need coordinates and they are not available
+        if coordinates_only and not coordinates:
+            continue
 
-        images = get_tweet_images(tweet,search_type)
-        
+        images = get_tweet_images(tweet)
+    
         result.append({
             'id': tweet.id_str,
             'text': get_tweet_text(tweet), 
