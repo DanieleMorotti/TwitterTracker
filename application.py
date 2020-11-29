@@ -9,6 +9,7 @@ from words_frequency import get_words_frequency, make_wordcloud
 from twitter import start_stream_listener, stop_stream_listener, streaming_data, get_tweets, post_tweet_with_image
 from tweets import store_tweets, get_stored_tweets_info, get_stored_tweet, delete_stored_tweet, update_tweets_name
 import scheduler
+import automation
 
 # Set default mimetype for .js files
 mimetypes.add_type('application/javascript', '.js')
@@ -57,7 +58,7 @@ def search():
         query += "filter:images "
     print(query)
 
-    tweets = get_tweets(query, location, coordinates_only, count,'manual')
+    tweets = get_tweets(query, location, coordinates_only, count)
     
     return Response(json.dumps(tweets, ensure_ascii=False, indent=2), status=200, mimetype="application/json")
         
@@ -135,6 +136,7 @@ if not (application.debug or os.environ.get("FLASK_ENV") == "development") or os
     # The app is not in debug mode or we are in the reloaded process
     #scheduler.test()
     #post_tweet_with_image("Tweet automatico di prova!", "static/img/logo.png")
+    #automation.get_image_to_post("ciao", '44.69164,10.47674,450km', 100, 7)
     pass
 
 # Run the application

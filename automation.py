@@ -51,20 +51,16 @@ def get_maps_image(center,markers,zoom):
         response.raise_for_status()
     except requests.exceptions.RequestException as e:
         print(e)
-    #storing the response in a file (image)
-    with open('toPost.png', 'wb') as file:
-        file.write(response.content)
-    
-    #change the image mode so all the pictures(bytes) is not converted to 'P' mode
-    im_tmp = Image.open('toPost.png').convert(mode="RGB", matrix=None, dither=None, palette=0, colors=256)
-    im_tmp.save('toPost.png', quality=95)
+
+    image = Image.open(BytesIO(response.content)).convert(mode="RGB", matrix=None, dither=None, palette=0, colors=256)
+
+    return image
 
 
-def draw_on_image(tw_im,px,py):
+def draw_on_image(im_map, tw_im, px, py):
     #the width i want the twitter images are resized to
     basewidth = 35
 
-    im_map = Image.open('toPost.png')
     #get the img from the url
     tweet_im = requests.get(tw_im)
     im2 = Image.open(BytesIO(tweet_im.content))
@@ -76,12 +72,12 @@ def draw_on_image(tw_im,px,py):
 
     #back_im = im1.copy()
     im_map.paste(im2,(px, py))
-    im_map.save('toPost.png', quality=95)
 
 
-def get_image_to_post(word,location,count,zoom):
+def get_image_to_post(query,location,count,zoom):
     #True because i need only geo-located tweet
-    tweets = get_tweets(word,location,True,count,'automatic')
+    tweets = get_tweets(query,location,True,count)
+
     markers = []
     #loop to find all the geo-localized tweet, but not pictures
     for tw in tweets:
@@ -92,13 +88,16 @@ def get_image_to_post(word,location,count,zoom):
 
     #get the coordinates without the radius
     center = location.rsplit(',', maxsplit=1)[0]
-    get_maps_image(center,markers,zoom)
+    image = get_maps_image(center,markers,zoom)
 
     float_lat = float(center.split(',')[0])
     float_lon = float(center.split(',')[1])
+
     #draw all the pictures over the map
     for tw in tweets:
-        if(tw['images'] and tw['images']['media_url']):
+        if tw['images']:
             px,py = coord_to_pixel(float_lat,float_lon,tw["coordinates"][0][1][1],tw["coordinates"][0][1][0],zoom,MAP_IMAGE_SIZE)
-            draw_on_image(tw["images"]['media_url'],int(px),int(py))
+            draw_on_image(image, tw["images"][0],int(px),int(py))
+    
+    image.save("toPost.png")
 
