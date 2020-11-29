@@ -41,7 +41,7 @@ export default {
                 $('#wordcloud').empty();
                 var blb = new Blob([xhr.response], { type: 'image/png' });
                 var url = (window.URL || window.webkitURL).createObjectURL(blb);
-                $('#wordcloud').append(`<img id="wc-img" src="${url}"></img>`);
+                $('#wordcloud').append(`<img id="wc-img" src="${url}">`);
             }
 
             xhr.onerror = () => console.log("Failed loading wordcloud");

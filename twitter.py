@@ -1,5 +1,6 @@
 import tweepy
-  
+import os
+
 # Twitter keys
 API_KEY = 'j6DEP35tCTAxgmoaCYMQAThHw'
 API_SECRET_KEY = 'IStBpbpGzInMyzxAtlg6ZRLpJWZu5hS0SUAm6RB8YdmlNLz9OD'
@@ -134,8 +135,11 @@ def get_tweets(query, location, coordinates_only, count):
     return result
 
 #Tweet on fraydrum
-def post_tweet_with_image(text, img_path):
-    api.update_with_media(img_path, text)
+def post_tweet_with_image(text, image):
+    filename = "temptweet.png"
+    image.save(filename)
+    api.update_with_media(filename, text)
+    os.remove(filename)
 
 #Trends
 def get_trends_at_woeid(woeid):
