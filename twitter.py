@@ -77,7 +77,7 @@ def get_tweet_text(tweet):
     
     return text
 
-def get_tweet_images(tweet):
+def get_tweet_images(tweet,search_type):
     media = []
     media_tweet = tweet
     #If it's a retweet the media is actually in retweeted_status
@@ -89,15 +89,21 @@ def get_tweet_images(tweet):
     elif hasattr(media_tweet, "entities") and 'media' in media_tweet.entities:
         media = media_tweet.entities["media"]
     
-    images = []
-    for m in media:
-        if m["type"] == "photo" or m["type"] == "animated_gif":
-            images.append(m["media_url"])
-    
-    return images
-
+    if search_type == 'manual':
+        images = []
+        for m in media:
+            if m["type"] == "photo" or m["type"] == "animated_gif":
+                images.append(m["media_url"])
+        return images
+    else:
+        for m in media:
+            #i just need one photo per tweet
+            if m["type"] == "photo":
+                return m
+        return None
+   
 # Method to get a list of tweets
-def get_tweets(query, location, coordinates_only, count):
+def get_tweets(query, location, coordinates_only, count,search_type):
     result = []
     max_count = count 
     if coordinates_only:
@@ -111,13 +117,17 @@ def get_tweets(query, location, coordinates_only, count):
             coordinates = tweet.place.bounding_box.coordinates
             city =  tweet.place.full_name
         
-        # skip the tweet if we need coordinates and they are not available
-        if coordinates_only and not coordinates:
-            continue
+        if search_type == 'manual':
+            # skip the tweet if we need coordinates and they are not available
+            if coordinates_only and not coordinates:
+                continue
+        else:
+            # skip the tweet if coordinates are not available
+            if not coordinates:
+                continue
 
-        images = get_tweet_images(tweet)
+        images = get_tweet_images(tweet,search_type)
         
-            
         result.append({
             'id': tweet.id_str,
             'text': get_tweet_text(tweet), 

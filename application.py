@@ -57,7 +57,7 @@ def search():
         query += "filter:images "
     print(query)
 
-    tweets = get_tweets(query, location, coordinates_only, count)
+    tweets = get_tweets(query, location, coordinates_only, count,'manual')
     
     return Response(json.dumps(tweets, ensure_ascii=False, indent=2), status=200, mimetype="application/json")
         
