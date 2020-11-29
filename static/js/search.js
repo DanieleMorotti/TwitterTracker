@@ -59,11 +59,8 @@ export function dispatch_search() {
     return true;
 }
 
-// Search tweets containing a word and an optional location
-function search(count, word, user, center, radius, images_only, coordinates_only) {
-    if (!$('#loading').length) {
-        $('body').append('<div id="loading"></div>');
-    }
+export function getSearchQuery(count, word, user, center, radius, images_only, coordinates_only)
+{
     let query = {};
     if (word) {
         query['keyword']= word;
@@ -81,6 +78,18 @@ function search(count, word, user, center, radius, images_only, coordinates_only
         query['user'] = user;
     }
     query['count'] = count;
+
+    return query;
+}
+
+// Search tweets containing a word and an optional location
+function search(count, word, user, center, radius, images_only, coordinates_only) {
+    if (!$('#loading').length) {
+        $('body').append('<div id="loading"></div>');
+    }
+    
+    let query = getSearchQuery(count, word, user, center, radius, images_only, coordinates_only);
+    
     $.ajax({
         method: "GET",
         url: "/search",

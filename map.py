@@ -8,36 +8,31 @@ import random as rand
 
 MAP_IMAGE_SIZE = 640
 
-history_pixels = []
 #to prevent images over other images
-def val_dist(pix):
-    global history_pixels
-    px,py = pix[0],pix[1]
+def val_dist(history_pixels, x, y):
+    px,py = x, y
     #until the pixel coordinates are equals to others
-    if((int(px),int(py)) in history_pixels):
-        px+= 30 * (-1 if rand.random() < 0.5 else 1)
-        py+= 30 * (-1 if rand.random() < 0.5 else 1)
-        #until the pixels is already taken
-        if((int(px),int(py)) in history_pixels):px,py =val_dist((px,py))
-        else:history_pixels.append((int(px),int(py)))
+    if (int(px), int(py)) in history_pixels:
+        px += 30 * (-1 if rand.random() < 0.5 else 1)
+        py += 30 * (-1 if rand.random() < 0.5 else 1)
+
+    history_pixels.add((int(px),int(py)))
     return px,py
 
 #convert coordinates lat,long to pixels given a center,the zoom used and the size of the image
-def coord_to_pixel(center_lat,center_lon, lat, lon,zoom,img_size):
+def coord_to_pixel(history_pixel, center_lat, center_lon, lat, lon, zoom, img_size):
     degreesPerPixelX = 360 / 2**(zoom+8)
     degreesPerPixelY = 360 / 2**(zoom+8) * cos(center_lat * pi / 180)
     py = ((center_lat - lat)/degreesPerPixelY)+img_size/2
     px = ((lon - center_lon)/degreesPerPixelX)+img_size/2
-    px,py = val_dist((px,py))
+    px, py = val_dist(history_pixel, px, py)
     return px, py
 
 
-def get_maps_image(center,markers,zoom):
-    global MAP_IMAGE_SIZE
+def get_maps_image(center, markers, zoom):
     BASE_URL = "https://maps.googleapis.com/maps/api/staticmap?"
     API_KEY = "AIzaSyDD9bBnkYVGlT_4TOWjQkhVe9M3RchWAmU"
     #google maps api limit
-    if(MAP_IMAGE_SIZE > 640):MAP_IMAGE_SIZE=640
     MARKERS_URL = "markers=color:red"
 
     #generate the string to draw all the markers in the map
@@ -74,30 +69,26 @@ def draw_on_image(im_map, tw_im, px, py):
     im_map.paste(im2,(px, py))
 
 
-def get_image_to_post(query,location,count,zoom):
-    #True because i need only geo-located tweet
-    tweets = get_tweets(query,location,True,count)
-
+def make_map(tweets, center, zoom):
     markers = []
     #loop to find all the geo-localized tweet, but not pictures
     for tw in tweets:
-        if not tw['images']:
+        if not tw['images'] and tw['coordinates']:
             #to get the north-west coordinate
             lon,lat = tw["coordinates"][0][1][0],tw["coordinates"][0][1][1]
             markers.append((lat,lon))
 
     #get the coordinates without the radius
-    center = location.rsplit(',', maxsplit=1)[0]
     image = get_maps_image(center,markers,zoom)
 
     float_lat = float(center.split(',')[0])
     float_lon = float(center.split(',')[1])
 
     #draw all the pictures over the map
+    history_pixels = set()
     for tw in tweets:
-        if tw['images']:
-            px,py = coord_to_pixel(float_lat,float_lon,tw["coordinates"][0][1][1],tw["coordinates"][0][1][0],zoom,MAP_IMAGE_SIZE)
+        if tw['images'] and tw['coordinates']:
+            px,py = coord_to_pixel(history_pixels, float_lat,float_lon,tw["coordinates"][0][1][1],tw["coordinates"][0][1][0],zoom,MAP_IMAGE_SIZE)
             draw_on_image(image, tw["images"][0],int(px),int(py))
-    
-    image.save("toPost.png")
+    return image
 

@@ -49,7 +49,7 @@ def get_words_frequency(tweets, word_count):
             dict[w] += 1
 
     items = sorted(dict.items(), key = lambda item: item[1], reverse=True)
-
+ 
     #MAX è il numero di parole nella wordcloud
     MAX = word_count = min(len(items), word_count)
     items = items[0 : word_count]

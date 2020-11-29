@@ -9,8 +9,8 @@ from io import BytesIO
 from words_frequency import get_words_frequency, make_wordcloud
 from twitter import start_stream_listener, stop_stream_listener, streaming_data, get_tweets, post_tweet_with_image
 from tweets import store_tweets, get_stored_tweets_info, get_stored_tweet, delete_stored_tweet, update_tweets_name
-import scheduler
-import automation
+from scheduler import add_autopost_job, init_scheduler
+from map import make_map
 
 # Set default mimetype for .js files
 mimetypes.add_type('application/javascript', '.js')
@@ -40,35 +40,93 @@ def stream_stop():
 def stream_update():
     return Response(json.dumps(list(reversed(streaming_data)), ensure_ascii=False, indent=2), status=200, mimetype="application/json")
 
-# Route to search tweets    
-@application.route('/search')
-def search():
-    count = int(request.args.get("count"))
-    word = request.args.get("keyword")
-    user = request.args.get("user")
-    location = request.args.get("location")
-    images_only = request.args.get("images_only")
-    coordinates_only = request.args.get("coordinates_only")
-    
-    query = ""
+# Get search parameters for get_tweets function
+def get_search_parameters(filters):
+    count = int(filters.get("count"))
+    word = filters.get("keyword")
+    user = filters.get("user")
+    location = filters.get("location")
+    images_only = filters.get("images_only")
+    coordinates_only = filters.get("coordinates_only")
+
+    query =  ""
     if word:
         query += word + " "
     if user:
         query += "from:" + user + " "
     if images_only:
         query += "filter:images "
-    print(query)
 
-    tweets = get_tweets(query, location, coordinates_only, count)
-    
+    result = {
+        'query': query,
+        'location': location,
+        'coordinates_only': coordinates_only,
+        'count': count,
+    }
+
+    return result
+
+
+# Route to search tweets    
+@application.route('/search')
+def search():
+    params = get_search_parameters(request.args)
+    tweets = get_tweets(**params)
     return Response(json.dumps(tweets, ensure_ascii=False, indent=2), status=200, mimetype="application/json")
+
+# Get image from automatic post request body
+def get_image_from_request_body(body):
+    tweets = body["tweets"]
+    kind = body["kind"]
+
+    if kind == "map":
+        zoom = body["zoom"]
+        center = body["center"]
+        return make_map(tweets, center, zoom)
+    elif kind == "wordcloud":
+        return make_wordcloud(get_words_frequency(tweets, 500))
+    else:
+        return None
+
+# Route to get preview of image to post automatically
+@application.route('/postPreview', methods=["POST"])
+def post_preview():
+    body = request.get_json()
+    image = get_image_from_request_body(body)
+    return send_image(image)
+
+# Automate posting of maps and wordclouds
+@application.route('/autopost', methods=["POST"])
+def autopost():
+    body = request.get_json()
+    filters = body['filters']
+    freq = body["frequency"]
+    post_count = body["post_count"]
+    kind = body["kind"]
+
+    # Post the first image immediately
+    image = get_image_from_request_body(body)
+    post_tweet_with_image("Testo di prova", image)
+
+    #Create a scheduled job to post again later
+    if post_count > 1:
+        params = get_search_parameters(filters)
+        # Force coordinates_only for the map
+        if kind == "map":
+            params['coordinates_only'] = True
         
+        args = [params] if kind == "wordcloud" else [params, body['center'], body['zoom']]
+        add_autopost_job(kind, args, freq, post_count - 1) # - 1 because we already posted the first time
+
+    return Response(status=200)
+
 # Route for retrieving tweet collections info
 @application.route('/collections')
 def collections():
     info = get_stored_tweets_info()
     return Response(json.dumps(info, ensure_ascii=False, indent=2), status=200,  mimetype="application/json")
 
+# Create a new collection
 @application.route('/collections', methods=["POST"])
 def save_collection():
     body = request.get_json()
@@ -79,6 +137,7 @@ def save_collection():
     status = 200 if success else 400
     return Response(status=status)
     
+# Rename a collection with the specified id
 @application.route('/collections/<int:id>/name', methods=["POST"])
 def update_collection_name(id):
     body = request.get_json()
@@ -89,6 +148,7 @@ def update_collection_name(id):
     status = 200 if success else 400
     return Response(status=status)
 
+# Get the collection with the specified id
 @application.route('/collections/<int:id>', methods=["GET"])
 def get_collection(id):
     result = get_stored_tweet(id)
@@ -97,19 +157,15 @@ def get_collection(id):
     else:
         return Response(status=400)
 
+# Delete collection with the specified id
 @application.route('/collections/<int:id>', methods=["DELETE"])
 def delete_collection(id):
     success = delete_stored_tweet(id)
     status = 200 if success else 400
     return Response(status=status)
 
-#wordcloud request
-@application.route('/wordcloud/<int:req_count>', methods=["POST"])
-def get_wordcloud(req_count):
-    data = request.get_json()
-
-    image = make_wordcloud(get_words_frequency(data, int(req_count)))
-    
+# Send image as a png in the response body
+def send_image(image):
     image_io = BytesIO()
     image.save(image_io, 'PNG')
     image_io.seek(0)
@@ -117,12 +173,20 @@ def get_wordcloud(req_count):
     #Return the image directly in the body    
     return send_file(image_io, mimetype="image/png")
 
-#frequency words request
+# Wordcloud request
+@application.route('/wordcloud/<int:req_count>', methods=["POST"])
+def get_wordcloud(req_count):
+    data = request.get_json()
+
+    image = make_wordcloud(get_words_frequency(data, int(req_count)))
+    return send_image(image)
+
+# Frequency words request
 @application.route('/frequency/<int:req_count>', methods=["POST"])
 def get_frequency(req_count):
     data = request.get_json()
     freq_list = get_words_frequency(data, int(req_count))
-    return Response(json.dumps(freq_list, ensure_ascii=False, indent=2), status=200,  mimetype="application/json")
+    return Response(json.dumps(freq_list, ensure_ascii=False), status=200,  mimetype="application/json")
 
 # Route for the index page
 @application.route('/')
@@ -141,10 +205,8 @@ def add_header(r):
 
 # Only run this once even if the reloader is running:
 if not (application.debug or os.environ.get("FLASK_ENV") == "development") or os.environ.get("WERKZEUG_RUN_MAIN") == "true":
-    # The app is not in debug mode or we are in the reloaded process
-    #scheduler.test()
+    init_scheduler()
     #post_tweet_with_image("Tweet automatico di prova!", "static/img/logo.png")
-    #automation.get_image_to_post("ciao", '44.69164,10.47674,450km', 100, 7)
     pass
 
 # Run the application
