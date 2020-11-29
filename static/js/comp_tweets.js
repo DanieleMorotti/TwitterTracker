@@ -107,7 +107,7 @@ export default {
                                 <p class="date">${data[i].data}</p>
                                 <h5>${data[i].user}</h5>
                                 <p class="tweet-content">${text}</p>
-                                <button data-toggle="modal" data-target="#tweetModal" >Show</button>
+                                <button class="showBtn" data-toggle="modal" data-target="#tweetModal" >Show</button>
                             </div>`);
                 div.find('button').on("click", () => this.showTweetInModal(url) );
             

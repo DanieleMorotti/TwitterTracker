@@ -59,7 +59,7 @@ body {
 }
 
 #hr-navbar {
-    background-color: #3A525F;
+    background-image:linear-gradient(-8deg, #354b59 18%,#02131a 80%);
     width: 100%;
     height: 5rem;
     list-style-type: none;
@@ -74,7 +74,7 @@ body {
   
 #hr-navbar button {
     display: block;
-    background-color: #2f424c;
+    background-image: linear-gradient(20deg, #6e8a9f 10%, #02131a 80%);
     border-style: none;
     display: inline-block;
     width: 6rem;
@@ -87,21 +87,21 @@ body {
 }
 
 #navbar li:hover{
-    background-color: #e69f23;
+    background-color: #3d41477e;
 }
 
 #navbar .router-link-active {
-    background-color: #e69f23;
+    background-color: #2a2a299e;
 }
 
 #navbar {
-    padding-top: 2rem;
+    padding-top: 5rem;
     height: 100%;
     z-index: 3;
     top: 0;
     left: 0;
     float: left;
-    background-color:  #627481;
+    background-image: linear-gradient(15deg, #000101 0%, #708da2 100%);
     text-align: center;
     width: 6rem;
 }
@@ -122,7 +122,7 @@ body {
 }
    
 #componentView::-webkit-scrollbar-thumb {
-    background: rgb(24 63 92); 
+    background: #62849c; 
     border-radius: 8px;
 }
 #componentView::-webkit-scrollbar {
