@@ -1,5 +1,6 @@
 import tweepy
-  
+import os
+
 # Twitter keys
 API_KEY = 'j6DEP35tCTAxgmoaCYMQAThHw'
 API_SECRET_KEY = 'IStBpbpGzInMyzxAtlg6ZRLpJWZu5hS0SUAm6RB8YdmlNLz9OD'
@@ -36,7 +37,7 @@ class MyStreamListener(tweepy.StreamListener):
             'user':status.user.name, 
             'username': status.user.screen_name, 
             'text': text, 
-            'data':status.created_at.strftime('%m/%d/%Y')
+            'data':status.created_at.strftime('%d/%m/%Y')
         })
 
     # Called when an error occurs
@@ -93,15 +94,15 @@ def get_tweet_images(tweet):
     for m in media:
         if m["type"] == "photo" or m["type"] == "animated_gif":
             images.append(m["media_url"])
-    
     return images
 
+   
 # Method to get a list of tweets
 def get_tweets(query, location, coordinates_only, count):
     result = []
     max_count = count 
     if coordinates_only:
-        max_count = 1000
+        max_count = count*3
 
     # Ask for max_count tweets
     for tweet in tweepy.Cursor(api.search, q=query, geocode=location, count=max_count, tweet_mode="extended", include_entities=True).items(max_count):
@@ -116,14 +117,13 @@ def get_tweets(query, location, coordinates_only, count):
             continue
 
         images = get_tweet_images(tweet)
-        
-            
+    
         result.append({
             'id': tweet.id_str,
             'text': get_tweet_text(tweet), 
             'user':tweet.user.name, 
             'username':tweet.user.screen_name,
-            'data':tweet.created_at.strftime('%m/%d/%Y'),
+            'data':tweet.created_at.strftime('%d/%m/%Y'),
             'location': tweet.user.location,
             'city':city, 
             'coordinates':coordinates,
@@ -135,8 +135,11 @@ def get_tweets(query, location, coordinates_only, count):
     return result
 
 #Tweet on fraydrum
-def post_tweet_with_image(text, img_path):
-    api.update_with_media(img_path, text)
+def post_tweet_with_image(text, image):
+    filename = "temptweet.png"
+    image.save(filename)
+    api.update_with_media(filename, text)
+    os.remove(filename)
 
 #Trends
 def get_trends_at_woeid(woeid):

@@ -8,12 +8,12 @@ import graphsComp from '/static/js/comp_graphs.js'
 
 export const router = new VueRouter({
     routes: [
-      {path: '/',             component: mainComp     },
+      {path: '/',             component: mainComp       },
       {path: '/search',       component: searchComp     },
       {path: '/tweets',       component: tweetComp      },
       {path: '/map',          component: mapComp        },
       {path: '/collections',  component: collectionsComp},
-      {path: '/word_cloud',   component: cloudComp      },
+      {path: '/cloud',        component: cloudComp      },
       {path: '/graphs',       component: graphsComp     },
     ],
   })
@@ -32,7 +32,7 @@ router.beforeEach((to, from, next) => {
     else if (to.path === '/collections') {
       $('#stylesheetComp').attr('href','/static/css/collections.css');
     }
-    else if (to.path === '/word_cloud') {
+    else if (to.path === '/cloud') {
         $('#stylesheetComp').attr('href', '/static/css/cloud.css');
     }
     else if (to.path === '/graphs') {

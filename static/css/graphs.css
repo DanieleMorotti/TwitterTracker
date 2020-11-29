@@ -1,0 +1,29 @@
+h2{
+    margin-top:0;
+    text-align:center;
+    padding-top:2vh;
+    color: white;
+}
+#firstGraph {
+    width: 40%;
+    margin-left: 5%;
+    color: white;
+    font-size: 15px;
+    float:left;
+    margin-top: 5%;
+}
+#secondGraph {
+    width: 40%;
+    margin-right: 5%;
+    color: white;
+    font-size: 15px;
+    float: right;
+    margin-top: 5%;
+}
+#container1, #container2 {
+    height: 500px;
+}
+#info1, #info2 {
+    margin-top: 3%;
+    text-align: center;
+}

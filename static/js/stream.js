@@ -22,20 +22,20 @@ export function streamStart() {
             },
             success: (data) => {
                 $('#tweets').empty();
-                
-                if(streamingInterval)
+
+                if (streamingInterval)
                     clearInterval(streamingInterval);
-                
+
                 // Start an interval timer that updates the tweets every 500ms
                 streamingInterval = setInterval(() => { stream_update(keyword) }, 500);
             },
-            
+
             error: (xhr, ajaxOptions, thrownError) => {
                 console.log("streamStart: " + xhr.status + ' - ' + thrownError);
             }
         });
         return true;
-    }
+    } else return false;
 }
 
 // Stop the stream of tweets

@@ -6,3 +6,5 @@ package-lock.json
 package.json
 download.py
 babel.config.js
+static/pil/wordcloud.png
+

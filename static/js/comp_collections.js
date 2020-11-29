@@ -16,10 +16,12 @@ export default {
             for(let i = 0; i < data.length; i++)
             {
                 let c = data[i];
+                let date = c.date || "";
                 let div = $(`
                 <div class="collection">
                     <input type="text" class="collection-name" value="${c.name}">
                     <p class="collection-count">Count: ${c.count}</p>
+                    <p class="collection-date">${date}</p>
                     <button class="collection-open">Open</button>
                     <button class="collection-delete">Delete</button>
                 </div>

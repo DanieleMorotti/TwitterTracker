@@ -1,7 +1,7 @@
-import { setSearchObj, dispatch_search } from "./search.js";
+import tweetsComp from './comp_tweets.js';
+import { dispatch_search, setSearchObj } from "./search.js";
 import { setStreamObj, streamStart } from "./stream.js";
 
-import tweetsComp from './comp_tweets.js';
 
 // map used to draw the search area
 export var map = null;
@@ -33,6 +33,8 @@ export default {
                 <input type="checkbox" id="streamOff" name="streamOff" value="false">
                 <span class="slider round" @click="changeSearch"></span>
             </label>
+            <label for="tweet-count"> Tweets to show </label>
+            <input id="tweet-count" maxlength=3 type="number" max=500 min=10 step=10 value=250 onkeydown="return false"></input>
             <label for="keyWord" class="text">Key-word </label>
             <input autocomplete="off" type="text" name="keyWord" id="keyWord" />
             <br> 
@@ -71,15 +73,21 @@ export default {
               $("#coordinates").attr("placeholder", "e.g. 41.83,12.48,45.519.14");
               $("#pdi").val("");
               $("#pdi").prop("disabled", true);
+              $("#tweet-count").val("");
+              $("#tweet-count").prop("disabled", true);
+
           }
           else {
               $("#coordinates").val("");
               $("#coordinates").attr("placeholder", "e.g. 45.4773,9.1815");
               $("#pdi").prop("disabled", false);
+              $("#tweet-count").val("250");
+              $("#tweet-count").prop("disabled", false);
           }
         },
         onClickSearch() {
             let newSearchObj = {
+                count: $('#tweet-count').val(),
                 keyword: $('#keyWord').val(),  
                 user: $('#user').val(),
                 center: $('#coordinates').val().replace(/\s+/g, ''),
@@ -99,15 +107,18 @@ export default {
             else {
                 setStreamObj(newSearchObj);
                 success = streamStart();
+                
             }
 
-            if(success) {
+            if (success) {
                 this.$router.push('tweets', () => {
                     setTimeout(() => {
                         tweetsComp.methods.setFilters();
                         tweetsComp.methods.clearTitleAndTweets()
                     }, 0);
                 });
+            } else {
+                //TODO: avvisare in caso di fail
             }
         },
         clearPDI() {
@@ -122,7 +133,7 @@ export default {
 
             //set up the drawing tool
             const drawingManager = new google.maps.drawing.DrawingManager({
-                drawingMode: google.maps.drawing.OverlayType.MARKER,
+                //drawingMode: google.maps.drawing.OverlayType.MARKER,
                 drawingControl: true,
                 drawingControlOptions: {
                     //set the position of the tool and the shapes you can draw

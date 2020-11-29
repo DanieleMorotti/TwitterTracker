@@ -71,8 +71,11 @@ export function loadCollections() {
 }
 
 // Save the currently loaded tweets as a new collection
-export function saveCollection(tweets, filters)
+export function saveCollection(tweets, filters, onSuccess)
 {
+    let d = new Date();
+    let datestring = d.getDate()  + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+
     $.ajax({
         method: "POST",
         url: "/collections",
@@ -81,9 +84,11 @@ export function saveCollection(tweets, filters)
             name: "New collection",
             filters: filters,
             data: tweets,
+            date: datestring
         }),
 
         success: (data) => {
+            onSuccess();
         },
 
         error: (xhr, ajaxOptions, thrownError) => {
