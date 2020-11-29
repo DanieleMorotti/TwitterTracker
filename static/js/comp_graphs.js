@@ -64,18 +64,30 @@ export default {
 
 			//create data
 			var dati = [];
-	
-			// create a chart
-			var chart = anychart.column();
+			let max_req = 10;
+
+			$.ajax({
+                url: '/frequency/' + max_req,
+                type: 'GET',
+                success: (data) => {
+                    console.log(data);
+                },
+                error: (xhr, ajaxOptions, thrownError) => {
+                    console.log("search: " + xhr.status + ' - ' + thrownError);
+                }
+            });
+
+			// // create a chart
+			// var chart = anychart.column();
 			
-			// create a column series and set the data
-			var series = chart.column(dati);
+			// // create a column series and set the data
+			// var series = chart.column(dati);
 			
-			// set the container id
-			chart.container("container2");
+			// // set the container id
+			// chart.container("container2");
 			
-			// initiate drawing the chart
-			chart.draw();
+			// // initiate drawing the chart
+			// chart.draw();
 			}
 	},
 
