@@ -72,7 +72,6 @@ export default {
                     filter.on("click", () => this.deleteFilter(field));
 
                     $('#filters').append(filter);
-                    $('#filters').append('<br>');
 
                 }
             }

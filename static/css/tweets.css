@@ -1,16 +1,10 @@
-@font-face {
-    font-family: 'segoe';
-    src: url('/static/fonts/segoeuisl.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
 
 
 /* Tweet */
 #tweets-search {
     border-radius: 8px;
     margin: 3rem;
+    margin-top: 0;
     overflow-y: scroll;
     /* Hide scrollbar for IE, Edge and Firefox */
     -ms-overflow-style: none;  /* IE and Edge */
@@ -36,16 +30,20 @@
 }
 
 #filters{
-    float: right;
     margin: 0.5rem;
+    margin-left: 3rem;
 }
 
 .filter {
     margin: 0.5rem;
+    background-color: #ffffffc4;
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #f0f0f0;
 }
 
 .tweet h5 {
-    color:  rgb(241, 170, 103);
+    color: #b38491;
 }
 
 .tweet p {
@@ -57,7 +55,9 @@
 }
 
 .tweet mark {
-    background-color: rgb(241, 170, 103);
+    background-color: transparent;
+    color: white;
+    font-weight: 700;
 }
 
 .date {
@@ -94,5 +94,5 @@
     font-size: 1.5rem;
     padding: 0.5rem 1rem;
     border-radius: 5px;
-    font-family: 'segoe', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

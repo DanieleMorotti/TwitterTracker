@@ -1,3 +1,30 @@
+/* flexbox */
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-left {
+  flex: 50%;
+}
+
+.flex-right {
+  flex: 50%;
+  margin-left: 4rem;
+}
+
+@media (max-width: 800px) {
+  .flex-container {
+    flex-direction: column;
+  }
+  .flex-right {
+    margin-left: 0;
+  }
+
+}
+
+/**/
 
 #inputFields {
     float: left;
@@ -42,8 +69,8 @@ label[for="tweet-count"] {
     color: white;
 }
 
-#inputFields > label {
-    color: #98a0a3;
+#inputFields label {
+    color: #7e7e7e;
     margin-bottom: 0.5rem;
     margin-top: 1rem;
 }
@@ -66,7 +93,6 @@ label[for="tweet-count"] {
 
 #searchBtn {
     margin: 3rem;
-    font-weight: 700;
 }
 
 .error_msg {

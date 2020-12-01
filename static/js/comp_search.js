@@ -28,28 +28,32 @@ export default {
     template: `
     <div id="filterComp">
         <div id="inputFields">
-            <label for="streamOff"> Stream </label>
-            <label id="streamSwitch" class="switch">
-                <input type="checkbox" id="streamOff" name="streamOff" value="false">
-                <span class="slider round" @click="changeSearch"></span>
-            </label>
-            <label for="tweet-count"> Tweets to show </label>
-            <input id="tweet-count" maxlength=3 type="number" max=500 min=10 step=10 value=250 onkeydown="return false"></input>
-            <label for="keyWord" class="text">Key-word </label>
-            <input autocomplete="off" type="text" name="keyWord" id="keyWord" />
-            <br> 
-            <label for="user" class="text">User </label>
-            <input autocomplete="off" type="text" name="user" id="user" />
-            <br>
-
-            <label for="pdi" class="text">Point of interest </label>
-            <input autocomplete="off" type="text" name="pdi" id="pdi" placeholder="e.g. Università di Bologna" size="22" /> <br>
+            <div class="flex-container">
+                <div class="flex-left">
+                    <label for="streamOff"> Stream </label>
+                    <label id="streamSwitch" class="switch">
+                        <input type="checkbox" id="streamOff" name="streamOff" value="false">
+                        <span class="slider round" @click="changeSearch"></span>
+                    </label>
+                    <label for="tweet-count"> Tweets to show </label>
+                    <input id="tweet-count" maxlength=3 type="number" max=500 min=10 step=10 value=250 onkeydown="return false"></input><br>
+                    
+                    <label for="keyWord" class="text">Key-word </label><br>
+                    <input autocomplete="off" type="text" name="keyWord" id="keyWord" /><br>
+                    <label for="user" class="text">User </label><br>
+                    <input autocomplete="off" type="text" name="user" id="user" /><br>
+        
+                    <label for="pdi" class="text">Point of interest </label><br>
+                    <input autocomplete="off" type="text" name="pdi" id="pdi" placeholder="e.g. Università di Bologna" size="22" /> <br>
+                    
+                    <label for="coordinates" class="text">Coordinates (lat, long) </label><br>
+                    <input autocomplete="off" type="text" name="coordinates" id="coordinates" placeholder="e.g. 45.4773,9.1815" size="22" @change="updateCircleOnMap()" @keyup.enter="updateCircleOnMap()"/> <br>
+                </div>
+                <div class="flex-right">
+                    <div id="map"></div><br>
+                </div>
+            </div>
             
-            <label for="coordinates" class="text">Coordinates (lat, long) </label>
-            <input autocomplete="off" type="text" name="coordinates" id="coordinates" placeholder="e.g. 45.4773,9.1815" size="22" @change="updateCircleOnMap()" @keyup.enter="updateCircleOnMap()"/> <br>
-            
-            <div id="map"></div><br>
-
             <label for="radius" class= "text">Radius </label>
             <input style="display:inline" id="radius" type="range" min="10" max="1000" step="10"  v-model="value" name="radius" @change="updateCircleOnMap()"/>
             <label style="display:inline"><span v-text="value" id="radiusValue"></span> km</label>

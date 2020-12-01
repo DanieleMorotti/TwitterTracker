@@ -129,6 +129,7 @@ body {
 }
 #componentView::-webkit-scrollbar {
     width: 10px;
+    height: 10px;
 }
 
 /* Map */
@@ -137,9 +138,9 @@ body {
     width: 400px !important;
     display: inline-block;
     margin: 1vh;
-/*    border: 3px solid white;
-    border-radius: 2px;*/
+    border-radius: 10px;
 }
+
 #map > div > div > div:nth-child(4) .gmnoprint{
     left: 250px !important;
     margin: 10px !important;
