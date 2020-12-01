@@ -15,7 +15,7 @@
     border-style: none;
     border: 2px solid #2b6079;
     margin-bottom: 1rem;
-    width: 30vw;
+    width: 40rem;
     color: white
 }
 #inputFields input[type="number"] {
@@ -23,7 +23,7 @@
     width:4em !important;
 }
 label[for="tweet-count"] {
-    margin-left: 3em !important;
+    margin-left: 7em !important;
 }
 #inputFields input[type="text"]::placeholder {
     color: #6090a8;
@@ -57,7 +57,7 @@ label[for="tweet-count"] {
 }
 
 #inputFields > input[type="range"] {
-    width: 20rem;
+    width: 32rem;
 }
 
 #inputFields > input[type="checkbox"] {
