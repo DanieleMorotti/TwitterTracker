@@ -14,7 +14,7 @@ function addPostPreview(div, body)
 
     xhr.onerror = () => console.log("addPostPreview - Failed loading preview");
 
-    xhr.open('POST', '/autopost');
+    xhr.open('POST', '/postPreview');
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.send(JSON.stringify(body));
 }
