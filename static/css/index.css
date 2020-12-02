@@ -13,7 +13,7 @@ html, body, #app {
 }
 
 body {
-    background-color:  rgb(1 18 25);
+    background-color:  rgb(1, 18, 25);
 }
 
 #fraydrum-header {
@@ -28,9 +28,6 @@ body {
 }
 
 #fraydrum-logo {
-    float: right;
-    margin-left: 0.5rem;
-    margin-top: 0.5rem;
 }
 
 .icon {
@@ -60,7 +57,9 @@ body {
     width: 100%;
 }
 
+/*TODO: DA RIMUOVERE
 #hr-navbar {
+    display:none;
     background-image: linear-gradient(160deg, #e2edf5 6vw, #6e8ba0 10vw,#011219 30vw);
     width: 100%;
     height: 5rem;
@@ -76,34 +75,33 @@ body {
   
 #hr-navbar button {
     display: block;
-    background: transparent;/*linear-gradient(20deg, #6e8a9f 10%, #02131a 80%);*/
+    background: transparent;    
     border-style: none;
     display: inline-block;
     width: 6rem;
     height: 5rem;
     outline:0;
 }
-
+*/
 #navbar button:focus {
-    outline:0;
+    outline: 0;
 }
 
 #navbar li:hover{
     background-color: #3d41477e;
 }
 
-#navbar .router-link-active {
+#navbar .router-link-exact-active {
     background-color: #2a2a299e;
 }
 
-#navbar {
-    padding-top: 5rem;
+#navbar {    
     height: 100%;
     z-index: 3;
     top: 0;
     left: 0;
     float: left;
-    background-image: linear-gradient(340deg, #011219 35vh, #708da2 70vh, #e2edf5 95vh);
+    background-image: linear-gradient(340deg, #011219 35vh, #708da2 70vh, #011219 95vh);
     text-align: center;
     width: 6rem;
 }
@@ -116,7 +114,7 @@ body {
 #componentView {
     margin-left: 5rem;
     overflow-y: scroll;
-    height: calc(100vh - 5rem);
+    height: 100%;/*calc(100vh - 5rem);*/
 }
 
 #componentView::-webkit-scrollbar-track {

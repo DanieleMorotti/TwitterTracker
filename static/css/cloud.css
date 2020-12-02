@@ -1,20 +1,18 @@
 #wordcloud {
     display: inline-block;
     float: right;
+    height:40vw;
 }
 
 #wc-img {
-    height: 500px;
-    margin-right:10rem
+    height:100%;
 }
 
 #cloud_loading {
     height: 150px;
     position: relative;
     margin: 0 auto;
-    z-index: 9999999;/*
-    transform: translateY(-200%);
-*/  }
+    z-index: 9999999; }
 
 h3 {
     margin-top: 0;
