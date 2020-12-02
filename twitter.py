@@ -1,5 +1,6 @@
 import tweepy
 import os
+import urllib.parse
 
 # Twitter keys
 API_KEY = 'j6DEP35tCTAxgmoaCYMQAThHw'
@@ -144,9 +145,17 @@ def post_tweet_with_image(text, image):
 #Trends
 def get_trends_at_woeid(woeid):
     res = api.trends_place(woeid)
-    trends = res[0]['trends']
-    sorted_trends = sorted(trends, key=lambda t: t["tweet_volume"] or 0, reverse=True)
-    return sorted_trends
+    
+    trends = []
+    for t in res[0]['trends']:
+        trends.append({
+            "name": t['name'],
+            "count": t['tweet_volume'] or 0,
+            "query": urllib.parse.unquote_plus(t['query']),
+        })
+        
+    #trends = sorted(trends, key=lambda t: t["count"], reverse=True)
+    return trends
 
 def get_places_with_trends(lat, lng):
     places = api.trends_closest(lat, lng)
