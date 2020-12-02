@@ -17,18 +17,18 @@ body {
 }
 
 #fraydrum-header {
-    float: left;
+    float: right;
     font-size: 3rem;
     margin: 0;
     margin-left: 1rem;
     margin-top: 1rem;
-    color: #011219;
+    color: white;
     font-weight:600;
     font-family: 'Ink','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #fraydrum-logo {
-    float: right;
+    float: left;
     margin-left: 0.5rem;
     margin-top: 0.5rem;
 }
@@ -61,7 +61,7 @@ body {
 }
 
 #hr-navbar {
-    background-image: linear-gradient(160deg, #e2edf5 6vw, #6e8ba0 10vw,#011219 30vw);
+    background-image:linear-gradient(-8deg, #354b59 18%,#02131a 80%);
     width: 100%;
     height: 5rem;
     list-style-type: none;

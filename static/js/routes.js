@@ -2,7 +2,7 @@ import mainComp from '/static/js/comp_main.js'
 import searchComp from '/static/js/comp_search.js'
 import tweetComp from '/static/js/comp_tweets.js'
 import mapComp from '/static/js/comp_map.js'
-import collectionsComp from '/static/js/comp_collections.js'
+//import collectionsComp from '/static/js/comp_collections.js'
 import cloudComp from '/static/js/comp_cloud.js'
 import graphsComp from '/static/js/comp_graphs.js'
 
@@ -12,7 +12,7 @@ export const router = new VueRouter({
       {path: '/search',       component: searchComp     },
       {path: '/tweets',       component: tweetComp      },
       {path: '/map',          component: mapComp        },
-      {path: '/collections',  component: collectionsComp},
+  //    {path: '/collections',  component: collectionsComp},
       {path: '/cloud',        component: cloudComp      },
       {path: '/graphs',       component: graphsComp     },
     ],
@@ -29,9 +29,9 @@ router.beforeEach((to, from, next) => {
     else if (to.path === '/map') {
       $('#stylesheetComp').attr('href','/static/css/map.css');
     }
-    else if (to.path === '/collections') {
+   /* else if (to.path === '/collections') {
       $('#stylesheetComp').attr('href','/static/css/collections.css');
-    }
+    } */
     else if (to.path === '/cloud') {
         $('#stylesheetComp').attr('href', '/static/css/cloud.css');
     }

@@ -1,3 +1,4 @@
+/*
 import {loadCollections, openCollection, deleteCollection, updateCollectionName} from './collections.js'
 
 export default {
@@ -40,3 +41,5 @@ export default {
         loadCollections();
     }
 }
+
+*/

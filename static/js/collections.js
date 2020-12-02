@@ -1,10 +1,12 @@
-import collectionsComp from './comp_collections.js'
+//import collectionsComp from './comp_collections.js'
+
 import tweetsComp from './comp_tweets.js'
 import {setSearchObj, searchObj} from './search.js'
 
 // Open a tweet collection
 export function openCollection(id) {
-    $('#toTweets').click();
+    console.log('open')
+ //   $('#toTweets').click();
     $.ajax({
         method: "GET",
         url: "/collections/" + id,
@@ -61,7 +63,8 @@ export function loadCollections() {
         url: "/collections",
 
         success: (data) => {
-            collectionsComp.methods.setCollections(data);
+         //   collectionsComp.methods.setCollections(data);
+             tweetsComp.methods.setCollections(data);
         },
 
         error: (xhr, ajaxOptions, thrownError) => {
