@@ -133,6 +133,11 @@ export default {
             map = new google.maps.Map(document.getElementById("map"), {
                 center: { lat: 41.885453, lng: 12.498221 },
                 zoom: 5,
+                streetViewControl: false,
+                mapTypeControlOptions: {
+                    style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+                    mapTypeIds: ["roadmap", "terrain","hybrid"],
+                }
             });
 
             //set up the drawing tool
