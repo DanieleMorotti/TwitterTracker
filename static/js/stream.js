@@ -1,10 +1,15 @@
-import tweetsComp from './comp_tweets.js';
+import tweetsComp, {lastTweetsList} from './comp_tweets.js';
+import mapComp from './comp_map.js'
+import {router} from './routes.js';
 
 // Interval for the update of the stream of tweets
 export var streamingInterval = null;
+// Current index into the stream
+var streamingIndex = 0;
 
 // Save search filters
 export var streamObj = null;
+
 
 export function setStreamObj(newObj) {
     streamObj = newObj;
@@ -21,13 +26,14 @@ export function streamStart() {
                 word: keyword,
             },
             success: (data) => {
-                $('#tweets').empty();
+                tweetsComp.methods.setTitleAndTweets('0 Streaming Tweets Results', [], "");
 
                 if (streamingInterval)
                     clearInterval(streamingInterval);
 
-                // Start an interval timer that updates the tweets every 500ms
-                streamingInterval = setInterval(() => { stream_update(keyword) }, 500);
+                // Start an interval timer that updates the tweets every second
+                streamingIndex = 0;
+                streamingInterval = setInterval(() => { stream_update(keyword) }, 1000);
             },
 
             error: (xhr, ajaxOptions, thrownError) => {
@@ -40,6 +46,8 @@ export function streamStart() {
 
 // Stop the stream of tweets
 export function stream_stop() {
+    streamingIndex = 0;
+
     //Stop the interval update of the stream
     if(streamingInterval) {
         clearInterval(streamingInterval);
@@ -61,12 +69,23 @@ export function stream_stop() {
 // Update the tweets from the stream
 export function stream_update(word) {
     $.ajax({
-        url: '/streamUpdate',
+        url: '/streamUpdate/' + streamingIndex,
         method: 'GET',
         success: (data) => {
-            tweetsComp.methods.setTitleAndTweets(data.length + ' Streaming Tweets Results', data, word);
+            if(data) {
+                streamingIndex += data.length;
+                tweetsComp.methods.appendTweets(data, word);
+                tweetsComp.methods.setTitle(lastTweetsList.length + ' Streaming Tweets Results');
+                if(router.history.current.path) {
+                    mapComp.methods.drawDataOnMapView(data);
+                }
+            }
         },
         error: function (xhr, ajaxOptions, thrownError) {
+            //Stop the interval update of the stream
+            if(streamingInterval) {
+                clearInterval(streamingInterval);
+            }
             console.log("streamUpdate: " + xhr.status + ' - ' + thrownError);
         }
     });

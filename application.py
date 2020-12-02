@@ -7,7 +7,7 @@ import os
 from io import BytesIO
 
 from words_frequency import get_words_frequency, make_wordcloud
-from twitter import start_stream_listener, stop_stream_listener, streaming_data, get_tweets, post_tweet_with_image
+from twitter import start_stream_listener, stop_stream_listener, streaming_data, get_tweets, post_tweet_with_image, get_trends_at_woeid
 from tweets import store_tweets, get_stored_tweets_info, get_stored_tweet, delete_stored_tweet, update_tweets_name
 from scheduler import add_autopost_job, init_scheduler
 from map import make_map
@@ -26,7 +26,6 @@ def stream_start():
         return Response(status = 400)
     
     start_stream_listener(word)
-    
     return Response(status = 200)
     
 # Route to stop stream
@@ -36,9 +35,11 @@ def stream_stop():
     return Response(status = 200)
 
 # Route to get tweets from the stream
-@application.route('/streamUpdate')
-def stream_update():
-    return Response(json.dumps(list(reversed(streaming_data)), ensure_ascii=False, indent=2), status=200, mimetype="application/json")
+@application.route('/streamUpdate/<int:next_index>')
+def stream_update(next_index):
+    if next_index > len(streaming_data):
+        return Response(status=400)
+    return Response(json.dumps(streaming_data[next_index:], ensure_ascii=False, indent=2), status=200, mimetype="application/json")
 
 # Get search parameters for get_tweets function
 def get_search_parameters(filters):
@@ -187,6 +188,13 @@ def get_frequency(req_count):
     data = request.get_json()
     freq_list = get_words_frequency(data, int(req_count))
     return Response(json.dumps(freq_list, ensure_ascii=False), status=200,  mimetype="application/json")
+
+# Get trends in italy
+@application.route('/trends')
+def get_trends():
+    ITALY_WOEID = 23424853
+    trends = get_trends_at_woeid(ITALY_WOEID)
+    return Response(json.dumps(trends, ensure_ascii=False), status=200,  mimetype="application/json")    
 
 # Route for the index page
 @application.route('/')
