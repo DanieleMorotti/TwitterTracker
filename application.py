@@ -26,7 +26,6 @@ def stream_start():
         return Response(status = 400)
     
     start_stream_listener(word)
-    
     return Response(status = 200)
     
 # Route to stop stream
@@ -36,9 +35,11 @@ def stream_stop():
     return Response(status = 200)
 
 # Route to get tweets from the stream
-@application.route('/streamUpdate')
-def stream_update():
-    return Response(json.dumps(list(reversed(streaming_data)), ensure_ascii=False, indent=2), status=200, mimetype="application/json")
+@application.route('/streamUpdate/<int:next_index>')
+def stream_update(next_index):
+    if next_index > len(streaming_data):
+        return Response(status=400)
+    return Response(json.dumps(streaming_data[next_index:], ensure_ascii=False, indent=2), status=200, mimetype="application/json")
 
 # Get search parameters for get_tweets function
 def get_search_parameters(filters):

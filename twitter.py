@@ -20,25 +20,39 @@ class MyStreamListener(tweepy.StreamListener):
         print("Connected to the server!")
     
     # Called when a new tweet is received
-    def on_status(self, status):
+    def on_status(self, tweet):
+        global streaming_data
+
         text = ""
-        if hasattr(status, "retweeted_status"): # Check if Retweet
+        if hasattr(tweet, "retweeted_status"): # Check if Retweet
             try:
-                text = status.retweeted_status.extended_tweet["full_text"]
+                text = tweet.retweeted_status.extended_tweet["full_text"]
             except AttributeError:
-                text = status.retweeted_status.text
+                text = tweet.retweeted_status.text
         else:
             try:
-                text = status.extended_tweet["full_text"]
+                text = tweet.extended_tweet["full_text"]
             except AttributeError:
-                text = status.text
-        
+                text = tweet.text
+
+        city, coordinates = get_city_and_coordinates(tweet)
+
+        # skip the tweet if we need coordinates and they are not available
+        #if coordinates_only and not coordinates:
+        #    return
+
+        images = get_tweet_images(tweet)
+    
         streaming_data.append({
-            'id': status.id_str, 
-            'user':status.user.name, 
-            'username': status.user.screen_name, 
+            'id': tweet.id_str,
             'text': text, 
-            'data':status.created_at.strftime('%d/%m/%Y')
+            'user':tweet.user.name, 
+            'username':tweet.user.screen_name,
+            'data':tweet.created_at.strftime('%d/%m/%Y'),
+            'location': tweet.user.location,
+            'city':city, 
+            'coordinates':coordinates,
+            'images': images
         })
 
     # Called when an error occurs
@@ -65,7 +79,7 @@ def start_stream_listener(keyword):
     stop_stream_listener()
     
     # Create a new stream with the specified 
-    my_stream = tweepy.Stream(auth = api.auth, listener=myStreamListener, tweet_mode = 'extended')
+    my_stream = tweepy.Stream(auth = api.auth, listener=myStreamListener, tweet_mode="extended")
     my_stream.filter(track=[keyword], is_async=True)
 
 
@@ -97,6 +111,13 @@ def get_tweet_images(tweet):
             images.append(m["media_url"])
     return images
 
+def get_city_and_coordinates(tweet):
+    # Store city coordinates only if they are available in the tweet
+    city = coordinates = ""
+    if tweet.place:
+        coordinates = tweet.place.bounding_box.coordinates
+        city =  tweet.place.full_name
+    return city, coordinates
    
 # Method to get a list of tweets
 def get_tweets(query, location, coordinates_only, count):
@@ -107,12 +128,8 @@ def get_tweets(query, location, coordinates_only, count):
 
     # Ask for max_count tweets
     for tweet in tweepy.Cursor(api.search, q=query, geocode=location, count=max_count, tweet_mode="extended", include_entities=True).items(max_count):
-        # Store city coordinates only if they are available in the tweet
-        city = coordinates = ""
-        if tweet.place:
-            coordinates = tweet.place.bounding_box.coordinates
-            city =  tweet.place.full_name
-        
+        city, coordinates = get_city_and_coordinates(tweet)
+
         # skip the tweet if we need coordinates and they are not available
         if coordinates_only and not coordinates:
             continue

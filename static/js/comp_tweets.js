@@ -92,9 +92,11 @@ export default {
             $("#tweets-search").removeClass('bd-white');
         },
 
-        // Display an array of tweets highlighting the specified word
-        displayTweets(data, word) {
-            $("#tweets-search").empty();
+        //Append an array of tweets to the tweets view highlighting the specified word
+        appendTweets(data, word) {
+            lastTweetsList = lastTweetsList.concat(data);
+            
+            word = word || "";
             let reg = new RegExp(word.trim().replace(' ', '|'), 'gi');
 
             for (let i = 0; i < data.length; i++) {
@@ -126,6 +128,12 @@ export default {
                 $("#tweets-search").addClass('bd-white');
             }
         },
+        
+        // Display an array of tweets highlighting the specified word
+        displayTweets(data, word) {
+            $("#tweets-search").empty();
+            this.appendTweets(data, word);
+        },
 
         setTitle(title) {
             $("#results").empty();
@@ -136,9 +144,11 @@ export default {
         setTitleAndTweets(title, data, word) {
             this.setTitle(title);
             
-            lastTweetsList = data;
+            //Set lastTweetsList as empty list, appendTweets will add the tweets to the list
+            lastTweetsList = [];
             //Make a copy of the search object at the time of search, so that we can use it when we save the collection
             lastTweetsSearchObj = JSON.parse(JSON.stringify(searchObj));
+
             this.displayTweets(data, word);
         }
 

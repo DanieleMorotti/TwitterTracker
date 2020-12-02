@@ -2,6 +2,8 @@
 import {searchObj} from './search.js'
 import tweetComp, {lastTweetsList} from './comp_tweets.js'
 
+var map;
+
 export default {
     name: 'map_view',
     template: `
@@ -13,19 +15,13 @@ export default {
     `,
     methods: {
         //Method to invoke when a marker is clicked, it open a modla displaying the original tweet
-        expandTweet(id) {
-            lastTweetsList.forEach(tweet => {
-                if (tweet.id == id) {
-                    let url = "https://twitter.com/" + tweet.username + "/status/" + id;
-                    
-                    //Work-around to get modal window benefits by clicking a temporary button
-                    let button = $(`<button id="modal-show-btn" data-toggle="modal" data-target="#tweetModal" style="display:none;"></button>`);
-                    button.on("click", () => tweetComp.methods.showTweetInModal(url));
-                    $('#map_view_container').append(button);
-                    $('#modal-show-btn').click();
-                    $('#modal-show-btn').remove();
-                }
-            });
+        expandTweet(url) {
+            //Work-around to get modal window benefits by clicking a temporary button
+            let button = $(`<button id="modal-show-btn" data-toggle="modal" data-target="#tweetModal" style="display:none;"></button>`);
+            button.on("click", () => tweetComp.methods.showTweetInModal(url));
+            $('#map_view_container').append(button);
+            $('#modal-show-btn').click();
+            $('#modal-show-btn').remove();
         },
 
         //Method used to check wheter or not the point found is free from other markers
@@ -50,9 +46,9 @@ export default {
         },
 
         //Take a map as parameter on wich markers are gonna be placed
-        drawDataOnMapView(map) {
+        drawDataOnMapView(tweets) {
             let already_used_coordinates = [];
-            lastTweetsList.forEach(tweet => {
+            tweets.forEach(tweet => {
                 //For each tweet we pick the middle point of
                 //the bounding box and make a marker to display on the map
                 if (tweet.coordinates) {
@@ -67,8 +63,10 @@ export default {
                         position: LatLng,
                         map
                     });
+
                     //Event to invoke expandTweet when a click occur on the marker
-                    marker.addListener("click", () => { this.expandTweet(tweet.id); });
+                    let url = "https://twitter.com/" + tweet.username + "/status/" + tweet.id;
+                    marker.addListener("click", () => { this.expandTweet(url); });
 
                     //If there is at least one image we use that one as the marker 
                     if (tweet.images.length > 0) {
@@ -98,10 +96,12 @@ export default {
     //When the map window is activated from the main sidebar a map is created with the same center of the main one
     activated() {
         var center = (searchObj && searchObj.center) ? searchObj.center : '41.885453,12.498221';
-        var data_map = new google.maps.Map(document.getElementById("data-view-map"), {
+        map = new google.maps.Map(document.getElementById("data-view-map"), {
             center: { lat: Number(center.split(',')[0]), lng: Number(center.split(',')[1]) },
             zoom: 5,
         });
-        if (lastTweetsList) { this.drawDataOnMapView(data_map); }
+
+        if (lastTweetsList) 
+            this.drawDataOnMapView(lastTweetsList);
 	}
 }
