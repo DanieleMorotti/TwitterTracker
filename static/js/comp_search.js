@@ -1,5 +1,5 @@
 import tweetsComp from './comp_tweets.js';
-import { dispatch_search, setSearchObj } from "./search.js";
+import { dispatch_search, searchObj, setSearchObj } from "./search.js";
 import { setStreamObj, streamStart } from "./stream.js";
 
 
@@ -318,38 +318,37 @@ export default {
                 obj.updateCenter(newCenter.lat(), newCenter.lng());
             });
         },
-        searchTrend(query) {
-            console.log(query);
-        }
     },
 
     activated() {
-        $(document).on('click', 'li', (e) => {
-            let count = e.currentTarget.getAttribute('data-count');
-            let keyword = e.currentTarget.getAttribute('data-keyword');
-            $('#tweet-count').val(count > 0 ? count : 1000);
-            $('#keyWord').val(keyword); 
-            this.onClickSearch();
-        });
         //Request trends
         $.ajax({    
             method: "GET",
             url: "/trends",
             success: (data) => {
-                //Data e' una lista di oggetti con i campi 
-                // name: nome del trend
-                // query: stringa di query (parole + hashtag)
-                // count: numero di tweet associati al trend (spesso e' 0 se twitter non e' simpatico)
                 for(let i = 0; i < data.length; i++) {
                     let t = data[i];
-                    let c = t.count;
-                    //console.log(t.name, t.count);
-                    $('#trends-list').append(`
-                        <li data-keyword=${t.query} data-count=${t.count} v-on:click="searchTrend(this.name)">
-                            <h4> ${t.name} </h4>
-                            <p>${c > 0 ? (c > 1000 ? '+' + (c / 1000).toFixed(0) + 'K' : '< 1000') + ' tweets' : 'Nessuna informazione'}</p>
-                        </li>
-                    `);
+                    
+                    let el = $(`<li> <h4>${t.name}</h4> </li>`)
+                    if(t.count > 0)
+                        el.prepend(`<p>${(t.count > 1000 ? (t.count / 1000).toFixed(1) + 'K' : '< 1000') + ' Tweets'}</p>`);
+
+                    el.on("click", () => {
+                        setSearchObj({
+                            count: 250,
+                            keyword: t.query
+                        });
+                        dispatch_search();
+
+                        this.$router.push('tweets', () => {
+                            setTimeout(() => {
+                                tweetsComp.methods.setFilters();
+                                tweetsComp.methods.clearTitleAndTweets()
+                            }, 0);
+                        });
+                    });
+
+                    $('#trends-list').append(el);
                 }
             }
         });
