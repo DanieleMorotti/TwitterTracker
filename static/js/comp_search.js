@@ -67,6 +67,11 @@ export default {
             <br>
             <button id="searchBtn" @click="onClickSearch()">SEARCH</button>
         </div>
+        <div id="Trends">
+            <h3>TRENDIG TODAY</h3>
+            <ul id="trends-list">
+            </ul>
+        </div>
     </div>
     `,
     methods: {
@@ -313,9 +318,19 @@ export default {
                 obj.updateCenter(newCenter.lat(), newCenter.lng());
             });
         },
+        searchTrend(query) {
+            console.log(query);
+        }
     },
 
     activated() {
+        $(document).on('click', 'li', (e) => {
+            let count = e.currentTarget.getAttribute('data-count');
+            let keyword = e.currentTarget.getAttribute('data-keyword');
+            $('#tweet-count').val(count > 0 ? count : 1000);
+            $('#keyWord').val(keyword); 
+            this.onClickSearch();
+        });
         //Request trends
         $.ajax({    
             method: "GET",
@@ -327,7 +342,14 @@ export default {
                 // count: numero di tweet associati al trend (spesso e' 0 se twitter non e' simpatico)
                 for(let i = 0; i < data.length; i++) {
                     let t = data[i];
-                    //console.log(t.name, t.query, t.count);
+                    let c = t.count;
+                    //console.log(t.name, t.count);
+                    $('#trends-list').append(`
+                        <li data-keyword=${t.query} data-count=${t.count} v-on:click="searchTrend(this.name)">
+                            <h4> ${t.name} </h4>
+                            <p>${c > 0 ? (c > 1000 ? '+' + (c / 1000).toFixed(0) + 'K' : '< 1000') + ' tweets' : 'Nessuna informazione'}</p>
+                        </li>
+                    `);
                 }
             }
         });

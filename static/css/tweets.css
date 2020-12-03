@@ -12,7 +12,7 @@
 
 
 #tweets-search .tweet {
-    border: 1px solid rgba(255,255,255,0.6);
+    border: 1px solid rgba(255,255,255,0.2);
     border-radius: 5px;
     padding: 1rem;
     margin-top: 2rem;
@@ -96,7 +96,7 @@
 
 .showBtn {
     float: right;
-    background-color: rgb(1 18 25);
+    background-color: rgb(1, 18, 25);
     color: white;
     border: none;
     box-shadow: 0px 0px 2px white;
@@ -125,7 +125,7 @@
 
 .collection-name {
     font-size: 1.5rem;
-    color:  rgb(185 137 146);
+    color:  rgb(185, 137, 146);
     background-color: transparent;
     outline: none;
     border: 0px;
