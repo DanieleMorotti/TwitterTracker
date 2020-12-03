@@ -1,18 +1,35 @@
-#wordcloud {
-    display: inline-block;
-    float: right;
-    height:40vw;
+#wordcloud-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 40rem;
+    -webkit-flex-direction: row;
 }
 
 #wc-img {
-    height:100%;
+    max-width: 80rem;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+#legend {
+    margin: 0 auto;
+    min-width: 20rem;
+    max-width: 30rem;
+    height: fit-content;
+    background: #212529;
+    color: #fff;
+    border: 1px solid #ffffff24;
+    border-radius: 5px;
 }
 
 #cloud_loading {
     height: 150px;
     position: relative;
     margin: 0 auto;
-    z-index: 9999999; }
+    z-index: 9999999;
+}
 
 h3 {
     margin-top: 0;
@@ -38,14 +55,7 @@ tbody {
     overflow-x: hidden;
 }
 
-#containing {
-    width: 30rem;
-    background: #212529;
-    margin-left: 10rem;
-    color: #fff;
-    border: 1px solid #ffffff24;
-    border-radius: 5px;
-}
+
 
 td {
     width: 20em;
@@ -53,6 +63,10 @@ td {
     border: 1px solid #ffffff24;
     text-align: center;
     padding: .1em;
+}
+
+td:nth-child(2) {
+    width: calc(20em - 5px);
 }
 
 th {

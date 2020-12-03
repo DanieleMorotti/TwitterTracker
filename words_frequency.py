@@ -66,7 +66,13 @@ def get_words_frequency(tweets, word_count):
     for (w, c) in items:
         result[w] = c/total_count
     return result
+#Random colors
+def random_color_func(word=None, font_size=None, position=None,  orientation=None, font_path=None, random_state=None):
+    h = 211 #007bff, twitter main color
+    s = int(100.0 * 255.0 / 255.0)
+    l = int(100.0 * float(random_state.randint(60, 240)) / 255.0)
 
+    return "hsl({}, {}%, {}%)".format(h, s, l)
 
 #Wordcloud
 def make_wordcloud(words):
@@ -85,24 +91,16 @@ def make_wordcloud(words):
             mask=mask,
             font_path = 'static/fonts/seguiemj.ttf',
             random_state=42,
-            max_words=MAX)
+            max_words=MAX,
+            color_func=random_color_func)
     wc.fit_words(words)
     
-    colors = ImageColorGenerator(mask_color)
-    wc.recolor(color_func=colors)
-
+    #colors = ImageColorGenerator(mask_color)
+    #wc.recolor(color_func=colors)
+    #
     #Return a PIL image of the wordcloud
     return wc.to_image()
     
-    # save_folder = 'static/pil'
-    # if not os.path.exists(save_folder):
-    #     os.mkdir(save_folder)
-    
-    # save_path = os.path.join(save_folder, 'wordcloud.png')
-    # wc.to_file(save_path)
-    # return time.time()   
-
-
 #do server-side histograms
 def make_histograms(words_data,max_req):
     #set size in inches
