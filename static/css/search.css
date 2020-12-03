@@ -83,12 +83,12 @@ label[for="tweet-count"] {
     margin-left: 1rem;
 }
 
-#inputFields > input[type="range"] {
-    width: 32rem;
-}
-
 #inputFields > input[type="checkbox"] {
     transform: scale(1.5);
+}
+
+#inputFields > input[type="range"] {
+  width: 30rem;
 }
 
 #searchBtn {
@@ -146,11 +146,11 @@ label[for="tweet-count"] {
   }
   
   input:checked + .slider {
-    background-color: #f18216;
+    background-color: #0075ff;
   }
   
   input:focus + .slider {
-    box-shadow: 0 0 1px #f18216;
+    box-shadow: 0 0 1px #0075ff;
   }
   
   input:checked + .slider:before {

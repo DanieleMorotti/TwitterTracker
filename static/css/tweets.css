@@ -130,7 +130,7 @@
     margin: 0;
 }
 
-.collection-delete, .collection-open, #closeBtn {
+.collection-delete, .collection-open, .collection-add, #closeBtn {
     float: right;
     background-color: transparent;
     outline: none;
@@ -226,5 +226,3 @@
 
 
 }
-  
-  /**/

@@ -29,6 +29,54 @@ export default {
             </div>
         </div>
         <button id="collectionBtn" @click="openNav" style="transform: scale(1.3)"><i class="fas fa-folder-open"></i></button>
+
+        <!-- modal for deleting collections -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">Sei sicuro di voler eliminare questa collezione? </div>
+                <div class="modal-footer"> 
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                    <button id="deleteBtn" type="button" class="btn btn-primary">Conferma</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- modal for opening collections -->
+        <div class="modal fade" id="openModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">Sei apri questa collezione, i dati non salvati andranno persi</div>
+                <div class="modal-footer"> 
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                    <button id="openBtn" type="button" class="btn btn-primary" data-dismiss="modal">Conferma</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- modal for opening collections -->
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">Vuoi aggiungere i risultati a questa collezione?</div>
+                <div class="modal-footer"> 
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                    <button id="addBtn" type="button" class="btn btn-primary" data-dismiss="modal">Conferma</button>
+                </div>
+                </div>
+            </div>
+        </div>
     </div>
     `,
 
@@ -173,8 +221,9 @@ export default {
                 let date = c.date || "";
                 let div = $(`
                 <div class="collection">
-                    <button class="collection-delete"><i class="fas fa-trash" title="delete"></i></button>
-                    <button class="collection-open"><i class="fas fa-book-open" title="read"></i></button>
+                    <button class="collection-delete" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash" title="delete"></i></button>
+                    <button class="collection-open" data-toggle="modal" data-target="#openModal"><i class="fas fa-book-open" title="read"></i></button>
+                    <button class="collection-add" data-toggle="modal" data-target="#addModal"><i class="fas fa-plus"></i></button>
                     <div class="collection-info">
                     <input type="text" class="collection-name" value="${c.name}">
                     <p class="collection-count">Count: ${c.count}</p>
@@ -184,8 +233,12 @@ export default {
                 `);
 
                 div.find('.collection-name').on("change", (e) => updateCollectionName(c.id, $(e.target).val()));
-                div.find(".collection-open").on("click", () => openCollection(c.id));
-                div.find(".collection-delete").on("click", () => deleteCollection(c.id));
+                
+                $("#deleteBtn").on("click", () => deleteCollection(c.id));
+                $("#openBtn").on("click", () => openCollection(c.id));
+
+                /* TODO: define addToCollection function */
+                $("#addBtn").on("click", () => addToCollection(c.id));
 
                 $("#collections").append(div);
             }
