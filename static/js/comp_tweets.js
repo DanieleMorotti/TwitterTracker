@@ -13,9 +13,11 @@ export default {
     <div class="flex-tweet-container">
         <div id="searchDiv" class="flex-tweet-left">
             <div id="tweetsDiv">
-                <button id="stopBtn" @click="streamStop()">Stop</button>
-                <button id="saveBtn" @click="onClickSearch()">Search</button>
-                <button id="save-collection" @click="onClickSave()">Save</button>
+                    <div id="tweetsBtn">
+                    <button id="stopBtn" @click="streamStop()">Stop</button>
+                    <button id="saveBtn" @click="onClickSearch()">Search</button>
+                    <button id="save-collection" @click="onClickSave()">Save</button>
+                    </div>
                 <div id="results"></div>
                 <div id="filters"></div>
                 <div id="tweets-search" style=""></div>

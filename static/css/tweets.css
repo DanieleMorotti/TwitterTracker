@@ -80,11 +80,18 @@
 
 #tweetsDiv {
     height: 100%;
-    margin-left: 1rem;
 }
 
-#stopBtn, #saveBtn, #save-collection {
-    margin-top: 2rem;
+#tweetsBtn {
+    border-bottom: 1px solid rgba(255, 255,255,0.4);
+}
+
+#tweetsBtn button {
+    background-color: transparent;
+    border: none;
+    color: #4191b0;
+    margin: 1rem;
+    font-weight: bold;
 }
 
 .showBtn {
@@ -185,6 +192,7 @@
 #closeBtn {
     display: none;
     font-size: 3rem;
+    margin-right: 1rem;
 }
 
   
@@ -223,6 +231,5 @@
     .collection-count, .collection-date {
         font-size: 1.5rem;
     }
-
 
 }

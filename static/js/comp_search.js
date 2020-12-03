@@ -30,14 +30,13 @@ export default {
         <div id="inputFields">
             <div class="flex-container">
                 <div class="flex-left">
-                    <label for="streamOff"> Stream </label>
+                    <label for="streamOff" style="font-size: 14.5px;"> Stream </label>
                     <label id="streamSwitch" class="switch">
                         <input type="checkbox" id="streamOff" name="streamOff" value="false">
                         <span class="slider round" @click="changeSearch"></span>
                     </label>
-                    <label for="tweet-count"> Tweets to show </label>
+                    <label for="tweet-count" style="font-size: 14.5px;"> Tweets to show </label>
                     <input id="tweet-count" maxlength=3 type="number" max=500 min=10 step=10 value=250 onkeydown="return false"></input><br>
-                    
                     <label for="keyWord" class="text">Key-word </label><br>
                     <input autocomplete="off" type="text" name="keyWord" id="keyWord" /><br>
                     <label for="user" class="text">User </label><br>

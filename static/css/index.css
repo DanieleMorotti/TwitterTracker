@@ -25,6 +25,14 @@ body {
     align-content: center;
 }
 
+.fa-home {
+    display: none;
+}
+
+.fa-chart-bar {
+    transform: scale(1.2);
+}
+
 #loading {
     background: url('/static/img/loading.gif') no-repeat center;
     background-size: contain;
@@ -105,14 +113,11 @@ body {
     }
     
     
+    
 }
 
 
 @media screen and (max-width: 600px) {
-
-    #navbar li:first-child{
-        display: none
-    }
 
     #navbar {
         background-color:transparent;
@@ -123,6 +128,26 @@ body {
 
     #navbar li {
         font-size: 10px;
+    }
+
+    .fa-home {
+        display: block;
+    }
+
+    #fraydrum-logo {
+        display: none
+    }
+
+    #liSearch {
+        margin-left: 0;
+    }
+
+    .icon {
+        transform: scale(0.8);
+    }
+
+    .fa-chart-bar {
+        transform: scale(1);
     }
 }
 
@@ -154,22 +179,11 @@ body {
     height: 10px;
 }
 
-/* on mobile - componentView*/
-
-@media (max-width: 700px) {
-
-    #componentView {
-      margin-left: 1rem; 
-      overflow-y: scroll;
-      height: 100%;
-      width: 100%;
-    }
-}
 
 /* Map */
 #map {
-    height: 300px !important;
-    width: 400px !important;
+    height: 300px ;
+    width: 400px ;
     display: inline-block;
     margin: 1vh;
     border-radius: 10px;
@@ -190,4 +204,29 @@ body {
 
 #map label {
     margin-bottom: 0px;
+}
+
+
+/* on mobile - componentView*/
+
+@media (max-width: 600px) {
+
+    #componentView {
+      margin-left: 0; 
+      overflow-y: scroll;
+      height: 100%;
+      width: 100%;
+    }
+
+    #componentView::-webkit-scrollbar-track {
+        display: none;
+    }
+       
+    #componentView::-webkit-scrollbar-thumb {
+        display: none;
+    }
+    #componentView::-webkit-scrollbar {
+        width:0;
+        height: 0;
+    }
 }
