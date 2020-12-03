@@ -33,7 +33,7 @@ export function dispatch_search() {
             $('#coordinates_err').remove();
         }
         //If coordinates are given the search map is centered on the location
-        if (center) {
+        if (map && center) {
             map.setCenter({ lat: Number(center.split(',')[0]), lng: Number(center.split(',')[1]) });
         }
     }
@@ -99,9 +99,11 @@ function search(count, word, user, center, radius, images_only, coordinates_only
             if (data.length > 0) {
                 //Display the tweets
                 tweetsComp.methods.setTitleAndTweets(data.length + ' Search Tweets Results', data, word);
+                tweetsComp.methods.setTweetsTemporary(true);
             } else {
                 //Display a message if no tweets are available
                 tweetsComp.methods.setTitle('No results for the specified query');
+                tweetsComp.methods.setTweetsTemporary(false);
             }
         },
         error: (xhr, ajaxOptions, thrownError) => { 
