@@ -233,9 +233,9 @@ export default {
                 let date = c.date || "";
                 let div = $(`
                 <div class="collection">
-                    <button class="collection-delete" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash" title="delete"></i></button>
-                    <button class="collection-open" data-toggle="modal" data-target="#openModal"><i class="fas fa-book-open" title="read"></i></button>
-                    <button class="collection-add" data-toggle="modal" data-target="#addModal"><i class="fas fa-plus"></i></button>
+                    <button class="collection-delete" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash" title="Elimina"></i></button>
+                    <button class="collection-open" data-toggle="modal" data-target="#openModal"><i class="fas fa-book-open" title="Sfoglia"></i></button>
+                    <button class="collection-add" data-toggle="modal" data-target="#addModal"><i class="fas fa-plus"title="Aggiungi tweet"></i></button>
                     <div class="collection-info">
                     <input type="text" class="collection-name" value="${c.name}">
                     <p class="collection-count">Count: ${c.count}</p>

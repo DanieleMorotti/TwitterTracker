@@ -6,7 +6,7 @@ import mimetypes
 import os
 from io import BytesIO
 
-from words_frequency import get_words_frequency, make_wordcloud
+from words_frequency import get_words_frequency, make_wordcloud, make_histograms
 from twitter import start_stream_listener, stop_stream_listener, streaming_data, get_tweets, post_tweet_with_image, get_trends_at_woeid
 from tweets import store_tweets, get_stored_tweets_info, get_stored_tweet, delete_stored_tweet, update_tweets_name, add_tweets
 from scheduler import add_autopost_job, init_scheduler
@@ -86,6 +86,10 @@ def get_image_from_request_body(body):
         return make_map(tweets, center, zoom)
     elif kind == "wordcloud":
         return make_wordcloud(get_words_frequency(tweets, 500))
+    elif kind == "histogram_week":
+        return make_histograms(tweets,'week')
+    elif kind == "histogram_perc":
+        return make_histograms(get_words_frequency(tweets, 10),'perc')
     else:
         return None
 
@@ -94,7 +98,12 @@ def get_image_from_request_body(body):
 def post_preview():
     body = request.get_json()
     image = get_image_from_request_body(body)
-    return send_image(image)
+    #because i already have the BytesIO image of the histogram
+    if body['kind'] == 'histogram_week' or body['kind'] == 'histogram_perc':
+        image.seek(0)
+        return send_file(image,mimetype="image/png")
+    else:
+        return send_image(image)
 
 # Automate posting of maps and wordclouds
 @application.route('/autopost', methods=["POST"])
@@ -196,6 +205,7 @@ def get_wordcloud(req_count):
 
     image = make_wordcloud(get_words_frequency(data, int(req_count)))
     return send_image(image)
+
 
 # Frequency words request
 @application.route('/frequency/<int:req_count>', methods=["POST"])

@@ -6,6 +6,9 @@ import string
 import numpy
 import os
 import time
+import matplotlib.pyplot as plt
+from io import BytesIO
+
 MAX = 100
 #Create a list with word and frequency
 def get_words_frequency(tweets, word_count):
@@ -63,7 +66,13 @@ def get_words_frequency(tweets, word_count):
     for (w, c) in items:
         result[w] = c/total_count
     return result
+#Random colors
+def random_color_func(word=None, font_size=None, position=None,  orientation=None, font_path=None, random_state=None):
+    h = 211 #007bff, twitter main color
+    s = int(100.0 * 255.0 / 255.0)
+    l = int(100.0 * float(random_state.randint(60, 240)) / 255.0)
 
+    return "hsl({}, {}%, {}%)".format(h, s, l)
 
 #Wordcloud
 def make_wordcloud(words):
@@ -82,19 +91,60 @@ def make_wordcloud(words):
             mask=mask,
             font_path = 'static/fonts/seguiemj.ttf',
             random_state=42,
-            max_words=MAX)
+            max_words=MAX,
+            color_func=random_color_func)
     wc.fit_words(words)
     
-    colors = ImageColorGenerator(mask_color)
-    wc.recolor(color_func=colors)
-    
+    #colors = ImageColorGenerator(mask_color)
+    #wc.recolor(color_func=colors)
+    #
     #Return a PIL image of the wordcloud
     return wc.to_image()
     
-    # save_folder = 'static/pil'
-    # if not os.path.exists(save_folder):
-    #     os.mkdir(save_folder)
+
+#group the data according to the histogram type is requested
+def make_histograms(words_data,hist_type):
+    x_data = []
+    y_data = []
+    results = {}
     
-    # save_path = os.path.join(save_folder, 'wordcloud.png')
-    # wc.to_file(save_path)
-    # return time.time()   
+    #here words_data contain all the tweets
+    if hist_type=='week':
+        title = 'Tweet per giorno'
+        for tweet in words_data:
+            data = tweet['data']
+            if data in results:
+                results[data]+=1
+            else:
+                results[data]=1
+        
+        x_data = list(results.keys())
+        y_data = list(results.values())
+    #here words_data contain the words with their percentage of usage
+    else:
+        title = '% di utilizzo delle parole'
+        x_data = list(words_data.keys())
+        #get all the frequencies in percentage
+        for word in x_data:
+            y_data.append(round(words_data[word]*100))
+
+    return draw_histogram(x_data,y_data,title,'','')
+
+
+#create the histogram
+def draw_histogram(x_data,y_data,title,x_label,y_label):
+    
+    #set size in inches
+    plt.figure(figsize=(6.4,4.8))
+
+    plt.bar(x_data,y_data,width=0.65)
+    plt.xticks(rotation=30)
+    #add labels and title to the histogram
+    if x_label and y_label:
+        plt.xlabel(x_label)
+        plt.ylabel(y_label)
+    plt.title(title)
+
+    plot_img = BytesIO()
+    plt.savefig(plot_img, format='png',dpi=80,bbox_inches='tight')
+    return plot_img

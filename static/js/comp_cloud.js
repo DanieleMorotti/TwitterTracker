@@ -5,32 +5,35 @@ export default {
     template: `
         <div>
 	      <h3>Wordcloud of most common words in the results</h3>
-            <div id="containing">
+            
+          <div id="wordcloud-container">
+            <div class="flex-cloud-item" id="legend">
               <table id="frequency">
                 <thead>
                   <th>Word</th>
                   <th>Percentage</th>
                 </thead>
-                <tbody>
-                
+                <tbody>         
                 </tbody>
-               </table>
-             </div>
-          <div id="wordcloud"></div>
+              </table>
+            </div>
+          </div>
+
         </div>
     `,
     activated() {
         let max_req = 250;
         if (lastTweetsList) {
-            $('#wordcloud').empty();
-            $('#wordcloud').append('<img id="cloud_loading" src="static/img/wc_loading.gif"></img>');
+            if ($('#wordcloud-container h4').length > 0) {
+                $('#wordcloud-container h4').remove();
+            }
             this.getWordCloud(max_req);
             this.getLegend(max_req);
         } else {
-            if (!$('#wordcloud h4').length > 0) {
-                $('#wordcloud').append('<h4>Search for tweets or just load a collection to see the relative wordcloud</h4>');
+            if (!$('#wordcloud-container h4').length > 0) {
+                $('#wordcloud-container').append('<h4>Search for tweets or just load a collection to see the relative wordcloud</h4>');
             }
-            $('#containing').css('display', 'none');
+            $('#legend').css('display', 'none');
         }
     },
     methods: {
@@ -38,10 +41,12 @@ export default {
             let xhr = new XMLHttpRequest();
             xhr.responseType = 'arraybuffer';
             xhr.onload = () => {
-                $('#wordcloud').empty();
+                if ($('wc-img').length > 0) {
+                    $('#wc-img').remove();
+                }
                 var blb = new Blob([xhr.response], { type: 'image/png' });
                 var url = (window.URL || window.webkitURL).createObjectURL(blb);
-                $('#wordcloud').append(`<img id="wc-img" src="${url}">`);
+                $(`<img id="wc-img" src="${url}">`).insertBefore('#legend');
             }
 
             xhr.onerror = () => console.log("Failed loading wordcloud");
@@ -52,7 +57,7 @@ export default {
         },
         getLegend(max_req) {
             $('#frequency tbody').empty();
-            $('#containing').css('display', 'inline-block');
+            $('#legend').css('display', 'inline-block');
             $.ajax({
                 url: '/frequency/' + max_req,
                 type: 'POST',

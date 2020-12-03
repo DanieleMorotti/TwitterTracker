@@ -11,9 +11,11 @@ h3{
     height: 70vh;
     width: 90vw;
 }
+.gm-style img {
+    border-radius: .5rem;
+}
 #data-view-map > div:first-child {
     margin: 0 auto !important;
-    /*transform: translateY(-150%) !important;*/
 }
 #map_view_container {
     position: absolute;

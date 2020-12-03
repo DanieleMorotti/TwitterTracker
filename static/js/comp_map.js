@@ -99,8 +99,13 @@ export default {
         map = new google.maps.Map(document.getElementById("data-view-map"), {
             center: { lat: Number(center.split(',')[0]), lng: Number(center.split(',')[1]) },
             zoom: 5,
+            streetViewControl: false,
+            mapTypeControlOptions: {
+                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+                mapTypeIds: ["hybrid" , "roadmap"],
+            }
         });
-
+        map.setMapTypeId('hybrid');
         if (lastTweetsList) 
             this.drawDataOnMapView(lastTweetsList);
 	}
