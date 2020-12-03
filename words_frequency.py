@@ -101,25 +101,50 @@ def make_wordcloud(words):
     #Return a PIL image of the wordcloud
     return wc.to_image()
     
-#do server-side histograms
-def make_histograms(words_data,max_req):
+
+#group the data according to the histogram type is requested
+def make_histograms(words_data,hist_type):
+    x_data = []
+    y_data = []
+    results = {}
+    
+    #here words_data contain all the tweets
+    if hist_type=='week':
+        title = 'Tweet per giorno'
+        for tweet in words_data:
+            data = tweet['data']
+            if data in results:
+                results[data]+=1
+            else:
+                results[data]=1
+        
+        x_data = list(results.keys())
+        y_data = list(results.values())
+    #here words_data contain the words with their percentage of usage
+    else:
+        title = '% di utilizzo delle parole'
+        x_data = list(words_data.keys())
+        #get all the frequencies in percentage
+        for word in x_data:
+            y_data.append(round(words_data[word]*100))
+
+    return draw_histogram(x_data,y_data,title,'','')
+
+
+#create the histogram
+def draw_histogram(x_data,y_data,title,x_label,y_label):
+    
     #set size in inches
     plt.figure(figsize=(6.4,4.8))
-    
-    words = words_data.keys()
-    freq = []
 
-    #get all the frequencies in percentage
-    for word in words:
-        freq.append(round(words_data[word]*100))
-       
-    plt.bar(words,freq,width=0.65)
+    plt.bar(x_data,y_data,width=0.65)
     plt.xticks(rotation=30)
-    '''Se vogliamo aggiungere info
-    plt.xlabel('parole')
-    plt.ylabel('numero%')
-    plt.title('Parole presenti nei tweet')
-    plt.savefig('sales.png', transparent=False, dpi=80, bbox_inches="tight")'''
+    #add labels and title to the histogram
+    if x_label and y_label:
+        plt.xlabel(x_label)
+        plt.ylabel(y_label)
+    plt.title(title)
+
     plot_img = BytesIO()
-    plt.savefig(plot_img, format='png',bbox_inches='tight')
+    plt.savefig(plot_img, format='png',dpi=80,bbox_inches='tight')
     return plot_img
