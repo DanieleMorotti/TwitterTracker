@@ -27,6 +27,7 @@ export function streamStart() {
             },
             success: (data) => {
                 tweetsComp.methods.setTitleAndTweets('0 Streaming Tweets Results', [], "");
+                tweetsComp.methods.setTweetsTemporary(true);
 
                 if (streamingInterval)
                     clearInterval(streamingInterval);

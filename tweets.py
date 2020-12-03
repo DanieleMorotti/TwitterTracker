@@ -100,6 +100,32 @@ def update_tweets_name(id, name):
     except:
         return False
 
+def add_tweets(id, tweets):
+    path = get_tweets_path_from_id(id)
+    #try:
+    info = {}
+    with open(path, "r+", encoding='utf-8') as f:
+        info = json.load(f)
+        
+        #Prepare a set with all the ids of tweets in the collection
+        old = set()
+        for t in info["data"]:
+            old.add(t["id"])
+        
+        #Only add the tweet if it's not already in the collection
+        for t in tweets:
+            if not t["id"] in old:
+                info["data"].append(t)
+        info["count"] = len(info["data"])
+        
+        f.seek(0)
+        f.truncate()
+        json.dump(info, f, ensure_ascii=False, indent=2)
+        return True
+    #except:
+    return False
+
+
 
 def test():
     store_tweets("prova1", [{'prova' : "Hello 1"}, {'other' : 'Hello other'}])

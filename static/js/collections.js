@@ -1,19 +1,22 @@
 //import collectionsComp from './comp_collections.js'
 
 import tweetsComp from './comp_tweets.js'
-import {setSearchObj, searchObj} from './search.js'
+import { setSearchObj, searchObj } from './search.js'
+import { stream_stop, streamingInterval } from './stream.js'
 
 // Open a tweet collection
 export function openCollection(id) {
-    console.log('open')
- //   $('#toTweets').click();
     $.ajax({
         method: "GET",
         url: "/collections/" + id,
         success: (info) => {
+            if (streamingInterval) { 
+                stream_stop(); 
+            }
             setSearchObj(info.filters);
             tweetsComp.methods.setFilters();
             tweetsComp.methods.setTitleAndTweets(info.count + " Tweets from collection: " + info.name, info.data, searchObj.keyword || "");
+            tweetsComp.methods.setTweetsTemporary(false);
         },
 
         error: (xhr, ajaxOptions, thrownError) => {
@@ -48,6 +51,28 @@ export function updateCollectionName(id, name) {
         }),
 
         success: (data) => {
+        },
+
+        error: (xhr, ajaxOptions, thrownError) => {
+            console.log("updateCollectionName: " + xhr.status + ' - ' + thrownError);
+        }
+    });
+}
+
+// Add to collection
+export function addToCollection(id, tweets) {
+    console.log(id, tweets)
+    $.ajax({
+        method: "POST",
+        url: `/collections/${id}/add`,
+        contentType: 'application/json',
+        data: JSON.stringify({
+            data: tweets
+        }),
+
+        success: (data) => {
+            // Reload collections to update counts
+            loadCollections();
         },
 
         error: (xhr, ajaxOptions, thrownError) => {

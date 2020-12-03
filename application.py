@@ -8,7 +8,7 @@ from io import BytesIO
 
 from words_frequency import get_words_frequency, make_wordcloud
 from twitter import start_stream_listener, stop_stream_listener, streaming_data, get_tweets, post_tweet_with_image, get_trends_at_woeid
-from tweets import store_tweets, get_stored_tweets_info, get_stored_tweet, delete_stored_tweet, update_tweets_name
+from tweets import store_tweets, get_stored_tweets_info, get_stored_tweet, delete_stored_tweet, update_tweets_name, add_tweets
 from scheduler import add_autopost_job, init_scheduler
 from map import make_map
 
@@ -147,6 +147,21 @@ def update_collection_name(id):
 
     success = update_tweets_name(id, body["name"])
     status = 200 if success else 400
+    return Response(status=status)
+
+# Rename a collection with the specified id
+@application.route('/collections/<int:id>/add', methods=["POST"])
+def add_to_collection(id):
+    print("route")
+    body = request.get_json()
+    if not body:
+        print("no json yo")
+        return Response(status=400)
+
+    print("adding")
+    success = add_tweets(id, body["data"])
+    status = 200 if success else 400
+    print("wat")
     return Response(status=status)
 
 # Get the collection with the specified id

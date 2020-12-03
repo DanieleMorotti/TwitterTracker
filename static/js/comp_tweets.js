@@ -1,11 +1,12 @@
 import { saveCollection } from './collections.js';
 import { searchObj, dispatch_search } from './search.js'
 import { stream_stop } from "./stream.js";
-import { loadCollections, openCollection, deleteCollection, updateCollectionName} from './collections.js'
+import { loadCollections, openCollection, deleteCollection, updateCollectionName, addToCollection} from './collections.js'
 
 
 export var lastTweetsList = null;
 export var lastTweetsSearchObj = null;
+var tweetsAreTemporary = false;
 
 export default {
     name: 'search',
@@ -40,7 +41,7 @@ export default {
                 <div class="modal-body">Sei sicuro di voler eliminare questa collezione? </div>
                 <div class="modal-footer"> 
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
-                    <button id="deleteBtn" type="button" class="btn btn-primary">Conferma</button>
+                    <button id="deleteBtn" type="button" class="btn btn-primary" data-dismiss="modal">Conferma</button>
                 </div>
                 </div>
             </div>
@@ -62,7 +63,7 @@ export default {
             </div>
         </div>
 
-        <!-- modal for opening collections -->
+        <!-- modal for adding to collections -->
         <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -81,11 +82,20 @@ export default {
     `,
 
     methods: {
+        setTweetsTemporary(temporary) {
+            tweetsAreTemporary = temporary;
+        },
+
         streamStop() {
             stream_stop();
         }, 
         onClickSave() {
-            saveCollection(lastTweetsList, lastTweetsSearchObj, () => loadCollections());// () => this.$router.push("collections"));
+            if(lastTweetsList)
+            {
+                saveCollection(lastTweetsList, lastTweetsSearchObj, () => loadCollections());    
+                this.setTitle(lastTweetsList.length + " Tweets from collection: New collection");
+                this.setTweetsTemporary(false);
+            }
         },
 
         onClickSearch() {
@@ -234,11 +244,26 @@ export default {
 
                 div.find('.collection-name').on("change", (e) => updateCollectionName(c.id, $(e.target).val()));
                 
-                $("#deleteBtn").on("click", () => deleteCollection(c.id));
-                $("#openBtn").on("click", () => openCollection(c.id));
+                div.find('.collection-delete').on("click", () => {
+                    $("#deleteBtn").off();
+                    $("#deleteBtn").on("click", () => deleteCollection(c.id));
+                });
+                
+                div.find('.collection-open').on("click", (e) => {
+                    if(tweetsAreTemporary) {
+                        $("#openBtn").off();
+                        $("#openBtn").on("click", () => openCollection(c.id));
+                    } else {
+                        openCollection(c.id);
+                        e.preventDefault();
+                        return false;
+                    }
+                });
 
-                /* TODO: define addToCollection function */
-                $("#addBtn").on("click", () => addToCollection(c.id));
+                div.find('.collection-add').on("click", () => {
+                    $("#addBtn").off();
+                    $("#addBtn").on("click", () => addToCollection(c.id, lastTweetsList));
+                });
 
                 $("#collections").append(div);
             }
