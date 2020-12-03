@@ -80,24 +80,24 @@ export default {
 						dati.push( [parola[i], cont[i]] );
 					}
 
+					//created a set of data to sort the array
+					var view = anychart.data.set(dati).mapAs();
+					var sortedView = view.sort("value", "desc");
+			
 					// create a chart
 					var chart = anychart.column();
-					
 					// create a column series and set the data
-					console.log(dati);
-					var series = chart.column(dati);
+					var series = chart.column(sortedView);
 					
 					// set the container id
-					chart.container("container2");
-					
-					// initiate drawing the chart
+					chart.container("container2");	
 					chart.draw();
                 },
                 error: (xhr, ajaxOptions, thrownError) => {
                     console.log("search: " + xhr.status + ' - ' + thrownError);
                 }
             });
-			}
+		}
 	},
 
 	activated() {

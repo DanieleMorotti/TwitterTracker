@@ -6,6 +6,9 @@ import string
 import numpy
 import os
 import time
+import matplotlib.pyplot as plt
+from io import BytesIO
+
 MAX = 100
 #Create a list with word and frequency
 def get_words_frequency(tweets, word_count):
@@ -87,7 +90,7 @@ def make_wordcloud(words):
     
     colors = ImageColorGenerator(mask_color)
     wc.recolor(color_func=colors)
-    
+
     #Return a PIL image of the wordcloud
     return wc.to_image()
     
@@ -98,3 +101,27 @@ def make_wordcloud(words):
     # save_path = os.path.join(save_folder, 'wordcloud.png')
     # wc.to_file(save_path)
     # return time.time()   
+
+
+#do server-side histograms
+def make_histograms(words_data,max_req):
+    #set size in inches
+    plt.figure(figsize=(6.4,4.8))
+    
+    words = words_data.keys()
+    freq = []
+
+    #get all the frequencies in percentage
+    for word in words:
+        freq.append(round(words_data[word]*100))
+       
+    plt.bar(words,freq,width=0.65)
+    plt.xticks(rotation=30)
+    '''Se vogliamo aggiungere info
+    plt.xlabel('parole')
+    plt.ylabel('numero%')
+    plt.title('Parole presenti nei tweet')
+    plt.savefig('sales.png', transparent=False, dpi=80, bbox_inches="tight")'''
+    plot_img = BytesIO()
+    plt.savefig(plot_img, format='png',bbox_inches='tight')
+    return plot_img

@@ -6,7 +6,7 @@ import mimetypes
 import os
 from io import BytesIO
 
-from words_frequency import get_words_frequency, make_wordcloud
+from words_frequency import get_words_frequency, make_wordcloud, make_histograms
 from twitter import start_stream_listener, stop_stream_listener, streaming_data, get_tweets, post_tweet_with_image, get_trends_at_woeid
 from tweets import store_tweets, get_stored_tweets_info, get_stored_tweet, delete_stored_tweet, update_tweets_name, add_tweets
 from scheduler import add_autopost_job, init_scheduler
@@ -196,6 +196,14 @@ def get_wordcloud(req_count):
 
     image = make_wordcloud(get_words_frequency(data, int(req_count)))
     return send_image(image)
+
+# histograms created server-side
+@application.route('/histograms/<int:req_count>',methods=["POST"])
+def get_histograms(req_count):
+    data = request.get_json()
+    image = make_histograms(get_words_frequency(data, int(req_count)),int(req_count))
+    image.seek(0)
+    return send_file(image,mimetype="image/png")
 
 # Frequency words request
 @application.route('/frequency/<int:req_count>', methods=["POST"])
