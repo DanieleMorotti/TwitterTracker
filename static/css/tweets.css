@@ -12,8 +12,7 @@
 
 
 #tweets-search .tweet {
-    box-shadow: 0px 0px 11px #0557a2;
-    border: 1px solid white;
+    border: 1px solid rgba(255,255,255,0.6);
     border-radius: 5px;
     padding: 1rem;
     margin-top: 2rem;
@@ -50,7 +49,7 @@
 }
 .tweet-content {
     background-color: transparent;
-    padding: 1em;
+    padding: 0;
 }
 
 .tweet mark {
@@ -84,9 +83,8 @@
     margin-left: 1rem;
 }
 
-#tweetsDiv button {
+#stopBtn, #saveBtn, #save-collection {
     margin-top: 2rem;
-
 }
 
 .showBtn {
@@ -181,13 +179,15 @@
     height: 4rem;
     position: fixed;
     bottom: 3rem;
-    right: 3rem;
+    right: 4rem;
 }
 
 #closeBtn {
     display: none;
     font-size: 3rem;
 }
+
+  
 
 @media (max-width: 700px) {
     .flex-tweet-container {
@@ -205,6 +205,7 @@
     
     .flex-tweet-left {
         width:100%;
+        border:none;
     }
 
     #collectionBtn {
@@ -222,6 +223,8 @@
     .collection-count, .collection-date {
         font-size: 1.5rem;
     }
+
+
 }
   
   /**/

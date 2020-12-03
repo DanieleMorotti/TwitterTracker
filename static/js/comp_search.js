@@ -316,6 +316,24 @@ export default {
         },
     },
 
+    activated() {
+        //Request trends
+        $.ajax({    
+            method: "GET",
+            url: "/trends",
+            success: (data) => {
+                //Data e' una lista di oggetti con i campi 
+                // name: nome del trend
+                // query: stringa di query (parole + hashtag)
+                // count: numero di tweet associati al trend (spesso e' 0 se twitter non e' simpatico)
+                for(let i = 0; i < data.length; i++) {
+                    let t = data[i];
+                    //console.log(t.name, t.query, t.count);
+                }
+            }
+        });
+    },
+
     mounted() {
         this.initMap();
         this.initAutocomplete();

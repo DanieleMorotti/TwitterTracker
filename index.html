@@ -40,55 +40,50 @@
 
 	<!--Tooltips enabling-->
 	<script type="text/javascript">
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
+		//Tooltips activation
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		});
+		//Tooltips removing
+		$(document).on('click', '.nav-item', (e) => {
+			$('.tooltip').css('display', 'none');
+        });
 	</script>
 </head>
 	<body>
-		
+			
 		<div id="app">
-			<ul id="hr-navbar" class="nav">
-				<li class="nav-item">
-					<router-link id="toHome" tag="button" to="/">
-						<img id="fraydrum-logo" src="/static/img/logo2.png" alt="logo" width="40">
-					</router-link>
-					<h1 id="fraydrum-header"> Fraydrum</h1>
-
-				</li>
-			</ul>
 			<ul id="navbar" class="nav">
-				<li class="nav-item" >
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home">
+					<router-link id="toHome" tag="button" to="/">
+						<i><img id="fraydrum-logo" src="/static/img/logo.png" alt="logo" width="35"></i>
+					</router-link> 
+				</li>
+				<li id="liSearch" class="nav-item" data-toggle="tooltip" data-placement="right" title="Ricerca">
 					<router-link id="toSearch" tag="button" to="/search">
-					<i class="icon fas fa-search"></i>
+						<i class="icon fas fa-search"></i>
 					</router-link>
 				</li>
-				<li class="nav-item" >
-					<router-link id="toTweets" tag="button" to="/tweets" >
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Risultati e Streaming">
+					<router-link id="toTweets" tag="button" to="/tweets">
 						<i class="icon fab fa-twitter"></i>
 					</router-link>
 				</li>
-				<li class="nav-item" >
-					<router-link id="toMap" tag="button" to="/map" >
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Mappa">
+					<router-link id="toMap" tag="button" to="/map">
 						<i class="icon fas fa-map-marker-alt"></i>
-					</router-link>			
+					</router-link>
 				</li>
-				<!--TO_REMOVE: data-toggle, data-placement, title, disabled, style and the <script> tag in <head>-->
-				<li class="nav-item">
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Word Cloud">
 					<router-link id="toCloud" tag="button" to="/cloud">
 						<i class="icon fas fa-cloud"></i>
 					</router-link>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Grafici">
 					<router-link id="toCharts" tag="button" to="/graphs">
 						<i class="icon far fa-chart-bar" style="transform: scale(1.5)"></i>
 					</router-link>
 				</li>
-			<!--<li class="nav-item">
-					<router-link id="toCollections" tag="button" to="/collections" >
-						<i class="icon fas fa-layer-group"></i>
-					</router-link>
-				</li> -->
 			</ul>
 		
 			<div id="componentView">
@@ -117,6 +112,5 @@
 			</div>
 		</div>
 
-		
 	</body>
 </html>
