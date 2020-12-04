@@ -24,11 +24,9 @@
     border-radius: 5px;
 }
 
-#cloud_loading {
-    height: 150px;
-    position: relative;
-    margin: 0 auto;
-    z-index: 9999999;
+#wc-loading {
+    height: 20rem;
+    margin: auto;
 }
 
 h3 {

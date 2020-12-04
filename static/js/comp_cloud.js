@@ -22,37 +22,45 @@ export default {
         </div>
     `,
     activated() {
-        let max_req = 250;
+        let max_req = 250; 
         if (lastTweetsList) {
+            //Instruction message get deleted
             if ($('#wordcloud-container h4').length > 0) {
                 $('#wordcloud-container h4').remove();
             }
+            //Generate wc and legend
             this.getWordCloud(max_req);
             this.getLegend(max_req);
         } else {
+            //No collection avaiable means instruction message displayed 
             if (!$('#wordcloud-container h4').length > 0) {
                 $('#wordcloud-container').append('<h4>Search for tweets or just load a collection to see the relative wordcloud</h4>');
             }
+            //Hide empty legend
             $('#legend').css('display', 'none');
         }
     },
     methods: {
         getWordCloud(max_req) {
+            //XHR request to get PIL image and display it
             let xhr = new XMLHttpRequest();
             xhr.responseType = 'arraybuffer';
+            //Previous wc removed
+            if ($('#wc-img').length > 0) {
+                $('#wc-img').remove();
+            }
+            $('<img id="wc-loading" src="static/img/wc_loading.gif">').insertBefore('#legend');
             xhr.onload = () => {
-                if ($('wc-img').length > 0) {
-                    $('#wc-img').remove();
-                }
                 var blb = new Blob([xhr.response], { type: 'image/png' });
                 var url = (window.URL || window.webkitURL).createObjectURL(blb);
+                $('#wc-loading').remove();
                 $(`<img id="wc-img" src="${url}">`).insertBefore('#legend');
             }
 
             xhr.onerror = () => console.log("Failed loading wordcloud");
 
             xhr.open('POST', '/wordcloud/' + max_req);
-            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
             xhr.send(JSON.stringify(lastTweetsList));
         },
         getLegend(max_req) {
