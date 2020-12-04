@@ -110,7 +110,9 @@ def make_histograms(words_data,hist_type):
     
     #here words_data contain all the tweets
     if hist_type=='week':
-        title = 'Tweet per giorno'
+        title = ''
+        x_label = 'Days'
+        y_label = 'Number of tweets found'
         for tweet in words_data:
             data = tweet['data']
             if data in results:
@@ -122,29 +124,36 @@ def make_histograms(words_data,hist_type):
         y_data = list(results.values())
     #here words_data contain the words with their percentage of usage
     else:
-        title = '% di utilizzo delle parole'
+        title = ''
+        x_label = 'Most typed words'
+        y_label = '% of occurrences of words'
         x_data = list(words_data.keys())
         #get all the frequencies in percentage
         for word in x_data:
             y_data.append(round(words_data[word]*100))
 
-    return draw_histogram(x_data,y_data,title,'','')
+    return draw_histogram(x_data,y_data,title,x_label,y_label)
 
 
 #create the histogram
 def draw_histogram(x_data,y_data,title,x_label,y_label):
     
-    #set size in inches
+    #set size(in inches) and colors
     plt.figure(figsize=(6.4,4.8))
+    plt.rcParams['axes.facecolor']='#2E93FF'
+    plt.rcParams['axes.edgecolor']='white'
+    plt.rcParams['savefig.facecolor']='#2E93FF'
+    plt.rcParams['font.size'] = '12'
 
-    plt.bar(x_data,y_data,width=0.65)
+    plt.bar(x_data,y_data,width=0.65,color="#004085",edgecolor="white")
     plt.xticks(rotation=30)
+
     #add labels and title to the histogram
     if x_label and y_label:
         plt.xlabel(x_label)
         plt.ylabel(y_label)
-    plt.title(title)
-
+    if title: plt.title(title)
+         
     plot_img = BytesIO()
-    plt.savefig(plot_img, format='png',dpi=80,bbox_inches='tight')
+    plt.savefig(plot_img,format='png',dpi=80,bbox_inches='tight')
     return plot_img

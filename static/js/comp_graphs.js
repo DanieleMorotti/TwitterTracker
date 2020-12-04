@@ -59,7 +59,7 @@ export default {
 			var labelsy = chart.yAxis().labels();
 			labelsx.fontColor("#011219");
 			labelsy.fontColor("#011219");
-			labelsx.rotation(45);
+			labelsx.rotation(320);
 			chart.xAxis().title(' Dates ');
 			chart.yAxis().title('Number of tweets found');
 			chart.xAxis().title().padding(5);
@@ -123,7 +123,7 @@ export default {
 					labelsx.fontColor("#011219");
 					labelsy.fontColor("#011219");
 
-					labelsx.rotation(45);
+					labelsx.rotation(320);
 					chart.xAxis().title('Most used words');
 					chart.yAxis().title('% of occurrences of words');
 					chart.xAxis().title().padding(5);
@@ -169,7 +169,7 @@ export default {
 		}
 
 		/*TODO:Funzione per testare le immagini degli istogrammi create dal server(se volete eliminatela)
-		(function lol(){
+		(function try(){
 			let max_req = 10;
 			let obj = {tweets:lastTweetsList,req_count:max_req,kind:'histogram_week'};
 
