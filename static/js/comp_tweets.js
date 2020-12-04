@@ -3,7 +3,6 @@ import { searchObj, dispatch_search } from './search.js'
 import { stream_stop } from "./stream.js";
 import { loadCollections, openCollection, deleteCollection, updateCollectionName, addToCollection} from './collections.js'
 
-
 export var lastTweetsList = null;
 export var lastTweetsSearchObj = null;
 var tweetsAreTemporary = false;
@@ -120,7 +119,7 @@ export default {
                 $(`#${field}Btn`).remove();
                 let val = searchObj[field];
         
-                if (val && field != 'radius' && field != 'pdi') {
+                if (val && field != 'radius' && field != 'pdi' && field != 'count') {
                     let text = val;
                     if (field == 'center') {
                         //Add parenthesis around the center field
@@ -164,10 +163,13 @@ export default {
             $("#tweets-search").removeClass('bd-white');
         },
 
+        //Concat tweets to the lastTweetsList array
+        concatTweets(data) {
+            lastTweetsList = lastTweetsList.concat(data);
+        },
+
         //Append an array of tweets to the tweets view highlighting the specified word
         appendTweets(data, word) {
-            lastTweetsList = lastTweetsList.concat(data);
-            
             word = word || "";
             let reg = new RegExp(word.trim().replace(' ', '|'), 'gi');
 
@@ -216,8 +218,7 @@ export default {
         setTitleAndTweets(title, data, word) {
             this.setTitle(title);
             
-            //Set lastTweetsList as empty list, appendTweets will add the tweets to the list
-            lastTweetsList = [];
+            lastTweetsList = data;
             //Make a copy of the search object at the time of search, so that we can use it when we save the collection
             lastTweetsSearchObj = JSON.parse(JSON.stringify(searchObj));
 
@@ -281,6 +282,10 @@ export default {
     },
     activated() {
         loadCollections()
+
+        //Refresh the tweets if they arrived from a stream while in another component
+        if(lastTweetsList)
+            this.displayTweets(lastTweetsList, lastTweetsSearchObj.keyword)
     }
 
 }

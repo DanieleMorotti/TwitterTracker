@@ -61,7 +61,6 @@ export function updateCollectionName(id, name) {
 
 // Add to collection
 export function addToCollection(id, tweets) {
-    console.log(id, tweets)
     $.ajax({
         method: "POST",
         url: `/collections/${id}/add`,
