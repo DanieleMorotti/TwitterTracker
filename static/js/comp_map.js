@@ -1,6 +1,7 @@
 
 import {searchObj} from './search.js'
 import tweetComp, {lastTweetsList} from './comp_tweets.js'
+import {addMapPostPreview,autopostMap} from './autopost.js'
 
 var map;
 
@@ -11,6 +12,7 @@ export default {
           <h3>Here you will find the geographical representation of the results of your research</h3>
           <div id="data-view-map"></div>
           <div id="map_view_container"></div>
+          <button class="btn" @click="createModal">Posta</button>
         </div>
     `,
     methods: {
@@ -91,6 +93,13 @@ export default {
                     }
                 }
             });
+        },
+        createModal(){
+            let center = map.getCenter().toString().slice(1,-1);
+            let zoom = map.getZoom();
+            addMapPostPreview($('#imgPreview'),center,zoom);
+            $('#postBtn').attr('onclick',`post('map','${center}',${zoom})`);
+            $('#postModal').modal('show');
         }
     },
     //When the map window is activated from the main sidebar a map is created with the same center of the main one
