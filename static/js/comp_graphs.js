@@ -1,5 +1,5 @@
 import { lastTweetsList } from './comp_tweets.js'
-
+import {addHistogramsPostPreview,post} from './autopost.js'
 export default {
 	name: 'graphs',
 
@@ -21,8 +21,7 @@ export default {
 			<div id="container2"> </div>
 			<div id="info2">Most used words in tweets found (in %) </div>
 		</div>
-		<div id="histo"></div>
-		<div id="histo2"></div>
+		<button @click="createModal">POSTA</button>
 	</div>
 	`,
 
@@ -150,9 +149,29 @@ export default {
                     console.log("search: " + xhr.status + ' - ' + thrownError);
                 }
             });
+		},
+		createModal(){
+			//add the second image and the radio buttons
+			$('#imgPreview').after(`<div id="imgPreview2"></div>
+									<div id="chooseHistogram">
+										<label>Prima immagine <input type="radio" value="histogram_week" name="histoGroup" checked></label>
+										<label>Seconda immagine <input type="radio" value="histogram_perc" name="histoGroup"></label>
+									</div>`);
+
+			addHistogramsPostPreview($('#imgPreview'),'histogram_week');
+			addHistogramsPostPreview($('#imgPreview2'),'histogram_perc');
+            $("#postBtn").off();
+            $("#postBtn").on("click",()=>post('histogram_week'));
+			$('#postModal').modal('show');
+			
+			//add eventListener to change the post parameters when the radio button is changed
+			$('input[type=radio][name="histoGroup"]').change(()=> {
+				let newChoice = $('input[name="histoGroup"]:checked').val();
+				$("#postBtn").off();
+				$("#postBtn").on("click",()=>post(newChoice));
+			}).change();
 		}
 	},
-
 	activated() {
 		if (lastTweetsList != null) {
 			$('#info1').show();
@@ -169,42 +188,5 @@ export default {
 			$('#alert').show();
 		}
 
-		/*TODO:Funzione per testare le immagini degli istogrammi create dal server(se volete eliminatela)
-		(function try(){
-			let max_req = 10;
-			let obj = {tweets:lastTweetsList,req_count:max_req,kind:'histogram_week'};
-
-			let xhr = new XMLHttpRequest();
-			xhr.responseType = 'arraybuffer';
-			xhr.onload = () => {
-				$('#histo').empty();
-				var blb = new Blob([xhr.response], { type: 'image/png' });
-				var url = (window.URL || window.webkitURL).createObjectURL(blb);
-				$('#histo').append(`<img id="wc-img1" src="${url}">`);
-
-				//appena ho terminato faccio questa se no il server va giù
-				let xhr1 = new XMLHttpRequest();
-				obj['kind']="histogram_perc";
-				xhr1.responseType = 'arraybuffer';
-				xhr1.onload = () => {
-					$('#histo2').empty();
-					var blb = new Blob([xhr1.response], { type: 'image/png' });
-					var url = (window.URL || window.webkitURL).createObjectURL(blb);
-					$('#histo2').append(`<img id="wc-img2" src="${url}">`);
-				}
-				xhr1.onerror = () => console.log("Failed loading wordcloud");
-				xhr1.open('POST', '/postPreview');
-				xhr1.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-				xhr1.send(JSON.stringify(obj));
-			}
-
-			xhr.onerror = () => console.log("Failed loading wordcloud");
-			xhr.open('POST', '/postPreview');
-			xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-			xhr.send(JSON.stringify(obj));
-			setTimeout(()=>{console.log("sto aspettando")},5000);
-
-			
-		})();*/
 	}
 }

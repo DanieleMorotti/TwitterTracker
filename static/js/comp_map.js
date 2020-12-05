@@ -1,7 +1,7 @@
 
 import {searchObj} from './search.js'
 import tweetComp, {lastTweetsList} from './comp_tweets.js'
-import {addMapPostPreview,autopostMap} from './autopost.js'
+import {addMapPostPreview,post} from './autopost.js'
 
 var map;
 
@@ -98,7 +98,8 @@ export default {
             let center = map.getCenter().toString().slice(1,-1);
             let zoom = map.getZoom();
             addMapPostPreview($('#imgPreview'),center,zoom);
-            $('#postBtn').attr('onclick',`post('map','${center}',${zoom})`);
+            $("#postBtn").off();
+            $("#postBtn").on("click",()=>post('map'));
             $('#postModal').modal('show');
         }
     },

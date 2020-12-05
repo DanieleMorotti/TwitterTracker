@@ -2,19 +2,29 @@ import { map } from "./comp_search.js";
 import { lastTweetsList, lastTweetsSearchObj } from "./comp_tweets.js";
 import { getSearchQuery } from './search.js'
 
-window.post=function(type,center,zoom){
+//call the right function when the modal button is clicked
+export function post(type){
     let name = $("#postName").val(); 
 	let freq = $("#postFreq").val();
 	let count = $("#postNum").val();
-	//aggiungere possibilità di postare messaggio lato server let mess = $("#postMess").val(); 
+	let mess = $("#postMess").val(); 
     if(type === 'map'){
-        autopostMap(freq,count,center,zoom);
-    }else{
-        console.log("qui");
+        let center = map.getCenter().toString().slice(1,-1);
+        let zoom = map.getZoom();
+        autopostMap(freq,count,center,zoom,mess,name);
     }
-
+    else if(type === 'wc'){
+        autopostWordcloud(freq,count,name);
+    }
+    else{
+        autopostHistogram(freq,count,type,name);
+        $('#imgPreview2,#chooseHistogram').remove();
+    }
+    console.log(type);
+    $('#postModal').modal('hide');
 }
 
+/*Functions for post preview*/
 function addPostPreview(div, body)
 {
     let xhr = new XMLHttpRequest();
@@ -53,6 +63,16 @@ export function addWordcloudPostPreview(div) {
     addPostPreview(div,body);
 }
 
+export function addHistogramsPostPreview(div,hType) {
+    let body = {
+        tweets: lastTweetsList,
+        kind: hType
+    };
+
+    addPostPreview(div,body);
+}
+
+/*Functions for creating automatic post*/
 function autopost(body) {
     $.ajax({
         method: "POST",
@@ -61,6 +81,7 @@ function autopost(body) {
         data: JSON.stringify(body),
 
         success: (data) => {
+            console.log("Post automatico avviato correttamente");
         },
 
         error: (xhr, ajaxOptions, thrownError) => {
@@ -69,9 +90,8 @@ function autopost(body) {
     });
 }
 
-export function autopostMap(freq, post_count, center, zoom) {
-    console.log(freq,post_count,center,zoom);
-    /*let s = lastTweetsSearchObj;
+export function autopostMap(freq, post_count, center, zoom, message, name) {
+    let s = lastTweetsSearchObj;
     let body = {
         tweets: lastTweetsList,
         filters: getSearchQuery(s.count, s.word, s.user, s.center, s.radius, s.images_only, s.coordinates_only),
@@ -79,20 +99,37 @@ export function autopostMap(freq, post_count, center, zoom) {
         center: center,
         zoom: zoom,
         frequency: freq,
-        post_count: post_count
+        post_count: post_count,
+        message: message,
+        post_name:name
     };
     
-    autopost(body)*/
+    autopost(body)
 }
 
-export function autopostWordcloud(freq, post_count) {
+export function autopostWordcloud(freq, post_count, name) {
     let s = lastTweetsSearchObj;
     let body = {
         tweets: lastTweetsList,
         filters: getSearchQuery(s.count, s.word, s.user, s.center, s.radius, s.images_only, s.coordinates_only),
         kind: "wordcloud",
         frequency: freq,
-        post_count: post_count
+        post_count: post_count,
+        post_name:name
+    };
+
+    autopost(body)
+}
+
+export function autopostHistogram(freq, post_count,histo_type, name) {
+    let s = lastTweetsSearchObj;
+    let body = {
+        tweets: lastTweetsList,
+        filters: getSearchQuery(s.count, s.word, s.user, s.center, s.radius, s.images_only, s.coordinates_only),
+        kind: histo_type,
+        frequency: freq,
+        post_count: post_count,
+        post_name:name
     };
 
     autopost(body)

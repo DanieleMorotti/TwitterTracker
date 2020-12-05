@@ -9,8 +9,9 @@ from io import BytesIO
 from words_frequency import get_words_frequency, make_wordcloud, make_histograms
 from twitter import start_stream_listener, stop_stream_listener, streaming_data, get_tweets, post_tweet_with_image, get_trends_at_woeid
 from tweets import store_tweets, get_stored_tweets_info, get_stored_tweet, delete_stored_tweet, update_tweets_name, add_tweets
-from scheduler import add_autopost_job, init_scheduler
+from scheduler import add_autopost_job, init_scheduler, active_jobs, delete_job
 from map import make_map
+
 
 # Set default mimetype for .js files
 mimetypes.add_type('application/javascript', '.js')
@@ -112,12 +113,7 @@ def post_preview():
     if image == None:
         return Response(status=400)
     
-    #because i already have the BytesIO image of the histogram
-    if body['kind'] == 'histogram_week' or body['kind'] == 'histogram_perc':
-        image.seek(0)
-        return send_file(image,mimetype="image/png")
-    else:
-        return send_image(image)
+    return send_image(image)
 
 # Automate posting of maps and wordclouds
 @application.route('/autopost', methods=["POST"])
@@ -127,10 +123,12 @@ def autopost():
     freq = body["frequency"]
     post_count = body["post_count"]
     kind = body["kind"]
+    message = body["message"]
+    name = body["post_name"]
 
     # Post the first image immediately
     image = get_image_from_request_body(body)
-    post_tweet_with_image("Testo di prova", image)
+    post_tweet_with_image(message, image)
 
     #Create a scheduled job to post again later
     if post_count > 1:
@@ -139,10 +137,23 @@ def autopost():
         if kind == "map":
             params['coordinates_only'] = True
         
-        args = [params] if kind == "wordcloud" else [params, body['center'], body['zoom']]
-        add_autopost_job(kind, args, freq, post_count - 1) # - 1 because we already posted the first time
+        args = [params, body['center'], body['zoom'], message] if kind == "map" else [params, message]
+        add_autopost_job(kind, args, freq, post_count - 1, name) # - 1 because we already posted the first time
 
     return Response(status=200)
+
+# get the active automatic post
+@application.route('/getActivePost')
+def sendActiveJobs():
+    return Response(json.dumps(active_jobs, ensure_ascii=False, indent=2), status=200,  mimetype="application/json")
+
+# Delete id post 
+@application.route('/removePost/<string:id>', methods=["DELETE"])
+def remove_post(id):
+    success = delete_job(id)
+    status = 200 if success else 500
+    return Response(status=status)
+
 
 # Route for retrieving tweet collections info
 @application.route('/collections')

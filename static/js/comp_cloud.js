@@ -1,4 +1,5 @@
 import { lastTweetsList } from './comp_tweets.js'
+import {addWordcloudPostPreview,post } from './autopost.js'
 
 export default {
 	name: 'word_cloud',
@@ -18,7 +19,7 @@ export default {
               </table>
             </div>
           </div>
-
+          <button @click="createModal">POSTA</button>
         </div>
     `,
     activated() {
@@ -94,6 +95,12 @@ export default {
                     console.log("search: " + xhr.status + ' - ' + thrownError);
                 }
             });
+        },
+        createModal(){
+            addWordcloudPostPreview($('#imgPreview'));
+            $("#postBtn").off();
+            $("#postBtn").on("click",()=>post('wc'));
+            $('#postModal').modal('show');
         }
     }
 

@@ -153,4 +153,4 @@ def draw_histogram(x_data,y_data,title,x_label,y_label):
     finally:
         plt_lock.release()
     
-    return plot_img
+    return Image.open(plot_img)
