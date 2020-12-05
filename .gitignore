@@ -22,7 +22,8 @@ sonar-project.properties
 # Test files
 .coverage
 .pytest_cache/
-coverage/
+coverage/js/*
+!coverage/js/lcov.info
 
 # Node
 node_modules/
