@@ -90,7 +90,7 @@ export default {
 
 			//create data
 			var dati = [];
-			let max_req = 10;
+			let max_req = 20;
 			$.ajax({
                 url: '/frequency/' + max_req,
 				type: 'POST',
@@ -140,6 +140,12 @@ export default {
 					//titleyBack.cornerType("round");
 					//titleyBack.corners(10);
 					//titleyBack.stroke("#004085");
+
+					// Scrollable
+					chart.xScroller(true);
+					chart.xZoom().setToPointsCount(10, false);
+					chart.xScroller().thumbs().autoHide(true);
+					chart.xScroller().thumbs().hovered().fill("#FFD700");
 
 					// set the container id
 					chart.container("container2");	
