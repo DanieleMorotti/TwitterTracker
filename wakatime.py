@@ -3,7 +3,7 @@ import json
 import datetime
 import sys
 
-url = 'https://wakatime.com/share/@1e6c8175-74f3-46a2-ba63-420902c79a95/2ebb8805-f18f-46ab-a07f-e8e6769790f7.json'
+url = 'https://wakatime.com/share/@sofiagavanelli/56736fa7-d80b-41e4-84cb-be611c07f761.json'
 body = requests.get(url).json()
 
 datefrom = datetime.datetime.strptime("20/11/2020", "%d/%m/%Y")

@@ -54,28 +54,29 @@ export default {
 			
 			// style
 			series.fill("#004085");
-			chart.background().fill("#2E93FF");
+			chart.background().fill("#011219");
 			var labelsx = chart.xAxis().labels();
 			var labelsy = chart.yAxis().labels();
-			labelsx.fontColor("#011219");
-			labelsy.fontColor("#011219");
+			labelsx.fontColor("white");
+			labelsy.fontColor("white");
 			labelsx.rotation(320);
 			chart.xAxis().title(' Dates ');
 			chart.yAxis().title('Number of tweets found');
 			chart.xAxis().title().padding(5);
 			chart.yAxis().title().padding(5);
-			var titlexBack = chart.xAxis().title().background();
-			var titleyBack = chart.yAxis().title().background();
-			titlexBack.enabled(true);
-			titlexBack.fill("#fff");
-			titlexBack.cornerType("round");
-			titlexBack.corners(10);
-			titlexBack.stroke("#004085");
-			titleyBack.enabled(true);
-			titleyBack.fill("#fff");
-			titleyBack.cornerType("round");
-			titleyBack.corners(10);
-			titleyBack.stroke("#004085");
+			//semplificazione della grafica
+			//var titlexBack = chart.xAxis().title().background();
+			//var titleyBack = chart.yAxis().title().background();
+			//titlexBack.enabled(true);
+			//titlexBack.fill("transparent");
+			//titlexBack.cornerType("round");
+			//titlexBack.corners(10);
+			//titlexBack.stroke("#004085");
+			//titleyBack.enabled(false);
+			//titleyBack.fill("#fff");
+			//titleyBack.cornerType("round");
+			//titleyBack.corners(10);
+			//titleyBack.stroke("#004085");
 
 
 			// set the container id
@@ -117,29 +118,29 @@ export default {
 					
 					// style
 					series.fill("#004085");
-					chart.background().fill("#2E93FF"); //#5C99E2
+					chart.background().fill("#011219"); //#5C99E2
 					var labelsx = chart.xAxis().labels();
 					var labelsy = chart.yAxis().labels();
-					labelsx.fontColor("#011219");
-					labelsy.fontColor("#011219");
+					labelsx.fontColor("white");
+					labelsy.fontColor("white");
 
 					labelsx.rotation(320);
 					chart.xAxis().title('Most used words');
 					chart.yAxis().title('% of occurrences of words');
 					chart.xAxis().title().padding(5);
 					chart.yAxis().title().padding(5);
-					var titlexBack = chart.xAxis().title().background();
-					var titleyBack = chart.yAxis().title().background();
-					titlexBack.enabled(true);
-					titlexBack.fill("#fff");
-					titlexBack.cornerType("round");
-					titlexBack.corners(10);
-					titlexBack.stroke("#004085");
-					titleyBack.enabled(true);
-					titleyBack.fill("#fff");
-					titleyBack.cornerType("round");
-					titleyBack.corners(10);
-					titleyBack.stroke("#004085");
+					//var titlexBack = chart.xAxis().title().background();
+					//var titleyBack = chart.yAxis().title().background();
+					//titlexBack.enabled(true);
+					//titlexBack.fill("#fff");
+					//titlexBack.cornerType("round");
+					//titlexBack.corners(10);
+					//titlexBack.stroke("#004085");
+					//titleyBack.enabled(true);
+					//titleyBack.fill("#fff");
+					//titleyBack.cornerType("round");
+					//titleyBack.corners(10);
+					//titleyBack.stroke("#004085");
 
 					// set the container id
 					chart.container("container2");	
