@@ -43,11 +43,15 @@ def add_autopost_job(kind, args, hours, count, name):
     if kind == "map": func = job_autopost_map
     elif kind == "wordcloud": func = job_autopost_wordcloud
     elif kind == "histogram_week": func = job_autopost_hist_week
-    else: func = job_autopost_hist_perc
-    # start = dt.datetime.now() + dt.timedelta(hours = hours)
-    # end = dt.datetime.now() + dt.timedelta(hours = hours) * count - dt.timedelta(minutes = 5)
-    start = dt.datetime.now() + dt.timedelta(minutes = hours)
-    end = start + dt.timedelta(minutes = hours) * count - dt.timedelta(seconds = 30)
+    elif kind == "histogram_perc": func = job_autopost_hist_perc
+    else: return False
+
+    start = dt.datetime.now() + dt.timedelta(hours = hours)
+    end = dt.datetime.now() + dt.timedelta(hours = hours) * count - dt.timedelta(minutes = 5)
+
+    # Minutes instead of hours for testing
+    # start = dt.datetime.now() + dt.timedelta(minutes = hours)
+    # end = start + dt.timedelta(minutes = hours) * count - dt.timedelta(seconds = 30)
 
     id = str(next_job_id)
     active_jobs.append({"id":id,"name":name,"type":kind, "date":start})
@@ -55,6 +59,8 @@ def add_autopost_job(kind, args, hours, count, name):
 
     #scheduler.add_job(func=func, args=args, trigger="interval", hours=hours, start_date=start, end_date=end)
     scheduler.add_job(func=func, args=args, id=id, trigger="interval", minutes=hours, start_date=start, end_date=end)
+    
+    return True
     
 def delete_job(id):
     global active_jobs
@@ -68,30 +74,6 @@ def init_scheduler():
     # Shut down the scheduler when exiting the app
     atexit.register(lambda: scheduler.shutdown())
 
-def test():
-    ITALY_WOEID = 23424853
-    trends = get_trends_at_woeid(ITALY_WOEID)
-    for i in range(min(len(trends), 5)):
-        t = trends[i]
-        name = t['name']
-        query = urllib.parse.unquote_plus(t['query'])
-        
-        info = {}
-        info['name'] = name
-        info['data'] = get_tweets(query, None, False, 100)
-        info['date'] = time.strftime("%d/%m/%Y")
-        info['filters'] = {
-            "keyword": query,
-            "user": "",
-            "center": "",
-            "radius": "",
-            "pdi": "",
-            "images_only": False,
-            "coordinates_only": False
-        }
-
-        store_tweets(info)
-        print(f"Saved {info['count']} tweets on trend: {name} {query}")
 
 
 

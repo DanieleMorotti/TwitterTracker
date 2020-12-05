@@ -33,7 +33,7 @@ function addPostPreview(div, body)
         div.empty();
         var blb = new Blob([xhr.response], {type: 'image/png'});
         var url = (window.URL || window.webkitURL).createObjectURL(blb);
-        div.append(`<img width=200 height=200 src="${url}">`);
+        div.append(`<img style="width: 100%" src="${url}">`);
     }
 
     xhr.onerror = () => console.log("addPostPreview - Failed loading preview");

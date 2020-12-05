@@ -99,6 +99,22 @@ def start_stream_listener(keyword, user, location, coordinates_only, images_only
 
 
 # Search tweets
+
+def build_search_query(word = "", images_only = False, user = ""):
+    query =  ""
+    if word:
+        query += word + " "
+    if images_only:
+        query += "filter:images "
+
+    #Must be last for it to be applied after all filters
+    if user:
+        l = []
+        for u in user.split():
+            l.append("from:" + u)
+        query += " OR ".join(l)
+    return query
+
 def get_tweet_text(tweet):
     try:
        text = tweet.retweeted_status.full_text

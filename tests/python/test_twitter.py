@@ -30,7 +30,7 @@ def tweet_has_fields(t):
 
 # Test the search api
 def test_get_tweets():
-    tweets = get_tweets("test", None, False,10)
+    tweets = get_tweets("test", None, False, 10)
     assert len(tweets) == 10
 
     # test that tweet has the specified fields
@@ -43,7 +43,7 @@ def test_get_tweets():
         assert t["coordinates"]
     
     # test that all the tweets have images if specified in the query
-    tweets = get_tweets("filter:images", None, False, 10)
+    tweets = get_tweets(build_search_query(images_only = True), None, False, 10)
     for t in tweets:
         assert len(t["images"]) > 0
 

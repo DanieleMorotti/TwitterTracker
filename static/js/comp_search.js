@@ -88,18 +88,15 @@ export default {
     `,
     methods: {
         changeSearch() {
-          if(!$("#streamOff").is(":checked")) {
-              $("#coordinates").val("");
-              $("#coordinates").attr("placeholder", "e.g. 41.83,12.48,45.519.14");
-              $("#pdi").val("");
-              $("#pdi").prop("disabled", true);
-              $("#tweet-count").val("");
-              $("#tweet-count").attr("placeholder", "250");
-              $("#tweet-count").prop("disabled", true);
-          }
-          else {
-              $("#tweet-count").val("250");
-          }
+            if(!$("#streamOff").is(":checked")) {
+                $("#tweet-count").prop("disabled", true);
+                $("#tweet-count").val("");
+            }
+            else {
+                $("#tweet-count").prop("disabled", false);
+                $("#tweet-count").val("250");
+            }
+
         },
         onClickSearch() {
             let newSearchObj = {

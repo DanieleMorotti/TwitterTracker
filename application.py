@@ -7,7 +7,7 @@ import os
 from io import BytesIO
 
 from words_frequency import get_words_frequency, make_wordcloud, make_histograms
-from twitter import start_stream_listener, stop_stream_listener, streaming_data, get_tweets, post_tweet_with_image, get_trends_at_woeid
+from twitter import start_stream_listener, stop_stream_listener, streaming_data, get_tweets, post_tweet_with_image, get_trends_at_woeid, build_search_query
 from tweets import store_tweets, get_stored_tweets_info, get_stored_tweet, delete_stored_tweet, update_tweets_name, add_tweets
 from scheduler import add_autopost_job, init_scheduler, active_jobs, delete_job
 from map import make_map
@@ -57,18 +57,7 @@ def get_search_parameters(filters):
     images_only = filters.get("images_only")
     coordinates_only = filters.get("coordinates_only")
 
-    query =  ""
-    if word:
-        query += word + " "
-    if images_only:
-        query += "filter:images "
-
-    #Must be last for it to be applied after all filters
-    if user:
-        l = []
-        for u in user.split():
-            l.append("from:" + u)
-        query += " OR ".join(l)
+    query = build_search_query(word, user, images_only)
 
     result = {
         'query': query,
@@ -144,7 +133,7 @@ def autopost():
 
 # get the active automatic post
 @application.route('/getActivePost')
-def sendActiveJobs():
+def send_active_jobs():
     return Response(json.dumps(active_jobs, ensure_ascii=False, indent=2), status=200,  mimetype="application/json")
 
 # Delete id post 
