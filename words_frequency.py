@@ -8,8 +8,8 @@ import os
 import time
 import matplotlib.pyplot as plt
 from io import BytesIO
+import threading
 
-MAX = 100
 #Create a list with word and frequency
 def get_words_frequency(tweets, word_count):
     words = []
@@ -18,17 +18,6 @@ def get_words_frequency(tweets, word_count):
     stopwords += get_stop_words('spanish')
     stopwords += get_stop_words('french')
     stopwords += get_stop_words('german')
-    stopwords += get_stop_words('hungarian')
-    stopwords += get_stop_words('polish')
-    stopwords += get_stop_words('portuguese')
-    stopwords += get_stop_words('dutch')
-    stopwords += get_stop_words('czech')
-    stopwords += get_stop_words('bulgarian')
-    stopwords += get_stop_words('finnish')
-    stopwords += get_stop_words('norwegian')
-    stopwords += get_stop_words('swedish')
-    stopwords += get_stop_words('romanian')
-    stopwords += get_stop_words('russian')
 
     stopwords.append('')
     stopwords=set(stopwords)
@@ -52,9 +41,8 @@ def get_words_frequency(tweets, word_count):
             dict[w] += 1
 
     items = sorted(dict.items(), key = lambda item: item[1], reverse=True)
- 
-    #MAX è il numero di parole nella wordcloud
-    MAX = word_count = min(len(items), word_count)
+    
+    word_count = min(len(items), word_count)
     items = items[0 : word_count]
     
     total_count = 0
@@ -66,6 +54,7 @@ def get_words_frequency(tweets, word_count):
     for (w, c) in items:
         result[w] = c/total_count
     return result
+
 #Random colors
 def random_color_func(word=None, font_size=None, position=None,  orientation=None, font_path=None, random_state=None):
     h = 211 #007bff, twitter main color
@@ -91,7 +80,6 @@ def make_wordcloud(words):
             mask=mask,
             font_path = 'static/fonts/seguiemj.ttf',
             random_state=42,
-            max_words=MAX,
             color_func=random_color_func)
     wc.fit_words(words)
     
@@ -134,26 +122,35 @@ def make_histograms(words_data,hist_type):
 
     return draw_histogram(x_data,y_data,title,x_label,y_label)
 
+# Lock to not allow concurrent usage of matplotlib
+plt_lock = threading.Lock()
 
 #create the histogram
 def draw_histogram(x_data,y_data,title,x_label,y_label):
+    # acquire the lock to ensure matplotlib is being used only once
+    if not plt_lock.acquire(True, 10):
+        return None
+
+    try:
+        #set size(in inches) and colors
+        plt.figure(figsize=(6.4,4.8))
+        plt.rcParams['axes.facecolor']='#2E93FF'
+        plt.rcParams['axes.edgecolor']='white'
+        plt.rcParams['savefig.facecolor']='#2E93FF'
+        plt.rcParams['font.size'] = '12'
+
+        plt.bar(x_data,y_data,width=0.65,color="#004085",edgecolor="white")
+        plt.xticks(rotation=30)
+
+        #add labels and title to the histogram
+        if x_label and y_label:
+            plt.xlabel(x_label)
+            plt.ylabel(y_label)
+        if title: plt.title(title)
+            
+        plot_img = BytesIO()
+        plt.savefig(plot_img,format='png',dpi=80,bbox_inches='tight')
+    finally:
+        plt_lock.release()
     
-    #set size(in inches) and colors
-    plt.figure(figsize=(6.4,4.8))
-    plt.rcParams['axes.facecolor']='#2E93FF'
-    plt.rcParams['axes.edgecolor']='white'
-    plt.rcParams['savefig.facecolor']='#2E93FF'
-    plt.rcParams['font.size'] = '12'
-
-    plt.bar(x_data,y_data,width=0.65,color="#004085",edgecolor="white")
-    plt.xticks(rotation=30)
-
-    #add labels and title to the histogram
-    if x_label and y_label:
-        plt.xlabel(x_label)
-        plt.ylabel(y_label)
-    if title: plt.title(title)
-         
-    plot_img = BytesIO()
-    plt.savefig(plot_img,format='png',dpi=80,bbox_inches='tight')
     return plot_img

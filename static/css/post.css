@@ -1,0 +1,21 @@
+h2{
+    text-align:center;
+    color:white;
+}
+
+/*Stili per elenco post attivi*/
+#postMenu{
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: #2b6079;
+    padding:2rem;
+    font-family: 'Lucida Sans', Verdana, sans-serif;
+    color:white;
+}   
+#postList{
+    list-style: none;
+}
+
+#postList > li{
+    padding:1.2rem;
+}

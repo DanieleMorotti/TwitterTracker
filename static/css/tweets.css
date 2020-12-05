@@ -137,7 +137,7 @@
     margin: 0;
 }
 
-.collection-delete, .collection-open, .collection-add, #closeBtn {
+.collection-delete, .collection-open, .collection-add {
     float: right;
     background-color: transparent;
     outline: none;
@@ -189,15 +189,11 @@
     right: 4rem;
 }
 
-#closeBtn {
-    display: none;
-    font-size: 3rem;
-    margin-right: 1rem;
-}
+
 
   
 
-@media (max-width: 700px) {
+@media (max-width: 1000px) {
     .flex-tweet-container {
         flex-direction: column;
     }
@@ -220,7 +216,7 @@
         display: block;
     }
 
-    #closeBtn {
+    .closeBtn {
         display: block;
     }
 

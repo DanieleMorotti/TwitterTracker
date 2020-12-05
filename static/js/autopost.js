@@ -1,5 +1,19 @@
+import { map } from "./comp_search.js";
 import { lastTweetsList, lastTweetsSearchObj } from "./comp_tweets.js";
 import { getSearchQuery } from './search.js'
+
+window.post=function(type,center,zoom){
+    let name = $("#postName").val(); 
+	let freq = $("#postFreq").val();
+	let count = $("#postNum").val();
+	//aggiungere possibilità di postare messaggio lato server let mess = $("#postMess").val(); 
+    if(type === 'map'){
+        autopostMap(freq,count,center,zoom);
+    }else{
+        console.log("qui");
+    }
+
+}
 
 function addPostPreview(div, body)
 {
@@ -9,7 +23,7 @@ function addPostPreview(div, body)
         div.empty();
         var blb = new Blob([xhr.response], {type: 'image/png'});
         var url = (window.URL || window.webkitURL).createObjectURL(blb);
-        div.append(`<img width=500 src="${url}">`);
+        div.append(`<img width=200 height=200 src="${url}">`);
     }
 
     xhr.onerror = () => console.log("addPostPreview - Failed loading preview");
@@ -24,7 +38,7 @@ export function addMapPostPreview(div, center, zoom) {
         tweets: lastTweetsList,
         kind: "map",
         center: center,
-        zoom: zoom,
+        zoom: zoom
     };
 
     addPostPreview(div, body);
@@ -36,7 +50,7 @@ export function addWordcloudPostPreview(div) {
         kind: "wordcloud",
     };
 
-    addPostPreview(body);
+    addPostPreview(div,body);
 }
 
 function autopost(body) {
@@ -56,7 +70,8 @@ function autopost(body) {
 }
 
 export function autopostMap(freq, post_count, center, zoom) {
-    let s = lastTweetsSearchObj;
+    console.log(freq,post_count,center,zoom);
+    /*let s = lastTweetsSearchObj;
     let body = {
         tweets: lastTweetsList,
         filters: getSearchQuery(s.count, s.word, s.user, s.center, s.radius, s.images_only, s.coordinates_only),
@@ -67,7 +82,7 @@ export function autopostMap(freq, post_count, center, zoom) {
         post_count: post_count
     };
     
-    autopost(body)
+    autopost(body)*/
 }
 
 export function autopostWordcloud(freq, post_count) {

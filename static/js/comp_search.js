@@ -30,56 +30,72 @@ export default {
         <div id="inputFields">
             <div class="flex-container">
                 <div class="flex-left">
-                    <label for="streamOff" style="font-size: 14.5px;"> Stream </label>
-                    <label id="streamSwitch" class="switch">
-                        <input type="checkbox" id="streamOff" name="streamOff" value="false">
-                        <span class="slider round" @click="changeSearch"></span>
-                    </label>
-                    <label for="tweet-count" style="font-size: 14.5px;"> Tweets to show </label>
-                    <input id="tweet-count" maxlength=3 type="number" max=500 min=10 step=10 value=250 onkeydown="return false"></input><br>
-                    <label for="keyWord" class="text">Key-word </label><br>
-                    <input autocomplete="off" type="text" name="keyWord" id="keyWord" /><br>
-                    <label for="user" class="text">User </label><br>
-                    <input autocomplete="off" type="text" name="user" id="user" /><br>
-        
-                    <label for="pdi" class="text">Point of interest </label><br>
-                    <input autocomplete="off" type="text" name="pdi" id="pdi" placeholder="e.g. Università di Bologna" size="22" /> <br>
-                    
-                    <label for="coordinates" class="text">Coordinates (lat, long) </label><br>
-                    <input autocomplete="off" type="text" name="coordinates" id="coordinates" placeholder="e.g. 45.4773,9.1815" size="22" @change="updateCircleOnMap()" @keyup.enter="updateCircleOnMap()"/> <br>
+                    <div class="float-container">
+                        <div class="float-left">
+                            <label for="streamOff" style="font-size: 14.5px;"> Stream </label>
+                            <label id="streamSwitch" class="switch">
+                                <input type="checkbox" id="streamOff" name="streamOff" value="false">
+                                <span class="slider round" @click="changeSearch"></span>
+                            </label>
+                            <label for="tweet-count" style="font-size: 14.5px;"> Tweets to show </label>
+                            <input id="tweet-count" maxlength=3 type="number" max=500 min=10 step=10 value=250 onkeydown="return false"></input><br>
+                            <label for="keyWord" class="text">Key-word </label><br>
+                            <input autocomplete="off" type="text" name="keyWord" id="keyWord" /><br>
+                            <label for="user" class="text">User </label><br>
+                            <input autocomplete="off" type="text" name="user" id="user" /><br>
+                            
+                        </div>
+                        <div class="float-right">
+                            <label for="pdi" class="text">Point of interest </label><br>
+                            <input autocomplete="off" type="text" name="pdi" id="pdi" placeholder="e.g. Università di Bologna" size="22" /> <br>
+                            
+                            <label for="coordinates" class="text">Coordinates (lat, long) </label><br>
+                            <input autocomplete="off" type="text" name="coordinates" id="coordinates" placeholder="e.g. 45.4773,9.1815" size="22" @change="updateCircleOnMap()" @keyup.enter="updateCircleOnMap()"/> <br>
+                        </div>
+
+                        
+                    </div>
+                    <br>
+                            <label for="radius" class= "text">Radius </label>
+                            <input style="display:inline" id="radius" type="range" min="10" max="1000" step="10"  v-model="value" name="radius" @change="updateCircleOnMap()"/>
+                            <label style="display:inline"><span v-text="value" id="radiusValue"></span> km</label>
+                            <br>
+                
+                            <input type="checkbox" id="images-only">            
+                            <label for="images-only">Show only tweets containing images</label>
+                            <br>
+                
+                            <input type="checkbox" id="coordinates-only">            
+                            <label for="coordinates-only">Show only geo-localized tweets </label>
+                            <br>
+                    <div id="map"></div><br>
+                    <button id="searchBtn" @click="onClickSearch()">SEARCH</button>
+                    <button id="trendsBtn" @click="openTrendNav" title="trends" style="transform: scale(1.1)"><i class="fab fa-slack-hash"></i></button>
+
                 </div>
                 <div class="flex-right">
-                    <div id="map"></div><br>
+                    <div id="Trends">
+                        <button class="closeBtn" @click="closeTrendNav">x</button>
+                        <h3>Trending today</h3>
+                        <ul id="trends-list">
+                        </ul>
+                    </div>
                 </div>
             </div>
-            
-            <label for="radius" class= "text">Radius </label>
-            <input style="display:inline" id="radius" type="range" min="10" max="1000" step="10"  v-model="value" name="radius" @change="updateCircleOnMap()"/>
-            <label style="display:inline"><span v-text="value" id="radiusValue"></span> km</label>
-            <br>
-
-            <input type="checkbox" id="images-only">            
-            <label for="images-only">Show only tweets containing images</label>
-            <br>
-
-            <input type="checkbox" id="coordinates-only">            
-            <label for="coordinates-only">Show only geo-localized tweets </label>
-            <br>
-            <button id="searchBtn" @click="onClickSearch()">SEARCH</button>
         </div>
-        <div id="Trends">
-            <h3>TRENDIG TODAY</h3>
-            <ul id="trends-list">
-            </ul>
-        </div>
+        
     </div>
     `,
     methods: {
         changeSearch() {
           if(!$("#streamOff").is(":checked")) {
-              $("#tweet-count").prop("disabled", true);
+              $("#coordinates").val("");
+              $("#coordinates").attr("placeholder", "e.g. 41.83,12.48,45.519.14");
+              $("#pdi").val("");
+              $("#pdi").prop("disabled", true);
               $("#tweet-count").val("");
-
+              $("#tweet-count").attr("placeholder", "250");
+              $("#tweet-count").prop("disabled", true);
           }
           else {
               $("#tweet-count").val("250");
@@ -308,6 +324,14 @@ export default {
                 obj.updateCenter(newCenter.lat(), newCenter.lng());
             });
         },
+        openTrendNav() {
+            $('.flex-right').css("display","block")
+            $('.flex-left').css("display","none")
+        },
+        closeTrendNav() {
+            $('.flex-left').css("display","block")
+            $('.flex-right').css("display","none")
+        }
     },
 
     activated() {
@@ -324,6 +348,7 @@ export default {
                         el.prepend(`<p>${(t.count > 1000 ? (t.count / 1000).toFixed(1) + 'K' : '< 1000') + ' Tweets'}</p>`);
 
                     el.on("click", () => {
+                        this.closeTrendNav();
                         setSearchObj({
                             count: 250,
                             keyword: t.query

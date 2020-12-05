@@ -22,7 +22,7 @@ class MyStreamListener(tweepy.StreamListener):
 
     # Called when the stream starts
     def on_connect(self):
-        print("Connected to the server!")
+        pass
     
     # Called when a new tweet is received
     def on_status(self, tweet):
@@ -73,9 +73,11 @@ streaming_data = []
 
 # Disconnect current stream if there is one
 def stop_stream_listener():
+    global my_stream
     if(my_stream != None): 
-        my_stream.disconnect()
         streaming_data.clear()
+        my_stream.disconnect()
+        my_stream = None
     
 # Function to starm StreamListener
 def start_stream_listener(keyword, user, location, coordinates_only, images_only):
@@ -84,7 +86,7 @@ def start_stream_listener(keyword, user, location, coordinates_only, images_only
     
     # Disconnect existing stream
     stop_stream_listener()
-    
+
     track = keyword.split() if keyword else None
     follow = user.split() if user else None
     loc = [float(i) for i in location.split(",")] if location else None
@@ -183,22 +185,8 @@ def get_trends_at_woeid(woeid):
             "query": urllib.parse.unquote_plus(t['query']),
         })
         
-    #trends = sorted(trends, key=lambda t: t["count"], reverse=True)
     return trends
 
 def get_places_with_trends(lat, lng):
     places = api.trends_closest(lat, lng)
     return places
-
-def test_trends():
-    ITALY_WOEID = 23424853
-    BOLOGNA_COORDS = (44.4949, 11.3426)
-
-    places = get_places_with_trends(*BOLOGNA_COORDS)
-    print(places)
-    
-    trends = get_trends_at_woeid(ITALY_WOEID)
-    for t in trends:
-        print(t['name'], t['tweet_volume'] or 0)
-
-#test_trends()

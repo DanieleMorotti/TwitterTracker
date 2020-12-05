@@ -126,12 +126,3 @@ def add_tweets(id, tweets):
         return False
 
 
-
-def test():
-    store_tweets("prova1", [{'prova' : "Hello 1"}, {'other' : 'Hello other'}])
-    store_tweets("prova2", [{'prova' : "Hello 2"}])
-    store_tweets("prova3", [{'prova' : "Hello 3"}])
-    print(get_stored_tweets_info())
-    print(get_stored_tweet(2))
-
-#test()
