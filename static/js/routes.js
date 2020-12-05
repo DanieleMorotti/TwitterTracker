@@ -1,10 +1,10 @@
-import mainComp from '/static/js/comp_main.js'
-import searchComp from '/static/js/comp_search.js'
-import tweetComp from '/static/js/comp_tweets.js'
-import mapComp from '/static/js/comp_map.js'
-//import collectionsComp from '/static/js/comp_collections.js'
-import cloudComp from '/static/js/comp_cloud.js'
-import graphsComp from '/static/js/comp_graphs.js'
+import mainComp from './comp_main.js'
+import searchComp from './comp_search.js'
+import tweetComp from './comp_tweets.js'
+import mapComp from './comp_map.js'
+//import collectionsComp from './comp_collections.js'
+import cloudComp from './comp_cloud.js'
+import graphsComp from './comp_graphs.js'
 
 export const router = new VueRouter({
     routes: [

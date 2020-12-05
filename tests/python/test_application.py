@@ -3,7 +3,7 @@ from application import application as app
 
 @pytest.fixture
 def client():
-    app.config["TESTING"] = True;
+    app.config["TESTING"] = True
 
     with app.test_client() as client:
         yield client
