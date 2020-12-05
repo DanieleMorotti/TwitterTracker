@@ -1,6 +1,6 @@
 import tweetsComp from './comp_tweets.js';
 import { dispatch_search, searchObj, setSearchObj } from "./search.js";
-import { setStreamObj, streamStart } from "./stream.js";
+import { streamStart } from "./stream.js";
 
 
 // map used to draw the search area
@@ -98,11 +98,7 @@ export default {
               $("#tweet-count").prop("disabled", true);
           }
           else {
-              $("#coordinates").val("");
-              $("#coordinates").attr("placeholder", "e.g. 45.4773,9.1815");
-              $("#pdi").prop("disabled", false);
               $("#tweet-count").val("250");
-              $("#tweet-count").prop("disabled", false);
           }
         },
         onClickSearch() {
@@ -119,15 +115,13 @@ export default {
 
             let success;
 
+            setSearchObj(newSearchObj);
             if(!$("#streamOff").is(":checked")) {
-                setSearchObj(newSearchObj);
                 success = dispatch_search();
             }
             /* if streaming is active */
             else {
-                setStreamObj(newSearchObj);
                 success = streamStart();
-                
             }
 
             if (success) {

@@ -21,11 +21,15 @@ application = Flask(__name__)
 # Route to start stream
 @application.route('/streamStart')
 def stream_start():
-    word = request.args.get("word")
-    if not word:
+    word = request.args.get("keyword")
+    user = request.args.get("user")
+    location = request.args.get("location")
+    images_only = request.args.get("images_only", False)
+    coordinates_only = request.args.get("coordinates_only", False)
+    if not (word or user or location):
         return Response(status = 400)
-    
-    start_stream_listener(word)
+
+    start_stream_listener(word, user, location, coordinates_only, images_only)
     return Response(status = 200)
     
 # Route to stop stream
@@ -43,7 +47,9 @@ def stream_update(next_index):
 
 # Get search parameters for get_tweets function
 def get_search_parameters(filters):
-    count = int(filters.get("count"))
+    countstr = filters.get("count")
+    count = int(countstr) if countstr else 100
+
     word = filters.get("keyword")
     user = filters.get("user")
     location = filters.get("location")
@@ -53,10 +59,15 @@ def get_search_parameters(filters):
     query =  ""
     if word:
         query += word + " "
-    if user:
-        query += "from:" + user + " "
     if images_only:
         query += "filter:images "
+
+    #Must be last for it to be applied after all filters
+    if user:
+        l = []
+        for u in user.split():
+            l.append("from:" + u)
+        query += " OR ".join(l)
 
     result = {
         'query': query,
@@ -161,16 +172,11 @@ def update_collection_name(id):
 # Rename a collection with the specified id
 @application.route('/collections/<int:id>/add', methods=["POST"])
 def add_to_collection(id):
-    print("route")
     body = request.get_json()
     if not body:
-        print("no json yo")
         return Response(status=400)
-
-    print("adding")
     success = add_tweets(id, body["data"])
     status = 200 if success else 400
-    print("wat")
     return Response(status=status)
 
 # Get the collection with the specified id

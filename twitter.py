@@ -15,6 +15,11 @@ api = tweepy.API(auth)
 
 # Stream tweets
 class MyStreamListener(tweepy.StreamListener):
+
+    def set_additional_filters(self, coordinates_only, images_only):
+        self.coordinates_only = coordinates_only
+        self.images_only = images_only
+
     # Called when the stream starts
     def on_connect(self):
         print("Connected to the server!")
@@ -36,12 +41,14 @@ class MyStreamListener(tweepy.StreamListener):
                 text = tweet.text
 
         city, coordinates = get_city_and_coordinates(tweet)
-
         # skip the tweet if we need coordinates and they are not available
-        #if coordinates_only and not coordinates:
-        #    return
-
+        if self.coordinates_only and not coordinates:
+            return        
+            
         images = get_tweet_images(tweet)
+        #skip the tweet if we need only tweets with images and the tweet doesn't have any
+        if self.images_only and not images:
+            return 
     
         streaming_data.append({
             'id': tweet.id_str,
@@ -71,16 +78,21 @@ def stop_stream_listener():
         streaming_data.clear()
     
 # Function to starm StreamListener
-def start_stream_listener(keyword):
+def start_stream_listener(keyword, user, location, coordinates_only, images_only):
     global myStreamListener
     global my_stream
     
     # Disconnect existing stream
     stop_stream_listener()
     
-    # Create a new stream with the specified 
+    track = keyword.split() if keyword else None
+    follow = user.split() if user else None
+    loc = [float(i) for i in location.split(",")] if location else None
+
+    # Create a new stream with the specified
     my_stream = tweepy.Stream(auth = api.auth, listener=myStreamListener, tweet_mode="extended")
-    my_stream.filter(track=[keyword], is_async=True)
+    my_stream.filter(track=track, follow=follow, locations=loc, is_async=True)
+    myStreamListener.set_additional_filters(coordinates_only, images_only)
 
 
 
@@ -122,9 +134,9 @@ def get_city_and_coordinates(tweet):
 # Method to get a list of tweets
 def get_tweets(query, location, coordinates_only, count):
     result = []
-    max_count = count 
+    max_count = min(count, 1000) 
     if coordinates_only:
-        max_count = count*3
+        max_count = 1000
 
     # Ask for max_count tweets
     for tweet in tweepy.Cursor(api.search, q=query, geocode=location, count=max_count, tweet_mode="extended", include_entities=True).items(max_count):
