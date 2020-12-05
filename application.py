@@ -109,6 +109,9 @@ def get_image_from_request_body(body):
 def post_preview():
     body = request.get_json()
     image = get_image_from_request_body(body)
+    if image == None:
+        return Response(status=400)
+    
     #because i already have the BytesIO image of the histogram
     if body['kind'] == 'histogram_week' or body['kind'] == 'histogram_perc':
         image.seek(0)
