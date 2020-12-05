@@ -25,11 +25,9 @@ export default {
             </div>
         </div>
         <div id="collectionDiv" class="flex-tweet-right" >
-            <button id="closeBtn" @click="closeNav">x</button>
+            <button class="closeBtn" @click="closeNav">x</button>
             <h4>Le tue collezioni</h4>
-            <div>
             <div id="collections"></div>
-            </div>
         </div>
         <button id="collectionBtn" @click="openNav" style="transform: scale(1.3)"><i class="fas fa-folder-open"></i></button>
 
@@ -235,7 +233,7 @@ export default {
                 <div class="collection">
                     <button class="collection-delete" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash" title="Elimina"></i></button>
                     <button class="collection-open" data-toggle="modal" data-target="#openModal"><i class="fas fa-book-open" title="Sfoglia"></i></button>
-                    <button class="collection-add" data-toggle="modal" data-target="#addModal"><i class="fas fa-plus"title="Aggiungi tweet"></i></button>
+                    <button class="collection-add" data-toggle="modal" data-target="#addModal"><i class="fas fa-plus" title="Aggiungi tweet"></i></button>
                     <div class="collection-info">
                     <input type="text" class="collection-name" value="${c.name}">
                     <p class="collection-count">Count: ${c.count}</p>
@@ -252,6 +250,7 @@ export default {
                 });
                 
                 div.find('.collection-open').on("click", (e) => {
+                    this.closeNav();
                     if(tweetsAreTemporary) {
                         $("#openBtn").off();
                         $("#openBtn").on("click", () => openCollection(c.id));

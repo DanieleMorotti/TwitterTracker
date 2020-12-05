@@ -6,31 +6,62 @@
 }
 
 .flex-left {
-    flex: 50%;
+    flex: 65%;
+    margin: 2rem;
 }
 
 .flex-right {
+    flex: 20%;
+    border-left: 1px solid #2b6079;
+}
+
+.flex-right .closeBtn {
+    display: none;
+}
+
+.float-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.float-left {
     flex: 50%;
-    margin-left: 4rem;
+    display: inline;
+    float: left;
+    margin-right: 2rem;
+    margin-top: 2rem;
 }
 
-@media (max-width: 800px) {
-    .flex-container {
-        flex-direction: column;
-    }
-
-    .flex-right {
-        margin-left: 0;
-    }
+.float-right {
+    flex: 50%;
+    float: right;
+    margin-top: 6rem;
 }
+
 /* */
 
 /* Trends */
+
+#trendsBtn {
+    display: none;
+    float: right;
+    position: fixed;
+    top: 1rem;
+    right: 3rem;
+    margin: 2rem;
+    background-color: #2b414d;
+    box-shadow: 0px 0px 11px white;
+    color: white;
+    outline: none;
+    border: none;
+    border-radius: 3rem;
+    width: 5rem;
+    height: 5rem;
+}
+
 #Trends {
     width: 100%;
-    border: 2px solid #2b6079;
     overflow-y: auto;
-    overflow-x: hidden;
     color: #cecece;
 }
 
@@ -39,7 +70,6 @@
     padding: 1rem;
     height: 90vh;
     overflow-y: auto;
-    overflow-x: hidden;
 }
 
 #Trends ul::-webkit-scrollbar {
@@ -58,20 +88,19 @@
 
 #Trends li {
     padding: 0 1rem 0 1rem;
-    border: 2px solid #2b6079;
+    border: 1px solid rgb(112 145 160);
     margin: 1rem 0;
     border-radius: .5rem;
-    background-color: #2b607966;
+    background-color: #365061;
     word-break: break-all;
     overflow-x: hidden;
+    cursor: pointer;
 }
 
 #Trends li p {
     float: right;
 }
 
-#Trends h4 {
-}
 
 h3 {
     color: #2b6079;
@@ -82,15 +111,17 @@ h3 {
 }
 /* */
 
+
 /* searchComp */
+
 #filterComp {
-    margin-left: 3rem;
     display: flex;
+    width: 100%;
 }
 
 #inputFields {
     float: left;
-    margin-top: 3rem;
+    width: 100%;
 }
 
 #inputFields input[type="text"], #inputFields input[type="number"] {
@@ -99,7 +130,7 @@ h3 {
     border-style: none;
     border: 2px solid #2b6079;
     margin-bottom: 1rem;
-    width: 40rem;
+    width: 90%;
     color: white
 }
 
@@ -109,7 +140,7 @@ h3 {
 }
 
 label[for="tweet-count"] {
-    margin-left: 7em;
+    margin-left: 2rem;
 }
 
 #inputFields input[type="text"]::placeholder {
@@ -120,7 +151,7 @@ label[for="tweet-count"] {
     border-color: #98a0a3;
 }
 
-#inputFields input[type="text"]:disabled::placeholder {
+#inputFields input[type="text"]:disabled::placeholder, input[type="number"]:disabled::placeholder {
     color: #98a0a3;
 }
 
@@ -143,16 +174,16 @@ label[for="tweet-count"] {
     margin-left: 1rem;
 }
 
-#inputFields > input[type="checkbox"] {
-    transform: scale(1.5);
-}
 
-#inputFields > input[type="range"] {
-    width: 30rem;
+
+#inputFields input[type="range"] {
+    width: 40%;
 }
 
 #searchBtn {
-    margin: 3rem;
+    margin-top: 3rem;
+    margin-right: 4rem;
+    float: right;
 }
 
 .error_msg {
@@ -231,11 +262,53 @@ input:checked + .slider:before {
 
 /* on mobile */
 
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
+    .flex-container {
+        flex-direction: column;
+    }
+
+    .flex-right {
+        display: none;
+        border: none;
+    }
+
+    .flex-right .closeBtn {
+        display: block;
+    }
+
+    .flex-left {
+        flex: 100%;
+    }
+
+    #trendsBtn {
+        display: block;
+    }
+}
+
+
+@media (max-width: 800px) {
+
+    .flex-right {
+        margin-left: 0;
+    }
+
+    #trendsBtn {
+        top: 7rem
+    }
+    
+}
+
+@media (max-width: 650px) {
+    .float-container {
+        flex-direction: column;
+    }
+
+    .float-right, .float-left {
+        margin: 0;
+    }
+    
     #filterComp {
-        margin-left: 1rem;
-        /* cose inserit solo per fare debugging */
-        overflow-y: scroll;
+        /* cose inserite solo per fare debugging */
         margin-bottom: 5rem;
         /***/
     }

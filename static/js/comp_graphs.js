@@ -54,7 +54,7 @@ export default {
 			
 			// style
 			series.fill("#004085");
-			chart.background().fill("#2E93FF");
+			chart.background().fill("transparent");
 			var labelsx = chart.xAxis().labels();
 			var labelsy = chart.yAxis().labels();
 			labelsx.fontColor("#011219");
