@@ -8,23 +8,23 @@ def test_scheduler():
     init_scheduler()
 
     # Test adding jobs t
-    args = {
-        "params": { 
+    args = [
+        { 
             "query": "test",
             "location": None,
             "coordinates_only": False,
             "count": 10,
         },
-        "mess": "message"
-    }
+        "message"
+    ]
 
-    assert not add_autopost_job("wrong_kind", args, 1, 3, "name")
-    assert add_autopost_job("wordcloud", args, 1, 3, "name")
-    assert add_autopost_job("histogram_week", args, 1, 3, "name")
-    assert add_autopost_job("histogram_perc", args, 1, 3, "name")
+    assert not add_autopost_job("wrong_kind", list(args), 1, 3, "name")
+    assert add_autopost_job("wordcloud", list(args), 1, 3, "name")
+    assert add_autopost_job("histogram_week", list(args), 1, 3, "name")
+    assert add_autopost_job("histogram_perc", list(args), 1, 3, "name")
 
-    args["center"] = "41.3,11.2"
-    args["zoom"] = 8
+    args.append("41.3,11.2")
+    args.append(8)
     assert add_autopost_job("map", args, 1, 3, "name")
 
     assert len(active_jobs) == 4
@@ -40,8 +40,15 @@ def test_scheduler():
     delete_job(active_jobs[3]["id"])
     assert len(active_jobs) == 3
 
-    #Delete the remaining 3 obs
-    delete_job(active_jobs[0]["id"])    
+    #Test decrementing jobs
+    decrement_job_count(active_jobs[0]["id"])
+    assert len(active_jobs) == 3
+    decrement_job_count(active_jobs[0]["id"])
+    assert len(active_jobs) == 3
+    decrement_job_count(active_jobs[0]["id"])
+    assert len(active_jobs) == 2
+
+    #Delete the remaining 2 jobs
     delete_job(active_jobs[0]["id"])
     delete_job(active_jobs[0]["id"])
 

@@ -55,7 +55,7 @@ def test_stream_listener():
 
     # wait for at least 3 tweets for up to 10 seconds
     global streaming_data
-    for i in range(10):
+    for _ in range(10):
         time.sleep(1)
         if len(streaming_data) >= 3:
             break

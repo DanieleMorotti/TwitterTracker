@@ -248,8 +248,6 @@ def add_header(r):
 # Only run this once even if the reloader is running:
 if not (application.debug or os.environ.get("FLASK_ENV") == "development") or os.environ.get("WERKZEUG_RUN_MAIN") == "true":
     init_scheduler()
-    #post_tweet_with_image("Tweet automatico di prova!", "static/img/logo.png")
-    pass
 
 # Run the application
 if __name__ == "__main__":

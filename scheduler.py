@@ -16,25 +16,29 @@ active_jobs = []
 next_job_id = 1
 
 #functions for auto post 
-def job_autopost_map(params, center, zoom, mess):
+def job_autopost_map(id, params, center, zoom, mess):
     tweets = get_tweets(**params)
     image = make_map(tweets, center, zoom)
     post_tweet_with_image(mess, image)
+    decrement_job_count(id)
     
-def job_autopost_wordcloud(params, mess):
+def job_autopost_wordcloud(id, params, mess):
     tweets = get_tweets(**params)
     image = make_wordcloud(get_words_frequency(tweets, 500))
     post_tweet_with_image(mess, image)
+    decrement_job_count(id)
 
-def job_autopost_hist_week(params, mess):
+def job_autopost_hist_week(id, params, mess):
     tweets = get_tweets(**params)
     image = make_histograms(tweets,'week')
     post_tweet_with_image(mess, image)
+    decrement_job_count(id)
 
-def job_autopost_hist_perc(params, mess):
+def job_autopost_hist_perc(id, params, mess):
     tweets = get_tweets(**params)
     image = make_histograms(get_words_frequency(tweets, 10),'perc')
     post_tweet_with_image(mess, image)
+    decrement_job_count(id)
 
 def add_autopost_job(kind, args, hours, count, name):
     global next_job_id
@@ -54,17 +58,38 @@ def add_autopost_job(kind, args, hours, count, name):
     # end = start + dt.timedelta(minutes = hours) * count - dt.timedelta(seconds = 30)
 
     id = str(next_job_id)
-    active_jobs.append({"id":id,"name":name,"type":kind, "date":start})
+    active_jobs.append({"id":id,"name":name,"type":kind, "date":start, "count": count})
     next_job_id += 1
+
+    #Add id argument to job
+    args.insert(0, id)
 
     #scheduler.add_job(func=func, args=args, trigger="interval", hours=hours, start_date=start, end_date=end)
     scheduler.add_job(func=func, args=args, id=id, trigger="interval", minutes=hours, start_date=start, end_date=end)
     
     return True
-    
+
+def get_job_by_id(id):
+    global active_jobs
+    for j in active_jobs:
+        if j["id"] == id:
+            return j
+    return None
+
+def decrement_job_count(id):
+    global active_jobs
+    job = get_job_by_id(id)
+    if job:
+        job["count"] -= 1
+        if job["count"] <= 0:
+            active_jobs.remove(job)
+
 def delete_job(id):
     global active_jobs
-    active_jobs[:] = [job for job in active_jobs if job.get('id') != id]
+    job = get_job_by_id(id)
+    if job:
+        active_jobs.remove(job)
+    
     return active_jobs
 
 def init_scheduler():

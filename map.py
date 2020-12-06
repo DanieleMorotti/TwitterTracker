@@ -21,10 +21,10 @@ def val_dist(history_pixels, x, y):
 
 #convert coordinates lat,long to pixels given a center,the zoom used and the size of the image
 def coord_to_pixel(history_pixel, center_lat, center_lon, lat, lon, zoom, img_size):
-    degreesPerPixelX = 360 / 2**(zoom+8)
-    degreesPerPixelY = 360 / 2**(zoom+8) * cos(center_lat * pi / 180)
-    py = ((center_lat - lat)/degreesPerPixelY)+img_size/2
-    px = ((lon - center_lon)/degreesPerPixelX)+img_size/2
+    degrees_per_pixel_x = 360 / 2**(zoom+8)
+    degrees_per_pixel_y = 360 / 2**(zoom+8) * cos(center_lat * pi / 180)
+    py = ((center_lat - lat)/degrees_per_pixel_y)+img_size/2
+    px = ((lon - center_lon)/degrees_per_pixel_x)+img_size/2
     px, py = val_dist(history_pixel, px, py)
     return px, py
 
@@ -64,8 +64,7 @@ def draw_on_image(im_map, tw_im, px, py):
     wpercent = (basewidth / float(im2.size[0]))
     hsize = int((float(im2.size[1]) * float(wpercent)))
     im2 = im2.resize((basewidth, hsize),Image.ANTIALIAS)
-
-    #back_im = im1.copy()
+    
     im_map.paste(im2,(px, py))
 
 

@@ -6,7 +6,7 @@ from tweets import *
 #Test that ids are unique
 def test_get_next_id():
     ids = set()
-    for i in range(50):
+    for _ in range(50):
         new_id = get_next_id()
         assert new_id not in ids
         ids.add(new_id)
