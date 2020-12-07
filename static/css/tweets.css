@@ -145,6 +145,10 @@
     color: #c4c8ca;
 }
 
+.closeBtn {
+    display: none;
+}
+
 /* flexbox */
 
 .flex-tweet-container {
@@ -189,6 +193,15 @@
     right: 4rem;
 }
 
+@media (min-width: 1000px) {
+    .flex-tweet-right {
+        flex: 20% !important;
+        display: block !important;
+    }
+    .flex-tweet-left {
+        display: block !important;
+    }
+}
 
 
   

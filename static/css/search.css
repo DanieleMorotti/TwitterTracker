@@ -6,13 +6,23 @@
 }
 
 .flex-left {
-    flex: 65%;
+    flex: 65% !important;
     margin: 2rem;
 }
 
 .flex-right {
     flex: 20%;
     border-left: 1px solid #2b6079;
+}
+
+@media (min-width: 1000px) {
+    .flex-right {
+        flex: 20% !important;
+        display: block !important;
+    }
+    .flex-left {
+        display: block !important;
+    }
 }
 
 .flex-right .closeBtn {
