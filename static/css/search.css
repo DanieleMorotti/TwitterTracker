@@ -12,7 +12,7 @@
 
 .flex-right {
     flex: 20%;
-    border-left: 1px solid #2b6079;
+    border-left: 1px solid rgb(98 126 145);
 }
 
 @media (min-width: 1000px) {
@@ -112,11 +112,11 @@
 
 
 h3 {
-    color: #2b6079;
+    color: rgb(98 126 145);
     text-align: center;
     margin: 0;
     line-height: 2em;
-    border-bottom: 2px solid #2b6079;
+    border-bottom: 2px solid rgb(98 126 145);
 }
 /* */
 
