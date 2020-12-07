@@ -195,11 +195,10 @@
 
 @media (min-width: 1000px) {
     .flex-tweet-right {
-        flex: 20% !important;
-        display: block !important;
+        display: block;
     }
     .flex-tweet-left {
-        display: block !important;
+        display: block;
     }
 }
 

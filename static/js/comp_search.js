@@ -32,11 +32,11 @@ export default {
                 <div class="flex-left">
                     <div class="float-container">
                         <div class="float-left">
-                            <label for="streamOff" style="font-size: 14.5px;"> Stream </label>
-                            <label id="streamSwitch" class="switch">
-                                <input type="checkbox" id="streamOff" name="streamOff" value="false">
-                                <span class="slider round" @click="changeSearch"></span>
-                            </label>
+
+                            <input type="checkbox" id="styles_switch" class="switch-input" name="styles_switch" value="false" style="display:none">
+                            <label for="styles_switch" class="switch-label" style="font-size: 14.5px;"> Stream </label>
+                            <span class="toggle" @click="changeSearch"></span>
+
                             <label for="tweet-count" style="font-size: 14.5px;"> Tweets to show </label>
                             <input id="tweet-count" maxlength=3 type="number" max=500 min=10 step=10 value=250 onkeydown="return false"></input><br>
                             <label for="keyWord" class="text">Key-word </label><br>
@@ -56,19 +56,19 @@ export default {
                         
                     </div>
                     <br>
-                            <label for="radius" class= "text">Radius </label>
-                            <input style="display:inline" id="radius" type="range" min="10" max="1000" step="10"  v-model="value" name="radius" @change="updateCircleOnMap()"/>
-                            <label style="display:inline"><span v-text="value" id="radiusValue"></span> km</label>
-                            <br>
-                
-                            <input type="checkbox" id="images-only">            
-                            <label for="images-only">Show only tweets containing images</label>
-                            <br>
-                
-                            <input type="checkbox" id="coordinates-only">            
-                            <label for="coordinates-only">Show only geo-localized tweets </label>
-                            <br>
-                    <div id="map"></div><br>
+                    <label for="radius" class= "text">Radius </label>
+                    <input style="display:inline" id="radius" type="range" min="10" max="1000" step="10"  v-model="value" name="radius" @change="updateCircleOnMap()"/>
+                    <label style="display:inline"><span v-text="value" id="radiusValue"></span> km</label>
+                    <br>
+        
+                    <input type="checkbox" id="images-only">            
+                    <label for="images-only">Show only tweets containing images</label>
+                    <br>
+        
+                    <input type="checkbox" id="coordinates-only">            
+                    <label for="coordinates-only">Show only geo-localized tweets </label>
+                    <br>
+                    <div id="map"></div><br> 
                     <button id="searchBtn" @click="onClickSearch()">SEARCH</button>
                     <button id="trendsBtn" @click="openTrendNav" title="trends" style="transform: scale(1.1)"><i class="fab fa-slack-hash"></i></button>
 
@@ -88,7 +88,7 @@ export default {
     `,
     methods: {
         changeSearch() {
-            if(!$("#streamOff").is(":checked")) {
+            if(!$("#styles_switch").is(":checked")) {
                 $("#tweet-count").prop("disabled", true);
                 $("#tweet-count").val("");
             }
@@ -113,7 +113,7 @@ export default {
             let success;
 
             setSearchObj(newSearchObj);
-            if(!$("#streamOff").is(":checked")) {
+            if(!$("#styles_switch").is(":checked")) {
                 success = dispatch_search();
             }
             /* if streaming is active */
@@ -174,6 +174,7 @@ export default {
             let obj = this;
             //after the end of the draw action
             google.maps.event.addListener(drawingManager, 'overlaycomplete', function(event) {
+
                 //delete if drawn all the old circles on the map
                 if(shape)shape.setMap(null);
                 if(search_area)search_area.setMap(null);
@@ -200,6 +201,7 @@ export default {
 
                 /*The shape can be moved or resized, added eventlisteners to manage this actions*/
                 obj.setEventListeners(shape, 'radius_changed', 'center_changed');
+
             });
         },
 
