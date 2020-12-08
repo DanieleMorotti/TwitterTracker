@@ -100,7 +100,7 @@ def start_stream_listener(keyword, user, location, coordinates_only, images_only
 
 # Search tweets
 
-def build_search_query(word = "", images_only = False, user = ""):
+def build_search_query(word = "", user = "", images_only = False):
     query =  ""
     if word:
         query += word + " "

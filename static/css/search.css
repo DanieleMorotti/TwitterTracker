@@ -6,13 +6,22 @@
 }
 
 .flex-left {
-    flex: 65%;
+    flex: 65% !important;
     margin: 2rem;
 }
 
 .flex-right {
     flex: 20%;
-    border-left: 1px solid #2b6079;
+    border-left: 1px solid rgb(98 126 145);
+}
+
+@media (min-width: 1000px) {
+    .flex-right {
+        display: block;
+    }
+    .flex-left {
+        display: block;
+    }
 }
 
 .flex-right .closeBtn {
@@ -103,11 +112,11 @@
 
 
 h3 {
-    color: #2b6079;
+    color: rgb(98 126 145);
     text-align: center;
     margin: 0;
     line-height: 2em;
-    border-bottom: 2px solid #2b6079;
+    border-bottom: 2px solid rgb(98 126 145);
 }
 /* */
 
@@ -195,59 +204,57 @@ label[for="tweet-count"] {
 
 /* switch  */
 
-#streamSwitch {
-    margin-left: 1rem;
-}
 
-.switch {
+.switch-label {
+    font-size: 1.1em;
     position: relative;
     display: inline-block;
-    width: 4rem;
-    height: 2rem;
-}
-
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
+    min-width: 112px;
     cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: grey;
-    -webkit-transition: .4s;
-    transition: .4s;
+    text-align: left;
+    margin: 0px;
 }
 
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 1.5rem;
-    width: 1.5rem;
-    left: 0.4rem;
-    bottom: 0.25rem;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-}
-
-input:checked + .slider {
+.switch-input:checked + .switch-label:before {
     background-color: #0075ff;
+    box-shadow: 0 0 7px white;
+    -ms-transform: translate(100%, -50%);
+    -webkit-transform: translate(100%, -50%);
+    transform: translate(100%, -50%);
+}
+.switch-label:before {
+    left: 0;
+    width: 20px;
+    height: 20px;
+    z-index: 2;
+    background-color: #FAFAFA;
+    border-radius: 50%;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.14), 0 2px 2px 0 rgba(0, 0, 0, 0.098), 0 1px 5px 0 rgba(0, 0, 0, 0.084);
 }
 
-input:focus + .slider {
-    box-shadow: 0 0 1px #0075ff;
+.switch-input:checked + .switch-label:after {
+    background-color: #9FC1CB;
 }
-
-input:checked + .slider:before {
-    -webkit-transform: translateX(1.7rem);
-    -ms-transform: translateX(1.7rem);
-    transform: translateX(1.7rem);
+.switch-label:after {
+    left: 1px;
+    width: 38px;
+    height: 14px;
+    background-color: #9E9E9E;
+    border-radius: 8px;
+}
+.switch-label:before, .switch-label:after {
+    content: "";
+    position: absolute;
+    margin: 0;
+    margin-left: 6rem;
+    outline: 0;
+    top: 50%;
+    -ms-transform: translate(0, -50%);
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.4);
 }
 
 /* Rounded sliders */
@@ -334,3 +341,7 @@ input:checked + .slider:before {
         margin-left: 0;
     }
 }
+
+
+
+

@@ -28,7 +28,10 @@ export default {
             <h4>Le tue collezioni</h4>
             <div id="collections"></div>
         </div>
-        <button id="collectionBtn" @click="openNav" style="transform: scale(1.3)"><i class="fas fa-folder-open"></i></button>
+        <button id="collectionBtn" @click="openNav" style="transform: scale(1.3)"  aria-labelledby="openCollections">
+        <i class="fas fa-folder-open"></i>
+        <span id="openCollections" style="display: none;">Apri sidebar delle collezioni</span>
+        </button>
 
         <!-- modal for deleting collections -->
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -232,11 +235,12 @@ export default {
                 let date = c.date || "";
                 let div = $(`
                 <div class="collection">
-                    <button class="collection-delete" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash" title="Elimina"></i></button>
-                    <button class="collection-open" data-toggle="modal" data-target="#openModal"><i class="fas fa-book-open" title="Sfoglia"></i></button>
-                    <button class="collection-add" data-toggle="modal" data-target="#addModal"><i class="fas fa-plus" title="Aggiungi tweet"></i></button>
+                    <button class="collection-delete" data-toggle="modal" data-target="#deleteModal" aria-labelledby="deleteLabel"><i class="fas fa-trash" title="Elimina"></i><span id="deleteLabel" style="display: none;">Elimina collezione</span></button>
+                    <button class="collection-open" data-toggle="modal" data-target="#openModal"  aria-labelledby="openLabel"><i class="fas fa-book-open" title="Sfoglia"></i><span id="openLabel" style="display: none;">Apri collezione</span></button>
+                    <button class="collection-add" data-toggle="modal" data-target="#addModal"  aria-labelledby="addLabel"><i class="fas fa-plus" title="Aggiungi tweet"></i><span id="addLabel" style="display: none;">Aggiungi alla collezione</span></button>
                     <div class="collection-info">
-                    <input type="text" class="collection-name" value="${c.name}">
+                    <label id="nameLabel" style="display:none">Modifica il nome della collezione</label> 
+                    <input type="text" class="collection-name" value="${c.name}"  aria-labelledby="nameLabel">
                     <p class="collection-count">Count: ${c.count}</p>
                     <p class="collection-date">${date}</p>
                     </div>

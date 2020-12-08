@@ -83,15 +83,24 @@
 }
 
 #tweetsBtn {
-    border-bottom: 1px solid rgba(255, 255,255,0.4);
+    border-bottom: 1px solid rgb(98 126 145);
 }
 
 #tweetsBtn button {
     background-color: transparent;
     border: none;
     color: #4191b0;
-    margin: 1rem;
+    padding: 1.5rem;
     font-weight: bold;
+}
+
+#tweetsBtn button:focus {
+    outline: none;
+}
+
+#tweetsBtn button:hover {
+    background-color: rgba(185, 137, 146, 0.781);
+    color: white;
 }
 
 .showBtn {
@@ -145,6 +154,10 @@
     color: #c4c8ca;
 }
 
+.closeBtn {
+    display: none;
+}
+
 /* flexbox */
 
 .flex-tweet-container {
@@ -156,7 +169,7 @@
 .flex-tweet-left {
     flex: 70%;
     overflow-y: scroll;
-    border-right: 1px solid rgba(255, 255,255,0.4);
+    border-right: 1px solid rgb(98 126 145);
 }
 
 .flex-tweet-left::-webkit-scrollbar {
@@ -189,6 +202,14 @@
     right: 4rem;
 }
 
+@media (min-width: 1000px) {
+    .flex-tweet-right {
+        display: block;
+    }
+    .flex-tweet-left {
+        display: block;
+    }
+}
 
 
   
