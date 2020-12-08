@@ -86,7 +86,8 @@ export default {
                                 url: url,
                                 origin: new google.maps.Point(0, 0),
                                 anchor: new google.maps.Point(new_width / 2, 20),
-                                scaledSize: new google.maps.Size(new_width, 50)
+                                scaledSize: new google.maps.Size(new_width, 50),
+                                class: 'image_marker'
                             };
                             marker.setIcon(image);
                         }

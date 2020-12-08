@@ -10,7 +10,13 @@
     scrollbar-width: none;  /* Firefox */
 }
 
-
+.profile_pic{
+    float:left;
+    border-radius:100%;
+    margin-right:2rem;
+    width:50px;
+    height:50px;
+}
 #tweets-search .tweet {
     border: 1px solid rgba(255,255,255,0.2);
     border-radius: 5px;
@@ -125,7 +131,7 @@
     padding: 1rem;
     background-color: rgb(13 74 100 / 17%);
     border: 1px solid;
-    cursor: grab;
+    cursor: pointer;
 }
 
 .collection-info {

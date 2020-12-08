@@ -171,25 +171,40 @@ export default {
 
         //Append an array of tweets to the tweets view highlighting the specified word
         appendTweets(data, word) {
+            let img_only = lastTweetsSearchObj['images_only'];
             word = word || "";
             let reg = new RegExp(word.trim().replace(' ', '|'), 'gi');
 
             for (let i = 0; i < data.length; i++) {
                 let url = "https://twitter.com/" + data[i].username + "/status/" + data[i].id;
-
-                //If there is a keyword higlight it
-                let text = data[i].text;
-                if(word) {
-                    text = text.replace(reg, '<mark>$&</mark>');
-                }
-                let div = $(`<div class="tweet">
+                let div = null;
+                if (!img_only) {
+                    //If there is a keyword higlight it
+                    let text = data[i].text;
+                    if (word) {
+                        text = text.replace(reg, '<mark>$&</mark>');
+                    }
+                    div = $(`<div class="tweet">
                                 <p class="date">${data[i].data}</p>
-                                <h5>${data[i].user}</h5>
-                                <p class="tweet-content">${text}</p>
+                                <img src="${data[i].profile || '/static/img/default_user.png'}" class="profile_pic"></img>
+                                <div class="user">
+                                   <h5>${data[i].user}</h5>
+                                   <p class="tweet-content">${text}</p>
+                                </div>
                                 <button class="showBtn" data-toggle="modal" data-target="#tweetModal" >Show</button>
                             </div>`);
-                div.find('button').on("click", () => this.showTweetInModal(url) );
-            
+                } else {
+                    div = $(`<div class="tweet">
+                                <p class="date">${data[i].data}</p>
+                                <img src="${data[i].profile || '/static/img/default_user.png'}" class="profile_pic"></img>
+                                <div class="user">
+                                   <h5>${data[i].user}</h5>
+                                   <img class="post_image" src="${data[i].images[0]}"></img>
+                                </div>
+                                <button class="showBtn" data-toggle="modal" data-target="#tweetModal" >Show</button>
+                            </div>`);
+                }
+                div.find('button').on("click", () => this.showTweetInModal(url));
                 // Add the city and coordinates only if they are available in the tweet
                 if(data[i].city || data[i].coordinates){
                     let yCenter = (Number(data[i].coordinates[0][1][0]) + Number(data[i].coordinates[0][3][0])) / 2;
