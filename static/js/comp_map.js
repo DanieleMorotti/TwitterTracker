@@ -97,7 +97,8 @@ export default {
         createModal(){
             let center = map.getCenter().toString().slice(1,-1);
             let zoom = map.getZoom();
-            addMapPostPreview($('#imgPreview'),center,zoom);
+            let mapType = map.getMapTypeId();
+            addMapPostPreview($('#imgPreview'),center,zoom,mapType);
             $("#postBtn").off();
             $("#postBtn").on("click",()=>post('map'));
             $('#postModal').modal('show');
