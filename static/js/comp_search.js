@@ -328,8 +328,10 @@ export default {
             $('.flex-left').css("display","none")
         },
         closeTrendNav() {
-            $('.flex-left').css("display","block")
-            $('.flex-right').css("display","none")
+            if($('.flex-left').css('display') == 'none') {
+                $('.flex-left').css("display","block")
+                $('.flex-right').css("display","none")
+            }
         }
     },
 

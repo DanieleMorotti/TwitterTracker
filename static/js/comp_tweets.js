@@ -173,21 +173,23 @@ export default {
         appendTweets(data, word) {
             word = word || "";
             let reg = new RegExp(word.trim().replace(' ', '|'), 'gi');
-
+            
             for (let i = 0; i < data.length; i++) {
                 let url = "https://twitter.com/" + data[i].username + "/status/" + data[i].id;
+                let div; 
 
+               
                 //If there is a keyword higlight it
                 let text = data[i].text;
                 if(word) {
                     text = text.replace(reg, '<mark>$&</mark>');
                 }
-                let div = $(`<div class="tweet">
-                                <p class="date">${data[i].data}</p>
-                                <h5>${data[i].user}</h5>
-                                <p class="tweet-content">${text}</p>
-                                <button class="showBtn" data-toggle="modal" data-target="#tweetModal" >Show</button>
-                            </div>`);
+                div = $(`<div class="tweet">
+                            <p class="date">${data[i].data}</p>
+                            <h5>${data[i].user}</h5>
+                            <p class="tweet-content">${text}</p>
+                            <button class="showBtn" data-toggle="modal" data-target="#tweetModal" >Show</button>
+                        </div>`);
                 div.find('button').on("click", () => this.showTweetInModal(url) );
             
                 // Add the city and coordinates only if they are available in the tweet
@@ -198,6 +200,7 @@ export default {
                     let cityAndCoord = `<p>City: ${data[i].city}<br>Coordinates: lat ${xCenter}, lng ${yCenter} </p>`;
                     $(cityAndCoord).insertBefore(div.find('button'));
                 }
+                
 
                 $("#tweets-search").append(div);
                 $("#tweets-search").addClass('bd-white');
@@ -218,11 +221,10 @@ export default {
         // Set the title and the tweets of the tweets view
         setTitleAndTweets(title, data, word) {
             this.setTitle(title);
-            
             lastTweetsList = data;
             //Make a copy of the search object at the time of search, so that we can use it when we save the collection
             lastTweetsSearchObj = JSON.parse(JSON.stringify(searchObj));
-
+            
             this.displayTweets(data, word);
         },
 
@@ -279,8 +281,10 @@ export default {
             $('#searchDiv').css("display","none")
         },
         closeNav() {
-            $('#searchDiv').css("display","block")
-            $('#collectionDiv').css("display","none")
+            if($('#searchDiv').css('display') == 'none') {
+                $('#searchDiv').css("display","block")
+                $('#collectionDiv').css("display","none")
+            }
         }
     },
     activated() {

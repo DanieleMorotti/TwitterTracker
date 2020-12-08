@@ -47,7 +47,6 @@ export function streamStart() {
     if(!(data.keyword || data.location || data.user))
         return false;
 
-
     $.ajax({
         method: "GET",
         url: 'streamStart',
@@ -55,7 +54,7 @@ export function streamStart() {
         success: (data) => {
             tweetsComp.methods.setTitleAndTweets('0 Streaming Tweets Results', [], data.keyword || "");
             tweetsComp.methods.setTweetsTemporary(true);
-
+            
             if (streamingInterval)
                 clearInterval(streamingInterval);
 

@@ -141,7 +141,7 @@ body {
 }
 
 #map > div > div > div:nth-child(4) .gmnoprint{
-    left: 250px !important;
+ /*   left: 250px !important; */
     margin: 10px !important;
 }
 #map a{
