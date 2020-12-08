@@ -59,7 +59,8 @@ class MyStreamListener(tweepy.StreamListener):
             'location': tweet.user.location,
             'city':city, 
             'coordinates':coordinates,
-            'images': images
+            'images': images,
+            'profile': get_profile_pic_from_tweet(tweet)
         })
 
     # Called when an error occurs
@@ -148,7 +149,14 @@ def get_city_and_coordinates(tweet):
         coordinates = tweet.place.bounding_box.coordinates
         city =  tweet.place.full_name
     return city, coordinates
-   
+  
+# Get profile pic from tweet
+def get_profile_pic_from_tweet(tweet):
+    user = tweet.user
+    img_url = user.profile_image_url_https  if user.profile_image_url_https is not None else user.profile_image_url
+    return img_url
+
+
 # Method to get a list of tweets
 def get_tweets(query, location, coordinates_only, count):
     result = []
@@ -175,7 +183,8 @@ def get_tweets(query, location, coordinates_only, count):
             'location': tweet.user.location,
             'city':city, 
             'coordinates':coordinates,
-            'images': images
+            'images': images,
+            'profile': get_profile_pic_from_tweet(tweet)
         })
         #stop as soon as we reach the count we needed
         if len(result) >= count:

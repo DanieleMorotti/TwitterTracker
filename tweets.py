@@ -63,7 +63,7 @@ def get_stored_tweets_info():
                 'id': info['id'],
                 'name': info['name'],
                 'count': info['count'],
-                'date': info.get('date', ''),
+                'date': info.get('date', '')
             })
     
     return result
