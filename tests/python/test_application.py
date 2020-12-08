@@ -49,7 +49,7 @@ def test_collections(client, tweets, json_headers):
     assert rv.status_code == 200
 
     collections = rv.get_json()
-    assert collections
+    assert isinstance(collections, list)
 
     data = {
         "name": "Test collection",
