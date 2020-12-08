@@ -29,7 +29,7 @@ def coord_to_pixel(history_pixel, center_lat, center_lon, lat, lon, zoom, img_si
     return px, py
 
 
-def get_maps_image(center, markers, zoom):
+def get_maps_image(center, markers, zoom, map_type):
     BASE_URL = "https://maps.googleapis.com/maps/api/staticmap?"
     API_KEY = "AIzaSyDD9bBnkYVGlT_4TOWjQkhVe9M3RchWAmU"
     #google maps api limit
@@ -39,7 +39,7 @@ def get_maps_image(center, markers, zoom):
     for coord in markers:
         MARKERS_URL+=f'|{str(coord[0])},{str(coord[1])}'
 
-    URL = f'{BASE_URL}center={center}&zoom={zoom}&scale=1&size={MAP_IMAGE_SIZE}x{MAP_IMAGE_SIZE}&{MARKERS_URL}&key={API_KEY}'
+    URL = f'{BASE_URL}center={center}&zoom={zoom}&maptype={map_type}&scale=1&size={MAP_IMAGE_SIZE}x{MAP_IMAGE_SIZE}&{MARKERS_URL}&key={API_KEY}'
     #request for receiving the image of the map with the markers
     try:
         response = requests.get(URL)
@@ -68,7 +68,7 @@ def draw_on_image(im_map, tw_im, px, py):
     im_map.paste(im2,(px, py))
 
 
-def make_map(tweets, center, zoom):
+def make_map(tweets, center, zoom, map_type):
     markers = []
     #loop to find all the geo-localized tweet, but not pictures
     for tw in tweets:
@@ -78,7 +78,7 @@ def make_map(tweets, center, zoom):
             markers.append((lat,lon))
 
     #get the coordinates without the radius
-    image = get_maps_image(center,markers,zoom)
+    image = get_maps_image(center,markers,zoom, map_type)
 
     float_lat = float(center.split(',')[0])
     float_lon = float(center.split(',')[1])

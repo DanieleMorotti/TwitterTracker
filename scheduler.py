@@ -16,9 +16,9 @@ active_jobs = []
 next_job_id = 1
 
 #functions for auto post 
-def job_autopost_map(id, params, center, zoom, mess):
+def job_autopost_map(id, params, center, zoom, mess, map_type):
     tweets = get_tweets(**params)
-    image = make_map(tweets, center, zoom)
+    image = make_map(tweets, center, zoom, map_type)
     post_tweet_with_image(mess, image)
     decrement_job_count(id)
     
