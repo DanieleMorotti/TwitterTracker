@@ -90,7 +90,7 @@ export default {
 
 			//create data
 			var dati = [];
-			let max_req = 20;
+			let max_req = 50;
 			$.ajax({
                 url: '/frequency/' + max_req,
 				type: 'POST',
