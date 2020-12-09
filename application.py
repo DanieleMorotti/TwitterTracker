@@ -110,8 +110,8 @@ def post_preview():
 def autopost():
     body = request.get_json()
     filters = body['filters']
-    freq = body["frequency"]
-    post_count = body["post_count"]
+    freq = int(body["frequency"])
+    post_count = int(body["post_count"])
     kind = body["kind"]
     message = body["message"]
     name = body["post_name"]
