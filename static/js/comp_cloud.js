@@ -41,7 +41,9 @@ export default {
                 $('#wordcloud-container').append('<h4>Search for tweets or just load a collection to see the relative wordcloud</h4>');
             }
             //Hide empty legend
-            $('#legend').css('display', 'none');
+            $('#legend').hide();
+            //Hide share button
+            $('#worcloud-container button').hide();
         }
     },
     methods: {
@@ -69,7 +71,8 @@ export default {
         },
         getLegend(max_req) {
             $('#frequency tbody').empty();
-            $('#legend').css('display', 'inline-block');
+            $('#legend').show();
+            $('#worcloud-container button').show();
             $.ajax({
                 url: '/frequency/' + max_req,
                 type: 'POST',

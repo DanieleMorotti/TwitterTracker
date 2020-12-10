@@ -113,11 +113,15 @@ export default {
             streetViewControl: false,
             mapTypeControlOptions: {
                 style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-                mapTypeIds: ["hybrid" , "roadmap"],
+                mapTypeIds: ["hybrid", "roadmap"],
             }
         });
         map.setMapTypeId('hybrid');
-        if (lastTweetsList) 
+        if (lastTweetsList) {
+            $('button.mapShare').removeAttr('disabled');
             this.drawDataOnMapView(lastTweetsList);
-	}
+        } else {
+            $('button.mapShare').attr('disabled', 'disabled');
+        }
+    }
 }

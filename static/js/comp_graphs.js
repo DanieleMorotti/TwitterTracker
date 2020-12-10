@@ -51,7 +51,12 @@ export default {
 			
 			// create a column series and set the data
 			var series = chart.column(dati);
-			
+
+			// Tooltip
+			var tooltip = chart.getSeries(0).tooltip();
+			tooltip.title().text("Occurence");
+			tooltip.format("{%y} found on {%x}");
+
 			// style
 			series.fill("#004085");
 			chart.background().fill("#011219");
@@ -64,20 +69,22 @@ export default {
 			chart.yAxis().title('Number of tweets found');
 			chart.xAxis().title().padding(5);
 			chart.yAxis().title().padding(5);
-			//semplificazione della grafica
-			//var titlexBack = chart.xAxis().title().background();
-			//var titleyBack = chart.yAxis().title().background();
-			//titlexBack.enabled(true);
-			//titlexBack.fill("transparent");
-			//titlexBack.cornerType("round");
-			//titlexBack.corners(10);
-			//titlexBack.stroke("#004085");
-			//titleyBack.enabled(false);
-			//titleyBack.fill("#fff");
-			//titleyBack.cornerType("round");
-			//titleyBack.corners(10);
-			//titleyBack.stroke("#004085");
 
+			/*
+			semplificazione della grafica
+			var titlexBack = chart.xAxis().title().background();
+			var titleyBack = chart.yAxis().title().background();
+			titlexBack.enabled(true);
+			titlexBack.fill("transparent");
+			titlexBack.cornerType("round");
+			titlexBack.corners(10);
+			titlexBack.stroke("#004085");
+			titleyBack.enabled(false);
+			titleyBack.fill("#fff");
+			titleyBack.cornerType("round");
+			titleyBack.corners(10);
+			titleyBack.stroke("#004085");
+			*/
 
 			// set the container id
 			chart.container("container1");
@@ -115,7 +122,13 @@ export default {
 					var chart = anychart.column();
 					// create a column series and set the data
 					var series = chart.column(sortedView);
-					
+
+					// Tooltip
+					var tooltip = chart.getSeries(0).tooltip();
+					tooltip.title().text("Percentage");
+					tooltip.format('"{%x}" is the {%y}% of the total word count');
+
+
 					// style
 					series.fill("#004085");
 					chart.background().fill("#011219"); //#5C99E2
@@ -124,7 +137,9 @@ export default {
 					labelsx.fontColor("white");
 					labelsy.fontColor("white");
 
-					labelsx.rotation(320);
+					labelsx.rotation(70);
+					labelsx.wordBreak("break-all");
+					labelsx.width(100);
 					chart.xAxis().title('Most used words');
 					chart.yAxis().title('% of occurrences of words');
 					chart.xAxis().title().padding(5);
@@ -144,6 +159,12 @@ export default {
 
 					// Scrollable
 					chart.xScroller(true);
+					// change the scroller orientation
+					chart.xScroller().position("beforeAxes");
+					// set the fill color
+					chart.xScroller().fill('rgba(274,274,274,0.1)');
+					// set the selected fill color
+					chart.xScroller().selectedFill("rgba(274,274,274,0.5)");
 					chart.xZoom().setToPointsCount(10, false);
 					chart.xScroller().thumbs().autoHide(true);
 					chart.xScroller().thumbs().hovered().fill("#004085");
@@ -171,6 +192,8 @@ export default {
 		if (lastTweetsList != null) {
 			$('#info1').show();
 			$('#info2').show();
+			$('#pbtn').show();
+			$('#pbtn2').show();
 			$('#alert').hide();
 			$('#container1').empty();
 			$('#container2').empty();
@@ -180,6 +203,8 @@ export default {
 		else {
 			$('#info1').hide();
 			$('#info2').hide();
+			$('#pbtn').hide();
+			$('#pbtn2').hide();
 			$('#alert').show();
 		}
 
