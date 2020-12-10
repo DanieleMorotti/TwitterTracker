@@ -42,6 +42,11 @@ h3{
     margin: 2rem;
 }
 
+.mapShare:disabled {
+    background-color: rgba(255, 255, 255, 0.582);
+    color: grey;
+}
+
 .gm-bundled-control-on-bottom  > div{
     display: none;
 }
@@ -58,4 +63,12 @@ h3{
 #postModal p {
     font-size: 14px;
     font-weight: normal;
+}
+
+#postModal img {
+    border-radius: 10px;
+}
+
+#postModal label:first-of-type {
+    margin-top: 2rem;
 }

@@ -29,6 +29,16 @@ body {
     width: 8rem;
 }
 
+@media screen and (min-width: 1000px) {
+    .main-container img {
+        width: 11rem;
+    }
+
+    .row {
+        height: 30%
+    }
+}
+
 .main-title-container {
     margin: 5rem;
     text-align: left;
@@ -36,7 +46,7 @@ body {
 }
 
 
-.main-title-container h2 {
+.main-title-container h1 {
     color: #00aced;
 
 }
@@ -87,7 +97,6 @@ body {
 .row {
     margin-left: 0;
     margin-right: 0;
-    margin-bottom: 6rem;
 }
 
 .row .title {
@@ -103,8 +112,11 @@ body {
 
 
 .col-md-12 {
-    width: 100%;
+    margin: 0;
+    width: 50%;
+    float: left;
     padding: 1rem;
+    padding-bottom: 10rem;
 }
 
 .text-center {
@@ -112,7 +124,7 @@ body {
 }
 
 @media screen and (max-width: 700px) {
-    .col-md-4 {
+    .col-md-4, .col-md-12 {
         width: 100%;
     }
 }
@@ -226,7 +238,7 @@ body {
 
 .closeBtn {
     font-size: 3rem;
-    margin-right: 1rem;
+    margin: 1rem;
     float: right;
     background-color: transparent;
     outline: none;
