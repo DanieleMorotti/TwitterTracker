@@ -1,3 +1,5 @@
+/*eliminato <h3>Post automatici attivi</h3> */
+
 h2{
     text-align:center;
     color:white;
@@ -5,13 +7,24 @@ h2{
 
 /*Stili per elenco post attivi*/
 #postMenu{
+    /* VECCHIO CSS
     border: 2px solid black;
     border-radius: 20px;
     background-color: #2b6079;
-    padding:2rem;
+    padding:2rem;*/
+
+    border: 1px solid rgba(255,255,255,0.2);
+    background-color: rgb(13 74 100 / 55%);
+    border-radius: 5px;
+    padding: 1rem;
+    margin-top: 2rem;
+    margin-left: 2%;
+    margin-right: 2%;
     font-family: 'Lucida Sans', Verdana, sans-serif;
-    color:white;
+    color: white;
+    overflow: auto;
 }   
+
 #postList{
     list-style: none;
 }

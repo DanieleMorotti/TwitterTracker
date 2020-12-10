@@ -5,8 +5,8 @@ export default {
 	name: 'word_cloud',
     template: `
         <div>
-	      <h3>Wordcloud of most common words in the results</h3>
-            
+          <h3>Wordcloud of most common words in the results</h3>
+          <div id="info">Search for tweets or just load a collection to see the relative wordcloud</div>
           <div id="wordcloud-container">
             <div class="flex-cloud-item" id="legend">
               <table id="frequency">
@@ -19,16 +19,18 @@ export default {
               </table>
             </div>
           </div>
-          <button @click="createModal">POSTA</button>
+          <button @click="createModal" id="postbtn">POSTA</button>
         </div>
     `,
     activated() {
         let max_req = 250; 
         if (lastTweetsList) {
+            $('#postbtn').show();
+            $('#info').hide();
             //Instruction message get deleted
-            if ($('#wordcloud-container h4').length > 0) {
+            /*if ($('#wordcloud-container h4').length > 0) {
                 $('#wordcloud-container h4').remove();
-            }
+            }*/
             if ($('#wc-loading').length > 0) {
                 $('#wc-loading').remove();
             }
@@ -36,10 +38,12 @@ export default {
             this.getWordCloud(max_req);
             this.getLegend(max_req);
         } else {
+            $('#postbtn').hide();
             //No collection avaiable means instruction message displayed 
-            if (!$('#wordcloud-container h4').length > 0) {
+            $('#info').show();
+            /*if (!$('#wordcloud-container h4').length > 0) {
                 $('#wordcloud-container').append('<h4>Search for tweets or just load a collection to see the relative wordcloud</h4>');
-            }
+            }*/
             //Hide empty legend
             $('#legend').css('display', 'none');
         }
