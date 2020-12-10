@@ -12,9 +12,8 @@ export default {
 	
 	template: ` 
 	<div id="component">
-		<h2> Post </h2>
+		<h2> Active Publications </h2>
 		<div id="postMenu">
-			<h3>Post automatici attivi</h3>
 			<ul id="postList" v-if="actPost.length != 0">
 				<li v-for="post in actPost" >
 					{{post.name}}-{{post.date}}-{{post.type}} <i class="fas fa-minus-square" @click="removePost(post.id)"></i>

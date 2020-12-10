@@ -14,14 +14,14 @@ export default {
 		<h2> Graphs </h2>
 		<div id="alert">No research was done</div>
 		<div id="firstGraph">
-			<button @click="createModal('histogram_week')" id="pbtn">POSTA</button>
 			<div id="container1"> </div>
 			<div id="info1">Temporal arrangement of the tweets found </div>
+			<button @click="createModal('histogram_week')" id="pbtn">POSTA</button>
 		</div>
 		<div id="secondGraph">
-			<button @click="createModal('histogram_perc')" id="pbtn2">POSTA</button>
 			<div id="container2"> </div>
 			<div id="info2">Most used words in tweets found (in %) </div>
+			<button @click="createModal('histogram_perc')" id="pbtn2">POSTA</button>
 		</div>
 	</div>
 	`,
@@ -165,6 +165,7 @@ export default {
 					chart.xScroller().fill('rgba(274,274,274,0.1)');
 					// set the selected fill color
 					chart.xScroller().selectedFill("rgba(274,274,274,0.5)");
+
 					chart.xZoom().setToPointsCount(10, false);
 					chart.xScroller().thumbs().autoHide(true);
 					chart.xScroller().thumbs().hovered().fill("#004085");
@@ -206,6 +207,8 @@ export default {
 			$('#pbtn').hide();
 			$('#pbtn2').hide();
 			$('#alert').show();
+			$('#pbtn').hide();
+			$('#pbtn2').hide();
 		}
 
 	}
