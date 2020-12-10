@@ -3,7 +3,7 @@ import {searchObj} from './search.js'
 import tweetComp, {lastTweetsList} from './comp_tweets.js'
 import {addMapPostPreview,post} from './autopost.js'
 
-var map;
+export var map;
 
 export default {
     name: 'map_view',

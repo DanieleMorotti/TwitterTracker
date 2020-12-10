@@ -1,5 +1,3 @@
-import { lastTweetsList } from './comp_tweets.js'
-import {addWordcloudPostPreview,autopostWordcloud} from './autopost.js'
 
 export default {
 	name: 'post',
@@ -26,18 +24,19 @@ export default {
 
 	methods: {
 		removePost(id){
-			//to make the change immediatly visible to the user
-			let toDel = this.actPost.findIndex(post => post.id === id);
-			this.actPost.splice(toDel,1);
+			
 			$.ajax({
 				method: "DELETE",
-				url: "/removePost" + id,
+				url: "/removePost/" + id,
 				success: () => {
-					console.log("Cancellato post automatico con id:",id);
+					console.log("Cancellato post automatico con id: ",id);
+					//If the request worked delete from the list of the user
+					let toDel = this.actPost.findIndex(post => post.id === id);
+					this.actPost.splice(toDel,1);
 				},
 		
 				error: (xhr, ajaxOptions, thrownError) => {
-					console.log("deleteCollections: " + xhr.status + ' - ' + thrownError);
+					console.log("Remove automatic post: " + xhr.status + ' - ' + thrownError);
 				}
 			})
 		}
