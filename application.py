@@ -135,7 +135,7 @@ def autopost():
 # get the active automatic post
 @application.route('/getActivePost')
 def send_active_jobs():
-    return Response(json.dumps(active_jobs, ensure_ascii=False, indent=2), status=200,  mimetype="application/json")
+    return Response(json.dumps(active_jobs, ensure_ascii=False, indent=2, default=str), status=200,  mimetype="application/json")
 
 # Delete id post 
 @application.route('/removePost/<string:id>', methods=["DELETE"])

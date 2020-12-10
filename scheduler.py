@@ -86,11 +86,14 @@ def decrement_job_count(id):
 
 def delete_job(id):
     global active_jobs
+    global scheduler
     job = get_job_by_id(id)
     if job:
         active_jobs.remove(job)
+        scheduler.remove_job(id)
+        return 1
     
-    return active_jobs
+    return None
 
 def init_scheduler():
     global scheduler
