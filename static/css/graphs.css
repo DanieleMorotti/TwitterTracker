@@ -1,7 +1,16 @@
 #total {
     margin-left: 0;
 }
-
+.share-bttns {
+    background-color: white;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 0 6px black;
+    padding: 1rem;
+    font-weight: bold;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 18px;
+}
 #pbtn {
     color: black;
     border: white;

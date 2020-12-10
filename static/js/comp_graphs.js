@@ -16,12 +16,12 @@ export default {
 		<div id="firstGraph">
 			<div id="container1"> </div>
 			<div id="info1">Temporal arrangement of the tweets found </div>
-			<button @click="createModal('histogram_week')" id="pbtn">POSTA</button>
+			<button @click="createModal('histogram_week')" id="pbtn" class="share-bttns">POSTA</button>
 		</div>
 		<div id="secondGraph">
 			<div id="container2"> </div>
 			<div id="info2">Most used words in tweets found (in %) </div>
-			<button @click="createModal('histogram_perc')" id="pbtn2">POSTA</button>
+			<button @click="createModal('histogram_perc')" id="pbtn2" class="share-bttns">POSTA</button>
 		</div>
 	</div>
 	`,
@@ -31,7 +31,9 @@ export default {
 		createGraph1() {
 			
 			var dati = [];
+			//Iterate over tweets
 			for (let i = 0; i < lastTweetsList.length; i++) {  //calcola un tweet in meno tranne nella prima data
+				//Counting occurence for the first date
 				var data = lastTweetsList[i].data;
 				var cont = 1;
 				for (var j = i+1; j < lastTweetsList.length; j++) {
@@ -42,7 +44,7 @@ export default {
 						break;
 					}
 				}
-				i = j;
+				i = j-1;
 				dati.push( [data, cont] );
 			}
 
@@ -62,29 +64,17 @@ export default {
 			chart.background().fill("#011219");
 			var labelsx = chart.xAxis().labels();
 			var labelsy = chart.yAxis().labels();
-			labelsx.fontColor("white");
+
 			labelsy.fontColor("white");
+
+			labelsx.fontColor("white");
+			labelsy.width(60);
 			labelsx.rotation(320);
+
 			chart.xAxis().title(' Dates ');
 			chart.yAxis().title('Number of tweets found');
 			chart.xAxis().title().padding(5);
 			chart.yAxis().title().padding(5);
-
-			/*
-			semplificazione della grafica
-			var titlexBack = chart.xAxis().title().background();
-			var titleyBack = chart.yAxis().title().background();
-			titlexBack.enabled(true);
-			titlexBack.fill("transparent");
-			titlexBack.cornerType("round");
-			titlexBack.corners(10);
-			titlexBack.stroke("#004085");
-			titleyBack.enabled(false);
-			titleyBack.fill("#fff");
-			titleyBack.cornerType("round");
-			titleyBack.corners(10);
-			titleyBack.stroke("#004085");
-			*/
 
 			// set the container id
 			chart.container("container1");
@@ -131,32 +121,21 @@ export default {
 
 					// style
 					series.fill("#004085");
-					chart.background().fill("#011219"); //#5C99E2
+					chart.background().fill("#011219"); 
 					var labelsx = chart.xAxis().labels();
 					var labelsy = chart.yAxis().labels();
+
 					labelsx.fontColor("white");
+					labelsx.width(60);
+					labelsx.rotation(320);
+					labelsx.wordBreak("break-all");
+
 					labelsy.fontColor("white");
 
-					labelsx.rotation(70);
-					labelsx.wordBreak("break-all");
-					labelsx.width(100);
 					chart.xAxis().title('Most used words');
 					chart.yAxis().title('% of occurrences of words');
-					chart.xAxis().title().padding(5);
 					chart.yAxis().title().padding(5);
-					//var titlexBack = chart.xAxis().title().background();
-					//var titleyBack = chart.yAxis().title().background();
-					//titlexBack.enabled(true);
-					//titlexBack.fill("#fff");
-					//titlexBack.cornerType("round");
-					//titlexBack.corners(10);
-					//titlexBack.stroke("#004085");
-					//titleyBack.enabled(true);
-					//titleyBack.fill("#fff");
-					//titleyBack.cornerType("round");
-					//titleyBack.corners(10);
-					//titleyBack.stroke("#004085");
-
+					
 					// Scrollable
 					chart.xScroller(true);
 					// change the scroller orientation
