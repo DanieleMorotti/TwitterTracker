@@ -25,6 +25,7 @@ def test_scheduler():
 
     args.append("41.3,11.2")
     args.append(8)
+    args.append("hybrid")
     assert add_autopost_job("map", args, 1, 3, "name")
 
     assert len(active_jobs) == 4

@@ -87,9 +87,9 @@ function search(count, word, user, center, radius, images_only, coordinates_only
     if (!$('#loading').length) {
         $('body').append('<div id="loading"></div>');
     }
-    
+
     let query = getSearchQuery(count, word, user, center, radius, images_only, coordinates_only);
-    
+
     $.ajax({
         method: "GET",
         url: "/search",

@@ -17,10 +17,10 @@
 
 @media (min-width: 1000px) {
     .flex-right {
-        display: block;
+        display: block !important;
     }
     .flex-left {
-        display: block;
+        display: block !important;
     }
 }
 
@@ -186,7 +186,8 @@ label[for="tweet-count"] {
 
 
 #inputFields input[type="range"] {
-    width: 40%;
+    width: 25%;
+    margin: 2rem;
 }
 
 #searchBtn {
@@ -233,7 +234,7 @@ label[for="tweet-count"] {
 }
 
 .switch-input:checked + .switch-label:after {
-    background-color: #9FC1CB;
+    background-color: #0075ffad;
 }
 .switch-label:after {
     left: 1px;

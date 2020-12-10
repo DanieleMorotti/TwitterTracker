@@ -5,13 +5,13 @@ h3{
     padding-top:2vh;
     color: white;
 }
+
 #data-view-map {
     margin: 0 auto;
-    margin-top: 10vh;
-    height: 70vh;
-    width: 90vw;
+    height: 100vh;
 }
-.gm-style img {
+
+.gm-style > div > div > div > div > img {
     border-radius: .5rem;
 }
 #data-view-map > div:first-child {
@@ -24,4 +24,38 @@ h3{
     right: 0;
     top: 20rem;
     width: 550px;
+}
+
+/* map buttons */
+
+.mapShare {
+    background-color: white;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 0 6px black;
+    padding: 1rem;
+    font-weight: bold;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 18px;
+    position: absolute;
+    bottom: 2rem;
+    margin: 2rem;
+}
+
+.gm-bundled-control-on-bottom  > div{
+    display: none;
+}
+
+
+#postModal input {
+    border-radius: 5px;
+    border: 1px solid #8080806b;
+    display: block;
+    margin-top: 1rem;
+}
+
+
+#postModal p {
+    font-size: 14px;
+    font-weight: normal;
 }

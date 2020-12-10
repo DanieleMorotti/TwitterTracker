@@ -9,10 +9,9 @@ export default {
     name: 'map_view',
     template: `
         <div>
-          <h3>Here you will find the geographical representation of the results of your research</h3>
           <div id="data-view-map"></div>
-          <div id="map_view_container"></div>
-          <button class="btn" @click="createModal">Posta</button>
+          <div id="map_view_container"> </div>
+          <button class="mapShare" @click="createModal">Posta</button>
         </div>
     `,
     methods: {
@@ -86,7 +85,8 @@ export default {
                                 url: url,
                                 origin: new google.maps.Point(0, 0),
                                 anchor: new google.maps.Point(new_width / 2, 20),
-                                scaledSize: new google.maps.Size(new_width, 50)
+                                scaledSize: new google.maps.Size(new_width, 50),
+                                class: 'image_marker'
                             };
                             marker.setIcon(image);
                         }
@@ -97,7 +97,8 @@ export default {
         createModal(){
             let center = map.getCenter().toString().slice(1,-1);
             let zoom = map.getZoom();
-            addMapPostPreview($('#imgPreview'),center,zoom);
+            let mapType = map.getMapTypeId();
+            addMapPostPreview($('#imgPreview'),center,zoom,mapType);
             $("#postBtn").off();
             $("#postBtn").on("click",()=>post('map'));
             $('#postModal').modal('show');

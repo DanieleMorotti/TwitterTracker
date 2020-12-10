@@ -10,6 +10,13 @@
     scrollbar-width: none;  /* Firefox */
 }
 
+.profile_pic{
+    float:left;
+    border-radius:100%;
+    margin-right:2rem;
+    width: 50px;
+    height: 50px;
+}
 
 #tweets-search .tweet {
     border: 1px solid rgba(255,255,255,0.2);
@@ -41,7 +48,8 @@
 }
 
 .tweet h5 {
-    color: #b38491;
+    color: #ffffff;
+    font-weight: bolder;
 }
 
 .tweet p {
@@ -58,6 +66,35 @@
     font-weight: 700;
 }
 
+.tweet-images {
+    float: left;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 1rem;
+    margin: 1.5rem;
+    padding: 1rem;
+    width: 28%;
+    overflow: auto;
+    height: 30vh;
+}
+
+.tweet-images h5 {
+    color: white
+}
+
+.tweet-images:hover {
+    background-color: rgba(255, 255, 255, 0.158);
+    box-shadow: 0px 0px 3px white;
+    transform: scale(1);
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.tweet-images .post_image {
+    width: 100%;
+    margin-top: 1rem;
+    border-radius: 0.2rem;
+}
+
 .date {
     float: right;
 }
@@ -70,7 +107,7 @@
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-#tweets-search::-webkit-scrollbar {
+#tweets-search::-webkit-scrollbar, .tweet-images::-webkit-scrollbar {
   display: none;
 }
 
@@ -83,7 +120,8 @@
 }
 
 #tweetsBtn {
-    border-bottom: 1px solid rgb(98 126 145);
+    border-bottom: 2px solid rgb(98 126 145);
+    box-shadow: 0px -1px 10px 10px #415868;
 }
 
 #tweetsBtn button {
@@ -102,6 +140,16 @@
     background-color: rgba(185, 137, 146, 0.781);
     color: white;
 }
+
+#save-collection {
+    float: right;
+}
+
+#stopBtn:disabled, #startBtn:disabled {
+    color: grey !important;
+    background-color: transparent !important;
+}
+
 
 .showBtn {
     float: right;
@@ -125,7 +173,7 @@
     padding: 1rem;
     background-color: rgb(13 74 100 / 17%);
     border: 1px solid;
-    cursor: grab;
+    cursor: pointer;
 }
 
 .collection-info {
@@ -204,15 +252,13 @@
 
 @media (min-width: 1000px) {
     .flex-tweet-right {
-        display: block;
+        display: block !important;
     }
     .flex-tweet-left {
-        display: block;
+        display: block !important;
     }
 }
 
-
-  
 
 @media (max-width: 1000px) {
     .flex-tweet-container {
@@ -249,4 +295,15 @@
         font-size: 1.5rem;
     }
 
+}
+
+@media (max-width: 700px) {
+
+    .tweet-images {
+        width: inherit;
+    }
+
+    #tweets-search {
+        margin: 1rem;
+    }
 }

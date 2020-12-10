@@ -84,7 +84,8 @@ def get_image_from_request_body(body):
     if kind == "map":
         zoom = body["zoom"]
         center = body["center"]
-        return make_map(tweets, center, zoom)
+        map_type = body["map_type"]
+        return make_map(tweets, center, zoom, map_type)
     elif kind == "wordcloud":
         return make_wordcloud(get_words_frequency(tweets, 500))
     elif kind == "histogram_week":
@@ -109,8 +110,8 @@ def post_preview():
 def autopost():
     body = request.get_json()
     filters = body['filters']
-    freq = body["frequency"]
-    post_count = body["post_count"]
+    freq = int(body["frequency"])
+    post_count = int(body["post_count"])
     kind = body["kind"]
     message = body["message"]
     name = body["post_name"]
@@ -126,7 +127,7 @@ def autopost():
         if kind == "map":
             params['coordinates_only'] = True
         
-        args = [params, body['center'], body['zoom'], message] if kind == "map" else [params, message]
+        args = [params, body['center'], body['zoom'], message, body['map_type']] if kind == "map" else [params, message]
         add_autopost_job(kind, args, freq, post_count - 1, name) # - 1 because we already posted the first time
 
     return Response(status=200)

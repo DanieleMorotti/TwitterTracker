@@ -11,7 +11,8 @@ export function post(type){
     if(type === 'map'){
         let center = map.getCenter().toString().slice(1,-1);
         let zoom = map.getZoom();
-        autopostMap(freq,count,center,zoom,mess,name);
+        let mapType = map.getMapTypeId();
+        autopostMap(freq,count,center,zoom,mess,name,mapType);
     }
     else if(type === 'wc'){
         autopostWordcloud(freq,count,name);
@@ -42,12 +43,13 @@ function addPostPreview(div, body)
     xhr.send(JSON.stringify(body));
 }
 
-export function addMapPostPreview(div, center, zoom) {
+export function addMapPostPreview(div, center, zoom, mapType) {
     let body = {
         tweets: lastTweetsList,
         kind: "map",
         center: center,
-        zoom: zoom
+        zoom: zoom,
+        map_type: mapType
     };
 
     addPostPreview(div, body);
@@ -89,7 +91,7 @@ function autopost(body) {
     });
 }
 
-export function autopostMap(freq, post_count, center, zoom, message, name) {
+export function autopostMap(freq, post_count, center, zoom, message, name, mapType) {
     let s = lastTweetsSearchObj;
     let body = {
         tweets: lastTweetsList,
@@ -100,7 +102,8 @@ export function autopostMap(freq, post_count, center, zoom, message, name) {
         frequency: freq,
         post_count: post_count,
         message: message,
-        post_name:name
+        post_name:name,
+        map_type: mapType
     };
     
     autopost(body)

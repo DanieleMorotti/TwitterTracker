@@ -29,6 +29,9 @@ export default {
             if ($('#wordcloud-container h4').length > 0) {
                 $('#wordcloud-container h4').remove();
             }
+            if ($('#wc-loading').length > 0) {
+                $('#wc-loading').remove();
+            }
             //Generate wc and legend
             this.getWordCloud(max_req);
             this.getLegend(max_req);

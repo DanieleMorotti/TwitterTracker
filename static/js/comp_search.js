@@ -107,10 +107,10 @@ export default {
                 radius: $('#radius').val(),
                 pdi: $('#pdi').val(),
                 images_only: $('#images-only').prop('checked'),
-                coordinates_only: $('#coordinates-only').prop('checked')
+                coordinates_only: $('#coordinates-only').prop('checked'),
             };
 
-            let success;
+            let success, stream = false;
 
             setSearchObj(newSearchObj);
             if(!$("#styles_switch").is(":checked")) {
@@ -118,6 +118,7 @@ export default {
             }
             /* if streaming is active */
             else {
+                stream = true;
                 success = streamStart();
             }
 
@@ -125,7 +126,7 @@ export default {
                 this.$router.push('tweets', () => {
                     setTimeout(() => {
                         tweetsComp.methods.setFilters();
-                        tweetsComp.methods.clearTitleAndTweets()
+                        tweetsComp.methods.clearTitleAndTweets(stream)
                     }, 0);
                 });
             } else {
@@ -328,8 +329,10 @@ export default {
             $('.flex-left').css("display","none")
         },
         closeTrendNav() {
-            $('.flex-left').css("display","block")
-            $('.flex-right').css("display","none")
+            if($('.flex-left').css('display') == 'none') {
+                $('.flex-left').css("display","block")
+                $('.flex-right').css("display","none")
+            }
         }
     },
 
