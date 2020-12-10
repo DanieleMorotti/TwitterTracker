@@ -29,6 +29,16 @@ body {
     width: 8rem;
 }
 
+@media screen and (min-width: 1000px) {
+    .main-container img {
+        width: 11rem;
+    }
+
+    .row {
+        height: 30%
+    }
+}
+
 .main-title-container {
     margin: 5rem;
     text-align: left;
@@ -36,7 +46,7 @@ body {
 }
 
 
-.main-title-container h2 {
+.main-title-container h1 {
     color: #00aced;
 
 }

@@ -5,8 +5,8 @@ export default {
         <div>
             <div class="main-container">
                 <div class="main-title-container">
-                    <h2>Fraydrum</h2>   
-                    <h5>Raccogli e analizza tweet</h5>
+                    <h1>Fraydrum</h1>   
+                    <h4>Raccogli e analizza tweet</h4>
                     <button @click="$('#toSearch').click();">Inizia</button>
                 </div>
                 <div class="lined-header-container">  
@@ -38,7 +38,7 @@ export default {
                 </div>
 
                 <div class="lined-header-container">  
-                    <div class="lined-header">Dati</div>
+                    <div class="lined-header">Sezione utente</div>
                 </div>
                 <div class="row">
                 <div class="col-md-12">
