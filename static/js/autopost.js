@@ -100,7 +100,7 @@ export function autopostMap(freq, post_count, center, zoom, message, name, mapTy
     let s = lastTweetsSearchObj;
     let body = {
         tweets: lastTweetsList,
-        filters: getSearchQuery(s.count, s.word, s.user, s.center, s.radius, s.images_only, s.coordinates_only),
+        filters: getSearchQuery(s.count, s.keyword, s.user, s.center, s.radius, s.images_only, s.coordinates_only),
         kind: "map",
         center: center,
         zoom: zoom,
@@ -118,7 +118,7 @@ export function autopostWordcloud(freq, post_count, name, mess) {
     let s = lastTweetsSearchObj;
     let body = {
         tweets: lastTweetsList,
-        filters: getSearchQuery(s.count, s.word, s.user, s.center, s.radius, s.images_only, s.coordinates_only),
+        filters: getSearchQuery(s.count, s.keyword, s.user, s.center, s.radius, s.images_only, s.coordinates_only),
         kind: "wordcloud",
         frequency: freq,
         post_count: post_count,
@@ -133,7 +133,7 @@ export function autopostHistogram(freq, post_count,histo_type, name, mess) {
     let s = lastTweetsSearchObj;
     let body = {
         tweets: lastTweetsList,
-        filters: getSearchQuery(s.count, s.word, s.user, s.center, s.radius, s.images_only, s.coordinates_only),
+        filters: getSearchQuery(s.count, s.keyword, s.user, s.center, s.radius, s.images_only, s.coordinates_only),
         kind: histo_type,
         frequency: freq,
         post_count: post_count,
