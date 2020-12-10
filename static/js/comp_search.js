@@ -76,7 +76,7 @@ export default {
                 <div class="flex-right">
                     <div id="Trends">
                         <button class="closeBtn" @click="closeTrendNav">x</button>
-                        <h3>Trending today</h3>
+                        <div class="title"><h3>Trending today</h3></div>
                         <ul id="trends-list">
                         </ul>
                     </div>
@@ -345,9 +345,9 @@ export default {
                 for(let i = 0; i < data.length; i++) {
                     let t = data[i];
                     
-                    let el = $(`<li> <h4>${t.name}</h4> </li>`)
+                    let el = $(`<li> <p>${t.name}</p> </li>`)
                     if(t.count > 0)
-                        el.prepend(`<p>${(t.count > 1000 ? (t.count / 1000).toFixed(1) + 'K' : '< 1000') + ' Tweets'}</p>`);
+                        el.prepend(`<p class="tweet-number">${(t.count > 1000 ? (t.count / 1000).toFixed(1) + 'K' : '< 1000') + ' Tweets'}</p>`);
 
                     el.on("click", () => {
                         this.closeTrendNav();

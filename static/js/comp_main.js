@@ -38,13 +38,20 @@ export default {
                 </div>
 
                 <div class="lined-header-container">  
-                    <div class="lined-header">Condivisione</div>
+                    <div class="lined-header">Dati</div>
                 </div>
                 <div class="row">
                 <div class="col-md-12">
                     <div class="dashboard-container center-block text-center">
+                        <img src="/static/img/save_icon.png" alt="icona salva">
+                        <div class="title">Salva</div>
+                        <div class="description">Salva, riguarda ed aggiorna le tue collezioni</div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="dashboard-container center-block text-center">
                         <img src="/static/img/share_icon.png" alt="icona condivisione">
-                        <div class="title">Condivi</div>
+                        <div class="title">Condividi</div>
                         <div class="description">Condividi i dati raccolti su Twitter</div>
                     </div>
                 </div>
