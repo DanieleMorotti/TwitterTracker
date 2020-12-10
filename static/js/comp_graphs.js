@@ -14,14 +14,15 @@ export default {
 		<h2> Graphs </h2>
 		<div id="alert">No research was done</div>
 		<div id="firstGraph">
+			<button @click="createModal_week" id="pbtn">POSTA</button>
 			<div id="container1"> </div>
 			<div id="info1">Temporal arrangement of the tweets found </div>
 		</div>
 		<div id="secondGraph">
+			<button @click="createModal_perc" id="pbtn2">POSTA</button>
 			<div id="container2"> </div>
 			<div id="info2">Most used words in tweets found (in %) </div>
 		</div>
-		<button @click="createModal">POSTA</button>
 	</div>
 	`,
 
@@ -145,7 +146,7 @@ export default {
 					chart.xScroller(true);
 					chart.xZoom().setToPointsCount(10, false);
 					chart.xScroller().thumbs().autoHide(true);
-					chart.xScroller().thumbs().hovered().fill("#FFD700");
+					chart.xScroller().thumbs().hovered().fill("#004085");
 
 					// set the container id
 					chart.container("container2");	
@@ -156,9 +157,19 @@ export default {
                 }
             });
 		},
-		createModal(){
+		createModal_week(){
+
+			$("#imgPreview").empty();
+
+			addHistogramsPostPreview($('#imgPreview'),'histogram_week');
+
+			$("#postBtn").off();
+            $("#postBtn").on("click",()=>post('histogram_week'));
+			$('#postModal').modal('show');
+
+			//CODICE VECCHIO:
 			//add the second image and the radio buttons
-			$('#imgPreview').after(`<div id="imgPreview2"></div>
+			/*$('#imgPreview').after(`<div id="imgPreview2"></div>
 									<div id="chooseHistogram">
 										<label>Prima immagine <input type="radio" value="histogram_week" name="histoGroup" checked></label>
 										<label>Seconda immagine <input type="radio" value="histogram_perc" name="histoGroup"></label>
@@ -168,14 +179,26 @@ export default {
 			addHistogramsPostPreview($('#imgPreview2'),'histogram_perc');
             $("#postBtn").off();
             $("#postBtn").on("click",()=>post('histogram_week'));
-			$('#postModal').modal('show');
+			$('#postModal').modal('show');*/
 			
 			//add eventListener to change the post parameters when the radio button is changed
-			$('input[type=radio][name="histoGroup"]').change(()=> {
+			/*$('input[type=radio][name="histoGroup"]').change(()=> {
 				let newChoice = $('input[name="histoGroup"]:checked').val();
 				$("#postBtn").off();
 				$("#postBtn").on("click",()=>post(newChoice));
-			}).change();
+			}).change();*/
+
+		},
+		createModal_perc() {
+
+			$("#imgPreview").empty();
+
+			addHistogramsPostPreview($('#imgPreview'),'histogram_perc');
+
+			$("#postBtn").off();
+            $("#postBtn").on("click",()=>post('histogram_perc'));
+			$('#postModal').modal('show');
+
 		}
 	},
 	activated() {

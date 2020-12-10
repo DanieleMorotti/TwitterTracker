@@ -134,12 +134,12 @@ def draw_histogram(x_data,y_data,title,x_label,y_label):
     try:
         #set size(in inches) and colors
         plt.figure(figsize=(6.4,4.8))
-        plt.rcParams['axes.facecolor']='#2E93FF'
-        plt.rcParams['axes.edgecolor']='white'
-        plt.rcParams['savefig.facecolor']='#2E93FF'
+        plt.rcParams['axes.facecolor']='#FFFFFF' #sfondo bianco
+        plt.rcParams['axes.edgecolor']='#000000' #assi neri
+        plt.rcParams['figure.facecolor']='#FFFFFF' 
+        plt.rcParams['savefig.facecolor']='#FFFFFF'
         plt.rcParams['font.size'] = '12'
-
-        plt.bar(x_data,y_data,width=0.65,color="#004085",edgecolor="white")
+        plt.bar(x_data,y_data,width=0.45,color="#004085",edgecolor="#004085") #caratteristiche delle barre
         plt.xticks(rotation=30)
 
         #add labels and title to the histogram

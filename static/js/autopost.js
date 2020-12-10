@@ -18,7 +18,6 @@ export function post(type){
     }
     else{
         autopostHistogram(freq,count,type,name);
-        $('#imgPreview2,#chooseHistogram').remove();
     }
     console.log(type);
     $('#postModal').modal('hide');
