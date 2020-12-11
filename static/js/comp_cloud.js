@@ -90,11 +90,11 @@ export default {
                         return b[1] - a[1];
                     });
 
-                    sortable.forEach((el) => {
+                    sortable.forEach((e) => {
                         $('#frequency tbody').append(`
                               <tr>
-                                <td>${el[0]}</td> 
-                                <td>${(Number(el[1]) * 100).toFixed(2)}%</td> 
+                                <td>${e[0]}</td> 
+                                <td>${(Number(e[1]) * 100).toFixed(2)}%</td> 
                              </tr>
                             `);
                     });

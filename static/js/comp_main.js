@@ -5,9 +5,11 @@ export default {
         <div>
             <div class="main-container">
                 <div class="main-title-container">
+                <header>
                     <h1>Fraydrum</h1>   
                     <h4>Raccogli e analizza tweet</h4>
                     <button @click="$('#toSearch').click();">Inizia</button>
+                </header>
                 </div>
                 <div class="lined-header-container">  
                     <div class="lined-header">Raccolta e analisi</div>

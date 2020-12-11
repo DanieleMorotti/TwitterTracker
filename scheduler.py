@@ -3,6 +3,7 @@ import atexit
 import urllib.parse
 import os
 import datetime as dt
+import pytz
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
@@ -40,6 +41,8 @@ def job_autopost_hist_perc(id, params, mess):
     post_tweet_with_image(mess, image)
     decrement_job_count(id)
 
+italy_tz = pytz.timezone("Europe/Rome")
+
 def add_autopost_job(kind, args, hours, count, name):
     global next_job_id
     global active_jobs
@@ -58,7 +61,7 @@ def add_autopost_job(kind, args, hours, count, name):
     # end = start + dt.timedelta(minutes = hours) * count - dt.timedelta(seconds = 30)
 
     id = str(next_job_id)
-    active_jobs.append({"id":id,"name":name,"type":kind, "date":start, "count": count})
+    active_jobs.append({"id":id,"name":name,"type":kind, "date": dt.datetime.now(italy_tz), "count": count})
     next_job_id += 1
 
     #Add id argument to job

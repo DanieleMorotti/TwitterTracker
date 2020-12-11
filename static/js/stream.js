@@ -10,16 +10,16 @@ var streamingIndex = 0;
 
 // Start the stream of tweets
 export function streamStart() {
-    let data = {}
+    let query = {}
 
     if(searchObj.keyword)
-        data.keyword = searchObj.keyword;
+        query.keyword = searchObj.keyword;
     if(searchObj.user)
-        data.user = searchObj.user;
+        query.user = searchObj.user;
     if(searchObj.coordinates_only)
-        data.coordinates_only = true;
+        query.coordinates_only = true;
     if(searchObj.images_only)
-        data.images_only = true;
+        query.images_only = true;
     
     if(searchObj.center && searchObj.radius) {
         let nums = searchObj.center.split(',');
@@ -40,17 +40,17 @@ export function streamStart() {
         let NE = google.maps.geometry.spherical.computeOffset(center, radius * Math.sqrt(2), 45);
         let SW = google.maps.geometry.spherical.computeOffset(center, radius * Math.sqrt(2), 225);
 
-        data.location = SW.lng() + "," + SW.lat() + "," + NE.lng() + "," + NE.lat();
+        query.location = SW.lng() + "," + SW.lat() + "," + NE.lng() + "," + NE.lat();
     }
 
     //If no parameters
-    if(!(data.keyword || data.location || data.user))
+    if(!(query.keyword || query.location || query.user))
         return false;
 
     $.ajax({
         method: "GET",
         url: 'streamStart',
-        data: data,
+        data: query,
         success: (data) => {
             tweetsComp.methods.setTitleAndTweets('0 Streaming Tweets Results', [], data.keyword || "");
             tweetsComp.methods.setTweetsTemporary(true);
