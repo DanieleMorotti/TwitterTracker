@@ -54,47 +54,50 @@
 			
 		<div id="app">
 			<ul id="navbar">
-				<li href="javascript:void(0);" class="menu" >
-					<button onclick="openMenu()"><i class="icon fa fa-bars"></i></button>
+				<li href="javascript:void(0);" class="menu" aria-labelledby="barsLabel">
+					<button onclick="openMenu()">
+						<i class="icon fa fa-bars"></i>
+						<span id="barsLabel" style="display: none;">Home</span>
+					</button>
 				</li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home" onclick="openMenu()">
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home" @click="openMenu()">
 					<router-link id="toHome" tag="button" aria-labelledby="homeLabel" to="/">
 						<img id="fraydrum-logo" src="/static/img/logo.png" alt="Logo applicazione Twitter tracker" width="35">
 						<i class="icon fas fa-home"></i>
 						<span id="homeLabel" style="display: none;">Home</span>
 					</router-link> 
 				</li>
-				<li id="liSearch" class="nav-item" data-toggle="tooltip" data-placement="right" title="Ricerca" onclick="openMenu()">
+				<li id="liSearch" class="nav-item" data-toggle="tooltip" data-placement="right" title="Ricerca" @click="openMenu()">
 					<router-link id="toSearch" tag="button" aria-labelledby="searchLabel" to="/search">
 						<i class="icon fas fa-search"></i>
 						<span id="searchLabel" style="display: none;">Ricerca</span>
 					</router-link>
 				</li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Risultati e Streaming" onclick="openMenu()">
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Risultati e Streaming" @click="openMenu()">
 					<router-link id="toTweets" tag="button" aria-labelledby="tweetLabel" to="/tweets">
 						<i class="icon fab fa-twitter"></i>
 						<span id="tweetLabel" style="display: none;">Visualizzazione</span>
 					</router-link>
 				</li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Mappa" onclick="openMenu()">
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Mappa" @click="openMenu()">
 					<router-link id="toMap" tag="button" aria-labelledby="mapLabel" to="/map">
 						<i class="icon fas fa-map-marker-alt"></i>
 						<span id="mapLabel" style="display: none;">Mappa</span>
 					</router-link>
 				</li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Word Cloud" onclick="openMenu()">
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Word Cloud" @click="openMenu()">
 					<router-link id="toCloud" tag="button" aria-labelledby="cloudLabel"to="/cloud">
 						<i class="icon fas fa-cloud"></i>
 						<span id="cloudLabel" style="display: none;">Word-cloud</span>
 					</router-link>
 				</li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Grafici" onclick="openMenu()">
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Grafici" @click="openMenu()">
 					<router-link id="toCharts" tag="button" aria-labelledby="chartsLabel" to="/graphs">
 						<i class="icon far fa-chart-bar" ></i>
 						<span id="chartsLabel" style="display: none;">Grafici</span>
 					</router-link>
 				</li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Post" onclick="openMenu()">
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Post" @click="openMenu()">
 					<router-link id="toPost" tag="button" aria-labelledby="postLabel" to="/post">
 						<i class="icon fas fa-share-alt"></i>
 						<span id="postLabel" style="display: none;">Condividi</span>

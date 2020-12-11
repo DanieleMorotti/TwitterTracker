@@ -15,9 +15,7 @@ html, body, #app {
 body {
     background-color:  rgb(1, 18, 25);
 }
-h3 {
-    font-size:3em;
-}
+
 
 /* main component */
 
@@ -148,6 +146,11 @@ h3 {
 
 .fa-chart-bar {
     transform: scale(1.2);
+}
+
+
+.fa-info-circle {
+    color: #7e7e7e;
 }
 
 #loading {

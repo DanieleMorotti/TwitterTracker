@@ -5,8 +5,11 @@ export default {
 	name: 'word_cloud',
     template: `
     <div>
-        <h3>Wordcloud of most common words in the results</h3>
-        <div id="info">Search for tweets or just load a collection to see the relative wordcloud</div>
+        <div id="info">
+            <img src="/static/img/nocloud.png" alt="icona no word-cloud">
+            <p>Ancora nessun dato da visualizzare.<br>
+            Fai una ricerca o carica una collezione per visualizzarne la word-cloud.</p>
+        </div>
         <div id="wordcloud-container">
             <div id="img-container">
                 <button @click="createModal" id="postbtn">POSTA</button>
