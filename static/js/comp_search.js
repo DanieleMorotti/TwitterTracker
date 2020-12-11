@@ -32,10 +32,10 @@ export default {
                 <div class="flex-left">
                     <div class="float-container">
                         <div class="float-left">
-
+                            <span class="toggle" @click="changeSearch">
                             <input type="checkbox" id="styles_switch" class="switch-input" name="styles_switch" value="false" style="display:none">
                             <label for="styles_switch" class="switch-label" style="font-size: 14.5px;"> Stream </label>
-                            <span class="toggle" @click="changeSearch"></span>
+                            </span>
 
                             <label for="tweet-count" style="font-size: 14.5px;"> Tweets to show </label>
                             <input id="tweet-count" maxlength=3 type="number" max=500 min=10 step=10 value=250 onkeydown="return false"></input><br>
@@ -88,7 +88,7 @@ export default {
     `,
     methods: {
         changeSearch() {
-            if(!$("#styles_switch").is(":checked")) {
+            if($("#styles_switch").is(":checked")) {
                 $("#tweet-count").prop("disabled", true);
                 $("#tweet-count").val("");
             }

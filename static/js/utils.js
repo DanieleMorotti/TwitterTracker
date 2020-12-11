@@ -31,8 +31,8 @@ export function imageRequest(url, body) {
         xhr.onload = () => {
             if (this.status >= 200 && this.status < 300) {    
                 var blb = new Blob([xhr.response], { type: 'image/png' });
-                var url = (window.URL || window.webkitURL).createObjectURL(blb);
-                resolve(url);
+                var blburl = (window.URL || window.webkitURL).createObjectURL(blb);
+                resolve(blburl);
             } else {
                 reject(this.status);
             }

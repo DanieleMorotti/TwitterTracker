@@ -14,7 +14,7 @@ export default {
 		<div id="postMenu">
 			<ul id="postList" v-if="actPost.length != 0">
 				<li v-for="post in actPost" >
-					{{post.name}}-{{post.date}}-{{post.type}} <i class="fas fa-minus-square" @click="removePost(post.id)"></i>
+					{{post.name}}-{{post.date}}-{{post.time}}-{{post.type}} <i class="fas fa-minus-square" @click="removePost(post.id)"></i>
 				</li>
 			</ul>
 			<span v-else>Nessun post automatico attivo</span>
