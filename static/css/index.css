@@ -15,6 +15,9 @@ html, body, #app {
 body {
     background-color:  rgb(1, 18, 25);
 }
+h3 {
+    font-size:3em;
+}
 
 /* main component */
 
