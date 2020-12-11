@@ -15,13 +15,22 @@ export default {
 		<div id="alert">No research was done</div>
 		<div id="firstGraph">
 			<div id="container1"> </div>
-			<div id="info1">Temporal arrangement of the tweets found </div>
-			<button @click="createModal('histogram_week')" id="pbtn" class="share-bttns">POSTA</button>
+			<div class="didascalia">
+				<h5 id="info1"> Temporal arrangement of the tweets found </h5>
+				<button @click="createModal('histogram_week')" id="pbtn" class="share-bttns">
+					SHARE <i class="fas fa-share-alt"></i>
+				</button> 
+			</div>
+			
 		</div>
 		<div id="secondGraph">
 			<div id="container2"> </div>
-			<div id="info2">Most used words in tweets found (in %) </div>
-			<button @click="createModal('histogram_perc')" id="pbtn2" class="share-bttns">POSTA</button>
+			<div class="didascalia">
+				<h5 id="info2">Most used words in tweets found (in %)</h5>
+				<button @click="createModal('histogram_perc')" id="pbtn2" class="share-bttns">
+					SHARE <i class="fas fa-share-alt"></i>
+				</button>
+			</div>
 		</div>
 	</div>
 	`,
@@ -60,13 +69,13 @@ export default {
 			tooltip.format("{%y} found on {%x}");
 
 			// style
-			series.fill("#004085");
-			chart.background().fill("#011219");
+			series.fill("#c98d26");
+			series.stroke("#f7c672")
+			chart.background().fill("#011219"); //colore di background del grafico
 			var labelsx = chart.xAxis().labels();
 			var labelsy = chart.yAxis().labels();
 
 			labelsy.fontColor("white");
-
 			labelsx.fontColor("white");
 			labelsy.width(60);
 			labelsx.rotation(320);
@@ -75,6 +84,13 @@ export default {
 			chart.yAxis().title('Number of tweets found');
 			chart.xAxis().title().padding(5);
 			chart.yAxis().title().padding(5);
+
+			var titlexBack = chart.xAxis().title();
+			var titleyBack = chart.yAxis().title();
+			titlexBack.fontColor("#9c9c9c"); 
+			titlexBack.fontWeight("bold");
+			titleyBack.fontColor("#9c9c9c");
+			titleyBack.fontWeight("bold");
 
 			// set the container id
 			chart.container("container1");
@@ -120,8 +136,9 @@ export default {
 
 
 					// style
-					series.fill("#004085");
-					chart.background().fill("#011219"); 
+					series.fill("#c98d26"); //#fca26e"); //"#004085");
+					series.stroke("#f7c672");
+					chart.background().fill("#011219");
 					var labelsx = chart.xAxis().labels();
 					var labelsy = chart.yAxis().labels();
 
@@ -135,6 +152,13 @@ export default {
 					chart.xAxis().title('Most used words');
 					chart.yAxis().title('% of occurrences of words');
 					chart.yAxis().title().padding(5);
+
+					var titlexBack = chart.xAxis().title();
+					var titleyBack = chart.yAxis().title();
+					titlexBack.fontColor("#9c9c9c");
+					titlexBack.fontWeight("bold");
+					titleyBack.fontColor("#9c9c9c");
+					titleyBack.fontWeight("bold");
 					
 					// Scrollable
 					chart.xScroller(true);

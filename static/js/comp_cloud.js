@@ -12,7 +12,7 @@ export default {
         </div>
         <div id="wordcloud-container">
             <div id="img-container">
-                <button @click="createModal" id="postbtn">POSTA</button>
+                <button @click="createModal" id="postbtn" class="share-bttns">SHARE <i class="fas fa-share-alt"></i></button>
             </div>
             <div class="flex-cloud-item" id="legend">
                 <table id="frequency">

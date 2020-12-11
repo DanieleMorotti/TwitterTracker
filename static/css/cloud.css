@@ -68,19 +68,11 @@ img#cloud-post-loading {
 }
 
 #postbtn {
-    background-color: white;
-    border-radius: 5px;
-    border: none;
-    box-shadow: 0 0 6px black;
-    padding: 1rem;
-    font-weight: bold;
-    font-family: Roboto, Arial, sans-serif;
-    font-size: 18px;
     height: min-content;
     bottom: 2rem;
     margin: 2rem auto;
 }
-/* VECCHIO MESSAGGIO DI CARICAMENTO TWEET */
+
 
 #info {
     padding-top: 20rem;
@@ -111,6 +103,12 @@ img#cloud-post-loading {
     }
 }
 
+
+#postbtn {
+    color: black;
+    border: white;
+    border-radius: 4px;
+}
 
 tbody, thead {
     display: block;

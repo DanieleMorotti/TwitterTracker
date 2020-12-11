@@ -133,13 +133,13 @@ def draw_histogram(x_data,y_data,title,x_label,y_label):
 
     try:
         #set size(in inches) and colors
-        plt.figure(figsize=(6.4,4.8))
+        plt.figure(figsize=(6.4,5))
         plt.rcParams['axes.facecolor']='#FFFFFF' #sfondo bianco
         plt.rcParams['axes.edgecolor']='#000000' #assi neri
         plt.rcParams['figure.facecolor']='#FFFFFF' 
         plt.rcParams['savefig.facecolor']='#FFFFFF'
         plt.rcParams['font.size'] = '12'
-        plt.bar(x_data,y_data,width=0.45,color="#004085",edgecolor="#004085") #caratteristiche delle barre
+        plt.bar(x_data,y_data,width=0.45,color="#c98d26",edgecolor="#f7c672") #caratteristiche delle barre
         plt.xticks(rotation=30)
 
         #add labels and title to the histogram
@@ -149,7 +149,7 @@ def draw_histogram(x_data,y_data,title,x_label,y_label):
         if title: plt.title(title)
             
         plot_img = BytesIO()
-        plt.savefig(plot_img,format='png',dpi=80,bbox_inches='tight')
+        plt.savefig(plot_img,format='png',dpi=80,bbox_inches='tight') #,transparent=True
     finally:
         plt_lock.release()
     
