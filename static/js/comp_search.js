@@ -39,17 +39,25 @@ export default {
 
                             <label for="tweet-count" style="font-size: 14.5px;"> Tweets to show </label>
                             <input id="tweet-count" maxlength=3 type="number" max=500 min=10 step=10 value=250 onkeydown="return false"></input><br>
-                            <label for="keyWord" class="text">Key-word </label><br>
+                            <label for="keyWord" class="text">Key-word </label> &nbsp;
+                                <i class="fas fa-info-circle" style="color:white" data-toggle="tooltip" data-placement="auto" data-trigger="focus" title="Con più parole, se separate da una virgola, verranno cercati tutti i tweet che contengono almeno una di quelle, se separate da spazio invece solo quelli che le contengono tutte" tabindex="0"></i>
+                                <br>
                             <input autocomplete="off" type="text" name="keyWord" id="keyWord" /><br>
-                            <label for="user" class="text">User </label><br>
+                            <label for="user" class="text">User </label>&nbsp;
+                                <i class="fas fa-info-circle" style="color:white" data-toggle="tooltip" data-placement="auto" data-trigger="focus" title="È necessario inserire l'username di Twitter del profilo desiderato. Si possono inserire più profili contemporaneamente, divisi da spazio o virgola" tabindex="0"></i>
+                                <br>
                             <input autocomplete="off" type="text" name="user" id="user" /><br>
                             
                         </div>
                         <div class="float-right">
-                            <label for="pdi" class="text">Point of interest </label><br>
+                            <label for="pdi" class="text">Point of interest </label>&nbsp;
+                                <i class="fas fa-info-circle" style="color:white" data-toggle="tooltip" data-placement="auto" data-trigger="focus" title="Inserisci il punto di interesse che verrà usato come centro per la ricerca" tabindex="0"></i>
+                            <br>
                             <input autocomplete="off" type="text" name="pdi" id="pdi" placeholder="e.g. Università di Bologna" size="22" /> <br>
                             
-                            <label for="coordinates" class="text">Coordinates (lat, long) </label><br>
+                            <label for="coordinates" class="text">Coordinates (lat, long) </label>&nbsp;
+                                <i class="fas fa-info-circle" style="color:white" data-toggle="tooltip" data-placement="auto" data-trigger="focus" title="Inserire le coordinate decimali, nella forma: latitudine, longitudine" tabindex="0"></i>
+                                <br>
                             <input autocomplete="off" type="text" name="coordinates" id="coordinates" placeholder="e.g. 45.4773,9.1815" size="22" @change="updateCircleOnMap()" @keyup.enter="updateCircleOnMap()"/> <br>
                         </div>
 
@@ -374,5 +382,7 @@ export default {
     mounted() {
         this.initMap();
         this.initAutocomplete();
+        //added to avoid problem with the activation
+		$('i[data-toggle="tooltip"]').tooltip();
     }
 }
