@@ -123,7 +123,3 @@ export function saveCollection(tweets, filters, onSuccess)
         }
     });
 }
-
-export function example() {
-    return true;
-}

@@ -67,8 +67,8 @@ export default {
                     });
 
                     //Event to invoke expandTweet when a click occur on the marker
-                    let url = "https://twitter.com/" + tweet.username + "/status/" + tweet.id;
-                    marker.addListener("click", () => { this.expandTweet(url); });
+                    let tweeturl = "https://twitter.com/" + tweet.username + "/status/" + tweet.id;
+                    marker.addListener("click", () => { this.expandTweet(tweeturl); });
 
                     //If there is at least one image we use that one as the marker 
                     if (tweet.images.length > 0) {

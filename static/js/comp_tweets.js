@@ -13,12 +13,14 @@ export default {
     <div class="flex-tweet-container">
         <div id="searchDiv" class="flex-tweet-left">
             <div id="tweetsDiv">
+                    <header>
                     <div id="tweetsBtn">
                     <button id="saveBtn" @click="onClickSearch()" title="Nuova ricerca">Search</button>
                     <button id="startBtn" @click="stream_start()" title="Start stream">Start</button>
                     <button id="stopBtn" @click="streamStop()" title="Stop stream">Stop</button>
                     <button id="save-collection" @click="onClickSave()" title="Salva raccolta">Save</button>
                     </div>
+                    </header>
                 <div id="results"></div>
                 <div id="filters"></div>
                 <div id="tweets-search" style=""></div>
@@ -201,7 +203,7 @@ export default {
                     }
                     div = $(`<div class="tweet">
                                 <p class="date">${data[i].data}</p>
-                                <img src="${data[i].profile || '/static/img/default_user.png'}" class="profile_pic"></img>
+                                <img src="${data[i].profile || '/static/img/default_user.png'}" class="profile_pic" alt="profilepic_tweet${i}"></img>
                                 <div class="user">
                                    <h5>${data[i].user}</h5>
                                    <p class="tweet-content">${text}</p>

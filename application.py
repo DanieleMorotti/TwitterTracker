@@ -12,7 +12,6 @@ from tweets import store_tweets, get_stored_tweets_info, get_stored_tweet, delet
 from scheduler import add_autopost_job, init_scheduler, active_jobs, delete_job
 from map import make_map
 
-
 # Set default mimetype for .js files
 mimetypes.add_type('application/javascript', '.js')
 
@@ -135,7 +134,17 @@ def autopost():
 # get the active automatic post
 @application.route('/getActivePost')
 def send_active_jobs():
-    return Response(json.dumps(active_jobs, ensure_ascii=False, indent=2, default=str), status=200,  mimetype="application/json")
+    result = []
+    for j in active_jobs:
+        result.append({
+            "id" : j["id"],
+            "name" : j["name"],
+            "type" : j["type"],
+            "date" : j["date"].strftime("%d/%m/%Y"),
+            "time" : j["date"].strftime("%H:%M"),
+            "count" : j["count"],
+        })
+    return Response(json.dumps(result, ensure_ascii=False, indent=2, default=str), status=200,  mimetype="application/json")
 
 # Delete id post 
 @application.route('/removePost/<string:id>', methods=["DELETE"])
@@ -244,7 +253,6 @@ def add_header(r):
     r.headers["Expires"] = "0"
     r.headers['Cache-Control'] = 'public, max-age=0'
     return r
-
 
 # Only run this once even if the reloader is running:
 if not (application.debug or os.environ.get("FLASK_ENV") == "development") or os.environ.get("WERKZEUG_RUN_MAIN") == "true":
