@@ -4,30 +4,35 @@ import {addWordcloudPostPreview,post } from './autopost.js'
 export default {
 	name: 'word_cloud',
     template: `
-        <div>
-          <h3>Wordcloud of most common words in the results</h3>
-          <div id="info">Search for tweets or just load a collection to see the relative wordcloud</div>
-          <div id="wordcloud-container">
-            <button @click="createModal" id="postbtn" class="share-bttns">SHARE <i class="fas fa-share-alt"></i></button>
+    <div>
+        <h3>Wordcloud of most common words in the results</h3>
+        <div id="info">Search for tweets or just load a collection to see the relative wordcloud</div>
+        <div id="wordcloud-container">
+            <div id="img-container">
+                <button @click="createModal" id="postbtn" class="share-bttns">SHARE <i class="fas fa-share-alt"></i></button>
+            </div>
             <div class="flex-cloud-item" id="legend">
-              <table id="frequency">
-                <thead>
-                  <th>Word</th>
-                  <th>Percentage</th>
-                </thead>
-                <tbody>         
-                </tbody>
-              </table>
+                <table id="frequency">
+                    <thead>
+                        <th>Word</th>
+                        <th>Percentage</th>
+                    </thead>
+                    <tbody>         
+                    </tbody>
+                </table>
             </div> 
-          </div>
         </div>
+    </div>
     `,
     activated() {
         let max_req = 250;
         //Hide empty legend
         $('#legend').hide();
+
+        $('#img-container').hide();
         if (lastTweetsList) {
             $('#postbtn').show();
+            $('#img-container').show();
             $('#info').hide();
             if ($('#wc-loading').length > 0) {
                 $('#wc-loading').remove();
@@ -48,7 +53,7 @@ export default {
             if ($('#wc-img').length > 0) {
                 $('#wc-img').remove();
             }
-            $('#wordcloud-container').prepend('<div id="wc-loading"><img src="static/img/wc_loading.gif"></div>');
+            $('#img-container ').prepend('<div id="wc-loading"><img src="static/img/wc_loading.gif"></div>');
 
             //XHR request to get PIL image and display it
             let xhr = new XMLHttpRequest();
@@ -58,7 +63,7 @@ export default {
                 var blb = new Blob([xhr.response], { type: 'image/png' });
                 var url = (window.URL || window.webkitURL).createObjectURL(blb);
                 $('#wc-loading').remove();
-                $('#wordcloud-container').prepend(`<img id="wc-img" src="${url}">`);
+                $('#img-container').prepend(`<img id="wc-img" src="${url}">`);
             }
 
             xhr.onerror = () => console.log("Failed loading wordcloud");

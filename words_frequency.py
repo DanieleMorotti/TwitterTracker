@@ -57,8 +57,8 @@ def get_words_frequency(tweets, word_count):
 
 #Random colors
 def random_color_func(word=None, font_size=None, position=None,  orientation=None, font_path=None, random_state=None):
-    h = 37  #Hue
-    s = 100#Saturation
+    h = int(360.0 * 21.0 / 255.0)
+    s = int(100.0 * 255.0 / 255.0)
     l = int(100.0 * float(random_state.randint(80, 150)) / 255.0) #Light
 
     return "hsl({}, {}%, {}%)".format(h, s, l)
