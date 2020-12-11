@@ -40,7 +40,8 @@ export function addWordcloudPostPreview(div) {
         tweets: lastTweetsList,
         kind: "wordcloud",
     };
-
+    div.empty();
+    div.append('<img id="cloud-post-loading" src="static/img/wc_loading.gif">');
     addPostPreview(div,body);
 }
 
@@ -73,7 +74,7 @@ export function post(type){
     else{
         autopostHistogram(freq,count,type,name,mess);
     }
-    console.log(type);
+
     $('#postModal').modal('hide');
     $("#postName").val(""); 
     $("#postMess").val("");

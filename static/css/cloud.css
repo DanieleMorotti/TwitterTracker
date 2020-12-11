@@ -11,6 +11,7 @@
     width: 100%;
     height: auto;
     margin: 0 auto;
+    margin-top:1rem;
 }
 
 #legend {
@@ -25,27 +26,40 @@
 }
 
 #wc-loading {
-    height: 20rem;
-    margin: auto;
+    max-width: 80rem;
+    width: 100%;
+    margin: 0 auto;
 }
 
+#wc-loading > img {
+    width: 40rem;
+    display:block;
+    margin: auto;
+}
 h3 {
     margin-top: 0;
     text-align: center;
     padding-top: 2vh;
     color: white;
-    /*margin-bottom: 2em;*/
 }
 
-/* VECCHIO MESSAGGIO DI CARICAMENTO TWEET
-h4 {
-    color: white;
-    text-align: center;
-    width: calc(100vw - 6rem);
-}*/
+img#cloud-post-loading {
+    width: 80%;
+    height: auto;
+    margin: auto;
+    display: block;
+    margin-bottom: 2rem;
+}
+
+#postbtn {
+    height: min-content;
+    bottom: 2rem;
+    margin: 2rem auto;
+}
+
 
 #info {
-    margin-top: 0; /*5%;*/
+    margin-top: 0; 
     text-align: center;
     font-size: 20px;
     font-style: italic;
@@ -100,27 +114,4 @@ tbody::-webkit-scrollbar-track {
 tbody::-webkit-scrollbar-thumb {
     border-radius: 100px;
     -webkit-box-shadow: inset 0 0 10px rgb(24, 63, 92);
-}
-
-
-/*gestione modale pubblicazione*/
-#postModal input {
-    border-radius: 5px;
-    border: 1px solid #8080806b;
-    display: block;
-    margin-top: 1rem;
-}
-
-
-#postModal p {
-    font-size: 14px;
-    font-weight: normal;
-}
-
-#postModal img {
-    border-radius: 10px;
-}
-
-#postModal label:first-of-type {
-    margin-top: 2rem;
 }

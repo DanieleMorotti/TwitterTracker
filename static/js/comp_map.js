@@ -11,7 +11,8 @@ export default {
         <div>
           <div id="data-view-map"></div>
           <div id="map_view_container"> </div>
-          <button class="mapShare" @click="createModal">Posta</button>
+          <button class="share-bttns" id="mapShare" @click="createModal">
+            Share <i class="fas fa-share-alt"></i> </button>
         </div>
     `,
     methods: {
@@ -118,10 +119,10 @@ export default {
         });
         map.setMapTypeId('hybrid');
         if (lastTweetsList) {
-            $('button.mapShare').removeAttr('disabled');
+            $('button.share-bttns').removeAttr('disabled');
             this.drawDataOnMapView(lastTweetsList);
         } else {
-            $('button.mapShare').attr('disabled', 'disabled');
+            $('button.share-bttns').attr('disabled', 'disabled');
         }
     }
 }

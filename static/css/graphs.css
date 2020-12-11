@@ -2,29 +2,38 @@
     margin-left: 0;
 }
 
-#pbtn {
-    color: black;
-    border: white;
-    border-radius: 4px;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    margin-left: 45%;
-}
-
-#pbtn2 {
-    color: black;
-    border: white;
-    border-radius: 4px;
-    margin-top: 5%;
-    margin-bottom: 15%;
-    margin-left: 45%;
-}
-
 h2 {
     margin-top:0;
     padding-top:2vh;
     text-align:center;
     color: white;
+}
+
+.didascalia {
+    padding: 5rem;
+}
+
+/*.share-bttns {
+    background-color: white;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 0 6px black;
+    padding: 1rem;
+    font-weight: bold;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 18px;
+}*/
+
+#pbtn, #pbtn2 {
+    color: black;
+    margin: 0 auto; 
+    display: block;
+}
+
+#info1, #info2 {
+    text-align: center;
+    font-size: medium;
+    margin-bottom: 20px;
 }
 
 #firstGraph {
@@ -49,12 +58,6 @@ h2 {
     height: 500px;
 }
 
-#info1, #info2 {
-    margin-top: 3%;
-    text-align: center;
-    font-size: medium;
-}
-
 #alert {
     margin-top: 0; /*5%;*/
     text-align: center;
@@ -64,58 +67,21 @@ h2 {
 }
 
 #imgPreview {
-    height: 230px;
-    width: 230px;
+    margin: auto;
+    height: 45%;
+    width: 45%;
+}
+
+.anychart-credits-text {
+    display: none;
 }
 
 
-/*gestione modale pubblicazione*/
-#postModal input {
-    border-radius: 5px;
-    border: 1px solid #8080806b;
-    display: block;
-    margin-top: 1rem;
-}
-
-
-#postModal p {
-    font-size: 14px;
-    font-weight: normal;
-}
-
-#postModal img {
-    border-radius: 10px;
-}
-
-#postModal label:first-of-type {
-    margin-top: 2rem;
-}
-
-
-@media screen and (max-width: 800px) {
-
-    #total {
-        margin-left: 0;
-        overflow-y: scroll;
-        height: 100%;/*calc(100vh - 15rem);*/
-        width: 100%;
-    }
-    
-    #total::-webkit-scrollbar-track {
-        background: #212529;
-    }
-       
-    #total::-webkit-scrollbar-thumb {
-        background: #62849c; 
-        border-radius: 8px;
-    }
-
-    #total::-webkit-scrollbar {
-        width: 10px;
-        height: 10px;
-    }
+/*  -------  */
+@media screen and (max-width: 1000px) {
 
     #firstGraph, #secondGraph {
+        padding: 5%;
         width: 80%;
         float: left;
         margin-right: 0%;
@@ -124,11 +90,45 @@ h2 {
 
     #container1, #container2 {
         margin-top: 10px;
-        height: 450px; /*442px;*/
+        height: 450px;
     }
 
 }
 
+
+/*  -------  */
+@media screen and (max-width: 800px) {
+
+    #total {
+        padding: 5%;
+        margin-left: 0;
+        overflow-y: scroll;
+        height: 100%;/*calc(100vh - 15rem);*/
+        width: 100%;
+    }
+     
+    #total::-webkit-scrollbar-track {
+        background: #212529;
+    }
+        
+    #total::-webkit-scrollbar-thumb {
+        background: #62849c; 
+        border-radius: 8px;
+    }
+ 
+    #total::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+
+    #pbtn2 {
+        margin-bottom: 15%;
+    }
+
+}
+
+
+/*  -------  */
 @media screen and (max-width: 600px) {
 
     #total {

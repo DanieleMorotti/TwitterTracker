@@ -26,49 +26,20 @@ h3{
     width: 550px;
 }
 
-/* map buttons */
-
-.mapShare {
+/* map buttons -> classe .share-bttns dichiarata in index.css */
+#mapShare {
     background-color: white;
-    border-radius: 5px;
-    border: none;
-    box-shadow: 0 0 6px black;
-    padding: 1rem;
-    font-weight: bold;
-    font-family: Roboto, Arial, sans-serif;
-    font-size: 18px;
     position: absolute;
     bottom: 2rem;
-    margin: 2rem;
+    margin: 1.1rem;
+    padding: 1rem;
 }
 
-.mapShare:disabled {
+.share-bttns:disabled {
     background-color: rgba(255, 255, 255, 0.582);
     color: grey;
 }
 
 .gm-bundled-control-on-bottom  > div{
     display: none;
-}
-
-
-#postModal input {
-    border-radius: 5px;
-    border: 1px solid #8080806b;
-    display: block;
-    margin-top: 1rem;
-}
-
-
-#postModal p {
-    font-size: 14px;
-    font-weight: normal;
-}
-
-#postModal img {
-    border-radius: 10px;
-}
-
-#postModal label:first-of-type {
-    margin-top: 2rem;
 }
