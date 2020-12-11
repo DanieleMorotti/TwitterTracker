@@ -52,6 +52,12 @@ h4 {
     color: grey;
 }
 
+#postbtn {
+    color: black;
+    border: white;
+    border-radius: 4px;
+}
+
 tbody, thead {
     display: inline-block;
 }
@@ -61,8 +67,6 @@ tbody {
     overflow-y: auto;
     overflow-x: hidden;
 }
-
-
 
 td {
     width: 20em;
@@ -96,4 +100,27 @@ tbody::-webkit-scrollbar-track {
 tbody::-webkit-scrollbar-thumb {
     border-radius: 100px;
     -webkit-box-shadow: inset 0 0 10px rgb(24, 63, 92);
+}
+
+
+/*gestione modale pubblicazione*/
+#postModal input {
+    border-radius: 5px;
+    border: 1px solid #8080806b;
+    display: block;
+    margin-top: 1rem;
+}
+
+
+#postModal p {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+#postModal img {
+    border-radius: 10px;
+}
+
+#postModal label:first-of-type {
+    margin-top: 2rem;
 }

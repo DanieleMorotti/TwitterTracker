@@ -62,18 +62,24 @@ export default {
 			chart.background().fill("#011219");
 			var labelsx = chart.xAxis().labels();
 			var labelsy = chart.yAxis().labels();
-			labelsx.fontColor("white");
-			labelsy.fontColor("white");
+			labelsx.fontColor("#ffffff");
+			labelsy.fontColor("#ffffff");
 			labelsx.rotation(320);
 			chart.xAxis().title(' Dates ');
 			chart.yAxis().title('Number of tweets found');
 			chart.xAxis().title().padding(5);
 			chart.yAxis().title().padding(5);
 
+			/*var titlexBack = chart.xAxis().title();
+			var titleyBack = chart.yAxis().title();
+			titlexBack.fontColor("/*");
+			titlexBack.fontWeight("bold");
+			titleyBack.fontColor("/*");
+			titleyBack.fontWeight("bold");*/
+
+
 			/*
 			semplificazione della grafica
-			var titlexBack = chart.xAxis().title().background();
-			var titleyBack = chart.yAxis().title().background();
 			titlexBack.enabled(true);
 			titlexBack.fill("transparent");
 			titlexBack.cornerType("round");

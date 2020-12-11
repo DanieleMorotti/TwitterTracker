@@ -149,7 +149,7 @@ def draw_histogram(x_data,y_data,title,x_label,y_label):
         if title: plt.title(title)
             
         plot_img = BytesIO()
-        plt.savefig(plot_img,format='png',dpi=80,bbox_inches='tight')
+        plt.savefig(plot_img,format='png',dpi=80,bbox_inches='tight') #,transparent=True
     finally:
         plt_lock.release()
     
