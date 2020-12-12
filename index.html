@@ -53,7 +53,7 @@
 	<body>
 			
 		<div id="app">
-			<ul id="navbar">
+			<ul role="navigation" id="navbar">
 				<li href="javascript:void(0);" class="menu" aria-labelledby="barsLabel">
 					<button onclick="openMenu()">
 						<i class="icon fa fa-bars"></i>
@@ -106,7 +106,7 @@
 
 			</ul>
 		
-			<div id="componentView">
+			<div role="main" id="componentView">
 				<keep-alive>
 					<router-view></router-view>
 				</keep-alive>

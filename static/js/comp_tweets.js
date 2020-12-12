@@ -15,10 +15,10 @@ export default {
             <div id="tweetsDiv">
                     <header>
                     <div id="tweetsBtn">
-                    <button id="saveBtn" @click="onClickSearch()" title="Nuova ricerca">Search</button>
+                    <button id="saveBtn" @click="onClickSearch()" title="Nuova ricerca">Cerca</button>
                     <button id="startBtn" @click="stream_start()" title="Start stream">Start</button>
                     <button id="stopBtn" @click="streamStop()" title="Stop stream">Stop</button>
-                    <button id="save-collection" @click="onClickSave()" title="Salva raccolta">Save</button>
+                    <button id="save-collection" @click="onClickSave()" title="Salva raccolta">Salva</button>
                     </div>
                     </header>
                 <div id="results"></div>
@@ -104,8 +104,8 @@ export default {
             if(lastTweetsList)
             {
                 this.openNav();
-                saveCollection(lastTweetsList, lastTweetsSearchObj, () => loadCollections());    
-                this.setTitle(lastTweetsList.length + " Tweets from collection: New collection");
+                saveCollection(lastTweetsList, lastTweetsSearchObj, () => loadCollections());
+                this.setTitle(lastTweetsList.length + " Tweets dalla collezione: Nuova collezione");
                 this.setTweetsTemporary(false);
             }
         },
@@ -143,10 +143,10 @@ export default {
                     }
                     else if (field == 'images_only') {
                         //Text for only images filter
-                        text = "Containing images";
+                        text = "Solo con immagini";
                     }
                     else if (field == 'coordinates_only') {
-                        text = "Containing coordinates";
+                        text = "Solo con coordinate";
                     }
                     
                     //Add a button to delete the filter in the tweets view
@@ -227,7 +227,7 @@ export default {
                     let yCenter = (Number(data[i].coordinates[0][1][0]) + Number(data[i].coordinates[0][3][0])) / 2;
                     let xCenter = (Number(data[i].coordinates[0][1][1]) + Number(data[i].coordinates[0][3][1])) / 2;
 
-                    let cityAndCoord = `<p>City: ${data[i].city}<br>Coordinates: lat ${xCenter}, lng ${yCenter} </p>`;
+                    let cityAndCoord = `<p>Città: ${data[i].city}<br>Coordinate: lat ${xCenter}, long ${yCenter} </p>`;
                     $(cityAndCoord).insertBefore(div.find('button'));
                 }
                 
@@ -273,7 +273,7 @@ export default {
                     <div class="collection-info">
                     <label id="nameLabel" style="display:none">Modifica il nome della collezione</label> 
                     <input type="text" class="collection-name" value="${c.name}"  aria-labelledby="nameLabel">
-                    <p class="collection-count">Count: ${c.count}</p>
+                    <p class="collection-count">Numero tweet: ${c.count}</p>
                     <p class="collection-date">${date}</p>
                     </div>
                 </div>

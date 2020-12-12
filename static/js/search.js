@@ -98,11 +98,11 @@ function search(count, word, user, center, radius, images_only, coordinates_only
             $('#loading').remove();
             if (data.length > 0) {
                 //Display the tweets
-                tweetsComp.methods.setTitleAndTweets(data.length + ' Search Tweets Results', data, word);
+                tweetsComp.methods.setTitleAndTweets(data.length + ' Risultati ricerca', data, word);
                 tweetsComp.methods.setTweetsTemporary(true);
             } else {
                 //Display a message if no tweets are available
-                tweetsComp.methods.setTitle('No results for the specified query');
+                tweetsComp.methods.setTitle('Nessun risultato per la ricerca');
                 tweetsComp.methods.setTweetsTemporary(false);
             }
         },
