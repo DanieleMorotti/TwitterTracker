@@ -190,7 +190,7 @@ export default {
         appendTweets(data, word) {
             let img_only = lastTweetsSearchObj['images_only'];
             word = word || "";
-            let reg = new RegExp(word.trim().replace(' ', '|'), 'gi');
+            let reg = new RegExp(word.trim().replace(/(\s|,)+/g, '|').trim(), 'gi');
             
             for (let i = 0; i < data.length; i++) {
                 let url = "https://twitter.com/" + data[i].username + "/status/" + data[i].id;

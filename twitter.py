@@ -1,6 +1,7 @@
 import tweepy
 import os
 import urllib.parse
+import re
 
 # Twitter keys
 API_KEY = 'j6DEP35tCTAxgmoaCYMQAThHw'
@@ -103,10 +104,13 @@ def start_stream_listener(keyword, user, location, coordinates_only, images_only
 
 def build_search_query(word = "", user = "", images_only = False):
     query =  ""
-    if word:
-        query += word + " "
     if images_only:
         query += "filter:images "
+    
+    if word:
+        #Split words on commas if they are not in quotes
+        l = [w.strip() for w in re.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", word)]
+        query += " OR ".join(l) + " "
 
     #Must be last for it to be applied after all filters
     if user:
@@ -114,6 +118,7 @@ def build_search_query(word = "", user = "", images_only = False):
         for u in user.split():
             l.append("from:" + u)
         query += " OR ".join(l)
+
     return query
 
 def get_tweet_text(tweet):
