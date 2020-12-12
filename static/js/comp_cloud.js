@@ -12,7 +12,6 @@ export default {
             Fai una ricerca o carica una collezione per visualizzarne la word-cloud.</p>
         </div>
         <div id="share-div">
-            <h4> Here are represented the most common words in the results of your research<h4>
             <button @click="createModal" id="postbtn" class="share-bttns">SHARE <i class="fas fa-share-alt"></i></button>
         </div>
         <div id="wordcloud-container">
@@ -31,7 +30,7 @@ export default {
                         <!-- Dati -->
                     </tbody>
                 </table>
-            </div> 
+            </div>
         </div>
     </div>
     `,
@@ -43,7 +42,6 @@ export default {
         if (lastTweetsList) {
             $('#postbtn').show();
             $('#img-container').show();
-            $('#share-div').show();
             $('#info').hide();
             if ($('#wc-loading').length > 0) {
                 $('#wc-loading').remove();
@@ -52,7 +50,6 @@ export default {
             this.getWordCloud(max_req);
             this.getLegend(max_req);
         } else {
-            $('#share-div').hide();
             //Hide post button
             $('#postbtn').hide();
             //No collection avaiable means instruction message displayed 
