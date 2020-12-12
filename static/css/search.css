@@ -228,60 +228,7 @@ label[for="tweet-count"] {
 
 /** /
 
-/* switch  */
 
-
-.switch-label {
-    font-size: 1.1em;
-    position: relative;
-    display: inline-block;
-    min-width: 112px;
-    cursor: pointer;
-    text-align: left;
-    margin: 0px;
-}
-
-.switch-input:checked + .switch-label:before {
-    background-color: #0075ff;
-    box-shadow: 0 0 7px white;
-    -ms-transform: translate(100%, -50%);
-    -webkit-transform: translate(100%, -50%);
-    transform: translate(100%, -50%);
-}
-.switch-label:before {
-    left: 0;
-    width: 20px;
-    height: 20px;
-    z-index: 2;
-    background-color: #FAFAFA;
-    border-radius: 50%;
-    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.14), 0 2px 2px 0 rgba(0, 0, 0, 0.098), 0 1px 5px 0 rgba(0, 0, 0, 0.084);
-}
-
-.switch-input:checked + .switch-label:after {
-    background-color: #0075ffad;
-}
-.switch-label:after {
-    left: 1px;
-    width: 38px;
-    height: 14px;
-    background-color: #9E9E9E;
-    border-radius: 8px;
-}
-.switch-label:before, .switch-label:after {
-    content: "";
-    position: absolute;
-    margin: 0;
-    margin-left: 6rem;
-    outline: 0;
-    top: 50%;
-    -ms-transform: translate(0, -50%);
-    -webkit-transform: translate(0, -50%);
-    transform: translate(0, -50%);
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255,255,255,0.4);
-}
 
 /* Rounded sliders */
 .slider.round {

@@ -21,13 +21,15 @@ export default {
                     <button id="save-collection" @click="onClickSave()" title="Salva raccolta">Salva</button>
                     </div>
                     </header>
+                <div id="viewImagesDiv">
+                    <span class="toggle">
+                    <input type="checkbox" id="viewImages" class="switch-input" name="styles_switch" value="false" style="display:none" @change="changeViewImages">
+                    <label for="viewImages" id="viewImagesLabel" class="switch-label" style="font-size: 14.5px;"> Visualizza immagini</label>
+                    </span>
+                </div>
+                <br>
                 <div id="results"></div>
                 <div id="filters"></div>
-                
-                <div id="viewImagesDiv">
-                    <input type="checkbox" id="viewImages" value="false" @change="changeViewImages">
-                    <label for="viewImages" id="viewImagesLabel"> Visualizza immagini </label>
-                </div>
                 
                 <div id="tweets-search" style=""></div>
             </div>
