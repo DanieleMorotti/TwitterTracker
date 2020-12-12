@@ -389,7 +389,7 @@ body {
         background-color: transparent !important;
     }
 
-    .responsive span {
+    .responsive li:not(:first-child) span {
         display: inline !important;
     }
     
