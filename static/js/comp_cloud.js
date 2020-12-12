@@ -5,22 +5,30 @@ export default {
 	name: 'word_cloud',
     template: `
     <div>
+        <h3> Word Cloud </h3>
         <div id="info">
             <img src="/static/img/nocloud.png" alt="icona no word-cloud">
             <p>Ancora nessun dato da visualizzare.<br>
             Fai una ricerca o carica una collezione per visualizzarne la word-cloud.</p>
         </div>
+        <div id="share-div">
+            <h4> Here are represented the most common words in the results of your research<h4>
+            <button @click="createModal" id="postbtn" class="share-bttns">SHARE <i class="fas fa-share-alt"></i></button>
+        </div>
         <div id="wordcloud-container">
             <div id="img-container">
-                <button @click="createModal" id="postbtn" class="share-bttns">SHARE <i class="fas fa-share-alt"></i></button>
+                <!-- Immagini -->
             </div>
             <div class="flex-cloud-item" id="legend">
                 <table id="frequency">
                     <thead>
-                        <th>Word</th>
-                        <th>Percentage</th>
+                        <tr>
+                            <th>Word</th>
+                            <th>Percentage</th>
+                        </tr>
                     </thead>
                     <tbody>         
+                        <!-- Dati -->
                     </tbody>
                 </table>
             </div> 
@@ -31,11 +39,11 @@ export default {
         let max_req = 250;
         //Hide empty legend
         $('#legend').hide();
-
         $('#img-container').hide();
         if (lastTweetsList) {
             $('#postbtn').show();
             $('#img-container').show();
+            $('#share-div').show();
             $('#info').hide();
             if ($('#wc-loading').length > 0) {
                 $('#wc-loading').remove();
@@ -44,6 +52,7 @@ export default {
             this.getWordCloud(max_req);
             this.getLegend(max_req);
         } else {
+            $('#share-div').hide();
             //Hide post button
             $('#postbtn').hide();
             //No collection avaiable means instruction message displayed 
@@ -56,7 +65,7 @@ export default {
             if ($('#wc-img').length > 0) {
                 $('#wc-img').remove();
             }
-            $('#img-container ').prepend('<div id="wc-loading"><img aria-hidden="true" src="static/img/wc_loading.gif"></div>');
+            $('#img-container ').prepend('<div id="wc-loading"><span class="helper"></span><img aria-hidden="true" src="static/img/wc_loading.gif"></div>');
 
             //XHR request to get PIL image and display it
             let xhr = new XMLHttpRequest();
