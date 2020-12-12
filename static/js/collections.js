@@ -15,7 +15,7 @@ export function openCollection(id) {
             }
             setSearchObj(info.filters);
             tweetsComp.methods.setFilters();
-            tweetsComp.methods.setTitleAndTweets(info.count + " Tweets from collection: " + info.name, info.data, searchObj.keyword || "");
+            tweetsComp.methods.setTitleAndTweets(info.count + " Tweet dalla collezione: " + info.name, info.data, searchObj.keyword || "");
             tweetsComp.methods.setTweetsTemporary(false);
         },
 
@@ -108,7 +108,7 @@ export function saveCollection(tweets, filters, onSuccess)
         url: "/collections",
         contentType: 'application/json',
         data: JSON.stringify({
-            name: "New collection",
+            name: "Nuova collezione",
             filters: filters,
             data: tweets,
             date: datestring

@@ -52,7 +52,7 @@ export function streamStart() {
         url: 'streamStart',
         data: query,
         success: (data) => {
-            tweetsComp.methods.setTitleAndTweets('0 Streaming Tweets Results', [], data.keyword || "");
+            tweetsComp.methods.setTitleAndTweets('0 Tweet ricevuti in streaming', [], data.keyword || "");
             tweetsComp.methods.setTweetsTemporary(true);
             
             if (streamingInterval)
@@ -102,8 +102,8 @@ export function stream_update(word) {
             if(data) {
                 streamingIndex += data.length;
                 tweetsComp.methods.concatTweets(data);
-                tweetsComp.methods.appendTweets(data, word);
-                tweetsComp.methods.setTitle(lastTweetsList.length + ' Streaming Tweets Results');
+                tweetsComp.methods.appendTweets(data, word, $("#viewImages").prop("checked"));
+                tweetsComp.methods.setTitle(lastTweetsList.length + ' Tweet ricevuti in streaming');
                 if(router.history.current.path) {
                     mapComp.methods.drawDataOnMapView(data);
                 }

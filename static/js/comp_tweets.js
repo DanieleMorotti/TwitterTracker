@@ -15,14 +15,20 @@ export default {
             <div id="tweetsDiv">
                     <header>
                     <div id="tweetsBtn">
-                    <button id="saveBtn" @click="onClickSearch()" title="Nuova ricerca">Search</button>
+                    <button id="saveBtn" @click="onClickSearch()" title="Nuova ricerca">Cerca</button>
                     <button id="startBtn" @click="stream_start()" title="Start stream">Start</button>
                     <button id="stopBtn" @click="streamStop()" title="Stop stream">Stop</button>
-                    <button id="save-collection" @click="onClickSave()" title="Salva raccolta">Save</button>
+                    <button id="save-collection" @click="onClickSave()" title="Salva raccolta">Salva</button>
                     </div>
                     </header>
                 <div id="results"></div>
                 <div id="filters"></div>
+                
+                <div id="viewImagesDiv">
+                    <input type="checkbox" id="viewImages" value="false" @change="changeViewImages">
+                    <label for="viewImages" id="viewImagesLabel"> Visualizza immagini </label>
+                </div>
+                
                 <div id="tweets-search" style=""></div>
             </div>
         </div>
@@ -87,6 +93,12 @@ export default {
     `,
 
     methods: {
+        changeViewImages() {
+            if(lastTweetsList) {
+                this.displayTweets(lastTweetsList, lastTweetsSearchObj.keyword, $("#viewImages").prop("checked"));
+            }
+        },
+
         setTweetsTemporary(temporary) {
             tweetsAreTemporary = temporary;
         },
@@ -104,8 +116,8 @@ export default {
             if(lastTweetsList)
             {
                 this.openNav();
-                saveCollection(lastTweetsList, lastTweetsSearchObj, () => loadCollections());    
-                this.setTitle(lastTweetsList.length + " Tweets from collection: New collection");
+                saveCollection(lastTweetsList, lastTweetsSearchObj, () => loadCollections());
+                this.setTitle(lastTweetsList.length + " Tweets dalla collezione: Nuova collezione");
                 this.setTweetsTemporary(false);
             }
         },
@@ -143,10 +155,10 @@ export default {
                     }
                     else if (field == 'images_only') {
                         //Text for only images filter
-                        text = "Containing images";
+                        text = "Solo con immagini";
                     }
                     else if (field == 'coordinates_only') {
-                        text = "Containing coordinates";
+                        text = "Solo con coordinate";
                     }
                     
                     //Add a button to delete the filter in the tweets view
@@ -157,6 +169,8 @@ export default {
 
                 }
             }
+            
+            $("#viewImages").prop("checked", searchObj.images_only);
         },
 
         deleteFilter(field) {
@@ -187,10 +201,9 @@ export default {
         },
 
         //Append an array of tweets to the tweets view highlighting the specified word
-        appendTweets(data, word) {
-            let img_only = lastTweetsSearchObj['images_only'];
+        appendTweets(data, word, img_only) {
             word = word || "";
-            let reg = new RegExp(word.trim().replace(' ', '|'), 'gi');
+            let reg = new RegExp(word.trim().replace(/(\s|,)+/g, '|').trim(), 'gi');
             
             for (let i = 0; i < data.length; i++) {
                 let url = "https://twitter.com/" + data[i].username + "/status/" + data[i].id;
@@ -211,7 +224,7 @@ export default {
                                 <button class="showBtn" data-toggle="modal" data-target="#tweetModal" >Show</button>
                             </div>`);
                             div.find('button').on("click", () => this.showTweetInModal(url));
-                } else {
+                } else if(data[i].images[0]) {
                     div = $(`<div class="tweet-images" data-toggle="modal" data-target="#tweetModal">
                                 <img src="${data[i].profile || '/static/img/default_user.png'}" class="profile_pic"></img>
                                 <div class="user">
@@ -222,25 +235,28 @@ export default {
                     div.on("click", () => this.showTweetInModal(url));
                 }
                
-                // Add the city and coordinates only if they are available in the tweet
-                if(data[i].city || data[i].coordinates){
-                    let yCenter = (Number(data[i].coordinates[0][1][0]) + Number(data[i].coordinates[0][3][0])) / 2;
-                    let xCenter = (Number(data[i].coordinates[0][1][1]) + Number(data[i].coordinates[0][3][1])) / 2;
+                if(div) {
+                    // Add the city and coordinates only if they are available in the tweet
+                    if(data[i].city || data[i].coordinates){
+                        let yCenter = (Number(data[i].coordinates[0][1][0]) + Number(data[i].coordinates[0][3][0])) / 2;
+                        let xCenter = (Number(data[i].coordinates[0][1][1]) + Number(data[i].coordinates[0][3][1])) / 2;
 
-                    let cityAndCoord = `<p>City: ${data[i].city}<br>Coordinates: lat ${xCenter}, lng ${yCenter} </p>`;
-                    $(cityAndCoord).insertBefore(div.find('button'));
+                        let cityAndCoord = `<p>Città: ${data[i].city}<br>Coordinate: lat ${xCenter}, long ${yCenter} </p>`;
+                        $(cityAndCoord).insertBefore(div.find('button'));
+                    }
+                    
+
+                    $("#tweets-search").append(div);
                 }
-                
-
-                $("#tweets-search").append(div);
-                $("#tweets-search").addClass('bd-white');
             }
+
+            $("#tweets-search").addClass('bd-white');
         },
         
         // Display an array of tweets highlighting the specified word
-        displayTweets(data, word) {
+        displayTweets(data, word, img_only) {
             $("#tweets-search").empty();
-            this.appendTweets(data, word);
+            this.appendTweets(data, word, img_only);
         },
 
         setTitle(title) {
@@ -254,8 +270,9 @@ export default {
             lastTweetsList = data;
             //Make a copy of the search object at the time of search, so that we can use it when we save the collection
             lastTweetsSearchObj = JSON.parse(JSON.stringify(searchObj));
+            $("#viewImages").prop("checked", lastTweetsSearchObj.images_only);
             
-            this.displayTweets(data, word);
+            this.displayTweets(data, word, lastTweetsSearchObj.images_only);
         },
 
          // Display an array of collections in the collections area
@@ -273,7 +290,7 @@ export default {
                     <div class="collection-info">
                     <label id="nameLabel" style="display:none">Modifica il nome della collezione</label> 
                     <input type="text" class="collection-name" value="${c.name}"  aria-labelledby="nameLabel">
-                    <p class="collection-count">Count: ${c.count}</p>
+                    <p class="collection-count">Numero tweet: ${c.count}</p>
                     <p class="collection-date">${date}</p>
                     </div>
                 </div>
@@ -323,8 +340,10 @@ export default {
         loadCollections()
 
         //Refresh the tweets if they arrived from a stream while in another component
-        if(lastTweetsList)
-            this.displayTweets(lastTweetsList, lastTweetsSearchObj.keyword)
+        if(lastTweetsList) {
+            $("#viewImages").prop("checked", lastTweetsSearchObj.images_only);
+            this.displayTweets(lastTweetsList, lastTweetsSearchObj.keyword, lastTweetsSearchObj.images_only)
+        }
     }
 
 }
