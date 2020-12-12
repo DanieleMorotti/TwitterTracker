@@ -309,3 +309,11 @@
         margin: 1rem;
     }
 }
+
+#viewImagesLabel {
+    color: white;
+}
+
+#viewImagesDiv {
+    margin: 1rem;
+}

@@ -102,7 +102,7 @@ export function stream_update(word) {
             if(data) {
                 streamingIndex += data.length;
                 tweetsComp.methods.concatTweets(data);
-                tweetsComp.methods.appendTweets(data, word);
+                tweetsComp.methods.appendTweets(data, word, $("#viewImages").prop("checked"));
                 tweetsComp.methods.setTitle(lastTweetsList.length + ' Tweet ricevuti in streaming');
                 if(router.history.current.path) {
                     mapComp.methods.drawDataOnMapView(data);
