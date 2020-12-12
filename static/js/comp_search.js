@@ -360,7 +360,7 @@ export default {
                     el.on("click", () => {
                         this.closeTrendNav();
                         setSearchObj({
-                            count: 250,
+                            count: 500,
                             keyword: t.query
                         });
                         dispatch_search();
