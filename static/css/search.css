@@ -215,9 +215,11 @@ label[for="tweet-count"] {
     margin-bottom: 5rem;
     float: right;
     border-radius: 5px;
-    padding: 0.5rem;
+    padding: 0.7rem;
     box-shadow: 0 0 5px #fffefe;
     border: 1px solid white;
+    background-color: white;
+    font-weight: bold;
 }
 
 .error_msg {

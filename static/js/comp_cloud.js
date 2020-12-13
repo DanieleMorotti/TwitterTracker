@@ -5,7 +5,6 @@ export default {
 	name: 'word_cloud',
     template: `
     <div>
-        <h3> Word Cloud </h3>
         <div id="info">
             <img src="/static/img/nocloud.png" alt="icona no word-cloud">
             <p>Ancora nessun dato da visualizzare.<br>
