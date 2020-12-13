@@ -160,11 +160,11 @@
 		<script>
 			function openMenu() {
 			  var x = document.getElementById("navbar");
-			  if (x.className === "")  {
+			  if (x.className === "" && window.innerWidth <= 600 )  {
 				$('#navbar').addClass("responsive");
 				$('#componentView').hide();
 			  }
-			  else {
+			  else if(window.innerWidth <= 600 ){
 				$('#navbar').removeClass("responsive");
 				$('#componentView').show();
 			  }

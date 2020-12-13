@@ -10,8 +10,11 @@ export default {
 	
 	template: ` 
 	<div id="component">
-		<h2> Pubblicazioni attive </h2>
-		<div id="info">Nessuna pubblicazione attiva</div>
+		<div id="info">
+			<img src="/static/img/noshare.png" alt="icona no pubblicazioni attive">
+			<p>Ancora nessun pubblicazione attiva.<br>
+			Fai una ricerca o carica una collezione per iniziare a condividere i tuoi risultati.</p>
+		</div>
 		<div id="postMenu" v-if="actPost.length != 0">
 				<div class="postList" v-for="post in actPost">
 					<button type="button" id="delPub" data-toggle="modal" data-target="#deletePModal"><i class="fas fa-trash"></i></button>

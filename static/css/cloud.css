@@ -103,8 +103,9 @@ img#cloud-post-loading {
 }
 
 #info img{
-    width: 40%;
+    width: 24%;
     float: left;
+    margin-right: 2rem;
 }
 
 
@@ -166,9 +167,10 @@ th {
 @media (max-width: 800px) {
     #info {
         padding-top: 5rem;
+        text-align: center;
     }
     #info img{
-        width: 60%;
+        width: 30%;
         float: none;
     }
 }

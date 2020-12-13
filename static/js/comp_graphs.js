@@ -11,7 +11,11 @@ export default {
 	
 	template: ` 
 	<div id="total">
-		<div id="alert">No research was done</div>
+		<div id="info">
+			<img src="/static/img/nocharts.png" alt="icona no grafici disponibili">
+			<p>Ancora nessun dato da visualizzare.<br>
+			Fai una ricerca o carica una collezione per visualizzare i tuoi grafici.</p>
+		</div>
 		<div id="firstGraph">
 			<div id="container1"> </div>
 			<div class="didascalia">
@@ -197,7 +201,7 @@ export default {
 			$('#info2').show();
 			$('#pbtn').show();
 			$('#pbtn2').show();
-			$('#alert').hide();
+			$('#info').hide();
 			$('#container1').empty();
 			$('#container2').empty();
 			this.createGraph1();
@@ -208,7 +212,7 @@ export default {
 			$('#info2').hide();
 			$('#pbtn').hide();
 			$('#pbtn2').hide();
-			$('#alert').show();
+			$('#info').show();
 			$('#pbtn').hide();
 			$('#pbtn2').hide();
 		}
