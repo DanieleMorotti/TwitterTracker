@@ -212,7 +212,6 @@ label[for="tweet-count"] {
 #searchBtn {
     margin-top: 3rem;
     margin-right: 4rem;
-    margin-bottom: 5rem;
     float: right;
     border-radius: 5px;
     padding: 0.7rem;
@@ -223,7 +222,7 @@ label[for="tweet-count"] {
 }
 
 .error_msg {
-    color: #efff00;
+    color: #ff7a00;
 }
 
 

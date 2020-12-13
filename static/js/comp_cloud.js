@@ -13,11 +13,11 @@ export default {
         <div id="share-div">
             <button @click="createModal" id="postbtn" class="share-bttns">SHARE <i class="fas fa-share-alt"></i></button>
         </div>
-        <div id="wordcloud-container">
-            <div id="img-container">
+        <div id="wordcloud-container" class="flex-container">
+            <div id="img-container" >
                 <!-- Immagini -->
             </div>
-            <div class="flex-cloud-item" id="legend">
+           <div class="flex-cloud-item" id="legend" >
                 <table id="frequency">
                     <thead>
                         <tr>
@@ -38,8 +38,10 @@ export default {
         //Hide empty legend
         $('#legend').hide();
         $('#img-container').hide();
+        $('#wordcloud-container').hide();
         if (lastTweetsList) {
             $('#postbtn').show();
+            $('#wordcloud-container').show();
             $('#img-container').show();
             $('#info').hide();
             if ($('#wc-loading').length > 0) {

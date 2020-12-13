@@ -30,7 +30,6 @@ export default {
                 <br>
                 <div id="results"></div>
                 <div id="filters"></div>
-                
                 <div id="tweets-search" style=""></div>
             </div>
         </div>

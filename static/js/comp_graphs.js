@@ -11,7 +11,6 @@ export default {
 	
 	template: ` 
 	<div id="total">
-		<h2> Graphs </h2>
 		<div id="alert">No research was done</div>
 		<div id="firstGraph">
 			<div id="container1"> </div>

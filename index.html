@@ -53,7 +53,7 @@
 	<body>
 			
 		<div id="app">
-			<ul role="navigation" id="navbar">
+			<ul  id="navbar">
 				<li href="javascript:void(0);" class="menu" aria-labelledby="barsLabel">
 					<button onclick="openMenu()">
 						<i class="icon fa fa-bars"></i>
@@ -160,10 +160,14 @@
 		<script>
 			function openMenu() {
 			  var x = document.getElementById("navbar");
-			  if (x.className === "") 
+			  if (x.className === "")  {
 				$('#navbar').addClass("responsive");
-			  else 
+				$('#componentView').hide();
+			  }
+			  else {
 				$('#navbar').removeClass("responsive");
+				$('#componentView').show();
+			  }
 			}
 			</script>
 	</body>

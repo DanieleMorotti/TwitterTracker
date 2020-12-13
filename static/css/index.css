@@ -9,8 +9,17 @@
 
 html, body, #app {
     height: 100%;
-    overflow-y: hidden;
+    overflow: auto;
 }
+
+*::-webkit-scrollbar {
+    display: none;
+}
+* {
+    -ms-overflow-style: none; 
+    scrollbar-width: none;  
+}
+
 
 body {
     background-color:  rgb(1, 18, 25);
@@ -29,6 +38,8 @@ body {
 .main-container img {
     width: 8rem;
 }
+
+
 
 @media screen and (min-width: 1000px) {
     .main-container img {
@@ -210,34 +221,13 @@ body {
 }
 
 
-/* 
-    IMPORTANTE: left di componentView deve essere uguale a width della navbar qui sopra ^
-
-    Non e' sicuramente il modo piu' intelligente di ottenere che l'area del componente sia affiancata alla navbar, ma funziona
-*/
-
-
 /* main component */
 
 #componentView {
     margin-left: 5rem;
     overflow-y: scroll;
-    height: 100%;/*calc(100vh - 5rem);*/
+    height: 100%;
 }
-
-#componentView::-webkit-scrollbar-track {
-    background: #212529; 
-}
-   
-#componentView::-webkit-scrollbar-thumb {
-    background: #62849c; 
-    border-radius: 8px;
-}
-#componentView::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-}
-
 
 /* close nav button */
 
