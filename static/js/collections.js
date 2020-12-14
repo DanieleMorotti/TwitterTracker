@@ -94,7 +94,7 @@ export function loadCollections() {
         },
 
         error: (xhr, ajaxOptions, thrownError) => {
-            console.log("collections: " + xhr.status + ' - ' + thrownError);
+            console.log("loadCollections: " + xhr.status + ' - ' + thrownError);
         }
     });
 }
@@ -120,7 +120,7 @@ export function saveCollection(tweets, filters, onSuccess)
         },
 
         error: (xhr, ajaxOptions, thrownError) => {
-            console.log("collections: " + xhr.status + ' - ' + thrownError);
+            console.log("saveCollections: " + xhr.status + ' - ' + thrownError);
         }
     });
 }
