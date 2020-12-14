@@ -16,24 +16,24 @@ Attraverso questo modulo è possibile selezionare i filtri che si desiderano app
 * Un checkbox per visualizzare solo i tweet geolocalizzati.
 Dopo aver compilato adeguatamente, secondo le proprie necessità, i campi appena descritti, è possibile avviare la ricerca per venire reindirizzati al modulo dei **Risultati**.
 
-#### Risultati:
-Questo modulo è preposto alla visualizzazione dei risultati a cascata sotto forma di tweet. Vengono visualizzati un massimo di 100 tweet a ricerca, per i risultati di stream invece non ci sono limiti di visualizzazione.
-E' possibile espandere i tweet in forma *embedded* nei risultati mediante il pulsante show, vengono inoltre visualizzate delle etichette contenenti i filtri applicati alla ricerca che è possibile rimuovere per, eventualmente, ripetere la ricerca con meno parametri. Si può inoltre salvare i risultati della ricerca in forma di collezione che sarà possibile rinominare o eliminare dalla sezione **Collezioni**.
+E' inoltre possibile decidere di selezionare un trend in modalità visualizzazione o streaming tramite la sezione dedicata
+
+#### Risultati e Streaming:
+Questo modulo è preposto alla visualizzazione dei risultati a cascata sotto forma di tweet. Vengono visualizzati un massimo di 500 tweet a ricerca, per i risultati di stream invece non ci sono limiti di visualizzazione.
+E' possibile espandere i tweet in forma *embedded* nei risultati mediante il pulsante show, vengono inoltre visualizzate delle etichette contenenti i filtri applicati alla ricerca che è possibile rimuovere per, eventualmente, ripetere la ricerca con meno parametri o passare alla modalità streaming. Si può inoltre salvare i risultati della ricerca in forma di collezione che sarà possibile rinominare o eliminare dalla sezione dedicata sulla destra dello schermo.
+E' inoltre possibile decidere di visualizzare solamente le immagini dei tweet - ove siano presenti - tramite il pulsante "*Visualizza immagini*".
 
 #### Mappa: 
 E' una sezione interamente dedicata alla visualizzazione su mappa dei tweet geolocalizzati apparsi fra i risultati, nel caso in cui uno o più tweet sulla mappa contengano uno o più media, al posto dell'icona di base, verrà visualizzato il primo dei media in questione.
 
 #### Word Cloud: 
-_**W.I.P.**_
+Da questa sezione è possibile visualizzare una wordcloud delle parole più comuni all'interno dei risultati della ricerca, assieme ad una legenda con le percentuali di frequenza di ogni parola.
 
-#### Visualizzazione grafica:
-_**W.I.P.**_
+#### Grafici:
+Tramite questa sezione è possibile visualizzare dei grafici nei quali viene rappresentata la frequenza nel tempo dei risultati ottenuti da una ricerca e le parole che compaiono nei sopracitati risultati in termini di frequenza.
 
-#### Collezioni:
-In questo modulo è possibile visualizzare, rinominare o rimuovere intere collezioni di tweet ottenute come risultato di una ricerca fatta precedentemente. Nel caso in cui si decida di visualizzare la collezione, verranno visualizzati anche i filtri applicati alla ricerca.
-La ricerca viene effettuata tramite una parola chiave da inserire nell'apposito campo di testo. 
-E' inoltre possibile inserire delle coordinate geografiche in gradi decimali e il raggio dell'area geografica all'interno della quale si vogliono cercare i tweet. I parametri devono essere separati da una virgola e il raggio di ricerca deve essere specificato in kilometri apponendo la sigla 'km' (e.g. Ricerca in 10km di raggio dal centro di Bologna : *[44.5075, 11.3514, 10km]*)
-Lo stream viene effettuato tramite la sola parola chiave da cercare e viene fatto partire dal pulsante 'start'. Per terminare lo stream occorre cliccare sul tasto 'stop' o semplicemente iniziare una nuova ricerca o stream. 
+#### Post:
+Da questa sezione è possibile gestire con comodità i post automatici precedentemente impostati. Per creare un post automatico è sufficiente cliccare sul pulsante **SHARE** in corrispondenza di ciò che si vuole postare. Il pulsante **SHARE** è disponibile per: **Mappa**, **Grafici** e **Word Cloud**.
 
 Fraydrum utilizza i servizi di Web Hosting di AWS ed è disponibile al link http://fraydrum.tk/
 
