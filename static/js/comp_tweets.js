@@ -264,12 +264,7 @@ export default {
                     //When the 50th tweet comes to the screen load 100 more
                     if(end != data.length && i == end - 50) {
                         $("#searchDiv").off();
-                        $("#searchDiv").on("scroll", () => {
-                            if(div.visible()) {
-                                $("#searchDiv").off();
-                                this.appendTweets(data, end, end + 100, word, img_only);
-                            }
-                        });
+                        $("#searchDiv").on("scroll", this.onScrollAppendTweets());
                     }
 
                     $("#tweets-search").append(div);
@@ -278,7 +273,13 @@ export default {
 
             $("#tweets-search").addClass('bd-white');
         },
-        
+        // Loading 100 more tweets function
+        onScrollAppendTweets() {
+            if (div.visible()) {
+                $("#searchDiv").off();
+                this.appendTweets(data, end, end + 100, word, img_only);
+            }
+        },
         // Display an array of tweets highlighting the specified word
         displayTweets(data, word, img_only) {
             $("#tweets-search").empty();
