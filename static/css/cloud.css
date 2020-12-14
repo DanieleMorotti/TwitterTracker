@@ -58,20 +58,6 @@
     text-align: center;
 }
 
-#frequency {
-    width: 100%;
-    display: block;
-    border-top-right-radius: 3rem;
-    border-bottom-right-radius: 3rem;
-}
-
-#frequency thead tr {
-    position: sticky;
-    background: none;
-    top: 0;
-    border-top-right-radius: 3rem;
-    border-bottom-right-radius: 3rem;
-}
 
 img#cloud-post-loading {
     width: 80%;
@@ -120,6 +106,7 @@ tbody {
     width: 100%;
     overflow-x: hidden;
 }
+
 
 td, th {
     width: 6%;
@@ -195,20 +182,6 @@ th {
         max-height: 300px;
     }
 
-    #frequency {
-        width: 100%;
-        display: block;
-        border-top-right-radius: 3rem;
-        border-bottom-right-radius: 3rem;
-    }
-    
-    #frequency thead tr {
-        position: sticky;
-        background: none;
-        top: 0;
-        border-top-right-radius: 3rem;
-    }
-    
     #share-div {
         position: relative;
         color: white;
@@ -218,4 +191,12 @@ th {
         top: 0;
         margin: 2rem;
     }
+    th {
+        position: relative;
+    }
+    tr {
+        border-top-right-radius: 3rem;
+        border-top-left-radius: 3rem;  
+    }
+    
 }
