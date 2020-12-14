@@ -17,7 +17,7 @@ export default {
 		</div>
 		<div id="postMenu" v-if="actPost.length != 0">
 				<div class="postList" v-for="post in actPost">
-					<button type="button" id="delPub" data-toggle="modal" data-target="#deletePModal"><i class="fas fa-trash"></i></button>
+					<button type="button" id="delPub" data-toggle="modal" data-target="#deletePModal" @click="removePost(post.id)"><i class="fas fa-trash"></i></button>
 					<h5> TITOLO: {{post.name}} </h5>
 					<h5> PRIMA PUBBLICAZIONE: {{post.date}} </h5>
 					<h5> TIPOLOGIA: {{post.type}} </h5>
@@ -34,7 +34,7 @@ export default {
                 <div class="modal-body">Sei sicuro di voler eliminare questa pubblicazione? </div>
                 <div class="modal-footer"> 
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
-                    <button id="deleteBtn" @click="removePost(post.id) "type="button" class="btn btn-primary" data-dismiss="modal">Conferma</button>
+                    <button id="deletePostBtn" type="button" class="btn btn-primary" data-dismiss="modal">Conferma</button>
                 </div>
                 </div>
             </div>
@@ -46,22 +46,24 @@ export default {
 
 	methods: {
 		removePost(id){
+			$("#deletePostBtn").off();
+			$("#deletePostBtn").on("click", () => {
+				$.ajax({
 
-			$.ajax({
-
-				method: "DELETE",
-				url: "/removePost/" + id,
-				success: () => {
-					console.log("Cancellato post automatico con id: ",id);
-					//If the request worked delete from the list of the user
-					let toDel = this.actPost.findIndex(post => post.id === id);
-					this.actPost.splice(toDel,1);
-				},
-		
-				error: (xhr, ajaxOptions, thrownError) => {
-					console.log("Remove automatic post: " + xhr.status + ' - ' + thrownError);
-				}
-			})
+					method: "DELETE",
+					url: "/removePost/" + id,
+					success: () => {
+						console.log("Cancellato post automatico con id: ",id);
+						//If the request worked delete from the list of the user
+						let toDel = this.actPost.findIndex(post => post.id === id);
+						this.actPost.splice(toDel,1);
+					},
+			
+					error: (xhr, ajaxOptions, thrownError) => {
+						console.log("Remove automatic post: " + xhr.status + ' - ' + thrownError);
+					}
+				});
+			});
 		}
 	},
 	activated() {
