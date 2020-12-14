@@ -107,21 +107,9 @@ export default {
             }
 
         },
-        onClickSearch() {
-            let newSearchObj = {
-                count: $('#tweet-count').val(),
-                keyword: $('#keyWord').val(),  
-                user: $('#user').val(),
-                center: $('#coordinates').val().replace(/\s+/g, ''),
-                radius: $('#radius').val(),
-                pdi: $('#pdi').val(),
-                images_only: $('#images-only').prop('checked'),
-                coordinates_only: $('#coordinates-only').prop('checked'),
-            };
 
+        startSearchOrStream() {
             let success, stream = false;
-
-            setSearchObj(newSearchObj);
             if(!$("#styles_switch").is(":checked")) {
                 success = dispatch_search();
             }
@@ -138,9 +126,23 @@ export default {
                         tweetsComp.methods.clearTitleAndTweets(stream)
                     }, 0);
                 });
-            } else {
-                //TODO: avvisare in caso di fail
-            }
+            } 
+        },
+
+        onClickSearch() {
+            let newSearchObj = {
+                count: $('#tweet-count').val(),
+                keyword: $('#keyWord').val(),  
+                user: $('#user').val(),
+                center: $('#coordinates').val().replace(/\s+/g, ''),
+                radius: $('#radius').val(),
+                pdi: $('#pdi').val(),
+                images_only: $('#images-only').prop('checked'),
+                coordinates_only: $('#coordinates-only').prop('checked'),
+            };
+
+            setSearchObj(newSearchObj);
+            this.startSearchOrStream();
         },
         clearPDI() {
             $('#pdi').val('');
@@ -359,18 +361,13 @@ export default {
 
                     el.on("click", () => {
                         this.closeTrendNav();
+
                         setSearchObj({
                             count: 500,
                             keyword: t.query
                         });
-                        dispatch_search();
 
-                        this.$router.push('tweets', () => {
-                            setTimeout(() => {
-                                tweetsComp.methods.setFilters();
-                                tweetsComp.methods.clearTitleAndTweets()
-                            }, 0);
-                        });
+                        this.startSearchOrStream();
                     });
 
                     $('#trends-list').append(el);

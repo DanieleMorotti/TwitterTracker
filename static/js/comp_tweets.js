@@ -111,7 +111,6 @@ export default {
 
         setOpenCollectionId(id) {
             openCollectionId = id;
-            console.log(id);
         },
 
         stream_start() {
@@ -217,11 +216,12 @@ export default {
         },
 
         //Append an array of tweets to the tweets view highlighting the specified word
-        appendTweets(data, word, img_only) {
+        appendTweets(data, begin, end, word, img_only) {
             word = word || "";
             let reg = new RegExp(word.trim().replace(/(\s|,)+/g, '|').trim(), 'gi');
             
-            for (let i = 0; i < data.length; i++) {
+            let begin_count = $("#tweets-search").children().length;
+            for (let i = begin; i < Math.min(data.length, end); i++) {
                 let url = getEmbeddedTweetUrl(data[i].username, data[i].id);
 
                 let div = null;
@@ -261,10 +261,25 @@ export default {
                         let cityAndCoord = `<p>Città: ${data[i].city}<br>Coordinate: lat ${xCenter}, long ${yCenter} </p>`;
                         $(cityAndCoord).insertBefore(div.find('button'));
                     }
-                    
 
                     $("#tweets-search").append(div);
+                } else {
+                    end++;
                 }
+            }
+
+            //When the 50th tweet comes to the screen load 100 more
+            if(end < data.length) {
+                let end_count = $("#tweets-search").children().length;
+                let i = begin_count + Math.floor((end_count - begin_count)/ 2);
+                let div = $($("#tweets-search").children().get(i));
+                $("#searchDiv").off();
+                $("#searchDiv").on("scroll", () => {
+                    if(div.visible()) {
+                        $("#searchDiv").off();
+                        this.appendTweets(data, end, end + 100, word, img_only);
+                    }
+                });
             }
 
             $("#tweets-search").addClass('bd-white');
@@ -273,7 +288,8 @@ export default {
         // Display an array of tweets highlighting the specified word
         displayTweets(data, word, img_only) {
             $("#tweets-search").empty();
-            this.appendTweets(data, word, img_only);
+            $("#searchDiv")[0].scrollTop = 0;
+            this.appendTweets(data, 0, 100, word, img_only);
         },
 
         setTitle(title) {

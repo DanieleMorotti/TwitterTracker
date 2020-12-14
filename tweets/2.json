@@ -2,7 +2,7 @@
   "name": "Ristoranti Lombardia",
   "filters": {
     "count": "500",
-    "keyword": "ristorante OR pizzeria OR osteria",
+    "keyword": "ristorante, pizzeria, osteria",
     "user": "",
     "center": "45.45167,9.54962",
     "radius": "80",

@@ -82,7 +82,6 @@ function autopost(body) {
         data: JSON.stringify(body),
 
         success: (data) => {
-            console.log("Post automatico avviato correttamente");
         },
 
         error: (xhr, ajaxOptions, thrownError) => {
