@@ -60,9 +60,17 @@
 #frequency {
     width: 100%;
     display: block;
+    border-top-right-radius: 3rem;
+    border-bottom-right-radius: 3rem;
 }
 
-
+#frequency thead tr {
+    position: sticky;
+    background: none;
+    top: 0;
+    border-top-right-radius: 3rem;
+    border-bottom-right-radius: 3rem;
+}
 
 img#cloud-post-loading {
     width: 80%;
@@ -186,6 +194,20 @@ th {
         max-height: 300px;
     }
 
+    #frequency {
+        width: 100%;
+        display: block;
+        border-top-right-radius: 3rem;
+        border-bottom-right-radius: 3rem;
+    }
+    
+    #frequency thead tr {
+        position: sticky;
+        background: none;
+        top: 0;
+        border-top-right-radius: 3rem;
+    }
+    
     #share-div {
         position: relative;
         color: white;
