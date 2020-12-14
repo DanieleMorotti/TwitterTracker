@@ -9,11 +9,16 @@
     -webkit-flex-direction: row;
 }
 
-#wc-img {
-    max-width: 70rem;
-    width: 100%;
+#wc-img, #wc-loading > img {
+    max-width: 60vw;
+    width: auto;
     max-height:100%;
     height: auto;
+}
+
+#wc-loading {
+    margin: 0 auto;
+    background: #011219;
 }
 
 #share-div {
@@ -27,11 +32,7 @@
     margin: 1rem auto;
     margin-top: 5rem;
 }
-#wc-loading > img {
-    width: 100%;
-    height: auto;
-    vertical-align: middle;
-}
+
 .helper {
     display: inline-block;
     height: 100%;
@@ -54,15 +55,6 @@
     max-height: 100%;
     padding: 2rem;
     text-align: center;
-}
-
-#wc-loading {
-    text-align:center;
-    max-width: 80rem;
-    margin: 0 auto;
-    padding: 12%;
-    height: 100%;
-    background: #011219;
 }
 
 #frequency {

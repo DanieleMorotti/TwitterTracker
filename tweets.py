@@ -44,11 +44,11 @@ def store_tweets(info):
         path = get_tweets_path_from_id(id)
         with open(path, "w", encoding='utf-8') as f:
             json.dump(info, f, ensure_ascii=False, indent=2)
-        return True
+        return id
 
     except Exception as e:
         print(e)
-        return False
+        return None
 
 def get_stored_tweets_info():
     if not os.path.isdir(tweets_dir):

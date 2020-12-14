@@ -29,16 +29,16 @@ export function imageRequest(url, body) {
         let xhr = new XMLHttpRequest();
         xhr.responseType = 'arraybuffer';
         xhr.onload = () => {
-            if (this.status >= 200 && this.status < 300) {    
+            if (xhr.status >= 200 && xhr.status < 300) {    
                 var blb = new Blob([xhr.response], { type: 'image/png' });
                 var blburl = (window.URL || window.webkitURL).createObjectURL(blb);
                 resolve(blburl);
             } else {
-                reject(this.status);
+                reject(xhr.status);
             }
         }
 
-        xhr.onerror = () => reject(this.status);
+        xhr.onerror = () => reject(xhr.status);
 
         xhr.open('POST', url);
         xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');

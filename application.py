@@ -167,9 +167,10 @@ def save_collection():
     if not body:
         return Response(status=400)
 
-    success = store_tweets(body)
-    status = 200 if success else 400
-    return Response(status=status)
+    id = store_tweets(body)
+    if id is None:
+        Response(status=400)
+    return Response(json.dumps({"id": id}, ensure_ascii=False, indent=2), status=200,  mimetype="application/json")
     
 # Rename a collection with the specified id
 @application.route('/collections/<int:id>/name', methods=["POST"])

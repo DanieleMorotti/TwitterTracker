@@ -2,10 +2,12 @@ import { saveCollection } from './collections.js';
 import { searchObj, dispatch_search } from './search.js'
 import { streamStart, stream_stop } from "./stream.js";
 import { loadCollections, openCollection, deleteCollection, updateCollectionName, addToCollection} from './collections.js'
+import { getEmbeddedTweetUrl, splitCoordinatesIntoLatLng } from './utils.js';
 
 export var lastTweetsList = null;
 export var lastTweetsSearchObj = null;
 var tweetsAreTemporary = false;
+var openCollectionId = null;
 
 export default {
     name: 'search',
@@ -102,7 +104,16 @@ export default {
 
         setTweetsTemporary(temporary) {
             tweetsAreTemporary = temporary;
+            if(temporary) {
+                openCollectionId = null;
+            }
         },
+
+        setOpenCollectionId(id) {
+            openCollectionId = id;
+            console.log(id);
+        },
+
         stream_start() {
             streamStart();
             $("#stopBtn").prop("disabled",false);
@@ -117,7 +128,10 @@ export default {
             if(lastTweetsList)
             {
                 this.openNav();
-                saveCollection(lastTweetsList, lastTweetsSearchObj, () => loadCollections());
+                saveCollection(lastTweetsList, lastTweetsSearchObj, (id) => {
+                    openCollectionId = id;
+                    loadCollections();
+                });
                 this.setTitle(lastTweetsList.length + " Tweets dalla collezione: Nuova collezione");
                 this.setTweetsTemporary(false);
             }
@@ -147,7 +161,8 @@ export default {
                     let text = val;
                     if (field == 'center') {
                         //Add parenthesis around the center field
-                        text = '(' + parseFloat(text.split(',')[0]).toFixed(2) + ', ' + parseFloat(text.split(',')[1]).toFixed(2) + ')';
+                        let c = splitCoordinatesIntoLatLng(text);
+                        text = '(' + c.lat.toFixed(2) + ', ' + c.lng.toFixed(2) + ')';
         
                         //If we have a pdi we write that too
                         if(searchObj.pdi) {
@@ -171,7 +186,7 @@ export default {
                 }
             }
             
-            $("#viewImages").prop("checked", searchObj.images_only);
+            $("#viewImages").prop("checked", searchObj.images_only || false);
         },
 
         deleteFilter(field) {
@@ -207,7 +222,8 @@ export default {
             let reg = new RegExp(word.trim().replace(/(\s|,)+/g, '|').trim(), 'gi');
             
             for (let i = 0; i < data.length; i++) {
-                let url = "https://twitter.com/" + data[i].username + "/status/" + data[i].id;
+                let url = getEmbeddedTweetUrl(data[i].username, data[i].id);
+
                 let div = null;
                 if (!img_only) {
                     //If there is a keyword higlight it
@@ -297,7 +313,13 @@ export default {
                 </div>
                 `);
 
-                div.find('.collection-name').on("change", (e) => updateCollectionName(c.id, $(e.target).val()));
+                div.find('.collection-name').on("change", (e) => {
+                    let name = $(e.target).val();
+                    updateCollectionName(c.id, name);
+                    if(c.id == openCollectionId) {
+                        this.setTitle(c.count + " Tweet dalla collezione: " + name);
+                    }
+                });
                 
                 div.find('.collection-delete').on("click", () => {
                     $("#deleteBtn").off();

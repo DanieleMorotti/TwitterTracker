@@ -2,6 +2,7 @@ import tweetsComp, {lastTweetsList} from './comp_tweets.js';
 import mapComp from './comp_map.js'
 import {router} from './routes.js';
 import {searchObj} from './search.js';
+import { splitCoordinatesIntoLatLng } from './utils.js';
 
 // Interval for the update of the stream of tweets
 export var streamingInterval = null;
@@ -22,19 +23,9 @@ export function streamStart() {
         query.images_only = true;
     
     if(searchObj.center && searchObj.radius) {
-        let nums = searchObj.center.split(',');
-        if(nums.length != 2) {
-            return false;
-        }
-
-        let lat = parseFloat(nums[0]);
-        let lng = parseFloat(nums[1]);
-        if (isNaN(lat) || isNaN(lng)) {
-            return false;
-        }
-
         let radius = searchObj.radius * 1000.0; //km to meters
-        let center = new google.maps.LatLng(lat, lng);
+        let c = splitCoordinatesIntoLatLng(searchObj.center);
+        let center = new google.maps.LatLng(c.lat, c.lng);
 
         //Square the circle
         let NE = google.maps.geometry.spherical.computeOffset(center, radius * Math.sqrt(2), 45);
@@ -117,4 +108,8 @@ export function stream_update(word) {
             console.log("streamUpdate: " + xhr.status + ' - ' + thrownError);
         }
     });
+}
+
+window.onbeforeunload = function(){
+    stream_stop();
 }

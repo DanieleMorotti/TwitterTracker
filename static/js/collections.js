@@ -3,6 +3,7 @@
 import tweetsComp from './comp_tweets.js'
 import { setSearchObj, searchObj } from './search.js'
 import { stream_stop, streamingInterval } from './stream.js'
+import { getDateString } from './utils.js';
 
 // Open a tweet collection
 export function openCollection(id) {
@@ -17,6 +18,7 @@ export function openCollection(id) {
             tweetsComp.methods.setFilters();
             tweetsComp.methods.setTitleAndTweets(info.count + " Tweet dalla collezione: " + info.name, info.data, searchObj.keyword || "");
             tweetsComp.methods.setTweetsTemporary(false);
+            tweetsComp.methods.setOpenCollectionId(id);
         },
 
         error: (xhr, ajaxOptions, thrownError) => {
@@ -75,7 +77,7 @@ export function addToCollection(id, tweets) {
         },
 
         error: (xhr, ajaxOptions, thrownError) => {
-            console.log("updateCollectionName: " + xhr.status + ' - ' + thrownError);
+            console.log("addToCollection: " + xhr.status + ' - ' + thrownError);
         }
     });
 }
@@ -100,8 +102,7 @@ export function loadCollections() {
 // Save the currently loaded tweets as a new collection
 export function saveCollection(tweets, filters, onSuccess)
 {
-    let d = new Date();
-    let datestring = d.getDate()  + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+    let datestring = getDateString();
 
     $.ajax({
         method: "POST",
@@ -115,7 +116,7 @@ export function saveCollection(tweets, filters, onSuccess)
         }),
 
         success: (data) => {
-            onSuccess();
+            onSuccess(data.id);
         },
 
         error: (xhr, ajaxOptions, thrownError) => {

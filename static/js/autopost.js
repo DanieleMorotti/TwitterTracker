@@ -2,25 +2,17 @@ import { map } from "./comp_search.js";
 import { map as compMap } from "./comp_map.js";
 import { lastTweetsList, lastTweetsSearchObj } from "./comp_tweets.js";
 import { getSearchQuery } from './search.js'
+import { imageRequest} from './utils.js'
 
 
 /*Functions for post preview*/
 function addPostPreview(div, body)
 {
-    let xhr = new XMLHttpRequest();
-    xhr.responseType = 'arraybuffer';
-    xhr.onload = () => {
-        div.empty();
-        var blb = new Blob([xhr.response], {type: 'image/png'});
-        var url = (window.URL || window.webkitURL).createObjectURL(blb);
-        div.append(`<img style="width: 100%" src="${url}">`);
-    }
-
-    xhr.onerror = () => console.log("addPostPreview - Failed loading preview");
-
-    xhr.open('POST', '/postPreview');
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhr.send(JSON.stringify(body));
+    imageRequest('/postPreview', JSON.stringify(body)).then(
+        (url) => {
+            div.empty();
+            div.append(`<img style="width: 100%" src="${url}">`);
+        });
 }
 
 export function addMapPostPreview(div, center, zoom, mapType) {
@@ -32,6 +24,7 @@ export function addMapPostPreview(div, center, zoom, mapType) {
         map_type: mapType
     };
 
+    div.empty();
     addPostPreview(div, body);
 }
 
@@ -51,6 +44,7 @@ export function addHistogramsPostPreview(div,hType) {
         kind: hType
     };
 
+    div.empty();
     addPostPreview(div,body);
 }
 

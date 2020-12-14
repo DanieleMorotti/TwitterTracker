@@ -87,7 +87,7 @@ body {
  .lined-header {
     display: inline-block;
     padding: 0 16px;
-    background-color: rgb(1, 18, 25);;
+    background-color: rgb(1, 18, 25);
     font-style: normal;
     font-family: "Helvetica Neue",Arial,sans-serif;
     font-weight: 300;
@@ -140,7 +140,7 @@ body {
     }
 }
 
-/**/
+/* navbar */
 
 
 .icon {

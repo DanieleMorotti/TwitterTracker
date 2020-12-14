@@ -2,6 +2,7 @@
 import {searchObj} from './search.js'
 import tweetComp, {lastTweetsList} from './comp_tweets.js'
 import {addMapPostPreview,post} from './autopost.js'
+import { getEmbeddedTweetUrl, splitCoordinatesIntoLatLng } from './utils.js';
 
 export var map;
 
@@ -67,7 +68,7 @@ export default {
                     });
 
                     //Event to invoke expandTweet when a click occur on the marker
-                    let tweeturl = "https://twitter.com/" + tweet.username + "/status/" + tweet.id;
+                    let tweeturl = getEmbeddedTweetUrl(tweet.username, tweet.id);
                     marker.addListener("click", () => { this.expandTweet(tweeturl); });
 
                     //If there is at least one image we use that one as the marker 
@@ -107,9 +108,9 @@ export default {
     },
     //When the map window is activated from the main sidebar a map is created with the same center of the main one
     activated() {
-        var center = (searchObj && searchObj.center) ? searchObj.center : '41.885453,12.498221';
+        let center = (searchObj && searchObj.center) ? searchObj.center : '41.885453,12.498221';
         map = new google.maps.Map(document.getElementById("data-view-map"), {
-            center: { lat: Number(center.split(',')[0]), lng: Number(center.split(',')[1]) },
+            center: splitCoordinatesIntoLatLng(center),
             zoom: 5,
             streetViewControl: false,
             mapTypeControlOptions: {

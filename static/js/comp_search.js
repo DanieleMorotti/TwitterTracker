@@ -1,6 +1,7 @@
 import tweetsComp from './comp_tweets.js';
-import { dispatch_search, searchObj, setSearchObj } from "./search.js";
+import { dispatch_search, setSearchObj } from "./search.js";
 import { streamStart } from "./stream.js";
+import { splitCoordinatesIntoLatLng } from './utils.js';
 
 
 // map used to draw the search area
@@ -288,11 +289,10 @@ export default {
             let coordinates = $('#coordinates').val();
             let radius = $('#radiusValue').text();
 
-            let lat = parseFloat(coordinates.split(',')[0]);
-            let lng = parseFloat(coordinates.split(',')[1]);
+            let c = splitCoordinatesIntoLatLng(coordinates);
 
-            if (radius && !isNaN(lat) && !isNaN(lng))
-                this.drawCircleOnMap(lat, lng, radius);
+            if (radius && c)
+                this.drawCircleOnMap(c.lat, c.lng, radius);
             //Still have to test if this statement makes problem, for now, if coordinates changes the PDI is cleared
             this.clearPDI();
         },

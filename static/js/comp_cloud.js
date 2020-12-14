@@ -1,5 +1,6 @@
 import { lastTweetsList } from './comp_tweets.js'
 import {addWordcloudPostPreview,post } from './autopost.js'
+import { imageRequest } from './utils.js';
 
 export default {
 	name: 'word_cloud',
@@ -65,22 +66,12 @@ export default {
             }
             $('#img-container ').prepend('<div id="wc-loading"><span class="helper"></span><img aria-hidden="true" src="static/img/wc_loading.gif"></div>');
 
-            //XHR request to get PIL image and display it
-            let xhr = new XMLHttpRequest();
-            xhr.responseType = 'arraybuffer';
-
-            xhr.onload = () => {
-                var blb = new Blob([xhr.response], { type: 'image/png' });
-                var url = (window.URL || window.webkitURL).createObjectURL(blb);
-                $('#wc-loading').remove();
-                $('#img-container').prepend(`<img id="wc-img" src="${url}" alt="Word cloud delle parole più frequenti nei tweet">`);
-            }
-
-            xhr.onerror = () => console.log("Failed loading wordcloud");
-
-            xhr.open('POST', '/wordcloud/' + max_req);
-            xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-            xhr.send(JSON.stringify(lastTweetsList));
+            // request to get PIL image and display it
+            imageRequest('/wordcloud/' + max_req, JSON.stringify(lastTweetsList)).then( 
+                (url) => {
+                    $('#wc-loading').remove();
+                    $('#img-container').prepend(`<img id="wc-img" src="${url}" alt="Word cloud delle parole più frequenti nei tweet">`);
+                });
         },
         getLegend(max_req) {
             $('#frequency tbody').empty();

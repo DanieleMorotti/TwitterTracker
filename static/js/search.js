@@ -1,6 +1,7 @@
 import { stream_stop, streamingInterval } from './stream.js'
 import { map } from './comp_search.js'
 import tweetsComp from './comp_tweets.js'
+import { splitCoordinatesIntoLatLng } from './utils.js';
 
 // Save search filters
 export var searchObj = null;
@@ -34,7 +35,7 @@ export function dispatch_search() {
         }
         //If coordinates are given the search map is centered on the location
         if (map && center) {
-            map.setCenter({ lat: Number(center.split(',')[0]), lng: Number(center.split(',')[1]) });
+            map.setCenter(splitCoordinatesIntoLatLng(center));
         }
     }
     //The query doesn't contain any of the required filters
