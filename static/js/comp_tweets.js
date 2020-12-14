@@ -220,6 +220,7 @@ export default {
             word = word || "";
             let reg = new RegExp(word.trim().replace(/(\s|,)+/g, '|').trim(), 'gi');
             
+            let begin_count = $("#tweets-search").children().length;
             for (let i = begin; i < Math.min(data.length, end); i++) {
                 let url = getEmbeddedTweetUrl(data[i].username, data[i].id);
 
@@ -260,25 +261,31 @@ export default {
                         let cityAndCoord = `<p>Città: ${data[i].city}<br>Coordinate: lat ${xCenter}, long ${yCenter} </p>`;
                         $(cityAndCoord).insertBefore(div.find('button'));
                     }
-                    
-                    //When the 50th tweet comes to the screen load 100 more
-                    if(end != data.length && i == end - 50) {
-                        $("#searchDiv").off();
-                        $("#searchDiv").on("scroll", () => {
-                            if(div.visible()) {
-                                $("#searchDiv").off();
-                                this.appendTweets(data, end, end + 100, word, img_only);
-                            }
-                        });
-                    }
 
                     $("#tweets-search").append(div);
+                } else {
+                    end++;
                 }
+            }
+
+            //When the 50th tweet comes to the screen load 100 more
+            if(end < data.length) {
+                let end_count = $("#tweets-search").children().length;
+                let i = begin_count + Math.floor((end_count - begin_count)/ 2);
+                let div = $($("#tweets-search").children().get(i));
+                $("#searchDiv").off();
+                $("#searchDiv").on("scroll", () => {
+                    if(div.visible()) {
+                        $("#searchDiv").off();
+                        this.appendTweets(data, end, end + 100, word, img_only);
+                    }
+                });
             }
 
             $("#tweets-search").addClass('bd-white');
         },
         
+
         // Display an array of tweets highlighting the specified word
         displayTweets(data, word, img_only) {
             $("#tweets-search").empty();
