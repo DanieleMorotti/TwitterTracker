@@ -67,8 +67,8 @@ def add_autopost_job(kind, args, hours, count, name):
     #Add id argument to job
     args.insert(0, id)
 
-    #scheduler.add_job(func=func, args=args, trigger="interval", hours=hours, start_date=start, end_date=end)
-    scheduler.add_job(func=func, args=args, id=id, trigger="interval", minutes=hours, start_date=start, end_date=end)
+    #scheduler.add_job(func=func, args=args, trigger="interval", minutes=hours, start_date=start, end_date=end)
+    scheduler.add_job(func=func, args=args, id=id, trigger="interval", hours=hours, start_date=start, end_date=end)
     
     return True
 
