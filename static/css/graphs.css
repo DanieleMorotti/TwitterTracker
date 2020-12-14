@@ -175,3 +175,20 @@
         float: none;
     }
 }
+
+@media (max-width: 800px) {
+    #info {
+        padding-top: 5rem;
+        text-align: center;
+    }
+    #info img{
+        width: 30%;
+        float: none;
+    }
+}
+
+@media (max-width: 500px) {
+    #total, #firstGraph, #secondGraph{
+        padding: 0;
+    }
+}
