@@ -35,7 +35,7 @@ Tramite questa sezione è possibile visualizzare dei grafici nei quali viene rap
 #### Post:
 Da questa sezione è possibile gestire con comodità i post automatici precedentemente impostati. Per creare un post automatico è sufficiente cliccare sul pulsante **SHARE** in corrispondenza di ciò che si vuole postare. Il pulsante **SHARE** è disponibile per: **Mappa**, **Grafici** e **Word Cloud**.
 
-Fraydrum utilizza i servizi di Web Hosting di AWS ed è disponibile al link http://fraydrum.tk/
+Fraydrum utilizza i servizi di Web Hosting di AWS ed è disponibile al link http://fraydrum.ml/
 
 ## Librerie
 Di seguito riportate le funzionalità back-end con la relativa libreria usata per 
