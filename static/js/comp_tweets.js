@@ -144,9 +144,16 @@ export default {
         },
 
         // Show the tweet with Twitter's visualization in the modal window
-        showTweetInModal(url){
+        showTweetInModal(id){
             $('#tweetContent').empty();
-            $('#tweetContent').append(`<blockquote class="twitter-tweet"><a href="${url}">Tweet</a></blockquote>  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"><\/script>`);
+            twttr.widgets.createTweet(id, document.getElementById("tweetContent"))
+            .then( 
+                () => {
+                    if($("#tweetContent").children().length == 0)
+                        $("#tweetContent").append(`<p>Il tweet selezionato è stato eliminato</p>`)
+                }
+            )
+            //$('#tweetContent').append(`<blockquote class="twitter-tweet"><a href="${url}">Tweet</a></blockquote>  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"><\/script>`);
         },
 
         setFilters() {
@@ -222,8 +229,6 @@ export default {
             
             let begin_count = $("#tweets-search").children().length;
             for (let i = begin; i < Math.min(data.length, end); i++) {
-                let url = getEmbeddedTweetUrl(data[i].username, data[i].id);
-
                 let div = null;
                 if (!img_only) {
                     //If there is a keyword higlight it
@@ -233,23 +238,23 @@ export default {
                     }
                     div = $(`<div class="tweet">
                                 <p class="date">${data[i].data}</p>
-                                <img src="${data[i].profile || '/static/img/default_user.png'}" class="profile_pic" alt="profilepic_tweet${i}"></img>
+                                <img src="${data[i].profile || '/static/img/default_user.png'}" class="profile_pic" alt="profilepic_tweet${i}" onerror="this.src='/static/img/default_user.png'"></img>
                                 <div class="user">
                                    <h5>${data[i].user}</h5>
                                    <p class="tweet-content">${text}</p>
                                 </div>
                                 <button class="showBtn" data-toggle="modal" data-target="#tweetModal" >Show</button>
                             </div>`);
-                            div.find('button').on("click", () => this.showTweetInModal(url));
+                            div.find('button').on("click", () => this.showTweetInModal(data[i].id));
                 } else if(data[i].images[0]) {
                     div = $(`<div class="tweet-images" data-toggle="modal" data-target="#tweetModal">
-                                <img src="${data[i].profile || '/static/img/default_user.png'}" class="profile_pic"></img>
+                                <img src="${data[i].profile || '/static/img/default_user.png'}" class="profile_pic" alt="profilepic_tweet${i}" onerror="this.src='/static/img/default_user.png'"></img>
                                 <div class="user">
                                    <h5>${data[i].user}</h5>
                                    <img class="post_image" src="${data[i].images[0]}"></img>
                                 </div>
                             </div>`);
-                    div.on("click", () => this.showTweetInModal(url));
+                    div.on("click", () => this.showTweetInModal(data[i].id));
                 }
                
                 if(div) {

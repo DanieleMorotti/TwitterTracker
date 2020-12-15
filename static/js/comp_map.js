@@ -18,10 +18,10 @@ export default {
     `,
     methods: {
         //Method to invoke when a marker is clicked, it open a modla displaying the original tweet
-        expandTweet(url) {
+        expandTweet(id) {
             //Work-around to get modal window benefits by clicking a temporary button
             let button = $(`<button id="modal-show-btn" data-toggle="modal" data-target="#tweetModal" style="display:none;"></button>`);
-            button.on("click", () => tweetComp.methods.showTweetInModal(url));
+            button.on("click", () => tweetComp.methods.showTweetInModal(id));
             $('#map_view_container').append(button);
             $('#modal-show-btn').click();
             $('#modal-show-btn').remove();
@@ -68,8 +68,7 @@ export default {
                     });
 
                     //Event to invoke expandTweet when a click occur on the marker
-                    let tweeturl = getEmbeddedTweetUrl(tweet.username, tweet.id);
-                    marker.addListener("click", () => { this.expandTweet(tweeturl); });
+                    marker.addListener("click", () => { this.expandTweet(tweet.id); });
 
                     //If there is at least one image we use that one as the marker 
                     if (tweet.images.length > 0) {
