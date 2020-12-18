@@ -17,16 +17,16 @@ export default {
             <div id="tweetsDiv">
                     <header>
                     <div id="tweetsBtn">
-                    <button id="saveBtn" @click="onClickSearch()" title="Nuova ricerca">Cerca</button>
+                    <button id="saveBtn" @click="onClickSearch()" title="New research">Search</button>
                     <button id="startBtn" @click="stream_start()" title="Start stream">Start</button>
                     <button id="stopBtn" @click="streamStop()" title="Stop stream">Stop</button>
-                    <button id="save-collection" @click="onClickSave()" title="Salva raccolta">Salva</button>
+                    <button id="save-collection" @click="onClickSave()" title="Save collection">Save</button>
                     </div>
                     </header>
                 <div id="viewImagesDiv">
                     <span class="toggle">
                     <input type="checkbox" id="viewImages" class="switch-input" name="styles_switch" value="false" style="display:none" @change="changeViewImages">
-                    <label for="viewImages" id="viewImagesLabel" class="switch-label" style="font-size: 14.5px;"> Visualizza immagini</label>
+                    <label for="viewImages" id="viewImagesLabel" class="switch-label" style="font-size: 14.5px;"> Display images</label>
                     </span>
                 </div>
                 <br>
@@ -37,12 +37,12 @@ export default {
         </div>
         <div id="collectionDiv" class="flex-tweet-right" >
             <button class="closeBtn" @click="closeNav">x</button>
-            <h4>Le tue collezioni</h4>
+            <h4>Your collections</h4>
             <div id="collections"></div>
         </div>
         <button id="collectionBtn" @click="openNav" style="transform: scale(1.3)"  aria-labelledby="openCollections">
         <i class="fas fa-folder-open"></i>
-        <span id="openCollections" style="display: none;">Apri sidebar delle collezioni</span>
+        <span id="openCollections" style="display: none;">Open collections sidebar</span>
         </button>
 
         <!-- modal for deleting collections -->
@@ -52,10 +52,10 @@ export default {
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
-                <div class="modal-body">Sei sicuro di voler eliminare questa collezione? </div>
+                <div class="modal-body">Are you sure to delete this collection? </div>
                 <div class="modal-footer"> 
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
-                    <button id="deleteBtn" type="button" class="btn btn-primary" data-dismiss="modal">Conferma</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button id="deleteBtn" type="button" class="btn btn-primary" data-dismiss="modal">Delete</button>
                 </div>
                 </div>
             </div>
@@ -68,10 +68,10 @@ export default {
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
-                <div class="modal-body">Sei apri questa collezione, i dati non salvati andranno persi</div>
+                <div class="modal-body">If you open this collection, the current,not saved tweets will be lost</div>
                 <div class="modal-footer"> 
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
-                    <button id="openBtn" type="button" class="btn btn-primary" data-dismiss="modal">Conferma</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button id="openBtn" type="button" class="btn btn-primary" data-dismiss="modal">Open</button>
                 </div>
                 </div>
             </div>
@@ -84,10 +84,10 @@ export default {
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
-                <div class="modal-body">Vuoi aggiungere i risultati a questa collezione?</div>
+                <div class="modal-body">Do you want to add results to this collection?</div>
                 <div class="modal-footer"> 
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
-                    <button id="addBtn" type="button" class="btn btn-primary" data-dismiss="modal">Conferma</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button id="addBtn" type="button" class="btn btn-primary" data-dismiss="modal">Add</button>
                 </div>
                 </div>
             </div>
@@ -131,7 +131,7 @@ export default {
                     openCollectionId = id;
                     loadCollections();
                 });
-                this.setTitle(lastTweetsList.length + " Tweets dalla collezione: Nuova collezione");
+                this.setTitle(lastTweetsList.length + " Tweets from collection: New collection");
                 this.setTweetsTemporary(false);
             }
         },
@@ -150,10 +150,9 @@ export default {
             .then( 
                 () => {
                     if($("#tweetContent").children().length == 0)
-                        $("#tweetContent").append(`<p>Il tweet selezionato è stato eliminato</p>`)
+                        $("#tweetContent").append(`<p>The selected tweet has been deleted</p>`)
                 }
             )
-            //$('#tweetContent').append(`<blockquote class="twitter-tweet"><a href="${url}">Tweet</a></blockquote>  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"><\/script>`);
         },
 
         setFilters() {
@@ -177,10 +176,10 @@ export default {
                     }
                     else if (field == 'images_only') {
                         //Text for only images filter
-                        text = "Solo con immagini";
+                        text = "Images only";
                     }
                     else if (field == 'coordinates_only') {
-                        text = "Solo con coordinate";
+                        text = "Coordinates only";
                     }
                     
                     //Add a button to delete the filter in the tweets view
@@ -263,7 +262,7 @@ export default {
                         let yCenter = (Number(data[i].coordinates[0][1][0]) + Number(data[i].coordinates[0][3][0])) / 2;
                         let xCenter = (Number(data[i].coordinates[0][1][1]) + Number(data[i].coordinates[0][3][1])) / 2;
 
-                        let cityAndCoord = `<p>Città: ${data[i].city}<br>Coordinate: lat ${xCenter}, long ${yCenter} </p>`;
+                        let cityAndCoord = `<p>City: ${data[i].city}<br>Coordinates: lat ${xCenter}, long ${yCenter} </p>`;
                         $(cityAndCoord).insertBefore(div.find('button'));
                     }
 
@@ -323,13 +322,13 @@ export default {
                 let date = c.date || "";
                 let div = $(`
                 <div class="collection">
-                    <button class="collection-delete" data-toggle="modal" data-target="#deleteModal" aria-labelledby="deleteLabel"><i class="fas fa-trash" title="Elimina"></i><span id="deleteLabel" style="display: none;">Elimina collezione</span></button>
-                    <button class="collection-open" data-toggle="modal" data-target="#openModal"  aria-labelledby="openLabel"><i class="fas fa-book-open" title="Sfoglia"></i><span id="openLabel" style="display: none;">Apri collezione</span></button>
-                    <button class="collection-add" data-toggle="modal" data-target="#addModal"  aria-labelledby="addLabel"><i class="fas fa-plus" title="Aggiungi tweet"></i><span id="addLabel" style="display: none;">Aggiungi alla collezione</span></button>
+                    <button class="collection-delete" data-toggle="modal" data-target="#deleteModal" aria-labelledby="deleteLabel"><i class="fas fa-trash" title="Delete"></i><span id="deleteLabel" style="display: none;">Delete collection</span></button>
+                    <button class="collection-open" data-toggle="modal" data-target="#openModal"  aria-labelledby="openLabel"><i class="fas fa-book-open" title="Open"></i><span id="openLabel" style="display: none;">Open collection</span></button>
+                    <button class="collection-add" data-toggle="modal" data-target="#addModal"  aria-labelledby="addLabel"><i class="fas fa-plus" title="Add tweets"></i><span id="addLabel" style="display: none;">Add to collection</span></button>
                     <div class="collection-info">
-                    <label id="nameLabel" style="display:none">Modifica il nome della collezione</label> 
+                    <label id="nameLabel" style="display:none">Change the name of the collection</label> 
                     <input type="text" class="collection-name" value="${c.name}"  aria-labelledby="nameLabel">
-                    <p class="collection-count">Numero tweet: ${c.count}</p>
+                    <p class="collection-count">Number of tweets: ${c.count}</p>
                     <p class="collection-date">${date}</p>
                     </div>
                 </div>
@@ -339,7 +338,7 @@ export default {
                     let name = $(e.target).val();
                     updateCollectionName(c.id, name);
                     if(c.id == openCollectionId) {
-                        this.setTitle(c.count + " Tweet dalla collezione: " + name);
+                        this.setTitle(c.count + " Tweets from collection: " + name);
                     }
                 });
                 

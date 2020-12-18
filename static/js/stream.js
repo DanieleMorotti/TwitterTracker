@@ -43,7 +43,7 @@ export function streamStart() {
         url: 'streamStart',
         data: query,
         success: (data) => {
-            tweetsComp.methods.setTitleAndTweets('0 Tweet ricevuti in streaming', [], data.keyword || "");
+            tweetsComp.methods.setTitleAndTweets('0 Tweets received in streaming', [], data.keyword || "");
             tweetsComp.methods.setTweetsTemporary(true);
             
             if (streamingInterval)

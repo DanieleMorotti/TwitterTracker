@@ -1,7 +1,7 @@
 {
-  "name": "fraydrum",
+  "name": "twitter-tracker",
   "version": "1.0.0",
-  "description": "Fraydrum è un Twitter tracker utile alla collezione di tweet già esistenti e alla visualizzazione in tempo reale dei tweet secondo determinati parametri.",
+  "description": "Twitter tracker is useful to collect and examine data get from the Twitter API",
   "main": "index.js",
   "directories": {
     "test": "tests/js"
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://dmylos@aminsep.disi.unibo.it/gitlab/dmylos/fraydrum.git"
+    "url": "https://github.com/DanieleMorotti/TwitterTracker.git"
   },
   "keywords": [],
   "author": "",

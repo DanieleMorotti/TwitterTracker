@@ -95,6 +95,7 @@ export default {
                 }
             });
         },
+        //modal for posting on twitter account
         createModal(){
             let center = map.getCenter().toString().slice(1,-1);
             let zoom = map.getZoom();

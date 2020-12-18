@@ -38,26 +38,31 @@ export default {
                             <label for="styles_switch" class="switch-label" style="font-size: 14.5px;"> Stream </label>
                             </span>
 
-                            <label for="tweet-count" style="font-size: 14.5px;"> Numero di tweet </label>
+                            <label for="tweet-count" style="font-size: 14.5px;"> Number of tweets </label>
                             <input id="tweet-count" maxlength=3 type="number" max=500 min=10 step=10 value=250></input><br>
-                            <label for="keyWord" class="text">Parola chiave </label> &nbsp;
-                                <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="auto" data-trigger="focus" title="Con più parole, se separate da una virgola, verranno cercati tutti i tweet che contengono almeno una di quelle, se separate da spazio invece solo quelli che le contengono tutte. Per cercare una frase occorre includerla tra doppie virgolette" tabindex="0"></i>
+                            <label for="keyWord" class="text">Keyword </label> &nbsp;
+                                <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="auto" data-trigger="focus" 
+                                title="Words separated by commas: to find tweets with at least one of the words typed
+                                Words separated by blank spaces: to find tweets containing all the words typed
+                                Sentence in double quotes" tabindex="0"></i>
                                 <br>
                             <input autocomplete="off" type="text" name="keyWord" id="keyWord" /><br>
                             <label for="user" class="text">User </label>&nbsp;
-                                <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="auto" data-trigger="focus" title="È necessario inserire l'username di Twitter del profilo desiderato. Si possono inserire più profili contemporaneamente separati da spazi" tabindex="0"></i>
+                                <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="auto" data-trigger="focus" 
+                                title="Name of desired profile must be inserted; to obtain results
+                                from multiple users separe their names with blank spaces" tabindex="0"></i>
                                 <br>
                             <input autocomplete="off" type="text" name="user" id="user" /><br>
                             
                         </div>
                         <div class="float-right">
-                            <label for="pdi" class="text">Punto di interesse </label>&nbsp;
-                                <i class="fas fa-info-circle"  data-toggle="tooltip" data-placement="auto" data-trigger="focus" title="Il punto di interesse inserito verrà usato come centro per la ricerca" tabindex="0"></i>
+                            <label for="pdi" class="text">Point of interest </label>&nbsp;
+                                <i class="fas fa-info-circle"  data-toggle="tooltip" data-placement="auto" data-trigger="focus" title="The point of interest entered will be used as center for the search" tabindex="0"></i>
                             <br>
                             <input autocomplete="off" type="text" name="pdi" id="pdi" placeholder="e.g. Università di Bologna" size="22" /> <br>
                             
-                            <label for="coordinates" class="text">Coordinate </label>&nbsp;
-                                <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="auto" data-trigger="focus" title="Coordinate decimali usate come centro per la ricerca nella forma: latitudine, longitudine" tabindex="0"></i>
+                            <label for="coordinates" class="text">Coordinates </label>&nbsp;
+                                <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="auto" data-trigger="focus" title="Enter decimal coordinates to be used as the center of the search in the form: latitude, longitude" tabindex="0"></i>
                                 <br>
                             <input autocomplete="off" type="text" name="coordinates" id="coordinates" placeholder="e.g. 45.4773,9.1815" size="22" @change="updateCircleOnMap()" @keyup.enter="updateCircleOnMap()"/> <br>
                         </div>
@@ -65,20 +70,20 @@ export default {
                         
                     </div>
                     <br>
-                    <label for="radius" class= "text">Raggio </label>
+                    <label for="radius" class= "text">Radius </label>
                     <input style="display:inline" id="radius" type="range" min="10" max="1000" step="10"  v-model="value" name="radius" @change="updateCircleOnMap()"/>
                     <label style="display:inline"><span v-text="value" id="radiusValue"></span> km</label>
                     <br>
         
                     <input type="checkbox" id="images-only">            
-                    <label for="images-only">Includi solo tweet con immagini</label>
+                    <label for="images-only">Only include tweets with images</label>
                     <br>
         
                     <input type="checkbox" id="coordinates-only">            
-                    <label for="coordinates-only">Includi solo tweet con coordinate geografiche</label>
+                    <label for="coordinates-only">Only include geolocated tweets</label>
                     <br>
                     <div id="map"></div><br> 
-                    <button id="searchBtn" @click="onClickSearch()">Cerca</button>
+                    <button id="searchBtn" @click="onClickSearch()">Search</button>
                     <button id="trendsBtn" @click="openTrendNav" title="trends" style="transform: scale(1.1)"><i class="fab fa-slack-hash"></i></button>
 
                 </div>

@@ -8,15 +8,15 @@ export default {
     <div>
         <div id="info">
             <img src="/static/img/nocloud.png" alt="icona no word-cloud">
-            <p>Ancora nessun dato da visualizzare.<br>
-            Fai una ricerca o carica una collezione per visualizzarne la word-cloud.</p>
+            <p>There is still no data to display. <br>
+            Do a search or load a collection to create a Word-Cloud</p>
         </div>
         <div id="share-div">
             <button @click="createModal" id="postbtn" class="share-bttns">SHARE <i class="fas fa-share-alt"></i></button>
         </div>
         <div id="wordcloud-container" class="flex-container">
             <div id="img-container" >
-                <!-- Immagini -->
+                <!-- Images -->
             </div>
            <div class="flex-cloud-item" id="legend" >
                 <table id="frequency">
@@ -27,7 +27,7 @@ export default {
                         </tr>
                     </thead>
                     <tbody>         
-                        <!-- Dati -->
+                        <!-- Data -->
                     </tbody>
                 </table>
             </div>

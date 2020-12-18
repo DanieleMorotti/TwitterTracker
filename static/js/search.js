@@ -24,7 +24,7 @@ export function dispatch_search() {
     if (center && !(/^\s?\-?\d+\.?\d*\,\s?\-?\d+\.?\d*\s?$/.test(center))) {
         //There isn't yet the error message
         if (!$('#coordinates_err').length) {
-            $('#coordinates').after('<span id="coordinates_err" class="error_msg">*Le coordinate devono essere della forma xx.xxx, yy.yyy</span>')
+            $('#coordinates').after('<span id="coordinates_err" class="error_msg">*Coordinates must to be write as xx.xxx, yy.yyy</span>')
         }
         return false;
         //Given coordinates are well written
@@ -42,7 +42,7 @@ export function dispatch_search() {
     if (!word && !center && !user) {
         //There isn't yet the error message
         if (!$('#filter_err').length) {
-            $('#searchBtn').after('<span id="filter_err" class="error_msg">*Devi inserire almeno una parola chiave, un utente o una posizione</span>');
+            $('#searchBtn').after('<span id="filter_err" class="error_msg">*You must enter at least a keyword, a user or a location</span>');
         }
         return false;
     //Given query has at least one of the required filter
@@ -99,11 +99,11 @@ function search(count, word, user, center, radius, images_only, coordinates_only
             $('#loading').remove();
             if (data.length > 0) {
                 //Display the tweets
-                tweetsComp.methods.setTitleAndTweets(data.length + ' Risultati ricerca', data, word);
+                tweetsComp.methods.setTitleAndTweets(data.length + ' Search results', data, word);
                 tweetsComp.methods.setTweetsTemporary(true);
             } else {
                 //Display a message if no tweets are available
-                tweetsComp.methods.setTitle('Nessun risultato per la ricerca');
+                tweetsComp.methods.setTitle('No results for this search');
                 tweetsComp.methods.setTweetsTemporary(false);
             }
         },

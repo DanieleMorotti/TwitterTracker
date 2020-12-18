@@ -12,16 +12,16 @@ export default {
 	<div id="component">
 		<div id="info">
 			<img src="/static/img/noshare.png" alt="icona no pubblicazioni attive">
-			<p>Ancora nessun pubblicazione attiva.<br>
-			Fai una ricerca o carica una collezione per iniziare a condividere i tuoi risultati.</p>
+			<p>No active publication yet.<br>
+			Do a search or load a collection to share your results.</p>
 		</div>
 		<div id="postMenu" v-if="actPost.length != 0">
-				<div class="postList" v-for="post in actPost">
-					<button type="button" id="delPub" data-toggle="modal" data-target="#deletePModal" @click="removePost(post.id)"><i class="fas fa-trash"></i></button>
-					<h5> TITOLO: {{post.name}} </h5>
-					<h5> PRIMA PUBBLICAZIONE: {{post.date}} </h5>
-					<h5> TIPOLOGIA: {{post.type}} </h5>
-				</div>
+			<div class="postList" v-for="post in actPost">
+				<button type="button" id="delPub" data-toggle="modal" data-target="#deletePModal" @click="removePost(post.id)"><i class="fas fa-trash"></i></button>
+				<h5> TITLE: {{post.name}} </h5>
+				<h5> FIRST PUBLICATION: {{post.date}} </h5>
+				<h5> POST TYPE: {{post.type}} </h5>
+			</div>
 		</div>
 
 		<!-- modal for deleting collections -->
@@ -31,10 +31,10 @@ export default {
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
-                <div class="modal-body">Sei sicuro di voler eliminare questa pubblicazione? </div>
+                <div class="modal-body">Are you sure to delete this publication? </div>
                 <div class="modal-footer"> 
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
-                    <button id="deletePostBtn" type="button" class="btn btn-primary" data-dismiss="modal">Conferma</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button id="deletePostBtn" type="button" class="btn btn-primary" data-dismiss="modal">Delete</button>
                 </div>
                 </div>
             </div>

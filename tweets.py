@@ -2,7 +2,7 @@ import os
 import re
 import json
 
-tweets_dir = "tweets"
+tweets_dir = "../tweets"
 next_tweets_id = 1
 
 #init tweets directory and next id based on present files

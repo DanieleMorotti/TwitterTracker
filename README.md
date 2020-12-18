@@ -1,81 +1,99 @@
-# Fraydrum
+# Twitter-Tracker
 
-Fraydrum è un Twitter tracker utile alla collezione di tweet già esistenti e alla visualizzazione in tempo reale dei tweet secondo determinati parametri.
+Twitter-tracker is useful for collecting published tweets from around the world and viewing them in various representations.
 
-## Interfaccia grafica
-L'applicazione è costituita da sei moduli accessibili attraverso la sidebar:
+<img src="./img_readme/TT_home.png" align="right" width="40%"/>
 
-#### Ricerca: 
-Attraverso questo modulo è possibile selezionare i filtri che si desiderano applicare alla ricerca o allo streaming di tweet. E' possibile selezionare:
-* Una parola da ricercare all'interno dei tweet.
-* Un utente di cui ricercare i tweet.
-* Un punto d'interesse in cui ricercare i tweet.
-* Un'area sulla mappa di google selezionando il bottone di disegno.
-* Un'area da descrivere in termini di coordinate e raggio alternativa a quella descritta con la mappa.
-* Un checkbox per visualizzare solo i tweet contenenti immagini.
-* Un checkbox per visualizzare solo i tweet geolocalizzati.
-Dopo aver compilato adeguatamente, secondo le proprie necessità, i campi appena descritti, è possibile avviare la ricerca per venire reindirizzati al modulo dei **Risultati**.
+### Table of Contents
+- [Get started](#get-started)
+- [Usage](#usage)
+- [Libraries](#libraries)
+- [Authors](#authors)
 
-E' inoltre possibile decidere di selezionare un trend in modalità visualizzazione o streaming tramite la sezione dedicata
+## Get started
+To use this application a Twitter Developers account is needed, in order to get the tweets and for posting to your account. You can go to [Twitter site](https://developer.twitter.com/en/apply-for-access) to get your codes and get started.
+You also need a Google Maps Developer account to use the Map functionalities. Get [here](https://developers.google.com/maps/documentation?hl=en).
 
-#### Risultati e Streaming:
-Questo modulo è preposto alla visualizzazione dei risultati a cascata sotto forma di tweet. Vengono visualizzati un massimo di 500 tweet a ricerca, per i risultati di stream invece non ci sono limiti di visualizzazione.
-E' possibile espandere i tweet in forma *embedded* nei risultati mediante il pulsante show, vengono inoltre visualizzate delle etichette contenenti i filtri applicati alla ricerca che è possibile rimuovere per, eventualmente, ripetere la ricerca con meno parametri o passare alla modalità streaming. Si può inoltre salvare i risultati della ricerca in forma di collezione che sarà possibile rinominare o eliminare dalla sezione dedicata sulla destra dello schermo.
-E' inoltre possibile decidere di visualizzare solamente le immagini dei tweet - ove siano presenti - tramite il pulsante "*Visualizza immagini*".
+When you're ready, insert your codes replacing 'YOUR_API_KEY','YOUR_TOKEN' and 'YOUR_SECRET_TOKEN' in these files:
+* index.html, line 28 (Google Maps API)
+* map.py, line 34 (Google Maps API)
+* twitter.py, line 7-10 (Twitter API)
 
-#### Mappa: 
-E' una sezione interamente dedicata alla visualizzazione su mappa dei tweet geolocalizzati apparsi fra i risultati, nel caso in cui uno o più tweet sulla mappa contengano uno o più media, al posto dell'icona di base, verrà visualizzato il primo dei media in questione.
+```
+#go to the folder with 'requirements.txt' file and prompt this command:
 
-#### Word Cloud: 
-Da questa sezione è possibile visualizzare una wordcloud delle parole più comuni all'interno dei risultati della ricerca, assieme ad una legenda con le percentuali di frequenza di ogni parola.
+pip install -r requirements.txt 
 
-#### Grafici:
-Tramite questa sezione è possibile visualizzare dei grafici nei quali viene rappresentata la frequenza nel tempo dei risultati ottenuti da una ricerca e le parole che compaiono nei sopracitati risultati in termini di frequenza.
+#Every python library you need is installed. To launch the server run:
 
-#### Post:
-Da questa sezione è possibile gestire con comodità i post automatici precedentemente impostati. Per creare un post automatico è sufficiente cliccare sul pulsante **SHARE** in corrispondenza di ciò che si vuole postare. Il pulsante **SHARE** è disponibile per: **Mappa**, **Grafici** e **Word Cloud**.
+python application.py 
+```
+You can find the application at 'localhost:5000' on every browser.
 
-Fraydrum utilizza i servizi di Web Hosting di AWS ed è disponibile al link http://fraydrum.ml/
 
-## Librerie
-Di seguito riportate le funzionalità back-end con la relativa libreria usata per 
-implementarla:
+## Usage
+The application consists of 6 components accessible through the sidebar:
+- [Search](#search)
+- [Streaming and Results](#streaming-and-results)
+- [Map](#map)
+- [Word-Cloud](#word-cloud)
+- [Graphics](#graphics)
+- [Post](#post)
+
+### Search 
+In this component it is possible to insert the filters that will be used for the query to be submitted to the Twitter API(v.1). It can be selected:
+* A keyword to find within the tweets (it works with hashtags too).
+* A user to search for tweets.
+* A point of interest in which to search for tweets.
+* A drawing circle, to find the tweets enclosed in this area.
+* Coordinates and circle radius of the area in which to search for tweets.
+* A checkbox to find only tweets with images.
+* A checkbox to find only geolocated tweets.
+Completed the compilation of the desired fields, it is possible to start the search and you are automatically redirected to the '**Results**' component.
+
+There's a section from which it is possible to search for a Twitter trend in streaming or normal search mode.
+
+### Streaming and Results
+This component is meant to display cascading tweets; a maximum of 500 tweets per search are shown but there are no limits for streaming option and for uploading collections.
+It is possible to extend the tweets in *embedded* appearence through the 'show' button, or by clicking on them from mobile devices. The labels with the filters selected are displayed, with the opportunity to remove them for repeating the search with less parameters. The search results can be saved in a collection which can be renamed, deleted and expanded by the appropriate section.
+It can be decided to show only the images of the tweets, where existing, through the *Display images* switch.
+
+### Map 
+This section is entirely based on the visualization of the geolocated tweets on the map. If a tweet contains multiple media, the first will be displayed instead of the default marker.
+
+### Word-Cloud 
+Here a word-cloud of the most common words, within the search results, is drawn, with a legend pointing out the frequency percentages of each word.
+
+### Graphics
+Through this component it can be viewed 2 graphics. The first shows the number of found tweets published every day of the last week, the second represents the frequency of words used in tweets.
+
+### Post
+There is the possibility of automatically posting on your Twitter account(it must be your developer account) through the SHARE button inserted in the **Map**, **Word-Cloud** and **Graphics** components. A preview of the image that will be posted, will be shown in the modal, where you can set some parameters. When automatic posts have been activated, they will show up in this component and can be deleted. (Obviously every time the server is turned off all automatic posts are lost)
+
+
+## Libraries
+The Server-side part of the application has been developed with flask. We have used tweepy to simplify the use of the Twitter API. 
 
 Twitter API - tweepy: https://www.tweepy.org/
 
 Server-Side Routing - flask: https://flask.palletsprojects.com/en/1.1.x/
 
-## Test
 
-#### Python
+If you want to see the running application go to https://flask-env.eba-snhy2wnm.eu-west-3.elasticbeanstalk.com/#/. We use the AWS web hosting service to deploy this application.
 
-I test per le funzionalità server side sono in `tests/python`.
-Per eseguire i test e generare le informazioni di code coverage occorre installare pytest e coverage:
+## Authors
 
-```
-pip install pytest coverage
-```
+This project has been developed as part of 'Software Engineering' course at the University of Bologna;<br>
+all the code has been been written by: *Nicolò Buscaroli*, *Gabriele Fogu*, *Sofia Gavanelli*, *Erika Lena*, *Daniele Morotti*, *Dario Mylonopoulos*.
 
-Per eseguire i test e generare il report di code coverage per SonarQube eseguire i comandi:
+Contact details:
+- https://github.com/Busca99
+- https://github.com/HowlHowlHowl
+- https://github.com/sofiagavanelli
+- https://github.com/erikalena
+- https://github.com/DanieleMorotti
+- https://github.com/ramenguy99
 
-```
-coverage run -m pytest tests/python
-coverage xml -i -o coverage/python/coverage.xml
-```
+Please let us know if you have any further questions or any kind of issues.
 
-Il report è generato nel file ```coverage/python/coverage.xml```
-
-#### Javascript
-
-I test per le funzionalità client side sono in `tests/js`.
-Per eseguire i test e generare le informazioni di code coverage occorre installare i pacchetti necessari con npm:
-```
-npm install
-```
-
-Per eseguire i test e generare il report di code coverage per SonarQube eseguire il comando:
-```
-npm run test
-```
-
-Il report è generato nel file ```coverage/js/lconv.info```
+[Back To The Top](#twitter-tracker)

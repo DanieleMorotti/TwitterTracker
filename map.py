@@ -31,7 +31,7 @@ def coord_to_pixel(history_pixel, center_lat, center_lon, lat, lon, zoom, img_si
 
 def get_maps_image(center, markers, zoom, map_type):
     BASE_URL = "https://maps.googleapis.com/maps/api/staticmap?"
-    API_KEY = "AIzaSyDD9bBnkYVGlT_4TOWjQkhVe9M3RchWAmU"
+    API_KEY = "YOUR_API_KEY"
     #google maps api limit
     MARKERS_URL = "markers=color:red"
 

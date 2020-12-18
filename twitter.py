@@ -4,10 +4,10 @@ import urllib.parse
 import re
 
 # Twitter keys
-API_KEY = 'j6DEP35tCTAxgmoaCYMQAThHw'
-API_SECRET_KEY = 'IStBpbpGzInMyzxAtlg6ZRLpJWZu5hS0SUAm6RB8YdmlNLz9OD'
-ACCESS_TOKEN = '1315934369433956354-rLqEw3cEm7rCcM4gIkOwf769Bau9KO'
-ACCESS_SECRET_TOKEN = '6PpugJgagpUUdkvI9ZZCK7qB6Z6TjATmbTilZkmQNOU3U'
+API_KEY = 'YOUR_API_KEY'
+API_SECRET_KEY = 'YOUR_API_SECRET_KEY'
+ACCESS_TOKEN = 'YOUR_ACCESS_TOKEN'
+ACCESS_SECRET_TOKEN = 'YOUR_ACCESS_SECRET_TOKEN'
 
 # Initialize tweepy
 auth = tweepy.OAuthHandler(API_KEY, API_SECRET_KEY)
@@ -196,7 +196,7 @@ def get_tweets(query, location, coordinates_only, count):
             break
     return result
 
-#Tweet on fraydrum
+#Tweet on your profile bind to the twitter API
 def post_tweet_with_image(text, image):
     filename = "temptweet.png"
     image.save(filename)

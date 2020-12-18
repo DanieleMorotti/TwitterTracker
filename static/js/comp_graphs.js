@@ -13,8 +13,8 @@ export default {
 	<div id="total">
 		<div id="info">
 			<img src="/static/img/nocharts.png" alt="icona no grafici disponibili">
-			<p>Ancora nessun dato da visualizzare.<br>
-			Fai una ricerca o carica una collezione per visualizzare i tuoi grafici.</p>
+			<p>There is still no data to display.<br>
+			Do a search or load a collection to create graphics</p>
 		</div>
 		<div id="firstGraph">
 			<div id="container1"> </div>
@@ -39,12 +39,12 @@ export default {
 	`,
 
 	methods: {
-		//Istogramma che rappresenta il numero di tweet postati per ogni giorno dell'ultima settimana
+		//histogram to represent the posted tweets fro every day of the last week
 		createGraph1() {
 			
 			var dati = [];
 			//Iterate over tweets
-			for (let i = 0; i < lastTweetsList.length; i++) {  //calcola un tweet in meno tranne nella prima data
+			for (let i = 0; i < lastTweetsList.length; i++) {  
 				//Counting occurence for the first date
 				var data = lastTweetsList[i].data;
 				var cont = 1;
@@ -74,7 +74,7 @@ export default {
 			// style
 			series.fill("#c98d26");
 			series.stroke("#f7c672")
-			chart.background().fill("#011219"); //colore di background del grafico
+			chart.background().fill("#011219"); //graphic background color
 			var labelsx = chart.xAxis().labels();
 			var labelsy = chart.yAxis().labels();
 
@@ -102,7 +102,7 @@ export default {
 			chart.draw();
 		},
 
-		//Istogramma che riporta le parole più utilizzate nei tweet trovati
+		//histogram of the most used words in found tweets
 		createGraph2() {
 
 			//create data
@@ -139,7 +139,7 @@ export default {
 
 
 					// style
-					series.fill("#c98d26"); //#fca26e"); //"#004085");
+					series.fill("#c98d26"); 
 					series.stroke("#f7c672");
 					chart.background().fill("#011219");
 					var labelsx = chart.xAxis().labels();

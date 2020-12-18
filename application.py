@@ -244,7 +244,7 @@ def get_trends():
 # Route for the index page
 @application.route('/')
 def get_page():
-    return send_file("index.html")
+    return send_file("./index.html")
 
 # Headers to avoid browser caching (comment before deploy)
 @application.after_request

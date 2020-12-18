@@ -6,55 +6,55 @@ export default {
             <div class="main-container">
                 <div class="main-title-container">
                 <header>
-                    <h1>Fraydrum</h1>   
-                    <h4>Raccogli e analizza tweet</h4>
-                    <button @click="$('#toSearch').click();">Inizia</button>
+                    <h1>Twitter-Tracker</h1>   
+                    <h4>Collect and analyze data</h4>
+                    <button @click="$('#toSearch').click();">Start</button>
                 </header>
                 </div>
                 <div class="lined-header-container">  
-                    <div class="lined-header">Raccolta e analisi</div>
+                    <div class="lined-header">Collection and Analysis</div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-4">
                         <div class="dashboard-container center-block text-center">
                             <img src="/static/img/map_icon.png" alt="icona mappa">
-                            <div class="title">Mappe</div>
-                            <div class="description">Visualizza i tweet raccolti sulla mappa</div>
+                            <div class="title">Map</div>
+                            <div class="description">View on the map the collected tweets</div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="dashboard-container center-block text-center">
                             <img src="/static/img/cloud_icon.png" alt="icona word-cloud">
                             <div class="title">Word-cloud</div>
-                            <div class="description">Disposizione delle parole in forma di word-cloud</div>
+                            <div class="description">Arrangement of words in the form of Word-Cloud</div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="dashboard-container center-block text-center">
                             <img src="/static/img/chart_icon.png" alt="icona grafici">
-                            <div class="title">Grafici</div>
-                            <div class="description">Visualizzazione grafica delle parole ricorrenti</div>
+                            <div class="title">Graphics</div>
+                            <div class="description">Graphic display of recurring words</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="lined-header-container">  
-                    <div class="lined-header">Sezione utente</div>
+                    <div class="lined-header">User section</div>
                 </div>
                 <div class="row">
                 <div class="col-md-12">
                     <div class="dashboard-container center-block text-center">
                         <img src="/static/img/save_icon.png" alt="icona salva">
-                        <div class="title">Salva</div>
-                        <div class="description">Salva, riguarda ed aggiorna le tue collezioni</div>
+                        <div class="title">Save</div>
+                        <div class="description">Save, review and update your collections</div>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="dashboard-container center-block text-center">
                         <img src="/static/img/share_icon.png" alt="icona condivisione">
-                        <div class="title">Condividi</div>
-                        <div class="description">Condividi i dati raccolti su Twitter</div>
+                        <div class="title">Share</div>
+                        <div class="description">Share collected data on Twitter</div>
                     </div>
                 </div>
             </div>

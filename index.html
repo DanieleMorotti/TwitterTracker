@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
-	<title>Fraydrum</title>
+	<title>Twitter-Tracker</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -25,7 +25,7 @@
 	
 	<!--Google Maps-->
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDD9bBnkYVGlT_4TOWjQkhVe9M3RchWAmU&libraries=drawing,places&v=weekly" defer></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=drawing&language=en&region=GB,places&v=weekly" defer></script>
 
 	<!-- Vue -->
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
@@ -66,27 +66,27 @@
 				</li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home" @click="openMenu()">
 					<router-link id="toHome" tag="button" aria-labelledby="homeLabel" to="/">
-						<img id="fraydrum-logo" src="/static/img/logo.png" alt="Logo applicazione Twitter tracker" width="35">
+						<img id="twitter-tracker-logo" src="/static/img/logo.png" alt="Logo applicazione Twitter tracker" width="35">
 						<i class="icon fas fa-home"></i>
 						<span id="homeLabel" style="display: none;">Home</span>
 					</router-link> 
 				</li>
-				<li id="liSearch" class="nav-item" data-toggle="tooltip" data-placement="right" title="Ricerca" @click="openMenu()">
+				<li id="liSearch" class="nav-item" data-toggle="tooltip" data-placement="right" title="Search" @click="openMenu()">
 					<router-link id="toSearch" tag="button" aria-labelledby="searchLabel" to="/search">
 						<i class="icon fas fa-search"></i>
-						<span id="searchLabel" style="display: none;">Ricerca</span>
+						<span id="searchLabel" style="display: none;">Search</span>
 					</router-link>
 				</li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Risultati e Streaming" @click="openMenu()">
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Results and Streaming" @click="openMenu()">
 					<router-link id="toTweets" tag="button" aria-labelledby="tweetLabel" to="/tweets">
 						<i class="icon fab fa-twitter"></i>
-						<span id="tweetLabel" style="display: none;">Visualizzazione</span>
+						<span id="tweetLabel" style="display: none;">Visualization</span>
 					</router-link>
 				</li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Mappa" @click="openMenu()">
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Map" @click="openMenu()">
 					<router-link id="toMap" tag="button" aria-labelledby="mapLabel" to="/map">
 						<i class="icon fas fa-map-marker-alt"></i>
-						<span id="mapLabel" style="display: none;">Mappa</span>
+						<span id="mapLabel" style="display: none;">Map</span>
 					</router-link>
 				</li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Word Cloud" @click="openMenu()">
@@ -95,16 +95,16 @@
 						<span id="cloudLabel" style="display: none;">Word-cloud</span>
 					</router-link>
 				</li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Grafici" @click="openMenu()">
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Graphics" @click="openMenu()">
 					<router-link id="toCharts" tag="button" aria-labelledby="chartsLabel" to="/graphs">
 						<i class="icon far fa-chart-bar" ></i>
-						<span id="chartsLabel" style="display: none;">Grafici</span>
+						<span id="chartsLabel" style="display: none;">Graphics</span>
 					</router-link>
 				</li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Post" @click="openMenu()">
 					<router-link id="toPost" tag="button" aria-labelledby="postLabel" to="/post">
 						<i class="icon fas fa-share-alt"></i>
-						<span id="postLabel" style="display: none;">Condividi</span>
+						<span id="postLabel" style="display: none;">Share</span>
 					</router-link>
 				</li>
 
@@ -147,14 +147,14 @@
 					</div>
 					<div class="modal-body">
 						<div id="imgPreview"></div>
-						<label>Dai un nome al post automatico: <input id="postName" type="text"></label><br>
-						<label>Ogni quante ore vuoi postarlo automaticamente? <input id="postFreq" type="number" min="1" max="48" value="8"></label><br>
-						<label>Quante volte la vuoi postare? <input id="postNum"type="number" min="1" max="50" value="5"></label><br>
-						<label>Messaggio da postare: <input id="postMess" type="text"></label>
+						<label>Name the automatic post: <input id="postName" type="text"></label><br>
+						<label>Every how many hours do you want to post automatically? <input id="postFreq" type="number" min="1" max="48" value="8"></label><br>
+						<label>How many times do you want to post? <input id="postNum"type="number" min="1" max="50" value="5"></label><br>
+						<label>Text to insert in tweets: <input id="postMess" type="text"></label>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn" data-dismiss="modal">Annulla</button>
-						<button type="button" id="postBtn" class="btn" onclick="">POSTA</button>
+						<button type="button" class="btn" data-dismiss="modal">Cancel</button>
+						<button type="button" id="postBtn" class="btn" onclick="">Post</button>
 					</div>
 				</div>
 			</div>
