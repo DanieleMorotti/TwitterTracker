@@ -2,7 +2,7 @@
 
 Twitter-tracker is useful for collecting published tweets from around the world and viewing them in various representations.
 
-<img src="./img_readme/TT_home.png" align="right" width="50%"/>
+<img src="./img_readme/TT_home.png" align="right" width="55%"/>
 
 ### Table of Contents
 - [Get started](#get-started)
@@ -63,21 +63,39 @@ It can be decided to show only the images of the tweets, where existing, through
 ### Map 
 This section is entirely based on the visualization of the geolocated tweets on the map. If a tweet contains multiple media, the first will be displayed instead of the default marker.
 
+<!--- Così le immagini sono centrate sotto al paragrafo, ma il tag center in teoria è deprecato da HTML4, quindi non ottimo
+### Word-Cloud 
+
+Here a word-cloud of the most common words, within the search results, is drawn, with a legend pointing out the frequency percentages of each word.
+
+<center><img src="./img_readme/cloud.png" width="450px" height="250px"></center>
+
+                            
+### Graphics
+
+Through this component it can be viewed 2 graphics. The first shows the number of found tweets published every day of the last week, the second represents the frequency of words used in tweets.
+
+<center><img src="./img_readme/charts.png" width="450px" height="250px"></center>
+
+-->
 
 ### Word-Cloud 
-Here a word-cloud of the most common words, within the search results, is drawn, with a legend pointing out the frequency percentages of each word.
-<img src="./img_readme/cloud.png" >
+<img src="./img_readme/cloud.png" align="right" width="60%">
 
+Here is drawn a word-cloud of the most common words, within the search results, with a legend pointing out the frequency percentages of each word. A word-cloud shows a snapshot of the frequencies at that moment and with the selected tweets, even a small change in the parameters of research (like the number of tweets) can drastically change it!
+
+<br><br><br><br><br>
+                            
 ### Graphics
-Through this component it can be viewed 2 graphics. The first shows the number of found tweets published every day of the last week, the second represents the frequency of words used in tweets.
- <img src="./img_readme/charts.png"  >
+<img src="./img_readme/charts.png" align="left" width="60%">
 
+This component shows 2 key graphics. The first shows the number of found tweets published during each day of the last week, the second represents the frequency of words used in tweets. If the searched topic is eavily tweeted about, it is possible that the first graph will show just one day, the current one.
+<br><br><br><br><br><br><br><br>
 
 ### Post
+<img src="./img_readme/automatic_post.gif" align="right" width="220px" height="400px">
 
 There is the possibility of automatically posting on your Twitter account(it must be your developer account) through the SHARE button inserted in the **Map**, **Word-Cloud** and **Graphics** components. A preview of the image that will be posted, will be shown in the modal, where you can set some parameters. When automatic posts have been activated, they will show up in this component and can be deleted. (Obviously every time the server is turned off all automatic posts are lost)
-
-<img src="./img_readme/automatic_post.gif" float="right" width="220px" height="400px">
 
 
 ## Libraries
