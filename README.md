@@ -2,7 +2,7 @@
 
 Twitter-tracker is useful for collecting published tweets from around the world and viewing them in various representations.
 
-<img src="./img_readme/TT_home.png" align="right" width="40%"/>
+<img src="./img_readme/TT_home.png" align="right" width="50%"/>
 
 ### Table of Contents
 - [Get started](#get-started)
@@ -58,17 +58,26 @@ This component is meant to display cascading tweets; a maximum of 500 tweets per
 It is possible to extend the tweets in *embedded* appearence through the 'show' button, or by clicking on them from mobile devices. The labels with the filters selected are displayed, with the opportunity to remove them for repeating the search with less parameters. The search results can be saved in a collection which can be renamed, deleted and expanded by the appropriate section.
 It can be decided to show only the images of the tweets, where existing, through the *Display images* switch.
 
+<img src="./img_readme/map_and_search.gif">
+
 ### Map 
 This section is entirely based on the visualization of the geolocated tweets on the map. If a tweet contains multiple media, the first will be displayed instead of the default marker.
 
+
 ### Word-Cloud 
 Here a word-cloud of the most common words, within the search results, is drawn, with a legend pointing out the frequency percentages of each word.
+<img src="./img_readme/cloud.png" >
 
 ### Graphics
 Through this component it can be viewed 2 graphics. The first shows the number of found tweets published every day of the last week, the second represents the frequency of words used in tweets.
+ <img src="./img_readme/charts.png"  >
+
 
 ### Post
+
 There is the possibility of automatically posting on your Twitter account(it must be your developer account) through the SHARE button inserted in the **Map**, **Word-Cloud** and **Graphics** components. A preview of the image that will be posted, will be shown in the modal, where you can set some parameters. When automatic posts have been activated, they will show up in this component and can be deleted. (Obviously every time the server is turned off all automatic posts are lost)
+
+<img src="./img_readme/automatic_post.gif" float="right" width="220px" height="400px">
 
 
 ## Libraries
