@@ -69,8 +69,7 @@ This section is entirely based on the visualization of the geolocated tweets on 
 Here a word-cloud of the most common words, within the search results, is drawn, with a legend pointing out the frequency percentages of each word.
 
 <center><img src="./img_readme/cloud.png" width="450px" height="250px"></center>
-
-                            
+                         
 ### Graphics
 
 Through this component it can be viewed 2 graphics. The first shows the number of found tweets published every day of the last week, the second represents the frequency of words used in tweets.
@@ -89,7 +88,7 @@ Here is drawn a word-cloud of the most common words, within the search results, 
 ### Graphics
 <img src="./img_readme/charts.png" align="left" width="60%">
 
-This component shows 2 key graphics. The first shows the number of found tweets published during each day of the last week, the second represents the frequency of words used in tweets. If the searched topic is eavily tweeted about, it is possible that the first graph will show just one day, the current one.
+This component shows 2 key graphics. The first shows the number of found tweets published during each day of the last week, the second represents the frequency of words used in tweets. If the searched topic is heavily tweeted about, it is possible that the first graph will show just one day, the current one.
 <br><br><br><br><br><br><br><br>
 
 ### Post
