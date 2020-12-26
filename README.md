@@ -89,7 +89,7 @@ Here is drawn a word-cloud of the most common words, within the search results, 
 ### Graphics
 <img src="./img_readme/charts.png" align="left" width="60%">
 
-This component shows 2 key graphics. The first shows the number of found tweets published during each day of the last week, the second represents the frequency of words used in tweets. If the searched topic is eavily tweeted about, it is possible that the first graph will show just one day, the current one.
+This component shows 2 key graphics. The first shows the number of found tweets published during each day of the last week, the second represents the frequency of words used in tweets. If the searched topic is heavily tweeted about, it is possible that the first graph will show just one day, the current one.
 <br><br><br><br><br><br><br><br>
 
 ### Post
