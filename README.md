@@ -82,14 +82,15 @@ Through this component it can be viewed 2 graphics. The first shows the number o
 ### Word-Cloud 
 <img src="./img_readme/cloud.png" align="right" width="60%">
 
-Here a word-cloud of the most common words, within the search results, is drawn, with a legend pointing out the frequency percentages of each word.
+Here is drawn a word-cloud of the most common words, within the search results, with a legend pointing out the frequency percentages of each word. A word-cloud shows a snapshot of the frequencies at that moment and with the selected tweets, even a small change in the parameters of research (like the number of tweets) can drastically change it!
+
 <br><br><br><br><br><br><br><br><br><br><br><br><br>
 
                             
 ### Graphics
 <img src="./img_readme/charts.png" align="left" width="60%">
 
-Through this component it can be viewed 2 graphics. The first shows the number of found tweets published every day of the last week, the second represents the frequency of words used in tweets.
+This component shows 2 key graphics. The first shows the number of found tweets published during each day of the last week, the second represents the frequency of words used in tweets. If the searched topic is eavily tweeted about, it is possible that the first graph will show just one day, the current one.
 
 <br><br><br><br><br><br><br><br><br><br><br>
 
